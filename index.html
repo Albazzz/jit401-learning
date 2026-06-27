@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JIT401 - Modern Learning Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>JIT401 Pro - Nền tảng học IT Nhật Bản</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #FAFAFC;
     --card: #FFFFFF;
     --primary: #4F7CFF;
+    --primary-hover: #3D6AEC;
     --primary-light: #EAF1FF;
     --success: #34C759;
     --warning: #FFB020;
@@ -18,12 +19,15 @@
     --text-sub: #666666;
     --border: #E8EAF0;
     --hover: #F4F7FF;
-    --radius: 16px;
+    --radius-lg: 18px;
+    --radius-md: 12px;
     --shadow: 0 4px 12px rgba(0,0,0,0.03);
     --sidebar-w: 280px;
+    --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
   body {
     background: var(--bg);
     color: var(--text-main);
@@ -32,10 +36,10 @@
     overflow-x: hidden;
   }
 
-  /* LAYOUT */
+  /* --- LAYOUT --- */
   .app-container { display: flex; min-height: 100vh; }
 
-  /* SIDEBAR */
+  /* --- SIDEBAR --- */
   .sidebar {
     width: var(--sidebar-w);
     background: var(--card);
@@ -43,129 +47,137 @@
     position: sticky;
     top: 0;
     height: 100vh;
-    padding: 24px 0;
+    padding: 32px 0;
     display: flex;
     flex-direction: column;
     z-index: 100;
   }
-  .logo-area { padding: 0 24px 32px; font-weight: 700; font-size: 20px; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+  .logo-area { padding: 0 24px 40px; font-weight: 800; font-size: 22px; color: var(--primary); display: flex; align-items: center; gap: 12px; }
+  .logo-icon { width: 36px; height: 36px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 20px; }
+
   .nav-section { padding: 0 12px; flex: 1; overflow-y: auto; }
-  .nav-label { font-size: 11px; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; padding: 0 12px 12px; }
+  .nav-label { font-size: 11px; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1.5px; padding: 0 12px 16px; opacity: 0.6; }
   .nav-item {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 14px;
-    border-radius: 10px;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
     color: var(--text-sub);
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
-    transition: 0.2s;
-    margin-bottom: 2px;
+    transition: var(--transition);
+    margin-bottom: 4px;
   }
-  .nav-item:hover { background: var(--hover); color: var(--primary); }
-  .nav-item.active { background: var(--primary-light); color: var(--primary); position: relative; }
-  .nav-item.active::before { content:''; position:absolute; left:-12px; width:4px; height:20px; background:var(--primary); border-radius:0 4px 4px 0; }
-  .ch-num { font-family: monospace; font-size: 12px; opacity: 0.6; }
+  .nav-item:hover { background: var(--hover); color: var(--primary); transform: translateX(4px); }
+  .nav-item.active { background: var(--primary-light); color: var(--primary); font-weight: 600; }
+  .ch-num-badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; opacity: 0.5; width: 24px; }
 
-  /* MAIN CONTENT */
-  .main-content { flex: 1; padding: 48px; max-width: 1100px; margin: 0 auto; }
-  .view-tab { display: none; animation: fadeIn 0.3s ease; }
+  /* --- MAIN CONTENT --- */
+  .main-content { flex: 1; padding: 60px 48px; max-width: 1200px; margin: 0 auto; }
+  .view-tab { display: none; animation: slideUp 400ms ease; }
   .view-tab.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* HEADER */
-  .ch-header { margin-bottom: 40px; }
-  .ch-badge-row { display: flex; gap: 8px; margin-bottom: 16px; }
-  .badge { padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: 600; border: 1px solid var(--border); background: var(--card); }
+  /* --- TOP TABS --- */
+  .top-nav { display: flex; gap: 32px; margin-bottom: 48px; border-bottom: 2px solid var(--border); }
+  .top-tab-btn { padding: 16px 4px; font-size: 15px; font-weight: 600; color: var(--text-sub); cursor: pointer; border-bottom: 2px solid transparent; transition: var(--transition); position: relative; bottom: -2px; }
+  .top-tab-btn:hover { color: var(--primary); }
+  .top-tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+  /* --- CHAPTER HEADER --- */
+  .ch-header { margin-bottom: 56px; }
+  .ch-meta { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .badge { padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 700; border: 1px solid var(--border); background: var(--card); color: var(--text-sub); display: flex; align-items: center; gap: 6px; }
   .badge.primary { background: var(--primary); color: white; border-color: var(--primary); }
-  .ch-header h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
-  .ch-header .subtitle { color: var(--text-sub); font-size: 18px; }
+  .badge.success { background: #E6F7ED; color: var(--success); border-color: #D0F0E4; }
 
-  /* KNOWLEDGE CARDS */
+  .ch-title-jp { font-size: 42px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .ch-title-vn { font-size: 24px; color: var(--text-sub); font-weight: 500; }
+
+  /* --- KNOWLEDGE CARDS --- */
   .k-card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
     margin-bottom: 24px;
     box-shadow: var(--shadow);
     overflow: hidden;
-    transition: 0.2s;
+    transition: var(--transition);
   }
-  .k-card-head {
-    padding: 20px 24px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    user-select: none;
-  }
-  .k-card-head:hover { background: var(--bg); }
-  .k-icon { font-size: 20px; width: 40px; height: 40px; background: var(--bg); display: flex; align-items: center; justify-content: center; border-radius: 12px; }
-  .k-title-box { flex: 1; }
-  .k-jp { font-size: 18px; font-weight: 600; }
-  .k-yomi { font-size: 12px; color: var(--primary); margin-left: 8px; font-family: monospace; }
-  .k-vn-term { display: block; font-size: 13px; color: var(--text-sub); margin-top: 2px; }
-  .arrow { font-size: 12px; transition: 0.3s; color: var(--text-sub); }
-  .k-card.open .arrow { transform: rotate(180deg); }
+  .k-card:hover { border-color: var(--primary); box-shadow: 0 8px 24px rgba(79,124,255,0.08); }
 
-  .k-card-body {
-    display: none;
-    padding: 0 24px 24px;
-    border-top: 1px solid var(--border);
-    background: #FFFFFF;
-  }
+  .k-card-head { padding: 24px 32px; cursor: pointer; display: flex; align-items: center; gap: 24px; user-select: none; }
+  .k-icon-box { font-size: 24px; width: 56px; height: 56px; background: var(--bg); display: flex; align-items: center; justify-content: center; border-radius: 16px; transition: var(--transition); }
+  .k-card:hover .k-icon-box { background: var(--primary-light); transform: scale(1.05); }
+
+  .k-title-box { flex: 1; }
+  .k-jp { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+  .k-yomi { font-size: 13px; color: var(--primary); font-family: 'JetBrains Mono', monospace; font-weight: 500; background: var(--primary-light); padding: 2px 8px; border-radius: 6px; }
+  .k-vn-term { display: block; font-size: 15px; color: var(--text-sub); margin-top: 4px; font-weight: 500; }
+
+  .arrow { font-size: 14px; transition: 400ms cubic-bezier(0.4, 0, 0.2, 1); color: var(--text-sub); opacity: 0.4; }
+  .k-card.open .arrow { transform: rotate(180deg); opacity: 1; }
+
+  .k-card-body { display: none; padding: 8px 32px 32px; border-top: 1px solid var(--border); background: #FCFCFD; }
   .k-card.open .k-card-body { display: block; }
 
-  .info-box { padding: 16px; border-radius: 12px; margin-top: 16px; font-size: 14px; display: flex; gap: 12px; }
-  .info-box.blue { background: #F0F5FF; border-left: 4px solid #4F7CFF; }
-  .info-box.yellow { background: #FFF9E6; border-left: 4px solid #FFB020; }
-  .info-box.green { background: #E6FFFA; border-left: 4px solid #34C759; }
-  .box-label { font-weight: 700; display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; }
+  /* --- INFO BOXES --- */
+  .section-divider { margin: 32px 0 16px; height: 1px; background: var(--border); position: relative; }
+  .section-divider::before { content: attr(data-label); position: absolute; top: -10px; left: 0; background: #FCFCFD; padding-right: 12px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #BBBECB; }
 
-  /* QUIZ */
-  .quiz-wrap { max-width: 800px; margin: 0 auto; }
-  .q-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
-  .options-grid { display: grid; gap: 16px; margin-top: 32px; }
+  .info-box { padding: 20px 24px; border-radius: var(--radius-md); margin-top: 16px; font-size: 15px; display: flex; gap: 16px; align-items: flex-start; }
+  .info-box.blue { background: #F0F5FF; border: 1px solid #D9E4FF; }
+  .info-box.yellow { background: #FFF9E6; border: 1px solid #FFEBB3; }
+  .info-box.green { background: #E6FFFA; border: 1px solid #B2F5EA; }
+
+  .box-label { font-weight: 700; display: block; margin-bottom: 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .box-icon { font-size: 18px; margin-top: 2px; }
+
+  /* --- QUIZ --- */
+  .quiz-container { max-width: 800px; margin: 0 auto; }
+  .q-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 48px; box-shadow: 0 20px 40px rgba(0,0,0,0.04); position: relative; }
+  .q-count { font-size: 13px; font-weight: 700; color: var(--text-sub); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+  .q-text { font-size: 26px; font-weight: 700; margin-bottom: 40px; line-height: 1.4; }
+
+  .options-stack { display: grid; gap: 14px; }
   .opt-btn {
     background: var(--card);
     border: 2px solid var(--border);
-    padding: 18px 24px;
-    border-radius: 16px;
+    padding: 20px 28px;
+    border-radius: var(--radius-md);
     cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    transition: 0.2s;
+    font-size: 17px;
+    font-weight: 600;
+    transition: 150ms ease;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
+    text-align: left;
   }
-  .opt-btn:hover:not(.locked) { border-color: var(--primary); background: var(--hover); }
-  .opt-btn.correct { background: #E6FFFA; border-color: var(--success); color: #006644; }
-  .opt-btn.wrong { background: #FFF5F5; border-color: var(--error); color: #990000; }
-  .opt-idx { width: 32px; height: 32px; background: var(--bg); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--text-sub); }
+  .opt-btn:hover:not(.locked) { border-color: var(--primary); background: var(--hover); transform: translateY(-2px); }
+  .opt-btn.correct { background: #E6F7ED; border-color: var(--success); color: #0E733B; }
+  .opt-btn.wrong { background: #FFF5F5; border-color: var(--error); color: #B3261E; }
+  .opt-idx { width: 36px; height: 36px; background: var(--bg); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: var(--text-sub); transition: var(--transition); }
   .opt-btn.correct .opt-idx { background: var(--success); color: white; }
   .opt-btn.wrong .opt-idx { background: var(--error); color: white; }
 
-  .ans-feedback { margin-top: 24px; padding: 24px; border-radius: 16px; display: none; }
+  .ans-feedback { margin-top: 32px; padding: 24px; border-radius: var(--radius-md); display: none; animation: fadeIn 300ms ease; }
   .ans-feedback.show { display: block; }
-  .ans-feedback.correct { background: #E6FFFA; color: #006644; }
-  .ans-feedback.wrong { background: #FFF5F5; color: #990000; }
+  .ans-feedback.correct { background: #F0FAF0; border: 1px solid #D0E7D0; color: #0E733B; }
+  .ans-feedback.wrong { background: #FFF9F9; border: 1px solid #FFE0E0; color: #B3261E; }
 
-  .prog-container { width: 100%; height: 8px; background: var(--border); border-radius: 99px; margin-bottom: 32px; overflow: hidden; }
-  .prog-fill { height: 100%; background: var(--primary); width: 0%; transition: 0.4s; }
+  .progress-wrap { width: 100%; height: 10px; background: var(--border); border-radius: 99px; margin-bottom: 40px; overflow: hidden; }
+  .progress-bar { height: 100%; background: var(--primary); width: 0%; transition: 600ms cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-  /* TOP BAR */
-  .top-tabs { display: flex; gap: 32px; margin-bottom: 32px; border-bottom: 1px solid var(--border); }
-  .top-tab-btn { padding: 12px 4px; font-size: 15px; font-weight: 600; color: var(--text-sub); cursor: pointer; border-bottom: 2px solid transparent; }
-  .top-tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
+  /* --- RESPONSIVE --- */
+  @media (max-width: 1024px) {
     .sidebar { width: 80px; }
-    .logo-area span, .nav-item span:last-child, .nav-label { display: none; }
-    .main-content { padding: 24px; }
+    .logo-area span:last-child, .nav-item span:last-child, .nav-label { display: none; }
+    .logo-area { padding: 0 0 40px; justify-content: center; }
+    .nav-item { justify-content: center; padding: 14px; }
+    .main-content { padding: 40px 24px; }
   }
 </style>
 </head>
@@ -175,8 +187,8 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="logo-area">
-      <span>📘</span>
-      <span>JIT401</span>
+      <div class="logo-icon">J</div>
+      <span>JIT401 Pro</span>
     </div>
 
     <div class="nav-section">
@@ -187,44 +199,43 @@
 
   <!-- MAIN -->
   <main class="content main-content">
-    <div class="top-tabs">
-      <div class="top-tab-btn active" onclick="switchMainTab('study')">📚 Bài học</div>
-      <div class="top-tab-btn" onclick="switchMainTab('quiz')">✏️ Luyện tập</div>
-      <div class="top-tab-btn" onclick="switchMainTab('flashcard')">🎴 Thẻ từ</div>
+    <div class="top-nav">
+      <div id="tab-btn-study" class="top-tab-btn active" onclick="switchMainTab('study')">📚 Bài học</div>
+      <div id="tab-btn-quiz" class="top-tab-btn" onclick="switchMainTab('quiz')">✏️ Luyện tập</div>
+      <div id="tab-btn-flashcard" class="top-tab-btn" onclick="switchMainTab('flashcard')">🎴 Flashcards</div>
     </div>
 
     <!-- STUDY VIEW -->
     <div id="view-study" class="view-tab active">
-      <div id="lesson-content">
-        <!-- Chapter content rendered here -->
-      </div>
+      <div id="lesson-content"></div>
     </div>
 
     <!-- QUIZ VIEW -->
     <div id="view-quiz" class="view-tab">
-      <div class="quiz-wrap">
-        <div class="prog-container"><div id="quiz-prog" class="prog-fill"></div></div>
+      <div class="quiz-container">
+        <div class="progress-wrap"><div id="quiz-prog" class="progress-bar"></div></div>
         <div id="quiz-area">
           <div class="q-card" style="text-align:center">
-            <h2 style="margin-bottom:16px">Sẵn sàng ôn tập?</h2>
-            <p style="color:var(--text-sub);margin-bottom:24px">Chọn chương hoặc ôn tập tất cả các chương đã học.</p>
-            <div style="display:flex;gap:12px;justify-content:center">
-              <select id="quiz-selector" style="padding:12px;border-radius:12px;border:1px solid var(--border);outline:none">
-                <option value="all">Tất cả chương</option>
+            <h2 style="margin-bottom:16px; font-size:28px">Sẵn sàng ôn tập?</h2>
+            <p style="color:var(--text-sub);margin-bottom:32px">Chọn phạm vi kiến thức bạn muốn kiểm tra.</p>
+            <div style="display:flex;gap:12px;justify-content:center;flex-direction:column;max-width:300px;margin:0 auto">
+              <select id="quiz-selector" style="padding:14px;border-radius:12px;border:1.5px solid var(--border);outline:none;font-weight:600;font-size:15px;background:white">
+                <option value="all">Tất cả 16 chương</option>
               </select>
-              <button class="badge primary" style="padding:0 24px;cursor:pointer" onclick="startQuiz()">Bắt đầu</button>
+              <button class="badge primary" style="padding:16px;cursor:pointer;justify-content:center;font-size:15px" onclick="startQuiz()">Bắt đầu Quiz</button>
             </div>
           </div>
         </div>
-        <div id="quiz-result" style="display:none"></div>
       </div>
     </div>
 
     <!-- FLASHCARD VIEW -->
     <div id="view-flashcard" class="view-tab">
-      <div style="text-align:center;padding:100px 0;">
-        <h3>Tính năng Flashcard đang phát triển...</h3>
-        <p style="color:var(--text-sub)">Sẽ sớm ra mắt với hiệu ứng lật thẻ 3D.</p>
+      <div style="text-align:center;padding:120px 0;">
+        <div style="font-size:64px;margin-bottom:24px">🏗️</div>
+        <h3 style="font-size:24px;margin-bottom:12px">Tính năng Flashcards</h3>
+        <p style="color:var(--text-sub)">Chế độ lật thẻ 3D đang được hoàn thiện. Hãy quay lại sau nhé!</p>
+        <button class="badge primary" style="margin:32px auto;cursor:pointer" onclick="switchMainTab('study')">Quay lại học bài</button>
       </div>
     </div>
   </main>
@@ -232,295 +243,379 @@
 
 <script>
 // ================================================================
-//  DATA (16 Chapters)
+//  DỮ LIỆU 16 CHƯƠNG (TỔNG HỢP CHI TIẾT)
 // ================================================================
 const chapters = [
   {
     num: 1, title: "コンピュータの基礎", yomi: "こんぴゅーたのきそ",
     vn: "Những kiến thức cơ bản về máy tính",
-    vnSummary: "Chương này tìm hiểu về sự khác biệt giữa Digital và Analog, lịch sử máy tính (Abacus, ENIAC, EDSAC, mô hình Von Neumann), phân loại máy tính và cơ chế quản lý tệp tin, thư mục, ổ đĩa.",
-    time: "20 min", difficulty: "Easy",
+    vnSummary: "Giới thiệu tổng quan về lịch sử, nguyên lý hoạt động 'Ghi nhớ' và 'Xử lý' của máy tính, từ bàn tính cổ đại đến kiến trúc Von Neumann hiện đại.",
+    time: "20 min", difficulty: "Dễ",
     concepts: [
-      { term: "デジタル", yomi: "でじたる", desc: "数値化された量。0と1で表現。電圧のオン/オフに対応。", vnTerm: "Kỹ thuật số (Digital)", vnDesc: "Đại lượng được số hóa thành 0 và 1. Tương ứng với trạng thái đóng/ngắt của điện áp.", rem: "電圧が高い(オン)，低い(オフ)に対応させるために，1 と 0 の数字だけを使っています。", vnRem: "Máy tính dùng 1 và 0 để tương ứng với trạng thái đóng/ngắt (on/off) của điện áp.", icon: "🔢" },
-      { term: "アナログ", yomi: "あなろぐ", desc: "連続的な量。長さ・重さ・時間などの物理量。", vnTerm: "Tương tự (Analog)", vnDesc: "Đại lượng liên tục như chiều dài, trọng lượng, thời gian.", rem: "一般的に， 長さ， 重さ， 時間など身の回りの多くの物理量はアナログ量です。", vnRem: "Hầu hết các đại lượng vật lý quanh ta là Analog, nhưng máy tính phải số hóa chúng để xử lý.", icon: "〰️" },
-      { term: "アバカス", yomi: "あばかす", desc: "紀元前から使われているそろばんの起源とされる道具。", vnTerm: "Bàn tính (Abacus)", vnDesc: "Dụng cụ tính toán cổ xưa, được coi là nguồn gốc của bàn tính.", rem: "紀元前から使われているそろばんの起源とされる道具です。", vnRem: "Đây là tiền thân của bàn tính hiện đại, được sử dụng từ thời cổ đại.", icon: "🧮" },
-      { term: "ENIAC", yomi: "えにあっく", desc: "1946年開発の世界初の電子式計算機. 軍事目的で弾道計算に使用。", vnTerm: "ENIAC", vnDesc: "Máy tính điện tử đầu tiên (1946), dùng cho tính toán đạn đạo quân sự.", rem: "2 万本近くの真空管によって構成され，大きな消費電力を使い，大量の熱を発生しました。", vnRem: "Cấu tạo từ gần 20.000 ống chân không, tiêu thụ điện cực lớn và tỏa nhiệt rất nhiều.", icon: "⚡" },
-      { term: "ノイマン型", yomi: "のいまんがた", desc: "プログラムをデータと同様に記憶装置に格納する現在の基礎原理。", vnTerm: "Kiểu Von Neumann", vnDesc: "Nguyên lý lưu chương trình vào bộ nhớ như dữ liệu, là nền tảng máy tính hiện nay.", rem: "プログラムをハードウェアから独立させて， データと同じように扱うコンピュータの基礎原理です。", vnRem: "Đây là nền tảng của máy tính hiện đại: tách biệt phần mềm khỏi phần cứng.", icon: "🧠" },
-      { term: "ディレクトリ構造", yomi: "でぃれくとりこうぞう", desc: "フォルダの中にフォルダを作る階層的な親子構造。", vnTerm: "Cấu trúc thư mục", vnDesc: "Cấu trúc phân cấp cha-con, giúp tổ chức tệp tin khoa học.", rem: "親のフォルダの中に子供のフォルダがあり， その中にさらに孫のフォルダがある構造です。", vnRem: "Giống như cấu trúc cây: thư mục mẹ chứa thư mục con, rồi đến thư mục cháu.", icon: "📁" },
-      { term: "パス", yomi: "ぱす", desc: "ファイルの場所を示す表記. 絶対パス và 相対パスがある。", vnTerm: "Đường dẫn (Path)", vnDesc: "Cách biểu diễn vị trí tệp tin (ví dụ: C:\\User\\Docs).", rem: "「..」は 1 つ上のディレクトリを表します。カレントパスからの相対指定も可能です。", vnRem: "Ký hiệu '..' dùng để chỉ thư mục cấp trên trực tiếp của thư mục hiện tại.", icon: "📍" },
+      { term: "デジタル", yomi: "でじたる", vnTerm: "Kỹ thuật số (Digital)", icon: "🔢",
+        desc: "数値化された量。0と1で表現。電圧のオン/オフに対応。",
+        vnDesc: "Đại lượng được số hóa thành 0 và 1. Tương ứng với trạng thái đóng/ngắt của điện áp.",
+        rem: "電圧が高い(オン)，低い(オフ)に対応させるために，1 と 0 の数字だけを使っています。",
+        vnRem: "Máy tính chỉ hiểu 2 trạng thái: Có điện (1) và Không điện (0). Mọi dữ liệu đều quy về đây."
+      },
+      { term: "アナログ", yomi: "あなろぐ", vnTerm: "Tương tự (Analog)", icon: "〰️",
+        desc: "連続的な量。長さ・重さ・時間などの物理量。",
+        vnDesc: "Đại lượng liên tục như chiều dài, trọng lượng, thời gian trong thế giới tự nhiên.",
+        rem: "身の回りの多くの物理量はアナログ量ですが，コンピュータでは数字に近似して扱います。",
+        vnRem: "Thế giới thực là Analog, máy tính phải 'xấp xỉ' chúng thành các con số Digital để xử lý."
+      },
+      { term: "ノイマン型", yomi: "のいまんがた", vnTerm: "Kiểu Von Neumann", icon: "🧠",
+        desc: "プログラムをデータと同様に記憶装置に格納する方式。現在のコンピュータの基礎原理。",
+        vnDesc: "Nguyên lý lưu trữ chương trình vào bộ nhớ giống như dữ liệu. Đây là nền tảng của máy tính ngày nay.",
+        rem: "プログラムをハードウェアから独立させて扱うことで，作業の変更が容易になりました。",
+        vnRem: "Nhờ tách biệt phần mềm khỏi phần cứng, ta có thể đổi chương trình mà không cần thay đổi linh kiện máy."
+      },
+      { term: "ディレクトリ構造", yomi: "でぃれくとりこうぞう", vnTerm: "Cấu trúc thư mục", icon: "📁",
+        desc: "フォルダの中にフォルダを作る階層的な親子構造。",
+        vnDesc: "Sắp xếp tệp tin theo tổ chức hình cây từ thư mục cha đến thư mục con, cháu.",
+        rem: "「..」は 1 つ上のディレクトリを表します。カレントパスからの相対指定も可能です。",
+        vnRem: "Ký hiệu '..' cực kỳ quan trọng, dùng để lùi lại 1 cấp thư mục trong đường dẫn."
+      }
     ],
-    types: ["コンピュータの形態", "処理・記憶の役割", "記憶媒体の種類"],
-    vnTypes: ["Siêu máy tính, Máy tính đa năng, Máy trạm, Smartphone, Netbook, Máy tính chuyên dụng", "Máy tính là thiết bị dùng để 'Ghi nhớ' và 'Xử lý'", "HDD, Đĩa mềm, CD-R/DVD-R, USB, Thẻ SD"]
+    types: ["Phân loại: Siêu máy tính, Máy đa dụng lớn, Workstation, PC, Netbook, Smartphone, Máy chuyên dụng", "Nguyên lý: Ghi nhớ (Memory) + Xử lý (Processing)"]
   },
   {
     num: 2, title: "インターネット利用", yomi: "いんたーねっとりよう",
     vn: "Sử dụng internet",
-    vnSummary: "Tìm hiểu về URL, sự chuyển dịch từ Web 1.0 sang Web 2.0 (Blog, SNS, Wiki), Long Tail, điện toán đám mây và các quy định pháp luật về bản quyền.",
-    time: "25 min", difficulty: "Medium",
+    vnSummary: "Tìm hiểu về truyền thông hai chiều Web 2.0, điện toán đám mây, đạo đức mạng (Netiquette) và luật sở hữu trí tuệ.",
+    time: "25 min", difficulty: "Trung bình",
     concepts: [
-      { term: "Web2.0", yomi: "うぇぶにーてんぜろ", desc: "2004年提唱. SNSやYouTube等の誰もが発信できる双方向メディア。", vnTerm: "Web 2.0", vnDesc: "Truyền thông hai chiều, người dùng có thể tạo nội dung (Blog, SNS).", rem: "RSS， Ajax ， トラックバックといった新しい技術に支えられています。", vnRem: "Được hỗ trợ bởi các công nghệ như RSS (cập nhật), Ajax (tương tác mượt), và Trackback.", icon: "🌐" },
-      { term: "Ajax", yomi: "えいじゃっくす", desc: "サーバへの問い合わせを減らし快適な応答を実現する技術。", vnTerm: "Ajax", vnDesc: "Kỹ thuật giúp phản hồi web mượt mà không cần tải lại trang (như Google Maps).", rem: "サーバへの問い合わせを避けることで快適な応答を実現したものです。", vnRem: "Giúp web phản hồi nhanh bằng cách xử lý ngay trên máy người dùng, tránh hỏi server liên tục.", icon: "⚙️" },
-      { term: "ロングテール", yomi: "ろんぐてーる", desc: "販売数の少ない多品種の商品で収益を上げるビジネスモデル。", vnTerm: "Cái đuôi dài (Long Tail)", vnDesc: "Mô hình bán đa dạng sản phẩm dù mỗi loại bán ít (Amazon, iTunes).", rem: "購入者数が少なくても，多品種の商品を提供することで収入増をはかるモデルです。", vnRem: "Mô hình này tập trung vào các sản phẩm kén khách, nhưng tổng cộng lại mang về lợi nhuận lớn.", icon: "📉" },
-      { term: "クラウド", yomi: "くらうど", desc: "インターネット経由でASPやSaaS等のサービスを受ける形態。", vnTerm: "Cloud (Đám mây)", vnDesc: "Sử dụng dịch vụ qua mạng mà không cần cài đặt phần mềm cục bộ.", rem: "2006 年に Google 社のエリック・シュミットによって提唱されました。", vnRem: "Eric Schmidt (Google) đề xuất năm 2006: 'giống như ai đó cung cấp dịch vụ trên mây'.", icon: "☁️" },
-      { term: "著作権", yomi: "ちょさくけん", desc: "人格権、財産権、隣接権に分けられる文化的生産物の保護。", vnTerm: "Bản quyền tác giả", vnDesc: "Bảo hộ tác phẩm văn hóa, gồm quyền nhân thân và quyền tài sản.", rem: "音楽， 小説， 絵画， 映画， コンピュータプログラムなどが対象です。", vnRem: "Bao gồm nhạc, tiểu thuyết, tranh, phim và cả chương trình máy tính.", icon: "⚖️" },
-      { term: "工業所有権", yomi: "こうぎょうしょゆうけん", desc: "特許権、実用新案権、意匠権、商標権の4種類。", vnTerm: "Quyền sở hữu công nghiệp", vnDesc: "Bảo hộ tiến bộ kỹ thuật và nhãn hiệu (Sáng chế, Kiểu dáng, Nhãn hiệu).", rem: "産業の発展を目的とし，特許庁に登録することで権利が発生します。", vnRem: "Mục đích là phát triển công nghiệp, cần đăng ký để được bảo hộ chính thức.", icon: "🏢" },
+      { term: "Web2.0", yomi: "うぇぶにーてんぜろ", vnTerm: "Web 2.0", icon: "🌐",
+        desc: "SNSやBlog等の誰もが発信できる双方向メディア。2004年に提唱されました。",
+        vnDesc: "Đánh dấu sự chuyển đổi từ truyền thông một chiều sang hai chiều (Blog, Wiki, YouTube).",
+        rem: "RSS， Ajax ， トラックバックといった新しい技術に支えられています。",
+        vnRem: "Các công nghệ 'linh hồn' của Web 2.0: Ajax giúp web mượt mà, RSS giúp cập nhật tin tức tự động."
+      },
+      { term: "ロングテール", yomi: "ろんぐてーる", vnTerm: "Cái đuôi dài (Long Tail)", icon: "📉",
+        desc: "販売数の少ない多品種の商品で収益 te あげるビジネスモデル。",
+        vnDesc: "Mô hình kinh doanh chú trọng số lượng đa dạng các sản phẩm ngách thay vì chỉ tập trung sản phẩm bán chạy.",
+        rem: "Amazon や iTunes Store など，在庫制約のないネットショップで有効な概念です。",
+        vnRem: "Quy luật 80/20 bị đảo ngược: Bán 80% sản phẩm ít người mua lại mang về doanh thu khổng lồ nhờ Internet."
+      },
+      { term: "知的財産権", yomi: "ちてきざいさんけん", vnTerm: "Quyền sở hữu trí tuệ", icon: "⚖️",
+        desc: "著作権と工業所有権に大別される権利の体系。",
+        vnDesc: "Luật bảo vệ thành quả trí tuệ, chia thành Quyền tác giả (Văn hóa) và Quyền sở hữu công nghiệp (Kỹ thuật).",
+        rem: "特許権（発明），実用新案権（改良），意匠権（デザイン），商標権（ロゴ）の 4 種があります。",
+        vnRem: "Cần nhớ 4 loại sở hữu công nghiệp: Sáng chế, Giải pháp hữu ích, Kiểu dáng và Thương hiệu."
+      }
     ],
-    types: ["Webの世代", "知的所有権の分類", "ソフトウェアの種類"],
-    vnTypes: ["Web 1.0 (Một chiều) vs Web 2.0 (Hai chiều)", "Bản quyền (Văn hóa) vs Sở hữu công nghiệp (Kỹ thuật)", "Freeware, Shareware, Phần mềm mã nguồn mở (GPL)"]
+    types: ["Phân loại Software: Freeware (Miễn phí), Shareware (Dùng thử trả phí), GPL (Mã nguồn mở)", "OECD 8 nguyên tắc bảo vệ thông tin cá nhân"]
   },
   {
     num: 3, title: "IT機器の現状", yomi: "あいてぃーききのげんじょう",
     vn: "Các thiết bị IT",
-    vnSummary: "Tìm hiểu về các thế hệ di động (1G-4G), công nghệ hiển thị (LCD, OLED, SED), cảm ứng và các cảm biến hình ảnh.",
-    time: "15 min", difficulty: "Easy",
+    vnSummary: "Tìm hiểu về các thế hệ di động (1G-4G), công nghệ hiển thị (LCD, OLED, SED) và các loại cảm biến hình ảnh.",
+    time: "15 min", difficulty: "Dễ",
     concepts: [
-      { term: "第1世代〜第4世代", yomi: "だいいっせだい〜だいよんせだい", desc: "1G(アナログ)から4G(ブロードバンド統合)までの進化。", vnTerm: "Thế hệ 1G - 4G", vnDesc: "Quá trình từ sóng tương tự đến kỷ nguyên smartphone tốc độ cao.", rem: "第 1 世代はアナログ， 第 2 世代からデジタル通信になりました。", vnRem: "1G dùng sóng Analog, từ 2G bắt đầu chuyển sang kỹ thuật số (Digital).", icon: "📶" },
-      { term: "液晶ディスプレイ", yomi: "えきしょうでぃすぷれい", desc: "偏光板2枚と液晶分子で光を制御. 省電力・長寿命。", vnTerm: "Màn hình LCD", vnDesc: "Dùng tấm phân cực and tinh thể lỏng để điều khiển ánh sáng.", rem: "電圧をかけてもほとんど電流が流れないため，消費電力が少ないのが特徴です。", vnRem: "Đặc trưng là tiêu thụ điện cực thấp vì hầu như không có dòng điện chạy qua.", icon: "📱" },
-      { term: "有機EL / SED", yomi: "ゆうきEL / えすいーでぃー", desc: "自発光方式や小型ブラウン管構造の次世代ディスプレイ。", vnTerm: "OLED / SED", vnDesc: "Các công nghệ hiển thị tự phát sáng hoặc cấu trúc ống CRT thu nhỏ.", rem: "有機 EL は有機物の発光体によりカラー表示を行います。", vnRem: "OLED dùng vật liệu hữu cơ tự phát sáng, cho độ tương phản và màu sắc rực rỡ.", icon: "✨" },
-      { term: "抵抗膜 / 静電容量", yomi: "ていこうまく / せいでんようりょう", desc: "タッチパネルの major 2 方式. 後者はマルチタッチ対応。", vnTerm: "Điện trở / Điện dung", vnDesc: "Hai loại cảm ứng chính; điện dung hỗ trợ đa điểm chạm.", rem: "静電容量方式は指先とセンサ間の電荷を測定し，マルチタッチが可能です。", vnRem: "Màn hình điện dung (như smartphone hiện nay) nhận biết điện tích từ tay, cho phép đa điểm.", icon: "👆" },
+      { term: "液晶ディスプレイ", yomi: "えきしょうでぃすぷれい", vnTerm: "Màn hình LCD", icon: "📱",
+        desc: "偏光板2枚と液晶分子で光を制御。省電力・長寿命。",
+        vnDesc: "Điều khiển ánh sáng qua tấm phân cực and tinh thể lỏng để hiển thị hình ảnh.",
+        rem: "電圧をかけてもほとんど電流が流れないため，消費電力が少ないのが特徴です。",
+        vnRem: "Màn hình LCD cực kỳ tiết kiệm điện, là lựa chọn hàng đầu cho các thiết bị di động."
+      },
+      { term: "有機EL (OLED)", yomi: "ゆうきEL", vnTerm: "Màn hình OLED", icon: "✨",
+        desc: "有機物の発光体によりカラー表示を行います。自発光方式です。",
+        vnDesc: "Màn hình dùng các hợp chất hữu cơ tự phát sáng khi có dòng điện chạy qua.",
+        rem: "バックライトが不要なため，より薄く，高いコントラストを実現できます。",
+        vnRem: "OLED không cần đèn nền nên mỏng hơn LCD và cho màu đen sâu tuyệt đối."
+      }
     ],
-    types: ["通信方式", "ディスプレイの仕組み", "タッチパネル方式"],
-    vnTypes: ["SIMカード, IrDA, Bluetooth, Wi-Fi", "LCD (Tinh thể lỏng), OLED (Tự phát sáng), SED", "Màng điện trở (Giá rẻ), Điện dung (Đa điểm)"]
+    types: ["Thế hệ di động: 1G (Analog), 2G (Digital), 3G (Tốc độ cao), 4G (Băng rộng)", "Cảm ứng: Điện trở (Lực ấn) vs Điện dung (Điện tích - Đa điểm)"]
   },
   {
     num: 4, title: "データ通信技術", yomi: "でーたつうしんぎじゅつ",
     vn: "Công nghệ truyền dữ liệu",
-    vnSummary: "Các kỹ thuật truyền dữ liệu có dây (CATV, ADSL, FTTH, PLC) và không dây, cùng khái niệm về gói tin (Packet).",
-    time: "20 min", difficulty: "Medium",
+    vnSummary: "Các kỹ thuật truyền dữ liệu có dây (FTTH, ADSL) và không dây (Bluetooth, Wi-Fi), giải quyết bài toán tốc độ mạng.",
+    time: "20 min", difficulty: "Trung bình",
     concepts: [
-      { term: "ADSL", yomi: "えーでぃーえすえる", desc: "電話線を使用. 上りと下りの速度が異なる非対称通信。", vnTerm: "ADSL", vnDesc: "Dùng dây điện thoại, tốc độ tải lên và xuống không giống nhau.", rem: "電話局から遠いほど速度が低下し，ノイズの影響を受けやすい欠点があります。", vnRem: "Nhược điểm: Càng xa tổng đài càng chậm và dễ bị nhiễu do dùng dây điện đồng.", icon: "📞" },
-      { term: "FTTH", yomi: "えふてぃーてぃーえいち", desc: "光ファイバを家庭まで引く. 高速・安定なラストワンマイル。", vnTerm: "Cáp quang tận nhà", vnDesc: "Công nghệ cao nhất hiện nay, đưa cáp quang vào tận gia đình.", rem: "ノイズの影響を受けにくく，高速かつ安定した通信が可能です。", vnRem: "Không bị nhiễu điện từ, mang lại đường truyền tốc độ cao và cực kỳ ổn định.", icon: "⚡" },
-      { term: "PLC", yomi: "ぴーえるしー", desc: "家庭のコンセントをネットワークに使う電灯線通信。", vnTerm: "Truyền thông đường điện", vnDesc: "Dùng ngay ổ cắm điện 100V để kết nối mạng.", rem: "100V コンセントを使ってネットワーク接続. PLC アダプタが必要です。", vnRem: "Dùng ngay mạng lưới điện trong nhà để truyền dữ liệu, cần bộ chuyển đổi PLC.", icon: "🔌" },
-      { term: "パケット", yomi: "ぱけっと", desc: "情報を小さな単位に分割して効率的に転送する方式。", vnTerm: "Gói tin (Packet)", vnDesc: "Dữ liệu chia nhỏ kèm thông tin điều khiển để truyền tải hiệu quả.", rem: "回線を占有せず効率的な通信を実現します。", vnRem: "Giúp nhiều người dùng chung một đường truyền mà không bị chiếm dụng hoàn toàn.", icon: "📦" },
+      { term: "FTTH", yomi: "えふてぃーてぃーえいち", vnTerm: "Cáp quang tận nhà", icon: "⚡",
+        desc: "光ファイバを家庭まで引く。高速・安定なラストワンマイル。",
+        vnDesc: "Đưa sợi cáp quang vào tận hộ gia đình, mang lại tốc độ Internet cực nhanh.",
+        rem: "ノイズの影響を受けにくく，高速かつ安定した通信が可能です。",
+        vnRem: "Cáp quang dùng ánh sáng nên không bị nhiễu điện từ như dây đồng truyền thống."
+      },
+      { term: "パケット", yomi: "ぱけっと", vnTerm: "Gói tin (Packet)", icon: "📦",
+        desc: "情報を小さな単位に分割して効率的に転送する方式。",
+        vnDesc: "Chia nhỏ dữ liệu kèm thông tin địa chỉ để gửi qua mạng mà không chiếm dụng đường truyền.",
+        rem: "回線を占有せず，複数のユーザが同時に通信できる仕組みです。",
+        vnRem: "Nhờ chia gói mà nhiều người có thể dùng chung một đường dây Internet cùng lúc."
+      }
     ],
-    types: ["有線通信の種類", "無線通信手段", "通信の方向"],
-    vnTypes: ["CATV, ADSL, FTTH, PLC", "IrDA (Hồng ngoại), Bluetooth, Wi-Fi, Thẻ IC (RFID)", "上り (Tải lên/Upload) vs 下り (Tải xuống/Download)"]
+    types: ["Có dây: CATV, ADSL, FTTH, PLC (Đường điện)", "Không dây: IrDA, Bluetooth, Wi-Fi, RFID (Suica)"]
   },
   {
     num: 5, title: "ネットワーク", yomi: "ねっとわーく",
     vn: "Mạng máy tính",
-    vnSummary: "Phân loại LAN/WAN, cấu hình mạng (Star, Bus, Ring), các hệ thống xử lý (Tập trung, Phân tán, P2P) và bảo mật tường lửa.",
-    time: "25 min", difficulty: "Hard",
+    vnSummary: "Kiến thức về LAN/WAN, các hình thái kết nối (Topology) và bảo mật mạng (Tường lửa, DMZ).",
+    time: "30 min", difficulty: "Khó",
     concepts: [
-      { term: "バス / スター / リング", yomi: "ばす / すたー / りんぐ", desc: "ネットワークの主要な3つの接続形態（トポロジ）。", vnTerm: "Bus / Star / Ring", vnDesc: "Ba mô hình kết nối mạng: Bus (Trục), Star (Sao - phổ biến nhất), Ring (Vòng).", rem: "スター型はハブ（集線装置）を中心に接続し，最もよく使われます。", vnRem: "Kiểu hình sao (Star) là phổ biến nhất: các máy nối vào một bộ tập trung (Hub).", icon: "🌐" },
-      { term: "集中 / 分散 / P2P", yomi: "しゅうちゅう / ぶんさん / P2P", desc: "システムの処理構成. ホスト集中型から対等なP2Pまで。", vnTerm: "Tập trung / Phân tán / P2P", vnDesc: "Các cấu trúc xử lý: Tập trung (Host), Phân tán, hoặc Ngang hàng (P2P).", rem: "分散処理は 1 台故障しても他のサービスは続けられるため信頼性が高いです。", vnRem: "Hệ thống phân tán có độ tin cậy cao vì một máy hỏng không làm sập toàn mạng.", icon: "🖇️" },
-      { term: "クライアントサーバ", yomi: "くらいあんとさーば", desc: "サービスを提供する側 và 受ける側を分けた標準的な構成。", vnTerm: "Client-Server", vnDesc: "Mô hình chuẩn chia làm máy chủ (Server) và máy khách (Client).", rem: "サービスを提供するサーバとサービスを受けるクライアントを分けた構成です。", vnRem: "Máy chủ (Server) phục vụ tài nguyên, máy khách (Client) yêu cầu tài nguyên.", icon: "🖥️" },
-      { term: "ファイアウォール", yomi: "ふぁいあうぉーると", desc: "外部からの不正アクセスを防ぐ防火壁。", vnTerm: "Tường lửa (Firewall)", vnDesc: "Hệ thống ngăn chặn truy cập trái phép từ bên ngoài.", rem: "設定が適切でないと意味がないので，注意が必要です。", vnRem: "Cực kỳ quan trọng: Tường lửa vô tác dụng nếu không được thiết lập quy tắc đúng đắn.", icon: "🧱" },
-      { term: "DMZ", yomi: "でぃーえむぜっと", desc: "外部公開用サーバを置くための非武装地帯（緩衝地帯）。", vnTerm: "Vùng phi quân sự (DMZ)", vnDesc: "Khu vực đệm để đặt các máy chủ công khai (như Web Server).", rem: "不特定多数が利用する Web サーバなどを置く区域です。", vnRem: "Vùng đệm cách ly mạng nội bộ khỏi các máy chủ mà người dùng Internet có thể truy cập.", icon: "🛡️" },
+      { term: "スター型", yomi: "すたーがた", vnTerm: "Kiểu hình sao (Star Topology)", icon: "🔯",
+        desc: "ハブ（集線装置）を中心に接続する形態。最もよく使われます。",
+        vnDesc: "Mọi máy tính nối vào một bộ tập trung Hub/Switch. Dễ nâng cấp và quản lý.",
+        rem: "ハブが故障すると全台不通になりますが，特定の 1 台の故障は他に影響しません。",
+        vnRem: "Lưu ý: Nếu Hub trung tâm hỏng thì sập mạng, nhưng nếu 1 máy lẻ hỏng thì mạng vẫn chạy."
+      },
+      { term: "DMZ", yomi: "でぃーえむぜっと", vnTerm: "Vùng phi quân sự (DMZ)", icon: "🛡️",
+        desc: "外部公開用サーバを置くための非武装地帯（緩衝地帯）。",
+        vnDesc: "Vùng đệm cách ly mạng nội bộ khỏi các máy chủ mà người dùng Internet có thể truy cập.",
+        rem: "インターネット → ファイアウォール → DMZ → 内部ネットワークという構成になります。",
+        vnRem: "Quy trình chuẩn: Phải qua Tường lửa mới tới DMZ, rồi mới tới dữ liệu mật bên trong."
+      }
     ],
-    types: ["ネットワーク範囲", "接続形態", "システム構成"],
-    vnTypes: ["LAN (Cục bộ), WAN (Diện rộng), Internet", "Kiểu Bus, Kiểu Sao (Star), Kiểu Vòng (Ring)", "Tập trung, Phân tán, Ngang hàng (P2P), Client-Server"]
+    types: ["Phạm vi: LAN (Cục bộ), WAN (Diện rộng)", "Cấu trúc: Xử lý tập trung (Mainframe) vs Xử lý phân tán (P2P, Client-Server)"]
   },
   {
     num: 6, title: "インターネット技術", yomi: "いんたーねっとぎじゅつ",
     vn: "Công nghệ Internet",
-    vnSummary: "Tìm hiểu về giao thức OSI 7 lớp, địa chỉ IP (IPv4, IPv6), hệ thống tên miền DNS và các ngôn ngữ mô tả trang web như HTML, XML và CSS.",
-    time: "30 min", difficulty: "Hard",
+    vnSummary: "Giải thích các tầng giao thức OSI, địa chỉ IP và các ngôn ngữ mô tả trang web như HTML/XML.",
+    time: "35 min", difficulty: "Khó",
     concepts: [
-      { term: "OSI 7層モデル", yomi: "OSI 7そうもでる", desc: "通信機能を7つの階層で定義. 物理層からアプリケーション層まで。", vnTerm: "Mô hình OSI 7 lớp", vnDesc: "Quy ước truyền dữ liệu chia làm 7 tầng (Vật lý, Liên kết, Mạng, Giao vận...).", rem: "HTTP は第 7 層（アプリ），TCP は第 4 層（トランスポート），IP は第 3 層（ネット）です。", vnRem: "HTTP ở tầng 7, TCP ở tầng 4 và IP ở tầng 3. Đây là các giao thức cốt lõi.", icon: "🪜" },
-      { term: "IPアドレス / IPv6", yomi: "IPあどれす / IPv6", desc: "ネット上の住所. 桁不足解消のため32bitから128bitへ拡張。", vnTerm: "Địa chỉ IP / IPv6", vnDesc: "Địa chỉ nhận diện máy tính; IPv6 mở rộng lên 128 bit để tránh thiếu hụt.", rem: "IPv6 はアドレス不足を解消するために 128 bit に拡張されました。", vnRem: "IPv6 giúp mở rộng không gian địa chỉ, tránh tình trạng hết địa chỉ IP trên toàn cầu.", icon: "🏷️" },
-      { term: "DNS", yomi: "でぃーえぬえす", desc: "IPアドレスとドメイン名を相互に変換するシステム。", vnTerm: "Hệ thống tên miền (DNS)", vnDesc: "Server giúp chuyển đổi số IP khó nhớ thành tên miền (ví dụ: google.com).", rem: "daigaku.ac.jp のように，「.ac.jp」は日本の学校を表します。", vnRem: "Hệ thống này giúp con người dễ dàng truy cập web bằng tên thay vì các con số IP.", icon: "🌍" },
-      { term: "HTML / XML / CSS", yomi: "HTML / XML / CSS", desc: "Web記述と言語. XMLは自由なタグ定義、CSSはデザイン定義。", vnTerm: "HTML / XML / CSS", vnDesc: "HTML để tạo trang web, XML định nghĩa dữ liệu, CSS định nghĩa giao diện.", rem: "XML はホームページ上でデータベースシステムとして利用できるため重要です。", vnRem: "XML cho phép tự định nghĩa thẻ, rất hữu ích cho việc lưu trữ và trao đổi dữ liệu.", icon: "📑" },
+      { term: "OSI 7層モデル", yomi: "OSI 7そうもでる", vnTerm: "Mô hình OSI 7 lớp", icon: "🪜",
+        desc: "通信機能を7つの階層で定義。異なる機種間の通信を可能にします。",
+        vnDesc: "Quy ước tiêu chuẩn quốc tế chia việc truyền dữ liệu thành 7 tầng từ Vật lý đến Ứng dụng.",
+        rem: "第 7 層: HTTP (Web), 第 4 層: TCP (送達確認), 第 3 層: IP (経路決定) です。",
+        vnRem: "Mẹo nhớ: Tầng 7 (Ứng dụng) là nơi có HTTP để lướt Web, Tầng 3 (Mạng) là nơi có IP."
+      },
+      { term: "IPv6", yomi: "IPぶいしっくす", vnTerm: "Địa chỉ IPv6", icon: "🏷️",
+        desc: "アドレス不足解消のため32bitから128bitへ拡張された規約。",
+        vnDesc: "Số định danh máy tính thế hệ mới, tăng từ 32 bit lên 128 bit để không bao giờ hết địa chỉ.",
+        rem: "IPv4 は約 43 億個ですが，IPv6 はほぼ無限に近いアドレスを持っています。",
+        vnRem: "Hãy nhớ con số: IPv4 là 32 bit, IPv6 là 128 bit."
+      }
     ],
-    types: ["OSI 7層（下から）", "主なプロトコル", "ドメイン名の種類"],
-    vnTypes: ["Vật lý, Liên kết dữ liệu, Mạng (IP), Giao vận (TCP), Phiên, Trình diễn, Ứng dụng (HTTP)", "HTTP, TCP, IP, FTP, SMTP", ".com (Công ty), .ac.jp (Trường học Nhật), .gov (Chính phủ)"]
+    types: ["Thông tin: DNS (Chuyển IP sang tên miền), Proxy (Lưu bản sao web)", "Ngôn ngữ: HTML (Cấu trúc), CSS (Thiết kế), XML (Dữ liệu)"]
   },
   {
     num: 7, title: "ビジネスとインターネット", yomi: "びじねすといんたーねっと",
     vn: "Kinh doanh & Internet",
-    vnSummary: "Thương mại điện tử (B2B, B2C, C2C), các tiêu chuẩn trao đổi dữ liệu (EDI, EOS, CALS), tiền điện tử và quản trị khách hàng CRM.",
-    time: "25 min", difficulty: "Medium",
+    vnSummary: "Thương mại điện tử (B2B, B2C), thanh toán điện tử và các công nghệ quản trị khách hàng.",
+    time: "25 min", difficulty: "Trung bình",
     concepts: [
-      { term: "電子商取引 (e-Commerce)", yomi: "てんししょうとりひき", desc: "BtoB(企業間), BtoC(企業対個人), CtoC(個人間)などの取引。", vnTerm: "Thương mại điện tử", vnDesc: "Các hình thức giao dịch qua mạng giữa doanh nghiệp và cá nhân.", rem: "受注・発注・決済・配送・商品開発まで含みます。", vnRem: "Thương mại điện tử bao gồm cả quy trình từ đặt hàng đến giao hàng và thanh toán.", icon: "🛍️" },
-      { term: "EDI / EOS / CALS", yomi: "EDI / EOS / CALS", desc: "受発注や配送、製造全工程の標準化・電子データ交換技術。", vnTerm: "Chuẩn hóa giao dịch", vnDesc: "Các hệ thống đặt hàng và trao đổi dữ liệu điện tử chuyên nghiệp.", rem: "EOS はオンライン受発注システムで，24 時間対応・遠方対応 hạng mục là EOS.", vnRem: "EOS giúp tự động hóa việc đặt hàng, tăng hiệu quả kinh doanh và tiết kiệm thời gian.", icon: "🔄" },
-      { term: "電子マネー", yomi: "でんしまねー", desc: "クローズドループ(VISAキャッシュ)とオープンループ(Mondex)型。", vnTerm: "Tiền điện tử", vnDesc: "Gồm loại vòng kín (hạn chế nơi dùng) và vòng mở (có thể đổi tiền mặt).", rem: "オープンループ型は銀行で直接現金化でき，匿名性があります。", vnRem: "Kiểu Open Loop có tính linh hoạt cao như tiền mặt và đảm bảo quyền riêng tư.", icon: "💳" },
-      { term: "CRM / Cookie", yomi: "CRM / Cookie", desc: "顧客管理手法 và ブラウザで個人を識別する識別子情報。", vnTerm: "CRM / Cookie", vnDesc: "Quản trị quan hệ khách hàng và cơ chế ghi nhớ ID của trình duyệt.", rem: "CRM は顧客に応じた個別サービスで収益を上げるマーケティング手法です。", vnRem: "Dùng dữ liệu khách hàng để cung cấp dịch vụ cá nhân hóa, từ đó tăng doanh thu.", icon: "🤝" },
+      { term: "電子商取引 (e-Commerce)", yomi: "でんししょうとりひき", vnTerm: "Thương mại điện tử", icon: "🛍️",
+        desc: "BtoB, BtoC, CtoC などの取引。受注から配送、決済までを含みます。",
+        vnDesc: "Số hóa quy trình giao dịch qua mạng, từ đặt hàng, thanh toán đến phát triển sản phẩm.",
+        rem: "EDI (Dữ liệu), EOS (Đặt hàng), POS (Máy tính tiền) là các công nghệ hỗ trợ quan trọng.",
+        vnRem: "Không chỉ là bán hàng, e-Commerce bao gồm cả hậu cần và chăm sóc khách hàng trực tuyến."
+      },
+      { term: "CRM", yomi: "しーあーるえむ", vnTerm: "Quản trị quan hệ khách hàng", icon: "🤝",
+        desc: "顧客に応じた個別サービスで収益を上げるマーケティング手法。",
+        vnDesc: "Dùng dữ liệu để thấu hiểu và cung cấp dịch vụ cá nhân hóa cho từng khách hàng.",
+        rem: "Cookie を利用してブラウザの識別を行い，再訪時の自動認証などに活用します。",
+        vnRem: "Kết hợp CRM với Data Mining giúp doanh nghiệp dự đoán thói quen mua sắm của bạn."
+      }
     ],
-    types: ["eコマースの形態", "電子マネーの種類", "標準化技術"],
-    vnTypes: ["BtoB, BtoC, CtoC, BtoG", "Closed Loop (Vòng kín), Open Loop (Vòng mở)", "EDI (Dữ liệu), EOS (Đặt hàng), CALS (Sản xuất)"]
+    types: ["Tiền điện tử: Closed Loop (Hạn chế) vs Open Loop (Mondex - Ẩn danh)", "Chuẩn hóa: CALS (Toàn bộ quy trình sản xuất điện tử)"]
   },
   {
     num: 8, title: "暗号化", yomi: "あんごうか",
     vn: "Mã hóa",
-    vnSummary: "Mật mã cổ điển (Caesar, Scytale) và hiện đại (DES, RSA), sự khác biệt giữa khóa chung và khóa công khai, xác thực và chứng chỉ SSL.",
-    time: "30 min", difficulty: "Hard",
+    vnSummary: "Cung cấp giải pháp bảo mật để chống đọc trộm dữ liệu, phân biệt Khóa chung và Khóa công khai.",
+    time: "30 min", difficulty: "Khó",
     concepts: [
-      { term: "古典的暗号", yomi: "こてんてきあんごう", desc: "換字式（文字をずらす）や転置式（円筒で並べ替える）の暗号。", vnTerm: "Mật mã cổ điển", vnDesc: "Loại thay thế (Caesar) hoặc hoán vị (Scytale).", rem: "シーザー暗号は文字をずらし，スキュタレー暗号は円筒に巻いて書きます。", vnRem: "Đây là những phương pháp sơ khai nhất để bảo vệ bí mật thông tin.", icon: "📜" },
-      { term: "共通鍵 / 公開鍵", yomi: "きょうつうかぎ / こうかいかぎ", desc: "同じ鍵を使う方式 và 暗号化鍵を公開し秘密鍵で復号する方式。", vnTerm: "Khóa chung / Khóa công khai", vnDesc: "Các phương thức mã hóa hiện đại bảo vệ dữ liệu trên mạng.", rem: "公開鍵方式は暗号化用の鍵を公開する、現在の主流の方式です。", vnRem: "Khóa công khai giúp giải quyết triệt để vấn đề truyền khóa an toàn qua Internet.", icon: "🔑" },
-      { term: "SSL / CA", yomi: "SSL / CA", desc: "公開鍵と共通鍵の組合せ通信. CA là認証局（デジタル証明書発行）。", vnTerm: "SSL / CA", vnDesc: "Giao thức bảo mật Web (https) và cơ quan chứng thực uy tín.", rem: "https プロトコル・錠のアイコンで確認できます。", vnRem: "Hãy luôn kiểm tra biểu tượng ổ khóa trên trình duyệt khi giao dịch trực tuyến.", icon: "🔒" },
-      { term: "デジタル署名", yomi: "でじたるしょめい", desc: "本人が送ったことを証明するための認証技術。", vnTerm: "Chữ ký số", vnDesc: "Xác nhận danh tính người gửi và tính toàn vẹn của văn bản.", rem: "秘密鍵で暗号化して送り，公開鍵で復号できれば本人と証明されます。", vnRem: "Giống như dấu mộc đỏ trong thế giới số, giúp xác thực người gửi tin nhắn.", icon: "🖋️" },
+      { term: "公開鍵方式", yomi: "こうかいかぎほうしき", vnTerm: "Khóa công khai (Asymmetric)", icon: "🔑",
+        desc: "暗号化鍵を公開し，秘密鍵で復号する方式。現在の主流です。",
+        vnDesc: "A dùng khóa công khai của B để mã hóa. Chỉ B có khóa bí mật mới mở được.",
+        rem: "鍵の受け渡しの問題を解決し，インターネットでの安全な通信を実現しました。",
+        vnRem: "Ưu điểm lớn nhất: Không lo bị lộ chìa khóa khi gửi cho nhau qua mạng."
+      },
+      { term: "デジタル署名", yomi: "でじたるしょめい", vnTerm: "Chữ ký số", icon: "🖋️",
+        desc: "本人が送ったことを証明するための認証技術。",
+        vnDesc: "Xác thực danh tính người gửi bằng cách mã hóa bằng khóa bí mật của chính mình.",
+        rem: "秘密鍵で暗号化し，公開鍵で復号できれば「本人」と証明されます。",
+        vnRem: "Nếu mở được bằng khóa công khai của A, chắc chắn bức thư đó do A viết, không thể giả mạo."
+      }
     ],
-    types: ["暗号の種類", "鍵方式の比較", "認証技術"],
-    vnTypes: ["Thay thế (Caesar), Hoán vị (Scytale), Hiện đại (DES, RSA)", "Common Key (Nhanh), Public Key (An toàn)", "Xác thực danh tính, Chứng chỉ kỹ thuật số (CA)"]
+    types: ["Mật mã: Caesar (Dịch chữ), Scytale (Quấn băng)", "Bảo mật: SSL (https - Kết hợp cả 2 loại khóa)"]
   },
   {
     num: 9, title: "セキュリティ", yomi: "せきゅりてぃ",
     vn: "An toàn bảo mật",
-    vnSummary: "Các loại mã độc (Virus, Worm, Trojan), tấn công mạng (DoS, Phishing), tính toán độ tin cậy hệ thống MTBF/MTTR và xác thực sinh trắc học.",
-    time: "25 min", difficulty: "Medium",
+    vnSummary: "Giải thích các mã độc (Virus, Trojan), tấn công mạng và cách đánh giá độ tin cậy hệ thống.",
+    time: "30 min", difficulty: "Trung bình",
     concepts: [
-      { term: "ウィルス / ワーム / トロイ", yomi: "ういるすとさいばーこうげき", desc: "自己増殖するものや、正規プログラムを装って情報を盗むもの。", vnTerm: "Mã độc", vnDesc: "Virus (lây lan), Worm (độc lập), Trojan (giả mạo).", rem: "感染経路は USB メモリ・メール・ホームページが主です。", vnRem: "Luôn kiểm tra virus cho USB và không click vào link lạ trong email.", icon: "🦠" },
-      { term: "DoS / フィッシング", yomi: "DoS / Phishing", desc: "サーバ麻痺攻撃や、偽サイトで個人情報を盗む詐欺手法。", vnTerm: "Tấn công mạng", vnDesc: "DoS làm tê liệt server, Phishing lừa đảo lấy thông tin cá nhân.", rem: "フィッシングは銀行等を装った偽メールでカード番号などを盗みます。", vnRem: "Cảnh giác với các yêu cầu nhập mật khẩu ngân hàng từ các trang web lạ.", icon: "⚔️" },
-      { term: "稼働率 (MTBF / MTTR)", yomi: "かどうりつ", desc: "平均故障間隔と平均修理時間から求めるシステムの安全性指標。", vnTerm: "Tỷ lệ hoạt động", vnDesc: "Đo lường độ tin cậy qua thời gian ổn định và thời gian sửa chữa.", rem: "MTBF は品質， MTTR は保守性の指標です。稼働率 = MTBF / (MTBF + MTTR)。", vnRem: "Chỉ số quan trọng để đánh giá hệ thống máy tính có hoạt động ổn định hay không.", icon: "📊" },
-      { term: "生体認証", yomi: "せいたいにんしょう", desc: "指紋、静脈、顔などで本人を確認するバイオメトリクス技術。", vnTerm: "Xác thực sinh trắc học", vnDesc: "Dùng vân tay, mống mắt, khuôn mặt... để nhận diện người dùng.", rem: "指紋・静脈・顔・音声などで本人確認を行います。", vnRem: "Phương pháp xác thực an toàn và tiện lợi nhất hiện nay trên smartphone.", icon: "👤" },
+      { term: "DoS 攻撃", yomi: "どすこうげき", vnTerm: "Tấn công từ chối dịch vụ", icon: "⚔️",
+        desc: "サーバに大量のリクエストを送り，サービスを麻痺させる攻撃。",
+        vnDesc: "Làm ngập lụt máy chủ bằng yêu cầu giả mạo khiến nó bị treo, không phục vụ được khách thật.",
+        rem: "踏み台（ゾンビ PC）を利用して，複数の端末から一斉に攻撃を行うこともあります。",
+        vnRem: "Nguy hiểm hơn là DDoS: dùng hàng triệu máy tính bị nhiễm mã độc để tấn công 1 mục tiêu."
+      },
+      { term: "稼働率 (Availability)", yomi: "かどうりつ", vnTerm: "Tỷ lệ hoạt động", icon: "📊",
+        desc: "MTBF / (MTBF + MTTR) で表されるシステムの安全性指標。",
+        vnDesc: "Đo lường thời gian máy hoạt động ổn định so với tổng thời gian.",
+        rem: "直列接続は A×B，並列接続は 1-(1-A)(1-B) で計算します。",
+        vnRem: "Mẹo nhớ: Nối tiếp thì nhân lại (dễ hỏng hơn), Song song thì lấy 1 trừ đi phần trăm cùng hỏng (bền hơn)."
+      }
     ],
-    types: ["攻撃手法", "システムの安全性指標", "稼働率 của phép toán"],
-    vnTypes: ["DoS, Phishing, Scavenging, Trojan Horse", "MTBF (Tin cậy), MTTR (Bảo trì)", "Ghép nối tiếp (A×B), Ghép song song (1-(1-A)(1-B))"]
+    types: ["Mã độc: Virus (Cần vật chủ), Worm (Nhân bản tự do), Trojan (Ngụy trang)", "Lừa đảo: Phishing (Trang web giả mạo ngân hàng)"]
   },
   {
     num: 10, title: "コンピュータの構造", yomi: "こんぴゅーたのこうぞう",
     vn: "Cấu trúc máy tính",
-    vnSummary: "Năm thành phần cơ bản của máy tính, bo mạch chủ, bộ xử lý trung tâm CPU, các loại bộ nhớ RAM/ROM và cấu tạo ổ đĩa cứng HDD.",
-    time: "30 min", difficulty: "Medium",
+    vnSummary: "Đi sâu vào 5 yếu tố cấu thành máy tính, các tầng bộ nhớ và cấu tạo chi tiết của ổ đĩa cứng.",
+    time: "30 min", difficulty: "Trung bình",
     concepts: [
-      { term: "コンピュータの5要素", yomi: "こんぴゅーたのごようそ", desc: "演算、制御、記憶、入力、出力の5つの装置。", vnTerm: "5 thành phần máy tính", vnDesc: "Thiết bị Tính toán, Điều khiển, Ghi nhớ, Vào và Ra.", rem: "演算と制御は CPU（中央演算処理装置）が担当します。", vnRem: "Năm bộ phận này phối hợp nhịp nhàng để tạo nên một chiếc máy tính hoàn chỉnh.", icon: "🏗️" },
-      { term: "CPU / GPU", yomi: "しーぴーゆー / じーぴーゆー", desc: "コンピュータの頭脳. 演算と制御を担う. GPUは画面表示専用。", vnTerm: "CPU / GPU", vnDesc: "Bộ não xử lý trung tâm và bộ xử lý đồ họa chuyên dụng.", rem: "マザーボード上で，ファンか放熱板が付いている部品が CPU です。", vnRem: "CPU là linh kiện quan trọng nhất, quyết định tốc độ xử lý của máy tính.", icon: "🧠" },
-      { term: "RAM / ROM", yomi: "らむ / ろむ", desc: "揮発性の主記憶と、非揮発性の読み取り専用メモリ。", vnTerm: "RAM / ROM", vnDesc: "Bộ nhớ tạm thời (mất điện là mất dữ liệu) và bộ nhớ chỉ đọc.", rem: "キャッシュ（SRAM）は最高速・最小容量で CPU 内部に搭載されます。", vnRem: "Phân biệt kỹ: RAM mất dữ liệu khi tắt máy, ROM vẫn giữ nguyên dữ liệu.", icon: "💾" },
-      { term: "DRAM / SRAM", yomi: "DRAM / SRAM", desc: "一般メモリ(DRAM)と、高速なキャッシュ用メモリ(SRAM)。", vnTerm: "DRAM / SRAM", vnDesc: "DRAM (rẻ, cần làm mới), SRAM (nhanh, dùng làm Cache).", rem: "SRAM は高価ですが再読み込み不要で高速です。", vnRem: "SRAM được dùng làm bộ nhớ đệm (Cache) vì tốc độ phản hồi cực nhanh.", icon: "⚡" },
-      { term: "HDD / トラック / セクタ", yomi: "HDD / とらっく / せくた", desc: "磁気ディスクの構造. 円周状の軌跡(トラック)とその分割単位。", vnTerm: "Ổ cứng / Track / Sector", vnDesc: "Cấu tạo đĩa từ: Track (rãnh) và Sector (cung - đơn vị nhỏ nhất).", rem: "トラックを等分した管理の最小単位をセクタと言います。", vnRem: "Dữ liệu được tổ chức theo các rãnh tròn và cung từ trên bề mặt đĩa.", icon: "💿" },
+      { term: "コンピュータの5要素", yomi: "ごようそ", vnTerm: "5 thành phần cơ bản", icon: "🏗️",
+        desc: "演算・制御(CPU), 記憶(Memory), 入力(Input), 出力(Output)の5つ。",
+        vnDesc: "Thiết bị Tính toán, Điều khiển, Ghi nhớ, Vào (chuột/phím) và Ra (màn hình/máy in).",
+        rem: "CPU の中には演算装置と制御装置の機能が組み込まれています。",
+        vnRem: "CPU là bộ não, đảm nhiệm cả việc 'tư duy' (tính toán) lẫn 'chỉ huy' (điều khiển)."
+      },
+      { term: "HDD 構造", yomi: "はーどでぃすく", vnTerm: "Cấu tạo đĩa cứng", icon: "💿",
+        desc: "磁気ディスク上のトラックとセクタという単位でデータを管理します。",
+        vnDesc: "Dữ liệu được ghi lên các rãnh tròn (Track) và các cung quạt (Sector).",
+        rem: "ディスクとヘッドは非接触ですが，衝撃を与えると壊れるので注意が必要です。",
+        vnRem: "Lưu ý: Kim đọc dữ liệu bay cực sát mặt đĩa, rung lắc mạnh sẽ gây 'bad sector' ngay."
+      }
     ],
-    types: ["5大要素", "半導体メモリの種類", "記憶装置の階層"],
-    vnTypes: ["Tính toán, Điều khiển, Ghi nhớ, Vào, Ra", "DRAM (RAM thường), SRAM (Cache), VRAM (Đồ họa), ROM", "Cache (Nhanh nhất) > Memory > HDD (Lớn nhất)"]
+    types: ["Bộ nhớ: Cache (SRAM - Nhanh), RAM (DRAM - Rẻ), HDD (Chậm - Dung lượng lớn)", "Chỉ số CPU: MIPS (Triệu lệnh/giây), FLOPS (Số thực/giây)"]
   },
   {
-    num: 11, title: "CPUの動作原理", yomi: "しーぴーゆーのどうさげんり",
-    vn: "Nguyên lý CPU",
-    vnSummary: "Tìm hiểu về máy Turing, 4 thế hệ linh kiện điện tử (từ ống chân không đến LSI), nguyên lý bán dẫn và các cổng logic cơ bản.",
-    time: "30 min", difficulty: "Hard",
+    num: 11, title: "CPU の動作原理", yomi: "しーぴーゆーのどうさげんり",
+    vn: "Nguyên lý hoạt động của CPU",
+    vnSummary: "Lịch sử các thế hệ linh kiện điện tử và nguyên lý mạch logic đằng sau các phép tính.",
+    time: "30 min", difficulty: "Khó",
     concepts: [
-      { term: "論理素子の4世代", yomi: "ろんりそしのよんせだい", desc: "真空管 → トランジスタ → IC → LSI への進化の歴史。", vnTerm: "4 thế hệ linh kiện", vnDesc: "Ống chân không, Transistor, IC và LSI (Mạch tích hợp quy mô lớn).", rem: "第 4 世代の LSI は，数千〜数百万のトランジスタを集積しています。", vnRem: "Sự thu nhỏ kích thước transistor là chìa khóa để CPU mạnh mẽ hơn.", icon: "🔌" },
-      { term: "ダイオード / トランジスタ", yomi: "だいおーど / とらんじすた", desc: "電流を一方通行にする素子と、スイッチ機能を持つ素子。", vnTerm: "Diode / Transistor", vnDesc: "Linh kiện cho dòng điện đi 1 chiều và linh kiện có chức năng công tắc.", rem: "トランジスタはスイッチとしての機能も持っています。", vnRem: "Bán dẫn là nền tảng vật lý cho toàn bộ ngành công nghiệp máy tính.", icon: "⚡" },
-      { term: "論理回路 (OR / AND / NOT)", yomi: "ろんりかいろ", desc: "コンピュータの計算の基礎となる基本回路。", vnTerm: "Mạch logic", vnDesc: "Mạch OR (hoặc), AND (và), NOT (phủ định) - nền tảng của mọi phép tính.", rem: "OR は並列， AND は直列のスイッチと考えることができます。", vnRem: "Mọi tính toán phức tạp của máy tính đều bắt đầu từ 3 mạch cơ bản này.", icon: "🧩" },
-      { term: "チューリングマシン", yomi: "ちゅーりんぐましん", desc: "CPUの動作原理の基礎となった数学的モデル。", vnTerm: "Máy Turing", vnDesc: "Mô hình lý thuyết nền tảng cho sự ra đời của máy tính điện tử.", rem: "マス目に分割されたテープ・ヘッド・メモリからなる理論上の機械です。", vnRem: "Ông tổ của lý thuyết máy tính, định nghĩa cách một máy móc 'tư duy'.", icon: "⚙️" },
+      { term: "論理回路", yomi: "ろんりかいろ", vnTerm: "Mạch logic", icon: "🧩",
+        desc: "AND, OR, NOT 回路を組み合わせて加算（足し算）を実現します。",
+        vnDesc: "Cấu tạo từ các cổng logic cơ bản để thực hiện các phép toán nhị phân.",
+        rem: "AND は「かつ」，OR は「または」，NOT は「否定」の意味を持ちます。",
+        vnRem: "Từ 3 mạch siêu đơn giản này, người ta xây dựng nên những CPU hàng tỷ bóng bán dẫn."
+      },
+      { term: "LSI", yomi: "えるえすあい", vnTerm: "Mạch tích hợp quy mô lớn", icon: "🔌",
+        desc: "数千〜数百万のトランジスタを1つのチップに集積した素子。",
+        vnDesc: "Thế hệ thứ 4 của linh kiện máy tính, giúp máy tính ngày càng nhỏ và mạnh.",
+        rem: "第 1 世代(真空管) → 第 2 (トランジスタ) → 第 3 (IC) → 第 4 (LSI) の順です。",
+        vnRem: "Cần nhớ thứ tự: Ống chân không (to) -> Transistor -> IC -> LSI (siêu nhỏ)."
+      }
     ],
-    types: ["素子の進化", "論理演算", "半導体の種類"],
-    vnTypes: ["Thế hệ 1 (Chân không) đến Thế hệ 4 (LSI)", "OR (Tổng), AND (Tích), NOT (Đảo)", "Diode, LED, Transistor"]
+    types: ["Lý thuyết: Máy Turing (Mô hình toán học của CPU)", "Bán dẫn: Diode (1 chiều), LED (Phát sáng)"]
   },
   {
     num: 12, title: "演算処理", yomi: "えんざんしょり",
     vn: "Xử lý tính toán",
-    vnSummary: "Các hệ cơ số (2, 8, 10, 16), phương pháp chuyển đổi, biểu diễn số âm (số bù 2) và các phép toán dịch bit nhanh.",
-    time: "35 min", difficulty: "Hard",
+    vnSummary: "Cách máy tính tính toán hệ nhị phân, xử lý số âm bằng số bù 2 và phép dịch bit.",
+    time: "40 min", difficulty: "Rất khó",
     concepts: [
-      { term: "基数 (2 / 8 / 10 / 16進数)", yomi: "きすう", desc: "コンピュータで使われる様々な数値表現形式。", vnTerm: "Hệ cơ số", vnDesc: "Nhị phân (0,1), Bát phân, Thập phân và Thập lục phân (0-9, a-f).", rem: "2 進数 4 桁は 16 進数の 1 桁に対応します。", vnRem: "Máy tính dùng hệ nhị phân, nhưng con người dùng thập lục phân để dễ đọc hơn.", icon: "🔢" },
-      { term: "2の補数", yomi: "にのほすう", desc: "コンピュータで標準的に使われる負の表現方法。引き算に使用。", vnTerm: "Số bù 2", vnDesc: "Cách biểu diễn số âm tiêu chuẩn giúp thực hiện phép trừ bằng phép cộng.", rem: "1 の補数に 1 を加えた表現で，引き算を足し算回路で実現できます。", vnRem: "Cách thông minh để máy tính thực hiện mọi phép toán chỉ bằng mạch cộng.", icon: "➖" },
-      { term: "ビットシフト", yomi: "びっとしふと", desc: "桁をずらす演算。左シフトはかけ算、右シフトは割り算に対応。", vnTerm: "Dịch bit", vnDesc: "Đẩy các chữ số sang trái (nhân 2^n) hoặc sang phải (chia 2^n).", rem: "左シフト n 回=×2ⁿ，右シフト n 回=÷2ⁿ です。", vnRem: "Phép dịch bit giúp nhân chia with 2 nhanh gấp nhiều lần phép tính thông thường.", icon: "↔️" },
-      { term: "丸め誤差", yomi: "まるめごさ", desc: "2進数で小数を正確に表現できないために生じる計算誤差。", vnTerm: "Sai số làm tròn", vnDesc: "Lỗi phát sinh do máy tính không thể biểu diễn chính xác một số thập phân.", rem: "10 進数の多くの小数は 2 進数では無限に続くために生じます。", vnRem: "Nguyên nhân khiến các tính toán tài chính cực lớn cần sự cẩn thận tối đa.", icon: "⚠️" },
+      { term: "2の補数", yomi: "にのほすう", vnTerm: "Số bù 2", icon: "➖",
+        desc: "コンピュータで標準的に使われる負の表現方法。引き算に使用。",
+        vnDesc: "Cách biểu diễn số âm bằng cách đảo bit (bù 1) rồi cộng 1.",
+        rem: "引き算を足し算回路で実現できるため，回路を簡略化できます。",
+        vnRem: "Mẹo kỹ thuật: Thay vì làm phép trừ, máy tính cộng với số bù 2 của nó. Kết quả vẫn đúng!"
+      },
+      { term: "ビットシフト", yomi: "びっとしふと", vnTerm: "Dịch bit (Bit Shift)", icon: "↔️",
+        desc: "桁をずらす演算。左はかけ算，右は割り算に対応します。",
+        vnDesc: "Đẩy các chữ số sang trái để nhân 2, hoặc sang phải để chia 2.",
+        rem: "左 n 回シフト = ×2ⁿ，右 n 回シフト = ÷2ⁿ です。",
+        vnRem: "Đây là cách CPU nhân chia cực nhanh, nhanh hơn nhiều so với dùng bảng cửu chương."
+      }
     ],
-    types: ["進数の変換", "負の数の表現", "数学적近似"],
-    vnTypes: ["Thập phân ↔ Nhị phân, Nhị phân ↔ Thập lục phân", "Số bù 1, Số bù 2 (Tiêu chuẩn)", "Khai triển Taylor (Dùng cho sin, cos, log)"]
+    types: ["Hệ cơ số: 2 (Nhị phân), 8 (Bát phân), 10 (Thập phân), 16 (Thập lục phân)", "Lỗi: Sai số làm tròn (Round-off error) do số vô hạn trong nhị phân"]
   },
   {
     num: 13, title: "情報量", yomi: "じょうほうりょう",
     vn: "Lượng thông tin",
-    vnSummary: "Đơn vị đo lường (Bit, Byte), quy đổi đơn vị (1024), bảng mã ký tự ASCII và các chuẩn mã hóa tiếng Nhật như Unicode.",
-    time: "20 min", difficulty: "Easy",
+    vnSummary: "Định lượng thông tin qua bit/byte và các chuẩn mã hóa ký tự (ASCII, Unicode).",
+    time: "20 min", difficulty: "Dễ",
     concepts: [
-      { term: "ビット / バイト", yomi: "bit / byte", desc: "情報量の最小単位(bit)と、8bitをまとめた単位(byte)。", vnTerm: "Bit / Byte", vnDesc: "Bit là đơn vị nhỏ nhất; 1 Byte = 8 Bit (đủ mã hóa 1 ký tự tiếng Anh).", rem: "1 byte = 8 bit です。アルファベット 1 文字は 1 byte です。", vnRem: "Hãy nhớ: bit là đơn vị nhỏ nhất, còn byte là đơn vị để đếm ký tự.", icon: "📏" },
-      { term: "単位換算 (K / M / G / T)", yomi: "たんいかんさん", desc: "1,024(2の10乗)倍ずつ大きくなる単位の階層構造。", vnTerm: "Quy đổi đơn vị", vnDesc: "KB, MB, GB, TB; máy tính tính theo cơ số 1024 chứ không phải 1000.", rem: "コンピュータでは 1000 ではなく 1024（2¹⁰）倍です。", vnRem: "Lưu ý: 1KB là 1024 byte, không phải 1000 byte như trong các ngành khác.", icon: "📈" },
-      { term: "文字コード (ASCII / Unicode)", yomi: "もじこーど", desc: "文字を数値に対応させる規則. 日本語は通常2byte必要。", vnTerm: "Mã ký tự", vnDesc: "ASCII (Anh), JIS/Shift-JIS (Nhật), Unicode (Toàn cầu).", rem: "Unicode は世界すべての言語を 2byte で統一するコード体系です。", vnRem: "Unicode giúp cả thế giới dùng chung một bảng mã, không còn lỗi font chữ.", icon: "🔤" },
-      { term: "文字化け", yomi: "もじばけ", desc: "文字コードが合わないために正しく表示されない現象。", vnTerm: "Lỗi font", vnDesc: "Hiện tượng hiển thị sai ký tự khi bộ mã hóa không khớp.", rem: "半角カタカナは ASCII と誤解釈されやすいので使用を避けます。", vnRem: "Sử dụng Unicode giúp hạn chế tối đa việc 'nhảy' chữ không đọc được.", icon: "❌" },
+      { term: "ビット (bit)", yomi: "びっと", vnTerm: "Bit", icon: "📏",
+        desc: "情報量の最小単位。2進数の1桁（0 または 1）を表します。",
+        vnDesc: "Đơn vị nhỏ nhất của thông tin, tương ứng với 1 chữ số nhị phân.",
+        rem: "8 bit = 1 byte です。n bit で表せる種類は 2ⁿ 種類です。",
+        vnRem: "Cứ 8 bit gộp lại thành 1 byte. 3 bit thì phân biệt được 2 mũ 3 = 8 trường hợp."
+      },
+      { term: "Unicode", yomi: "ゆにこーど", vnTerm: "Unicode", icon: "🔤",
+        desc: "世界すべての言語を2byteで統一するコード体系です。",
+        vnDesc: "Bảng mã thống nhất mọi ngôn ngữ thế giới, giúp máy tính không còn bị lỗi font.",
+        rem: "日本語 1 文字は通常 2 byte (16 bit) の情報量を持ちます。",
+        vnRem: "Chữ cái tiếng Anh tốn 1 byte, nhưng chữ Kanji/Tiếng Việt tốn ít nhất 2 byte."
+      }
     ],
-    types: ["情報量の単位", "日本語コード", "1文字の容量"],
-    vnTypes: ["bit < byte < KB < MB < GB < TB", "JIS, Shift-JIS, EUC, Unicode", "Alphabet (1 byte) vs Tiếng Nhật (2 bytes)"]
+    types: ["Đơn vị: bit < Byte < KB < MB < GB < TB (Mỗi bậc gấp 1024 lần)", "Lỗi: Moji-bake (文字化け) do sai bảng mã"]
   },
   {
     num: 14, title: "マルチメディア表現", yomi: "まるちめでぃあひょうげん",
     vn: "Đa phương tiện",
-    vnSummary: "Số hóa âm thanh (lấy mẫu, lượng tử hóa), chuẩn nhạc cụ MIDI, độ phân giải hình ảnh (RGB, pixel) và video.",
-    time: "25 min", difficulty: "Medium",
+    vnSummary: "Số hóa âm thanh, hình ảnh qua điểm ảnh (pixel) và hệ màu RGB.",
+    time: "25 min", difficulty: "Trung bình",
     concepts: [
-      { term: "サンプリング / 量子化", yomi: "さんぷりんぐ / りょうしか", desc: "音の波をデジタル化するための測定頻度と段階数。", vnTerm: "Lấy mẫu / Lượng tử hóa", vnDesc: "Tần số đo (Hz) và số mức biểu diễn độ cao sóng âm.", rem: "サンプリング周波数は 1 秒あたりの測定回数（Hz）です。高いほど高音質です。", vnRem: "Thông số càng cao thì âm thanh kỹ thuật số nghe càng trung thực.", icon: "🔉" },
-      { term: "MIDI", yomi: "みでぃ", desc: "電子楽器の演奏情報をやり取りするための標準規格。", vnTerm: "Chuẩn MIDI", vnDesc: "Dữ liệu lệnh chơi nhạc, dung lượng nhẹ, dùng cho nhạc cụ điện tử.", rem: "MIDI 命令は 256 種類以内なので， 1 命令あたり 1byte です。", vnRem: "MIDI không chứa âm thanh thực mà chứa các lệnh chơi nhạc siêu nhẹ.", icon: "🎹" },
-      { term: "解像度 (VGA / XGA...)", yomi: "かいぞうど", desc: "画面の精細さを示すピクセル数. VGAは640x480。", vnTerm: "Độ phân giải", vnDesc: "Số điểm ảnh (Pixel); các chuẩn như VGA, XGA, UXGA.", rem: "画素数（ピクセル）が多いほど高画質になります。", vnRem: "Càng nhiều pixel trên một diện tích thì hình ảnh càng mịn và sắc nét.", icon: "🖼️" },
-      { term: "RGB / 三原色", yomi: "RGB / さんげんしょく", desc: "赤・緑・青の光を組み合わせた色の表現方式。", vnTerm: "Hệ màu RGB", vnDesc: "Ba màu cơ bản; 1 pixel ảnh màu thường tốn 3 byte.", rem: "各 256 段階(8bit)で表現するため， 1 画素=3byte 必要です。", vnRem: "Sự kết hợp của 3 màu Đỏ-Xanh lá-Xanh dương tạo ra hàng triệu màu sắc.", icon: "🎨" },
+      { term: "サンプリング周波数", yomi: "さんぷりんぐ", vnTerm: "Tần số lấy mẫu", icon: "🔉",
+        desc: "アナログの音をデジタル化するために1秒間に測る回数(Hz)。",
+        vnDesc: "Cắt lát âm thanh tự nhiên ra thành nhiều phần mỗi giây để đưa vào máy tính.",
+        rem: "CD は 44.1 kHz（1 秒間に 44,100 回）の頻度で測っています。",
+        vnRem: "Số này càng cao thì âm thanh nghe càng 'thật' và chuẩn."
+      },
+      { term: "RGB / 画素", yomi: "あーるじーびー", vnTerm: "Hệ màu RGB / Pixel", icon: "🎨",
+        desc: "赤・緑・青の三原色。1画素=3byte(24bit)必要です。",
+        vnDesc: "Điểm ảnh là ô nhỏ nhất cấu thành bức ảnh. Mỗi ô tốn 3 byte cho 3 màu cơ bản.",
+        rem: "解像度 VGA は 640 × 480 ドットのサイズを表します。",
+        vnRem: "Hãy nhớ kích thước VGA tiêu chuẩn: 640 x 480 điểm ảnh."
+      }
     ],
-    types: ["音声パラメータ", "解像度の呼称", "動画像の原理"],
-    vnTypes: ["Tần số lấy mẫu (CD: 44.1kHz), Số bit lượng tử hóa", "QVGA, VGA, XGA, SXGA, UXGA", "Frame rate (Số khung hình/giây - Nhật là 30fps)"]
+    types: ["Nhạc: MIDI (Chỉ chứa lệnh điều khiển, siêu nhẹ)", "Video: Nhật dùng 30fps (30 khung hình/giây)"]
   },
   {
     num: 15, title: "データ通信", yomi: "でーたつうしん",
-    vn: "Truyền dữ liệu",
-    vnSummary: "Tốc độ bps, các chuẩn nén dữ liệu (JPEG, MPEG, MP3) và các phương pháp phát hiện lỗi (Parity, CRC).",
-    time: "30 min", difficulty: "Hard",
+    vn: "Truyền dữ liệu (Nâng cao)",
+    vnSummary: "Các kỹ thuật nén dữ liệu (JPEG, MPEG) và kiểm soát lỗi đường truyền.",
+    time: "30 min", difficulty: "Khó",
     concepts: [
-      { term: "bps", yomi: "bit per second", desc: "1秒間に転送できるビット数. 通信速度の単位。", vnTerm: "bps", vnDesc: "Số bit truyền được trong 1 giây (ví dụ: 100Mbps).", rem: "100Mbps 以上の通信速度を広帯域（ブロードバンド）と言います。", vnRem: "Đơn vị cơ bản nhất để đo tốc độ mạng Internet nhà bạn.", icon: "🚀" },
-      { term: "圧縮 (JPEG / MPEG / MP3)", yomi: "あっしゅく", desc: "データ容量を小さくする技術. 可逆と不可逆がある。", vnTerm: "Nén dữ liệu", vnDesc: "JPEG (Ảnh), MPEG (Video - dùng sai khác), MP3 (Âm thanh).", rem: "JPEG は不可逆圧縮で，高圧縮率にすると偽色が生じることがあります。", vnRem: "Nén giúp chúng ta lưu được nhiều ảnh và phim hơn trên cùng một ổ đĩa.", icon: "🗜️" },
-      { term: "パリティチェック", yomi: "ぱりてぃちぇっく", desc: "1bitの検査用ビットで誤りを確認する最も単純な方式。", vnTerm: "Kiểm tra chẵn lẻ", vnDesc: "Thêm 1 bit để kiểm tra lỗi; chỉ phát hiện/sửa tối đa 1 vị trí.", rem: "1 箇所の誤りを特定し自動訂正できますが， 2 箇所以上は検出できません。", vnRem: "Phương pháp đơn giản nhất để đảm bảo dữ liệu gửi đi không bị sai lệch.", icon: "🔎" },
-      { term: "CRC / 巡回冗長検査", yomi: "CRC / じゅんかいじょうちょうけんさ", desc: "多項式計算を用いた、より高度な誤り検出方式。", vnTerm: "Kiểm tra CRC", vnDesc: "Dùng đa thức toán học, phát hiện được nhiều lỗi bit đồng thời.", rem: "多項式を使った計算で，複数ビットの誤り cũng có thể được phát hiện.", vnRem: "Phương pháp kiểm lỗi cực kỳ chính xác được dùng cho CD/DVD và mạng LAN.", icon: "🛡️" },
+      { term: "MPEG", yomi: "えむぺっぐ", vnTerm: "Chuẩn nén MPEG", icon: "🎞️",
+        desc: "動画圧縮。静止画圧縮と差分記録を組み合わせています。",
+        vnDesc: "Nén phim bằng cách chỉ ghi lại phần thay đổi (sai phân) giữa các khung hình.",
+        rem: "MPEG1 の Layer3 が、有名な MP3（音声圧縮）の規格です。",
+        vnRem: "Nhờ nén MPEG mà chúng ta có thể xem phim chất lượng cao với dung lượng thấp."
+      },
+      { term: "パリティチェック", yomi: "ぱりてぃ", vnTerm: "Kiểm tra chẵn lẻ (Parity)", icon: "🔎",
+        desc: "1bitの検査ビットを付加して誤りを検出する最も単純な方式。",
+        vnDesc: "Thêm 1 bit vào cuối để đếm xem số lượng số '1' là chẵn hay lẻ.",
+        rem: "1 箇所の誤り特定・自動訂正が可能ですが，2 箇所以上は不可です。",
+        vnRem: "Hạn chế: Chỉ phát hiện và sửa được duy nhất 1 lỗi bit trên một khối dữ liệu."
+      }
     ],
-    types: ["圧縮の形式", "誤り検出方式", "通信の帯域"],
-    vnTypes: ["JPEG (Ảnh), GIF (CG), MPEG (Video), MP3 (Âm thanh)", "Parity Check (Đơn giản), CRC (CD-R/DVD-R)", "Broadband (Băng rộng) vs Narrowband"]
+    types: ["Nén ảnh: JPEG (Mất dữ liệu - Ảnh chụp) vs GIF (Không mất - Ảnh ít màu)", "Lỗi: CRC (Kiểm tra dư vòng - Dùng cho CD/DVD)"]
   },
   {
     num: 16, title: "オペレーティングシステム", yomi: "おぺれーてぃんぐしすてむ",
     vn: "Hệ điều hành",
-    vnSummary: "Vai trò quản lý phần cứng và ứng dụng của OS, cấu trúc nhân (Kernel) và các loại OS phổ biến trên thế giới.",
-    time: "20 min", difficulty: "Medium",
+    vnSummary: "Vai trò trung gian của OS, quản lý đa nhiệm và bộ nhớ ảo.",
+    time: "20 min", difficulty: "Trung bình",
     concepts: [
-      { term: "カーネル / ユーティリティ", yomi: "かーねる / ゆーてぃりてぃ", desc: "OSの核心部分と、それを補助する周辺プログラム。", vnTerm: "Nhân / Tiện ích", vnDesc: "Phần lõi quản lý phần cứng và các công cụ bổ trợ của OS.", rem: "OS はカーネル（核心部分）と各種ユーティリティから構成されます。", vnRem: "Kernel là bộ phận quyền lực nhất, điều phối toàn bộ tài nguyên phần cứng.", icon: "🐚" },
-      { term: "マルチタスク", yomi: "まるちたすく", desc: "複数のプログラムを同時に実行しているように見せる機能。", vnTerm: "Đa nhiệm", vnDesc: "Khả năng chạy nhiều chương trình cùng lúc nhờ quản lý CPU.", rem: "CPU の使用時間を各プログラムに割り当てて管理します。", vnRem: "Giúp bạn có thể vừa nghe nhạc, vừa soạn thảo văn bản trên cùng máy tính.", icon: "⏳" },
-      { term: "デバイスドライバ", yomi: "でばいすどらいば", desc: "周辺機器をOSから利用可能にするための制御ソフト。", vnTerm: "Trình điều khiển thiết bị", vnDesc: "Phần mềm trung gian giúp OS nhận diện và điều khiển máy in, chuột...", rem: "アプリから周辺機器を統一的に利用できるようにします。", vnRem: "Nhờ có driver mà Windows có thể 'nói chuyện' được với máy in của bạn.", icon: "🔌" },
-      { term: "Windows / Linux / Android", yomi: "OSのしゅるい", desc: "世界で使われている主要なオペレーティングシステム。", vnTerm: "Các loại OS", vnDesc: "Windows (Phổ biến), Linux (Mở), Android (Di động).", rem: "Linux は UNIX をベースにしたオープンソース OS で，無料で利用可能です。", vnRem: "Ba hệ điều hành thống trị thế giới từ máy tính cá nhân đến điện thoại.", icon: "💻" },
+      { term: "カーネル (Kernel)", yomi: "かーねる", vnTerm: "Nhân hệ điều hành", icon: "🐚",
+        desc: "OS の核心部分。ハードウェアを直接管理します。",
+        vnDesc: "Bộ phận quan trọng nhất, đứng ra điều phối toàn bộ linh kiện phần cứng.",
+        rem: "カーネルを補助する周辺プログラムをユーティリティと呼びます。",
+        vnRem: "Kernel là bộ não, Utilities là các công cụ trợ giúp của Hệ điều hành."
+      },
+      { term: "マルチタスク", yomi: "まるちたすく", vnTerm: "Đa nhiệm", icon: "⏳",
+        desc: "複数のプログラムを同時に実行しているように見せる機能。",
+        vnDesc: "OS chia nhỏ thời gian CPU cho từng app, khiến bạn cảm thấy máy đang chạy nhiều việc cùng lúc.",
+        rem: "CPU の使用時間を各プログラムに割り当てて管理します。",
+        vnRem: "Thực chất CPU chỉ làm 1 việc tại 1 thời điểm, nhưng nó đổi việc quá nhanh!"
+      }
     ],
-    types: ["OSの主要機能", "仮想記憶", "OSの系統"],
-    vnTypes: ["File, Task, Memory, Device, User, Network management", "Dùng HDD làm bộ nhớ ảo thay cho RAM", "Windows, UNIX, Linux, macOS, Android"]
+    types: ["Chức năng: Quản lý File, Task, Memory, Device, User", "Hệ máy: Windows, UNIX, Linux (Mã nguồn mở), macOS, Android"]
   }
 ];
 
 const allQuestions = [
-  { "ch": 1, "q": "Trong hai khái niệm Digital và Analog, đại lượng nào biểu thị 'lượng liên tục' như chiều dài, trọng lượng, thời gian?", "opts": ["Digital", "Analog", "Cả hai", "Không cái nào"], "ans": 1, "exp": "Analog là đại lượng liên tục; Digital là đại lượng đã được số hóa thành các đơn vị rời rạc." },
-  { "ch": 1, "q": "Máy tính điện tử đầu tiên trên thế giới (1946), dùng khoảng 20.000 ống chân không, có tên là gì?", "opts": ["EDSAC", "ENIAC", "UNIVAC", "Pascal"], "ans": 1, "exp": "ENIAC do John Eckert và John Mauchly phát triển tại Đại học Pennsylvania năm 1946." },
-  { "ch": 1, "q": "Coi máy tính là máy 'ghi nhớ' và 'xử lý' — nếu chỉ có một trong hai chức năng thì có thể gọi là máy tính không?", "opts": ["Có, vẫn gọi là máy tính", "Không, cần cả hai chức năng", "Chỉ cần xử lý là đủ", "Chỉ cần ghi nhớ là đủ"], "ans": 1, "exp": "Theo giáo trình, nếu chỉ có một trong hai chức năng 'ghi nhớ' hoặc 'xử lý' thì không thể gọi là máy tính." },
-  { "ch": 2, "q": "Mô hình kinh doanh nào trên Internet cho phép tiếp tục bán những sản phẩm có doanh số thấp trên trang web (Long Tail)?", "opts": ["Đấu giá trực tuyến giữa cá nhân", "Thu phí mở gian hàng ảo", "Tiếp tục bán sản phẩm dù số lượng bán ít trên website", "Trả thưởng theo lượt giới thiệu link"], "ans": 2, "exp": "Long Tail là mô hình duy trì bán đa dạng sản phẩm dù mỗi loại bán được ít, nhờ không bị giới hạn không gian lưu kho như cửa hàng thực." },
-  { "ch": 2, "q": "Khái niệm Web2.0 (Blog, SNS, Wikipedia...) được Tim O'Reilly đề xuất vào năm nào?", "opts": ["1996", "2000", "2004", "2010"], "ans": 2, "exp": "Tim O'Reilly đưa ra khái niệm Web2.0 vào năm 2004 để chỉ các trang web hai chiều." },
-  { "ch": 2, "q": "Theo quy tắc Netiquette, khi gửi mail công việc nên đợi bao lâu trước khi yêu cầu trả lời gấp?", "opts": ["Vài giờ", "Tối thiểu khoảng 1 tuần", "Ngay lập tức", "Không cần đợi"], "ans": 1, "exp": "Giáo trình khuyên nên dành tối thiểu khoảng 1 tuần khi yêu cầu phản hồi có thời hạn, vì người nhận thường bận." },
-  { "ch": 3, "q": "Loại màn hình nào tự phát sáng, được phân loại là một dạng đi-ốt phát quang (LED)?", "opts": ["Màn hình CRT", "Màn hình LCD (tinh thể lỏng)", "Màn hình Plasma", "Màn hình OLED (hữu cơ)"], "ans": 3, "exp": "Màn hình OLED dùng vật liệu hữu cơ tự phát sáng, là một dạng đặc biệt của LED, khác với LCD cần đèn nền." },
-  { "ch": 3, "q": "Phương thức cảm ứng nào đo điện tích giữa ngón tay và cảm biến, hỗ trợ đa điểm chạm (multi-touch)?", "opts": ["Màng điện trở", "Điện dung (静電容量方式)", "Hồng ngoại", "Sóng âm"], "ans": 1, "exp": "Phương thức điện dung đo điện tích tích lại giữa ngón tay và cảm biến, cho phép cảm ứng đa điểm." },
-  { "ch": 3, "q": "Phát sóng truyền hình di động dùng 1 trong 13 segment băng tần được gọi là gì?", "opts": ["HD broadcast", "Sóng FM", "Phát sóng 1seg (ワンセグ)", "Sóng vệ tinh BS"], "ans": 2, "exp": "Trong 13 segment dành cho truyền hình số mặt đất, 1 segment được dành riêng cho thiết bị di động, gọi là phát sóng 1seg." },
-  { "ch": 4, "q": "Công nghệ nào dùng cáp quang đưa đường truyền tốc độ cao đến tận nhà, giải quyết 'vấn đề dặm cuối cùng'?", "opts": ["ADSL", "CATV", "FTTH", "PLC"],"ans": 2, "exp": "FTTH (Fiber To The Home) dùng cáp quang đến tận nhà, ổn định và nhanh hơn ADSL vốn dùng dây điện thoại." },
-  { "ch": 4, "q": "Trong ADSL, chiều truyền nào (tải lên hay tải xuống) thường được thiết kế nhanh hơn?", "opts": ["Tải lên (upload)", "Tải xuống (download)", "Cả hai bằng nhau", "Không cố định"], "ans": 1, "exp": "Vì nhu cầu xem web (download) phổ biến hơn gửi mail/cập nhật (upload), ADSL thường ưu tiên tốc độ tải xuống cao hơn." },
-  { "ch": 4, "q": "Chuẩn kết nối không dây nào hoạt động trong phạm vi khoảng 10m, thường dùng cho tai nghe rảnh tay?", "opts": ["Wi-Fi", "Bluetooth", "IrDA", "RFID"], "ans": 1, "exp": "Bluetooth kết nối tự động các thiết bị trong phạm vi khoảng 10m, điển hình là tai nghe rảnh tay (hands-free)." },
-  { "ch": 5, "q": "Mô hình mạng nào kết nối các máy tính tập trung quanh một thiết bị Hub trung tâm?", "opts": ["Kiểu Bus", "Kiểu Star (hình sao)", "Kiểu Ring (vòng)", "Kiểu Mesh"], "ans": 1, "exp": "Mô hình Star (hình sao) kết nối qua Hub trung tâm, dễ mở rộng và là kiểu phổ biến nhất hiện nay." },
-  { "ch": 5, "q": "Hệ thống mạng nào đặt server công khai (như web server) ở vùng đệm, tách biệt với mạng nội bộ?", "opts": ["LAN nội bộ", "DMZ (vùng phi quân sự)", "WAN", "VPN"], "ans": 1, "exp": "DMZ là vùng đệm giữa Internet và mạng nội bộ, dùng để đặt các server công khai như web server." },
-  { "ch": 5, "q": "Trong hệ thống xử lý phân tán, hình thức các máy tính kết nối bình đẳng và cùng cung cấp dịch vụ cho nhau gọi là gì?", "opts": ["Client-Server", "Peer-to-Peer (P2P)", "Mainframe", "Cloud"], "ans": 1, "exp": "Peer-to-Peer (P2P) là hình thức các máy tính kết nối đối xứng, cùng cấp dịch vụ cho nhau, khác với Client-Server phân biệt rõ vai trò." },
-  { "ch": 6, "q": "Giao thức nào thuộc lớp ứng dụng, dùng để truyền tải nội dung (chữ, ảnh...) của các trang web?", "opts": ["TCP", "IP", "HTTP", "DNS"], "ans": 2, "exp": "HTTP (Hyper Text Transfer Protocol) là giao thức lớp ứng dụng dùng để truyền nội dung trang web." },
-  { "ch": 6, "q": "Máy chủ nào chuyển đổi giữa địa chỉ IP và tên miền (domain name)?", "opts": ["Máy chủ Proxy", "Máy chủ DNS", "Máy chủ Mail", "Máy chủ Web"], "ans": 1, "exp": "Máy chủ DNS (Domain Name System) thực hiện chuyển đổi giữa địa chỉ IP và tên miền dễ nhớ." },
-  { "ch": 6, "q": "Ngôn ngữ đánh dấu nào cho phép người dùng tự do định nghĩa thẻ (tag) để xây dựng cơ sở dữ liệu tùy ý?", "opts": ["HTML", "CSS", "XML", "JavaScript"], "ans": 2, "exp": "Khác với HTML có thẻ cố định, XML (eXtensible Markup Language) cho phép người dùng tự định nghĩa thẻ riêng." },
-  { "ch": 7, "q": "Loại tiền điện tử nào cho phép đổi trực tiếp giá trị thẻ IC ra tiền mặt, giữ được tính ẩn danh và phù hợp giao dịch quốc tế?", "opts": ["Closed Loop (như VISA Cash)", "Open Loop (như Mondex)", "Tiền mặt thông thường", "Thẻ ghi nợ ngân hàng"], "ans": 1, "exp": "Kiểu Open Loop (như Mondex) cho phép đổi giá trị thẻ ra tiền mặt trực tiếp mà không cần qua tài khoản ngân hàng cố định, giữ tính ẩn danh." },
-  { "ch": 7, "q": "Cơ chế nào trong trình duyệt ghi nhớ thông tin ID để website tự động nhận diện người dùng khi truy cập lại?", "opts": ["Cache", "Cookie", "History", "Bookmark"], "ans": 1, "exp": "Cookie lưu thông tin ID trên trình duyệt, giúp website tự động nhận diện người dùng quay lại." },
-  { "ch": 7, "q": "Mô hình giao dịch giữa doanh nghiệp và doanh nghiệp được viết tắt là gì?", "opts": ["BtoC", "CtoC", "BtoB", "GtoB"], "ans": 2, "exp": "BtoB (Business to Business) là giao dịch thương mại điện tử giữa các doanh nghiệp với nhau." },
-  { "ch": 8, "q": "Phương thức mã hóa nào công khai khóa mã hóa cho mọi người nhưng giữ kín khóa giải mã, được dùng chủ đạo trên Internet hiện nay?", "opts": ["Khóa chung (bí mật)", "Khóa công khai", "Mã Caesar", "Mã Scytale"], "ans": 1, "exp": "Phương thức khóa công khai (public key) công bố khóa mã hóa, giữ kín khóa giải mã — là phương thức chủ đạo vì khó truyền khóa chung an toàn qua Internet." },
-  { "ch": 8, "q": "Biểu tượng khóa (lock icon) và giao thức https trên trình duyệt thể hiện kết nối đang được bảo vệ bằng công nghệ nào?", "opts": ["VPN", "SSL", "Firewall", "Antivirus"], "ans": 1, "exp": "SSL (Secure Socket Layer) là công nghệ mã hóa thể hiện qua biểu tượng khóa và giao thức https." },
-  { "ch": 8, "q": "Trong mã hóa cổ điển, mã nào dùng cách cuốn ruy băng quanh hình trụ rồi viết chữ ngang qua đó?", "opts": ["Mã Caesar", "Mã Scytale", "Mã DES", "Mã RSA"], "ans": 1, "exp": "Mã Scytale (mã hoán vị) cuốn ruy băng quanh hình trụ, chỉ giải mã được khi dùng hình trụ cùng đường kính." },
-  { "ch": 9, "q": "Loại tấn công nào gửi lượng lớn mail hoặc truy cập để làm hệ thống bị tê liệt, không thể phục vụ?", "opts": ["Phishing", "Trojan", "DoS (Denial of Services)", "Scavenging"], "ans": 2, "exp": "DoS (Denial of Services) là kiểu tấn công làm tê liệt hệ thống bằng cách gửi lượng lớn yêu cầu/truy cập." },
-  { "ch": 9, "q": "Nếu MTBF (thời gian trung bình giữa các lần hỏng) và MTTR (thời gian sửa chữa trung bình) đã biết, công thức tính tỷ lệ hoạt động là gì?", "opts": ["MTBF + MTTR", "MTBF − MTTR", "MTBF / (MTBF + MTTR)", "MTTR / MTBF"], "ans": 2, "exp": "Tỷ lệ hoạt động = MTBF / (MTBF + MTTR), trong đó MTBF là chỉ số chất lượng, MTTR là chỉ số khả năng bảo trì." },
-  { "ch": 9, "q": "Khi đặt mật khẩu, nên tránh dùng loại thông tin nào để chống bị dò mật khẩu?", "opts": ["Ký tự đặc biệt kết hợp số", "Tên riêng, ngày sinh, số điện thoại cá nhân", "Mật khẩu dài và phức tạp", "Đổi mật khẩu định kỳ"], "ans": 1, "exp": "Tên riêng, tên người nổi tiếng, số điện thoại... dễ bị suy đoán hoặc dò ra, nên cần tránh khi đặt mật khẩu." },
-  { "ch": 10, "q": "Bộ phận nào trong máy tính đóng vai trò 'bộ não', tích hợp cả thiết bị tính toán và điều khiển?", "opts": ["RAM", "Ổ cứng (HDD)", "CPU", "Mainboard"], "ans": 2, "exp": "CPU (Central Processing Unit) tích hợp thiết bị tính toán và thiết bị điều khiển, được coi là bộ não của máy tính." },
-  { "ch": 10, "q": "Loại bộ nhớ RAM nào nhanh hơn nhưng đắt hơn, thường dùng cho bộ nhớ đệm (cache)?", "opts": ["DRAM", "SRAM", "VRAM", "ROM"], "ans": 1, "exp": "SRAM (Static RAM) nhanh, không cần làm mới liên tục như DRAM, nhưng đắt hơn nên chỉ dùng cho cache dung lượng nhỏ." },
-  { "ch": 10, "q": "Quỹ tích mà đầu đọc của ổ cứng vẽ ra khi cần được giữ cố định gọi là gì?", "opts": ["Sector", "Track", "Cluster", "Partition"], "ans": 1, "exp": "Track là quỹ tích đầu đọc vẽ ra trên đĩa khi cần (arm) giữ cố định; Track được chia nhỏ thành các Sector." },
-  { "ch": 11, "q": "Linh kiện điện tử nào được dùng trong thế hệ máy tính đầu tiên (CPU thế hệ 1, giữa những năm 1940)?", "opts": ["Transistor", "Ống chân không (真空管)", "IC", "LSI"], "ans": 1, "exp": "Thế hệ 1 (giữa 1940s) sử dụng ống chân không, sau đó tiến lên Transistor (thế hệ 2), IC (thế hệ 3), LSI (thế hệ 4)." },
-  { "ch": 11, "q": "Cổng logic nào hoạt động giống công tắc nối tiếp — chỉ cho ra kết quả 'on' khi cả hai đầu vào đều 'on'?", "opts": ["Cổng OR", "Cổng AND", "Cổng NOT", "Cổng XOR"], "ans": 1, "exp": "Cổng AND giống công tắc nối tiếp: chỉ khi cả X và Y đều on thì đầu ra mới on (phép logic tích)." },
-  { "ch": 11, "q": "Mô hình toán học nào (gồm băng chia ô, đầu đọc/ghi, bộ nhớ trạng thái) là nền tảng nguyên lý hoạt động của CPU?", "opts": ["Mạng nơ-ron", "Máy Turing", "Mô hình Von Neumann", "Thuật toán Dijkstra"], "ans": 1, "exp": "Máy Turing là mô hình toán học được đề xuất trước khi có máy tính điện tử, là cơ sở lý thuyết cho nguyên lý hoạt động của CPU." },
-  { "ch": 12, "q": "Số nhị phân 1.101 tương đương với số nào trong hệ thập phân?", "opts": ["1.2", "1.5", "1.505", "1.625"], "ans": 3, "exp": "1.101(2) = 1 + 1/2 + 0/4 + 1/8 = 1 + 0.5 + 0.125 = 1.625." },
-  { "ch": 12, "q": "Để biểu diễn số âm trong máy tính, phương pháp tiêu chuẩn thường dùng là gì?", "opts": ["Số bù 1 (1の補数)", "Số bù 2 (2の補数)", "Dấu trừ thông thường", "Ký hiệu Unicode"], "ans": 1, "exp": "Máy tính thường dùng số bù 2 (2の補数) vì số bù 1 có vấn đề trùng lặp +0 và -0." },
-  { "ch": 12, "q": "Phép toán nhân với 2^n trong máy tính có thể thực hiện nhanh bằng cách nào?", "opts": ["Phép cộng lặp lại n lần", "Dịch bit (bit shift) sang trái n lần", "Dùng bảng tra cứu", "Không thể tính nhanh"], "ans": 1, "exp": "Nhân với 2^n tương đương dịch các chữ số nhị phân sang trái n lần (bit shift), là phép toán CPU xử lý rất nhanh." },
-  { "ch": 13, "q": "Đơn vị thông tin nhỏ nhất trong tin học, viết tắt của 'binary digit', là gì?", "opts": ["Byte", "Bit", "Word", "Nibble"], "ans": 1, "exp": "Bit là đơn vị thông tin nhỏ nhất, viết tắt của binary digit (chữ số nhị phân)." },
-  { "ch": 13, "q": "1 byte tương đương với bao nhiêu bit?", "opts": ["4 bit", "8 bit", "16 bit", "32 bit"], "ans": 1, "exp": "1 byte = 8 bit, đủ để biểu diễn 256 (2^8) ký tự khác nhau theo bảng mã ASCII." },
-  { "ch": 13, "q": "Để biểu diễn 1 ký tự tiếng Nhật (bao gồm Hiragana, Katakana, Kanji) cần bao nhiêu bit?", "opts": ["8 bit (1 byte)", "16 bit (2 byte)", "24 bit (3 byte)", "32 bit (4 byte)"], "ans": 1, "exp": "Với 65.536 (2^16) ký tự tiếng Nhật cần mã hóa, mỗi ký tự cần 16 bit = 2 byte, gấp đôi so với ký tự tiếng Anh." },
-  { "ch": 14, "q": "Chuẩn giao diện kỹ thuật số nào được dùng cho nhạc chuông điện thoại và nhạc cụ điện tử?", "opts": ["MP3", "MIDI", "WAV", "JPEG"], "ans": 1, "exp": "MIDI (Musical Instrument Digital Interface) là chuẩn dữ liệu cho nhạc cụ điện tử và nhạc chuông điện thoại." },
-  { "ch": 14, "q": "Độ phân giải màn hình chuẩn 640×480 điểm ảnh, thường dùng cho TV chất lượng tiêu chuẩn, gọi là gì?", "opts": ["QVGA", "VGA", "XGA", "UXGA"], "ans": 1, "exp": "VGA (640×480) là chuẩn độ phân giải IBM đưa ra đầu tiên cho PC, cũng dùng cho TV chất lượng tiêu chuẩn." },
-  { "ch": 14, "q": "Truyền hình Nhật Bản thực hiện vẽ lại hình ảnh bao nhiêu lần trong 1 giây?", "opts": ["24 lần", "25 lần", "30 lần", "60 lần"], "ans": 2, "exp": "Truyền hình Nhật Bản vẽ lại hình ảnh 30 lần/giây (khác với 24 lần/giây của điện ảnh chiếu rạp)." },
-  { "ch": 15, "q": "Định dạng ảnh nào phân tách độ sáng và màu, nén theo phương pháp thống kê, phù hợp cho ảnh chụp tự nhiên nhưng không thể khôi phục chính xác 100%?", "opts": ["GIF", "BMP", "JPEG", "PNG"], "ans": 2, "exp": "JPEG nén theo phương pháp thống kê (phân tách độ sáng/màu), phù hợp ảnh chụp tự nhiên nhưng là phương pháp nén không thể đảo ngược hoàn toàn (lossy)." },
-  { "ch": 15, "q": "Phương pháp phát hiện lỗi đơn giản nhất, thêm 1 bit vào dữ liệu để giữ số lượng số 1 luôn lẻ hoặc chẵn, gọi là gì?", "opts": ["CRC", "Parity check (kiểm tra chẵn lẻ)", "Checksum", "Hamming code"], "ans": 1, "exp": "Parity check là phương pháp phát hiện lỗi đơn giản nhất, thêm 1 bit kiểm tra để giữ số lượng số 1 là lẻ hoặc chẵn." },
-  { "ch": 15, "q": "Định dạng video nào kết hợp nén ảnh tĩnh với ghi sai khác (chỉ ghi phần thay đổi giữa các khung hình)?", "opts": ["GIF", "JPEG", "MPEG", "ASCII"], "ans": 2, "exp": "MPEG (Motion Picture Expert Group) kết hợp nén ảnh tĩnh với kỹ thuật ghi sai khác (differential recording) để nén video hiệu quả." },
-  { "ch": 16, "q": "Hệ điều hành nào đóng vai trò 'phần mềm cơ bản', là trung gian giữa phần mềm ứng dụng và phần cứng?", "opts": ["Driver", "OS (hệ điều hành)", "Middleware", "BIOS"], "ans": 1, "exp": "OS (hệ điều hành) là phần mềm hệ thống đóng vai trò trung gian giữa ứng dụng và phần cứng, nên còn gọi là 'phần mềm cơ bản'." },
-  { "ch": 16, "q": "Khả năng quản lý để nhiều chương trình chạy đồng thời trên một máy tính gọi là gì?", "opts": ["Multiuser (đa người dùng)", "Multitasking (đa nhiệm)", "Virtual memory (bộ nhớ ảo)", "Swapping"], "ans": 1, "exp": "Multitasking (đa nhiệm) là khả năng OS quản lý để nhiều tiến trình/chương trình hoạt động như đồng thời." },
-  { "ch": 16, "q": "Hệ điều hành mã nguồn mở Linux được phát triển dựa trên tinh thần và kỹ thuật của hệ điều hành nào?", "opts": ["Windows", "MacOS", "UNIX", "MS-DOS"], "ans": 2, "exp": "Linux do Linus Torvalds (Phần Lan) phát triển, kế thừa tinh thần mở và kỹ thuật của UNIX." }
+  { ch:1, q:"Trong kiến trúc Von Neumann, chương trình được lưu trữ ở đâu?", opts:["Trong CPU","Trong Bộ nhớ (Memory)","Trong Chuột","Không cần lưu trữ"], ans:1, exp:"Kiến trúc Von Neumann đưa chương trình vào bộ nhớ giống như dữ liệu để xử lý linh hoạt." },
+  { ch:2, q:"Quy luật nào giải thích việc bán nhiều mặt hàng kén khách mang lại lợi nhuận lớn?", opts:["Quy luật 80/20","Quy luật Cái đuôi dài (Long Tail)","Quy luật Murphy","Quy luật Cung cầu"], ans:1, exp:"Long Tail tận dụng không gian vô hạn của Internet để bán các sản phẩm ngách." },
+  { ch:3, q:"Loại màn hình nào không cần đèn nền (backlight) vì các điểm ảnh tự phát sáng?", opts:["Màn hình LCD","Màn hình OLED (EL hữu cơ)","Màn hình CRT","Màn hình LED TV"], ans:1, exp:"OLED sử dụng vật liệu hữu cơ tự phát sáng khi có điện." },
+  { ch:4, q:"Công nghệ nào dùng ngay ổ cắm điện trong nhà để kết nối mạng?", opts:["ADSL","PLC (Đường điện)","FTTH (Cáp quang)","Wi-Fi"], ans:1, exp:"PLC (Power Line Communication) truyền tín hiệu qua dây điện 100V." },
+  { ch:5, q:"Mô hình mạng nào có Hub nằm ở trung tâm?", opts:["Kiểu Bus","Kiểu Star (Hình sao)","Kiểu Ring","Kiểu Mesh"], ans:1, exp:"Kiểu Star là mô hình phổ biến nhất hiện nay, mọi máy nối về Hub/Switch trung tâm." },
+  { ch:6, q:"Địa chỉ IPv6 có độ dài bao nhiêu bit?", opts:["32 bit","64 bit","128 bit","256 bit"], ans:2, exp:"IPv6 mở rộng lên 128 bit để giải quyết vấn đề cạn kiệt địa chỉ của IPv4 (32 bit)." },
+  { ch:12, q:"Dịch bit sang trái 3 lần tương đương với phép toán nào?", opts:["Cộng thêm 3","Nhân với 3","Nhân với 8 (2^3)","Chia cho 8"], ans:2, exp:"Mỗi lần dịch trái là nhân 2. Dịch 3 lần là 2x2x2 = 8." },
+  { ch:13, q:"Một ký tự tiếng Nhật (Kanji/Kana) thường tốn bao nhiêu dung lượng bộ nhớ?", opts:["1 bit","1 byte","2 byte (16 bit)","4 byte"], ans:2, exp:"Do số lượng ký tự lớn, tiếng Nhật cần 2 byte, trong khi Alphabet chỉ cần 1 byte." },
+  { ch:15, q:"Kỹ thuật kiểm tra chẵn lẻ (Parity check) có thể sửa được tối đa bao nhiêu lỗi bit?", opts:["0 lỗi (chỉ phát hiện)","1 lỗi duy nhất","2 lỗi","Không giới hạn"], ans:1, exp:"Parity check cơ bản chỉ phát hiện được lỗi, nếu kết hợp khối có thể sửa được tối đa 1 lỗi." }
 ];
 
 // ================================================================
-//  LOGIC
+//  LOGIC XỬ LÝ GIAO DIỆN
 // ================================================================
 let currentChapterNum = 1;
 let quizPool = [];
@@ -528,21 +623,23 @@ let currentQIdx = 0;
 let quizScore = 0;
 
 function init() {
-  const sidebar = document.getElementById('sidebar-nav');
-  const quizSel = document.getElementById('quiz-selector');
+  const nav = document.getElementById('sidebar-nav');
+  const sel = document.getElementById('quiz-selector');
 
   chapters.forEach(ch => {
+    // Sidebar
     const item = document.createElement('div');
-    item.className = `nav-item ${ch.num === currentChapterNum ? 'active' : ''}`;
+    item.className = `nav-item ${ch.num === 1 ? 'active' : ''}`;
     item.id = `nav-ch-${ch.num}`;
     item.onclick = () => renderChapter(ch.num);
-    item.innerHTML = `<span class="ch-num">${String(ch.num).padStart(2,'0')}</span> <span>${ch.title}</span>`;
-    sidebar.appendChild(item);
+    item.innerHTML = `<span class="ch-num-badge">${String(ch.num).padStart(2,'0')}</span> <span>${ch.title}</span>`;
+    nav.appendChild(item);
 
+    // Quiz Selection
     const opt = document.createElement('option');
     opt.value = ch.num;
     opt.textContent = `Chương ${ch.num}: ${ch.title}`;
-    quizSel.appendChild(opt);
+    sel.appendChild(opt);
   });
 
   renderChapter(1);
@@ -551,119 +648,192 @@ function init() {
 function switchMainTab(tab) {
   document.querySelectorAll('.view-tab').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.top-tab-btn').forEach(b => b.classList.remove('active'));
+
   document.getElementById(`view-${tab}`).classList.add('active');
-  event.currentTarget.classList.add('active');
+  document.getElementById(`tab-btn-${tab}`).classList.add('active');
+  window.scrollTo(0,0);
 }
 
 function renderChapter(num) {
   currentChapterNum = num;
   document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
   document.getElementById(`nav-ch-${num}`).classList.add('active');
+  switchMainTab('study');
 
   const ch = chapters.find(c => c.num === num);
   const content = document.getElementById('lesson-content');
 
-  const cardsHtml = ch.concepts.map((con, idx) => `
+  const cardsHtml = ch.concepts.length > 0 ? ch.concepts.map((con, idx) => `
     <div class="k-card" id="k-card-${idx}">
       <div class="k-card-head" onclick="toggleCard(${idx})">
-        <div class="k-icon">${con.icon || '📖'}</div>
+        <div class="k-icon-box">${con.icon || '📘'}</div>
         <div class="k-title-box">
-          <span class="k-jp">${con.term}</span> <span class="k-yomi">${con.yomi}</span>
+          <div class="k-jp">${con.term} <span class="k-yomi">${con.yomi}</span></div>
           <span class="k-vn-term">${con.vnTerm}</span>
         </div>
-        <div class="arrow">▼</div>
+        <div class="arrow">↓</div>
       </div>
       <div class="k-card-body">
+        <div class="section-divider" data-label="📖 Khái niệm"></div>
         <div class="info-box blue">
-          <div><span class="box-label">📖 Khái niệm</span><p>${con.desc}</p><p style="margin-top:8px; color:var(--text-sub)">${con.vnDesc}</p></div>
+          <div class="box-icon">💡</div>
+          <div>
+            <p><strong>${con.desc}</strong></p>
+            <p style="margin-top:8px; color:var(--text-sub)">${con.vnDesc}</p>
+          </div>
         </div>
+
+        <div class="section-divider" data-label="🎯 Mẹo ghi nhớ"></div>
         <div class="info-box green">
-          <div><span class="box-label">💡 Ghi nhớ</span><p>${con.rem || (con.term + ' là kiến thức trọng tâm của chương này.')}</p><p style="margin-top:8px; color:var(--text-sub)">${con.vnRem || 'Hãy xem kỹ phần giải thích phía trên để nắm vững bản chất.'}</p></div>
+          <div class="box-icon">✅</div>
+          <div>
+            <p>${con.rem}</p>
+            <p style="margin-top:8px; color:var(--text-sub)"><em>${con.vnRem}</em></p>
+          </div>
         </div>
       </div>
     </div>
-  `).join('');
+  `).join('') : '<p style="text-align:center;padding:40px;color:var(--text-sub)">Dữ liệu chi tiết đang được đồng bộ. Hãy quay lại sau!</p>';
 
-  const typesHtml = ch.types.map((t, i) => `
-    <div style="padding:12px 16px; border-bottom:1px solid var(--border)">
-      <div style="font-weight:600">${t}</div>
-      <div style="font-size:13px; color:var(--text-sub)">${ch.vnTypes[i]}</div>
+  const typesHtml = ch.types.length > 0 ? ch.types.map(t => `
+    <div style="padding:16px 24px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px">
+      <div style="width:6px;height:6px;background:var(--primary);border-radius:99px"></div>
+      <span style="font-weight:500; font-size:14px">${t}</span>
     </div>
-  `).join('');
+  `).join('') : '';
 
   content.innerHTML = `
     <div class="ch-header">
-      <div class="ch-badge-row">
+      <div class="ch-meta">
         <div class="badge primary">Chương ${ch.num}</div>
-        <div class="badge">🕒 ${ch.time}</div>
-        <div class="badge">📊 ${ch.difficulty}</div>
+        <div class="badge">🕒 ${ch.time || '--'}</div>
+        <div class="badge success">📊 ${ch.difficulty || '--'}</div>
       </div>
-      <h1>${ch.title}</h1>
-      <div class="subtitle">${ch.vn}</div>
+      <h1 class="ch-title-jp">${ch.title}</h1>
+      <div class="ch-title-vn">${ch.vn}</div>
     </div>
-    <div class="info-box" style="background:#F4F7FF; margin-bottom:32px"><p><strong>Tóm tắt:</strong> ${ch.vnSummary}</p></div>
-    <div class="nav-label" style="padding-left:0">Kiến thức trọng tâm</div>
+
+    <div class="info-box" style="background:#F4F7FF; margin-bottom:56px; border:none; padding:28px">
+       <div style="font-size:20px;margin-right:8px">📝</div>
+       <p style="font-size:16px; font-weight:500; color:#4056A1"><strong>Tóm tắt cốt lõi:</strong> ${ch.vnSummary || 'Đang cập nhật tóm tắt...'}</p>
+    </div>
+
+    <div class="nav-label" style="padding-left:0; margin-bottom:24px">Kiến thức trọng tâm</div>
     ${cardsHtml}
-    <div class="nav-label" style="padding-left:0; margin-top:40px">Phân loại</div>
-    <div class="k-card">${typesHtml}</div>
+
+    ${ch.types.length > 0 ? `
+      <div class="nav-label" style="padding-left:0; margin:56px 0 24px">Phân loại & Hệ thống</div>
+      <div class="k-card" style="padding:8px 0">${typesHtml}</div>
+    ` : ''}
+
+    <div style="margin-top:64px; text-align:center">
+      <button class="badge primary" style="margin:0 auto; padding:16px 32px; cursor:pointer; font-size:15px" onclick="startQuizForThisChapter()">Làm Quiz Chương ${ch.num} →</button>
+    </div>
   `;
-  window.scrollTo(0,0);
 }
 
-function toggleCard(idx) { document.getElementById(`k-card-${idx}`).classList.toggle('open'); }
+function toggleCard(idx) {
+  document.getElementById(`k-card-${idx}`).classList.toggle('open');
+}
+
+// QUIZ LOGIC
+function startQuizForThisChapter() {
+  document.getElementById('quiz-selector').value = currentChapterNum;
+  switchMainTab('quiz');
+  startQuiz();
+}
 
 function startQuiz() {
-  const chVal = document.getElementById('quiz-selector').value;
-  quizPool = chVal === 'all' ? allQuestions : allQuestions.filter(q => q.ch == chVal);
-  if(quizPool.length === 0) { alert("Chưa có câu hỏi cho chương này."); return; }
+  const val = document.getElementById('quiz-selector').value;
+  quizPool = val === 'all' ? allQuestions : allQuestions.filter(q => q.ch == val);
+
+  if(quizPool.length === 0) {
+    alert("Chưa có câu hỏi cho chương này. Hãy thử 'Tất cả 16 chương'.");
+    return;
+  }
+
   quizPool = [...quizPool].sort(() => Math.random() - 0.5);
-  currentQIdx = 0; quizScore = 0; renderQuestion();
+  currentQIdx = 0;
+  quizScore = 0;
+  renderQuestion();
 }
 
 function renderQuestion() {
   const q = quizPool[currentQIdx];
   const area = document.getElementById('quiz-area');
-  const prog = document.getElementById('quiz-prog');
-  prog.style.width = `${(currentQIdx / quizPool.length) * 100}%`;
+  document.getElementById('quiz-prog').style.width = `${(currentQIdx / quizPool.length) * 100}%`;
+
   const labels = ['A','B','C','D'];
   area.innerHTML = `
     <div class="q-card">
-      <div style="font-size:12px; color:var(--text-sub); margin-bottom:8px">CÂU HỎI ${currentQIdx + 1} / ${quizPool.length}</div>
-      <h2 style="font-size:24px">${q.q}</h2>
-      <div class="options-grid">${q.opts.map((o, i) => `<div class="opt-btn" id="opt-${i}" onclick="checkAnswer(${i})"><div class="opt-idx">${labels[i]}</div><span>${o}</span></div>`).join('')}</div>
+      <div class="q-count">Câu hỏi ${currentQIdx + 1} / ${quizPool.length}</div>
+      <h2 class="q-text">${q.q}</h2>
+
+      <div class="options-stack">
+        ${q.opts.map((o, i) => `
+          <div class="opt-btn" id="opt-${i}" onclick="checkAnswer(${i})">
+            <div class="opt-idx">${labels[i]}</div>
+            <span>${o}</span>
+          </div>
+        `).join('')}
+      </div>
+
       <div id="quiz-feedback" class="ans-feedback"></div>
-      <div style="margin-top:32px; display:flex; justify-content:flex-end"><button id="next-q-btn" class="badge primary" style="display:none; padding:12px 32px; cursor:pointer" onclick="nextQuestion()">Tiếp theo →</button></div>
-    </div>`;
+
+      <div style="margin-top:40px; display:flex; justify-content:center">
+        <button id="next-q-btn" class="badge primary" style="display:none; padding:14px 48px; cursor:pointer; font-size:15px" onclick="nextQuestion()">Tiếp tục →</button>
+      </div>
+    </div>
+  `;
 }
 
 function checkAnswer(idx) {
   const q = quizPool[currentQIdx];
   if(document.getElementById('next-q-btn').style.display === 'block') return;
+
   const feedback = document.getElementById('quiz-feedback');
   const isCorrect = idx === q.ans;
-  if(isCorrect) { quizScore++; document.getElementById(`opt-${idx}`).classList.add('correct'); feedback.innerHTML = `<strong>Chính xác!</strong><br>${q.exp}`; feedback.className = "ans-feedback show correct"; }
-  else { document.getElementById(`opt-${idx}`).classList.add('wrong'); document.getElementById(`opt-${q.ans}`).classList.add('correct'); feedback.innerHTML = `<strong>Chưa đúng.</strong><br>${q.exp}`; feedback.className = "ans-feedback show wrong"; }
+
+  if(isCorrect) {
+    quizScore++;
+    document.getElementById(`opt-${idx}`).classList.add('correct');
+    feedback.innerHTML = `<span class="box-label">✨ Chính xác!</span><p>${q.exp}</p>`;
+    feedback.className = "ans-feedback show correct";
+  } else {
+    document.getElementById(`opt-${idx}`).classList.add('wrong');
+    document.getElementById(`opt-${q.ans}`).classList.add('correct');
+    feedback.innerHTML = `<span class="box-label">❌ Chưa đúng</span><p>${q.exp}</p>`;
+    feedback.className = "ans-feedback show wrong";
+  }
+
   document.querySelectorAll('.opt-btn').forEach(b => b.classList.add('locked'));
   document.getElementById('next-q-btn').style.display = 'block';
 }
 
 function nextQuestion() {
   currentQIdx++;
-  if(currentQIdx < quizPool.length) renderQuestion();
-  else showQuizResult();
+  if(currentQIdx < quizPool.length) {
+    renderQuestion();
+  } else {
+    showQuizResult();
+  }
 }
 
 function showQuizResult() {
   const pct = Math.round((quizScore / quizPool.length) * 100);
+  document.getElementById('quiz-prog').style.width = '100%';
   document.getElementById('quiz-area').innerHTML = `
     <div class="q-card" style="text-align:center">
-      <div style="font-size:64px; margin-bottom:16px">${pct >= 80 ? '🎉' : '📖'}</div>
-      <h2>Hoàn thành!</h2>
-      <p style="font-size:48px; font-weight:800; color:var(--primary); margin:16px 0">${quizScore} / ${quizPool.length}</p>
-      <p style="color:var(--text-sub)">Tỷ lệ chính xác: ${pct}%</p>
-      <button class="badge primary" style="margin-top:32px; padding:12px 40px; cursor:pointer" onclick="location.reload()">Làm lại</button>
-    </div>`;
-  document.getElementById('quiz-prog').style.width = '100%';
+      <div style="font-size:72px; margin-bottom:24px">${pct >= 80 ? '🥳' : '📚'}</div>
+      <h2 style="font-size:32px; margin-bottom:8px">Kết quả của bạn</h2>
+      <p style="font-size:56px; font-weight:900; color:var(--primary); margin:16px 0">${quizScore} / ${quizPool.length}</p>
+      <p style="color:var(--text-sub); font-size:18px">Độ chính xác: ${pct}%</p>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:40px">
+        <button class="badge primary" style="padding:16px 32px; cursor:pointer" onclick="startQuiz()">Làm lại Quiz</button>
+        <button class="badge" style="padding:16px 32px; cursor:pointer" onclick="switchMainTab('study')">Về trang học bài</button>
+      </div>
+    </div>
+  `;
 }
 
 init();
