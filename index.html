@@ -6,314 +6,195 @@
   <title>JIT301 — Tin học & Công nghệ thông tin</title>
   <style>
     :root {
-      --bg: #f5f5f7;
-      --surface: #ffffff;
-      --surface-2: #f5f5f7;
-      --surface-3: #ebebed;
-      --text-primary: #1d1d1f;
-      --text-secondary: #6e6e73;
-      --text-tertiary: #86868b;
-      --accent: #0071e3;
-      --accent-soft: #e8f0fb;
-      --accent-dark: #0058b0;
-      --green: #34c759;
-      --green-soft: #e8f8ed;
-      --red: #ff3b30;
-      --red-soft: #fff0ef;
-      --orange: #ff9500;
-      --border: rgba(0,0,0,0.08);
-      --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
-      --shadow-md: 0 8px 32px rgba(0,0,0,0.10);
-      --radius: 18px;
-      --radius-sm: 10px;
-      --font: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      --font-display: -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-      --font-mono: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+      --bg: #f5f5f7; --surface: #ffffff; --surface-2: #f5f5f7; --surface-3: #ebebed;
+      --text-primary: #1d1d1f; --text-secondary: #6e6e73; --text-tertiary: #86868b;
+      --accent: #0071e3; --accent-soft: #e8f0fb; --accent-dark: #0058b0;
+      --green: #34c759; --green-soft: #e8f8ed; --red: #ff3b30; --red-soft: #fff0ef;
+      --border: rgba(0,0,0,0.08); --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.10); --radius: 18px; --radius-sm: 10px;
+      --font: -apple-system,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+      --font-display: -apple-system,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+      --font-mono: "SF Mono","Menlo","Monaco","Consolas",monospace;
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font); background: var(--bg); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav{position:sticky;top:0;z-index:200;background:rgba(245,245,247,0.88);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border)}
+    .nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 24px}
+    .nav-logo{font-size:17px;font-weight:600;color:var(--text-primary);letter-spacing:-0.3px;text-decoration:none}
+    .nav-tabs{display:flex;gap:2px;background:var(--surface-3);border-radius:10px;padding:3px}
+    .nav-tab{font-size:13px;font-weight:500;color:var(--text-secondary);padding:6px 16px;border-radius:8px;border:none;background:transparent;cursor:pointer;transition:all .18s;white-space:nowrap}
+    .nav-tab.active{background:var(--surface);color:var(--text-primary);box-shadow:0 1px 4px rgba(0,0,0,0.12);font-weight:600}
+    .nav-tab:hover:not(.active){color:var(--text-primary);background:rgba(255,255,255,0.5)}
+    .nav-badge{display:inline-block;min-width:16px;height:16px;padding:0 4px;background:var(--red);color:#fff;border-radius:8px;font-size:10px;font-weight:700;line-height:16px;text-align:center;margin-left:4px;vertical-align:middle}
 
-    /* ─── NAV ─── */
-    nav {
-      position: sticky; top: 0; z-index: 200;
-      background: rgba(245,245,247,0.88);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      max-width: 980px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 52px; padding: 0 24px;
-    }
-    .nav-logo { font-size: 17px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.3px; text-decoration: none; }
-    .nav-tabs { display: flex; gap: 2px; background: var(--surface-3); border-radius: 10px; padding: 3px; }
-    .nav-tab {
-      font-size: 13px; font-weight: 500; color: var(--text-secondary);
-      padding: 6px 16px; border-radius: 8px; border: none; background: transparent;
-      cursor: pointer; transition: all 0.18s; white-space: nowrap;
-    }
-    .nav-tab.active { background: var(--surface); color: var(--text-primary); box-shadow: 0 1px 4px rgba(0,0,0,0.12); font-weight: 600; }
-    .nav-tab:hover:not(.active) { color: var(--text-primary); background: rgba(255,255,255,0.5); }
-    .nav-badge { display:inline-block; min-width:16px; height:16px; padding:0 4px; background:var(--red); color:#fff; border-radius:8px; font-size:10px; font-weight:700; line-height:16px; text-align:center; margin-left:4px; vertical-align:middle; }
+    .page{display:none}.page.active{display:block}
 
-    /* ─── PAGES ─── */
-    .page { display: none; }
-    .page.active { display: block; }
+    .hero{background:linear-gradient(160deg,#0a0a0f 0%,#1a1a2e 50%,#0d2137 100%);padding:90px 24px 72px;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,113,227,0.28) 0%,transparent 70%)}
+    .hero-eyebrow{font-size:12px;font-weight:600;color:#0a84ff;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;position:relative}
+    .hero h1{font-family:var(--font-display);font-size:clamp(32px,5.5vw,60px);font-weight:700;color:#f5f5f7;letter-spacing:-1.5px;line-height:1.05;margin-bottom:18px;position:relative}
+    .hero h1 span{color:#0a84ff}
+    .hero-sub{font-size:18px;color:rgba(245,245,247,0.6);max-width:500px;margin:0 auto 40px;position:relative;line-height:1.55}
+    .hero-stats{display:flex;justify-content:center;gap:48px;position:relative;flex-wrap:wrap}
+    .hero-stat-num{font-size:30px;font-weight:700;color:#f5f5f7;letter-spacing:-1px;line-height:1}
+    .hero-stat-label{font-size:12px;color:rgba(245,245,247,0.45);margin-top:4px}
 
-    /* ─── HERO ─── */
-    .hero {
-      background: linear-gradient(160deg, #0a0a0f 0%, #1a1a2e 50%, #0d2137 100%);
-      padding: 90px 24px 72px; text-align: center; position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,113,227,0.28) 0%, transparent 70%);
-    }
-    .hero-eyebrow { font-size: 12px; font-weight: 600; color: #0a84ff; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 18px; position: relative; }
-    .hero h1 { font-family: var(--font-display); font-size: clamp(32px,5.5vw,60px); font-weight: 700; color: #f5f5f7; letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 18px; position: relative; }
-    .hero h1 span { color: #0a84ff; }
-    .hero-sub { font-size: 18px; color: rgba(245,245,247,0.6); max-width: 500px; margin: 0 auto 40px; position: relative; line-height: 1.55; }
-    .hero-stats { display: flex; justify-content: center; gap: 48px; position: relative; flex-wrap: wrap; }
-    .hero-stat-num { font-size: 30px; font-weight: 700; color: #f5f5f7; letter-spacing: -1px; line-height: 1; }
-    .hero-stat-label { font-size: 12px; color: rgba(245,245,247,0.45); margin-top: 4px; }
+    .toc-section{padding:56px 24px 0;max-width:980px;margin:0 auto}
+    .section-eyebrow{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+    .section-title{font-family:var(--font-display);font-size:clamp(24px,3.5vw,38px);font-weight:700;letter-spacing:-0.8px;color:var(--text-primary);margin-bottom:28px}
+    .toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+    .toc-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 15px;text-decoration:none;color:var(--text-primary);transition:box-shadow .18s,transform .18s;display:flex;align-items:flex-start;gap:10px}
+    .toc-item:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+    .toc-num{font-size:11px;font-weight:700;color:var(--accent);min-width:34px;height:24px;background:var(--accent-soft);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:0 6px}
+    .toc-text{font-size:13px;font-weight:500;line-height:1.3}
 
-    /* ─── SECTION WRAPPER ─── */
-    .toc-section { padding: 56px 24px 0; max-width: 980px; margin: 0 auto; }
-    .section-eyebrow { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
-    .section-title { font-family: var(--font-display); font-size: clamp(24px,3.5vw,38px); font-weight: 700; letter-spacing: -0.8px; color: var(--text-primary); margin-bottom: 28px; }
+    .content{max-width:780px;margin:0 auto;padding:40px 24px 80px}
+    .chapter{margin-bottom:40px;scroll-margin-top:66px}
+    .chapter-header{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius) var(--radius) 0 0;padding:24px 28px 20px;box-shadow:var(--shadow-sm)}
+    .chapter-num{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+    .chapter-sub{font-size:11px;color:var(--text-tertiary);margin-top:2px;font-family:var(--font-mono)}
+    .chapter-title-jp{font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:-0.3px;color:var(--text-primary);line-height:1.25}
+    .chapter-title-vn{font-size:14px;color:var(--text-secondary);margin-top:3px}
+    .chapter-body{background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:20px 28px 24px;box-shadow:var(--shadow-sm)}
 
-    /* TOC GRID */
-    .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(196px,1fr)); gap: 10px; }
-    .toc-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 13px 15px; text-decoration: none; color: var(--text-primary); transition: box-shadow .18s, transform .18s; display: flex; align-items: center; gap: 10px; }
-    .toc-item:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .toc-num { font-size: 11px; font-weight: 700; color: var(--accent); min-width: 24px; height: 24px; background: var(--accent-soft); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
-    .toc-text { font-size: 13px; font-weight: 500; line-height: 1.3; }
+    .def-row{display:grid;grid-template-columns:1fr 1fr;gap:3px 18px;padding:12px 0;border-bottom:1px solid var(--border);align-items:baseline}
+    .def-row:last-child{border-bottom:none}
+    .def-jp{font-size:14px;font-weight:500;color:var(--text-primary)}
+    .def-vn{font-size:13px;color:var(--text-secondary)}
+    .def-note{grid-column:1/-1;font-size:12px;color:var(--text-tertiary);margin-top:1px}
+    .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+    .info-card{background:var(--surface-2);border-radius:var(--radius-sm);padding:14px 16px;border:1px solid var(--border)}
+    .info-card-title{font-size:11px;font-weight:600;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:10px}
+    .info-card ul{padding:0;list-style:none}
+    .info-card li{font-size:13px;color:var(--text-primary);padding:5px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline}
+    .info-card li:last-child{border-bottom:none}
+    .info-card li .vn{font-size:11px;color:var(--text-tertiary)}
+    .code-block{background:#1d1d1f;border-radius:var(--radius-sm);padding:16px 18px;margin:14px 0;overflow-x:auto}
+    .code-block pre{font-family:var(--font-mono);font-size:12px;color:#a8ff78;line-height:1.7;white-space:pre}
+    .formula{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:12px 16px;margin:12px 0;font-size:14px;font-weight:500;color:var(--text-primary);font-family:var(--font-mono)}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+    .compare-card{border-radius:var(--radius-sm);padding:16px 18px;border:1px solid var(--border)}
+    .compare-card.digital{background:#e8f0fb;border-color:rgba(0,113,227,0.2)}
+    .compare-card.analog{background:#fef3ea;border-color:rgba(255,140,0,0.2)}
+    .compare-label{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px}
+    .compare-card.digital .compare-label{color:#0071e3}
+    .compare-card.analog .compare-label{color:#d16000}
+    .compare-card li{font-size:13px;color:var(--text-primary);padding:4px 0 4px 14px;position:relative;border-bottom:1px solid rgba(0,0,0,0.06);line-height:1.45;list-style:none}
+    .compare-card li::before{content:'—';position:absolute;left:0;color:var(--text-tertiary)}
+    .compare-card li:last-child{border-bottom:none}
+    .timeline-item{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+    .timeline-item:last-child{border-bottom:none}
+    .timeline-year{font-size:12px;font-weight:700;color:var(--accent);min-width:72px;padding-top:1px;font-family:var(--font-mono)}
+    .timeline-content{font-size:13px;color:var(--text-primary)}
+    .timeline-content span{color:var(--text-secondary);font-size:12px;display:block}
+    .highlight{background:linear-gradient(135deg,#e8f0fb 0%,#f0f5ff 100%);border:1px solid rgba(0,113,227,0.15);border-radius:var(--radius-sm);padding:16px 18px;margin:12px 0}
+    .highlight-title{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+    .highlight p{font-size:13px;color:var(--text-primary);line-height:1.6}
+    .rule-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+    .rule-item:last-child{border-bottom:none}
+    .rule-num{width:26px;height:26px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .rule-jp{font-size:13px;font-weight:500;color:var(--text-primary)}
+    .rule-vn{font-size:12px;color:var(--text-secondary)}
+    .ip-branch{margin-bottom:14px}
+    .ip-parent{font-size:13px;font-weight:600;color:var(--text-primary);padding:8px 12px;background:var(--surface-2);border-radius:8px;border:1px solid var(--border);margin-bottom:6px}
+    .ip-children{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding-left:18px}
+    .ip-child{font-size:12px;color:var(--text-secondary);padding:6px 11px;background:var(--surface);border:1px solid var(--border);border-radius:7px;display:flex;gap:7px;align-items:center}
+    .ip-child::before{content:'›';color:var(--accent);font-weight:700}
+    .osi-stack{display:flex;flex-direction:column;gap:3px;margin:10px 0}
+    .osi-layer{padding:9px 14px;border-radius:7px;display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:500}
+    .osi-layer.l7{background:#e8f0fb}.osi-layer.l6{background:#edf0fb}.osi-layer.l5{background:#f0eefb}
+    .osi-layer.l4{background:#fae8fb}.osi-layer.l3{background:#fbeef0}.osi-layer.l2{background:#fdf5e8}.osi-layer.l1{background:#f0fbe8}
+    .osi-proto{font-size:10px;font-weight:700;color:var(--accent);background:white;padding:2px 7px;border-radius:10px}
+    .unit-table{width:100%;border-collapse:collapse;margin:10px 0}
+    .unit-table th{font-size:10px;font-weight:700;color:var(--text-tertiary);letter-spacing:1px;text-transform:uppercase;text-align:left;padding:7px 10px;border-bottom:2px solid var(--border)}
+    .unit-table td{font-size:13px;padding:10px;border-bottom:1px solid var(--border);color:var(--text-primary);font-family:var(--font-mono)}
+    .unit-table tr:last-child td{border-bottom:none}
+    .unit-table tr:nth-child(even) td{background:var(--surface-2)}
+    .sec-item{padding:12px 0;border-bottom:1px solid var(--border)}
+    .sec-item:last-child{border-bottom:none}
+    .sec-tag{display:inline-block;font-size:10px;font-weight:700;color:#c00;background:var(--red-soft);border:1px solid rgba(200,0,0,0.15);border-radius:5px;padding:2px 7px;letter-spacing:0.5px;margin-bottom:5px}
+    .sec-tag.blue{color:var(--accent);background:var(--accent-soft);border-color:rgba(0,113,227,0.15)}
+    .sec-tag.green{color:#0a7a0a;background:var(--green-soft);border-color:rgba(0,100,0,0.15)}
+    .sec-jp{font-size:13px;font-weight:500;color:var(--text-primary);margin-bottom:2px}
+    .sec-vn{font-size:12px;color:var(--text-secondary);line-height:1.5}
+    .exercise{background:linear-gradient(135deg,#f5f5f7 0%,#eef2ff 100%);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin:12px 0}
+    .exercise-title{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+    .exercise p{font-size:13px;color:var(--text-primary);line-height:1.65;margin-bottom:6px}
+    .exercise .result{font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--accent);margin-top:8px}
+    .gen-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:6px}
+    .gen-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px}
+    .gen-year{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:3px}
+    .gen-title{font-size:13px;font-weight:600;color:var(--text-primary)}
+    .gen-sub{font-size:11px;color:var(--text-secondary);margin-top:2px}
+    .email-box{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px;margin:12px 0;font-size:13px;line-height:1.8;color:var(--text-primary)}
+    .back-top{display:block;text-align:center;margin:48px auto 16px;color:var(--accent);text-decoration:none;font-size:13px;font-weight:500}
+    .back-top:hover{text-decoration:underline}
 
-    /* ─── CONTENT ─── */
-    .content { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
+    /* QUIZ */
+    #quiz-page,#wrong-page{background:var(--bg);min-height:100vh}
+    .quiz-hero{background:linear-gradient(160deg,#0a0a0f 0%,#1a1a2e 50%,#0d2137 100%);padding:60px 24px 48px;text-align:center;position:relative;overflow:hidden}
+    .quiz-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(0,113,227,0.22) 0%,transparent 70%)}
+    .quiz-hero-eyebrow{font-size:12px;font-weight:600;color:#0a84ff;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px;position:relative}
+    .quiz-hero h2{font-family:var(--font-display);font-size:clamp(26px,4vw,44px);font-weight:700;color:#f5f5f7;letter-spacing:-1px;line-height:1.1;margin-bottom:14px;position:relative}
+    .quiz-hero h2 span{color:#0a84ff}
+    .quiz-stats-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 24px}
+    .quiz-stats-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .quiz-stat-item{font-size:13px;color:var(--text-secondary)}
+    .quiz-stat-item strong{color:var(--text-primary);font-weight:600}
+    .score-banner{max-width:720px;margin:24px auto;padding:0 24px}
+    .score-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:28px 32px;text-align:center;box-shadow:var(--shadow-sm)}
+    .score-big{font-size:56px;font-weight:700;color:var(--accent);letter-spacing:-2px;line-height:1}
+    .score-of{font-size:22px;color:var(--text-tertiary)}
+    .score-grade{font-size:22px;font-weight:600;color:var(--text-primary);margin-top:8px}
+    .score-bar-wrap{margin-top:16px;background:var(--surface-3);border-radius:8px;height:10px;overflow:hidden}
+    .score-bar-fill{height:100%;border-radius:8px;transition:width 0.8s cubic-bezier(.4,0,.2,1)}
+    .quiz-container{max-width:720px;margin:0 auto;padding:20px 24px 60px}
+    .page-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:13px;color:var(--text-secondary)}
+    .q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px 22px;margin-bottom:12px;box-shadow:var(--shadow-sm)}
+    .q-num{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:6px;letter-spacing:0.5px}
+    .q-text{font-size:15px;font-weight:500;color:var(--text-primary);margin-bottom:14px;line-height:1.5}
+    .choices{display:flex;flex-direction:column;gap:7px}
+    .choice-btn{width:100%;text-align:left;padding:10px 14px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface-2);color:var(--text-primary);font-size:13.5px;cursor:pointer;transition:all .15s;font-family:var(--font);line-height:1.45}
+    .choice-btn:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+    .choice-btn.selected{border-color:var(--accent);background:var(--accent-soft);color:#003d7a;font-weight:500}
+    .choice-btn.correct{border-color:var(--green);background:var(--green-soft);color:#1a5c2a;font-weight:600}
+    .choice-btn.wrong{border-color:var(--red);background:var(--red-soft);color:#7a0000}
+    .choice-btn:disabled{cursor:default}
+    .correct-hint{margin-top:8px;font-size:12px;color:#1a5c2a;background:var(--green-soft);border-radius:6px;padding:7px 12px;font-weight:500}
+    .quiz-nav{margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+    .btn{padding:10px 22px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:var(--font)}
+    .btn-ghost{background:var(--surface);border:1.5px solid var(--border);color:var(--text-primary)}
+    .btn-ghost:hover:not(:disabled){background:var(--surface-2)}
+    .btn-ghost:disabled{opacity:0.38;cursor:default}
+    .btn-primary{background:var(--accent);color:white}
+    .btn-primary:hover{background:var(--accent-dark)}
+    .btn-danger{background:var(--text-primary);color:white}
+    .btn-danger:hover{background:#333}
+    .page-dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+    .page-dot{width:30px;height:28px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--text-secondary);display:flex;align-items:center;justify-content:center;transition:all .15s}
+    .page-dot:hover{border-color:var(--accent);color:var(--accent)}
+    .submit-area{text-align:center;margin-top:28px}
+    .progress-strip{height:3px;background:var(--surface-3)}
+    .progress-fill{height:100%;background:var(--accent);transition:width .4s}
 
-    /* CHAPTER */
-    .chapter { margin-bottom: 40px; scroll-margin-top: 66px; }
-    .chapter-header { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius) var(--radius) 0 0; padding: 24px 28px 20px; box-shadow: var(--shadow-sm); }
-    .chapter-num { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
-    .chapter-title-jp { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: var(--text-primary); line-height: 1.25; }
-    .chapter-title-vn { font-size: 14px; color: var(--text-secondary); margin-top: 3px; }
-    .chapter-body { background: var(--surface); border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); padding: 20px 28px 24px; box-shadow: var(--shadow-sm); }
-
-    /* DEF ROW */
-    .def-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 18px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
-    .def-row:last-child { border-bottom: none; }
-    .def-jp { font-size: 14px; font-weight: 500; color: var(--text-primary); }
-    .def-vn { font-size: 13px; color: var(--text-secondary); }
-    .def-note { grid-column: 1/-1; font-size: 12px; color: var(--text-tertiary); margin-top: 1px; }
-
-    /* CARD GRID */
-    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
-    .info-card { background: var(--surface-2); border-radius: var(--radius-sm); padding: 14px 16px; border: 1px solid var(--border); }
-    .info-card-title { font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px; }
-    .info-card ul { padding: 0; list-style: none; }
-    .info-card li { font-size: 13px; color: var(--text-primary); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: baseline; }
-    .info-card li:last-child { border-bottom: none; }
-    .info-card li .vn { font-size: 11px; color: var(--text-tertiary); }
-
-    /* CODE */
-    .code-block { background: #1d1d1f; border-radius: var(--radius-sm); padding: 16px 18px; margin: 14px 0; overflow-x: auto; }
-    .code-block pre { font-family: var(--font-mono); font-size: 12px; color: #a8ff78; line-height: 1.7; white-space: pre; }
-
-    /* FORMULA */
-    .formula { background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 12px 0; font-size: 14px; font-weight: 500; color: var(--text-primary); font-family: var(--font-mono); }
-
-    /* COMPARE */
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
-    .compare-card { border-radius: var(--radius-sm); padding: 16px 18px; border: 1px solid var(--border); }
-    .compare-card.digital { background: #e8f0fb; border-color: rgba(0,113,227,0.2); }
-    .compare-card.analog { background: #fef3ea; border-color: rgba(255,140,0,0.2); }
-    .compare-label { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px; }
-    .compare-card.digital .compare-label { color: #0071e3; }
-    .compare-card.analog .compare-label { color: #d16000; }
-    .compare-card li { font-size: 13px; color: var(--text-primary); padding: 4px 0 4px 14px; position: relative; border-bottom: 1px solid rgba(0,0,0,0.06); line-height: 1.45; list-style: none; }
-    .compare-card li::before { content: '—'; position: absolute; left: 0; color: var(--text-tertiary); }
-    .compare-card li:last-child { border-bottom: none; }
-
-    /* TIMELINE */
-    .timeline-item { display: flex; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
-    .timeline-item:last-child { border-bottom: none; }
-    .timeline-year { font-size: 12px; font-weight: 700; color: var(--accent); min-width: 72px; padding-top: 1px; font-family: var(--font-mono); }
-    .timeline-content { font-size: 13px; color: var(--text-primary); }
-    .timeline-content span { color: var(--text-secondary); font-size: 12px; display: block; }
-
-    /* HIGHLIGHT */
-    .highlight { background: linear-gradient(135deg, #e8f0fb 0%, #f0f5ff 100%); border: 1px solid rgba(0,113,227,0.15); border-radius: var(--radius-sm); padding: 16px 18px; margin: 12px 0; }
-    .highlight-title { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 7px; }
-    .highlight p { font-size: 13px; color: var(--text-primary); line-height: 1.6; }
-
-    /* RULE LIST */
-    .rule-item { display: flex; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
-    .rule-item:last-child { border-bottom: none; }
-    .rule-num { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .rule-jp { font-size: 13px; font-weight: 500; color: var(--text-primary); }
-    .rule-vn { font-size: 12px; color: var(--text-secondary); }
-
-    /* IP TREE */
-    .ip-branch { margin-bottom: 14px; }
-    .ip-parent { font-size: 13px; font-weight: 600; color: var(--text-primary); padding: 8px 12px; background: var(--surface-2); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 6px; }
-    .ip-children { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding-left: 18px; }
-    .ip-child { font-size: 12px; color: var(--text-secondary); padding: 6px 11px; background: var(--surface); border: 1px solid var(--border); border-radius: 7px; display: flex; gap: 7px; align-items: center; }
-    .ip-child::before { content: '›'; color: var(--accent); font-weight: 700; }
-
-    /* OSI */
-    .osi-stack { display: flex; flex-direction: column; gap: 3px; margin: 10px 0; }
-    .osi-layer { padding: 9px 14px; border-radius: 7px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 500; }
-    .osi-layer.l7 { background: #e8f0fb; }
-    .osi-layer.l6 { background: #edf0fb; }
-    .osi-layer.l5 { background: #f0eefb; }
-    .osi-layer.l4 { background: #fae8fb; }
-    .osi-layer.l3 { background: #fbeef0; }
-    .osi-layer.l2 { background: #fdf5e8; }
-    .osi-layer.l1 { background: #f0fbe8; }
-    .osi-proto { font-size: 10px; font-weight: 700; color: var(--accent); background: white; padding: 2px 7px; border-radius: 10px; }
-
-    /* UNIT TABLE */
-    .unit-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-    .unit-table th { font-size: 10px; font-weight: 700; color: var(--text-tertiary); letter-spacing: 1px; text-transform: uppercase; text-align: left; padding: 7px 10px; border-bottom: 2px solid var(--border); }
-    .unit-table td { font-size: 13px; padding: 10px; border-bottom: 1px solid var(--border); color: var(--text-primary); font-family: var(--font-mono); }
-    .unit-table tr:last-child td { border-bottom: none; }
-    .unit-table tr:nth-child(even) td { background: var(--surface-2); }
-
-    /* SEC LIST */
-    .sec-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
-    .sec-item:last-child { border-bottom: none; }
-    .sec-tag { display: inline-block; font-size: 10px; font-weight: 700; color: #c00; background: var(--red-soft); border: 1px solid rgba(200,0,0,0.15); border-radius: 5px; padding: 2px 7px; letter-spacing: 0.5px; margin-bottom: 5px; }
-    .sec-tag.blue { color: var(--accent); background: var(--accent-soft); border-color: rgba(0,113,227,0.15); }
-    .sec-tag.green { color: #0a7a0a; background: var(--green-soft); border-color: rgba(0,100,0,0.15); }
-    .sec-jp { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 2px; }
-    .sec-vn { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-
-    /* EXERCISE */
-    .exercise { background: linear-gradient(135deg,#f5f5f7 0%,#eef2ff 100%); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; margin: 12px 0; }
-    .exercise-title { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
-    .exercise p { font-size: 13px; color: var(--text-primary); line-height: 1.65; margin-bottom: 6px; }
-    .exercise .result { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--accent); margin-top: 8px; }
-
-    /* GEN GRID */
-    .gen-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-top: 6px; }
-    .gen-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; }
-    .gen-year { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
-    .gen-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
-    .gen-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
-
-    /* EMAIL */
-    .email-box { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px 20px; margin: 12px 0; font-size: 13px; line-height: 1.8; color: var(--text-primary); }
-    .email-from { font-weight: 600; margin-bottom: 8px; color: var(--accent); }
-
-    .back-top { display: block; text-align: center; margin: 48px auto 16px; color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
-    .back-top:hover { text-decoration: underline; }
-
-    /* ═══════════════════════════════════════
-       QUIZ PAGE
-    ═══════════════════════════════════════ */
-    #quiz-page, #wrong-page { background: var(--bg); min-height: 100vh; }
-
-    .quiz-hero {
-      background: linear-gradient(160deg, #0a0a0f 0%, #1a1a2e 50%, #0d2137 100%);
-      padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden;
-    }
-    .quiz-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,113,227,0.22) 0%, transparent 70%); }
-    .quiz-hero-eyebrow { font-size: 12px; font-weight: 600; color: #0a84ff; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 14px; position: relative; }
-    .quiz-hero h2 { font-family: var(--font-display); font-size: clamp(26px,4vw,44px); font-weight: 700; color: #f5f5f7; letter-spacing: -1px; line-height: 1.1; margin-bottom: 14px; position: relative; }
-    .quiz-hero h2 span { color: #0a84ff; }
-
-    /* QUIZ STATS BAR */
-    .quiz-stats-bar {
-      background: var(--surface); border-bottom: 1px solid var(--border);
-      padding: 10px 24px;
-    }
-    .quiz-stats-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-    .quiz-stat-item { font-size: 13px; color: var(--text-secondary); }
-    .quiz-stat-item strong { color: var(--text-primary); font-weight: 600; }
-
-    /* SCORE BANNER */
-    .score-banner { max-width: 720px; margin: 24px auto; padding: 0 24px; }
-    .score-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 28px 32px; text-align: center; box-shadow: var(--shadow-sm); }
-    .score-big { font-size: 56px; font-weight: 700; color: var(--accent); letter-spacing: -2px; line-height: 1; }
-    .score-of { font-size: 22px; color: var(--text-tertiary); }
-    .score-grade { font-size: 22px; font-weight: 600; color: var(--text-primary); margin-top: 8px; }
-    .score-bar-wrap { margin-top: 16px; background: var(--surface-3); border-radius: 8px; height: 10px; overflow: hidden; }
-    .score-bar-fill { height: 100%; border-radius: 8px; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
-
-    /* QUIZ CONTAINER */
-    .quiz-container { max-width: 720px; margin: 0 auto; padding: 20px 24px 60px; }
-
-    /* PAGE INFO */
-    .page-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 13px; color: var(--text-secondary); }
-
-    /* QUESTION CARD */
-    .q-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px 22px; margin-bottom: 12px; box-shadow: var(--shadow-sm); }
-    .q-num { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 6px; letter-spacing: 0.5px; }
-    .q-text { font-size: 15px; font-weight: 500; color: var(--text-primary); margin-bottom: 14px; line-height: 1.5; }
-    .choices { display: flex; flex-direction: column; gap: 7px; }
-    .choice-btn {
-      width: 100%; text-align: left; padding: 10px 14px; border-radius: 8px; border: 1.5px solid var(--border);
-      background: var(--surface-2); color: var(--text-primary); font-size: 13.5px; cursor: pointer;
-      transition: all .15s; font-family: var(--font); line-height: 1.45;
-    }
-    .choice-btn:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
-    .choice-btn.selected { border-color: var(--accent); background: var(--accent-soft); color: #003d7a; font-weight: 500; }
-    .choice-btn.correct { border-color: var(--green); background: var(--green-soft); color: #1a5c2a; font-weight: 600; }
-    .choice-btn.wrong { border-color: var(--red); background: var(--red-soft); color: #7a0000; }
-    .choice-btn.reveal-correct { border-color: var(--green); background: var(--green-soft); color: #1a5c2a; }
-    .choice-btn:disabled { cursor: default; }
-    .correct-hint { margin-top: 8px; font-size: 12px; color: #1a5c2a; background: var(--green-soft); border-radius: 6px; padding: 7px 12px; font-weight: 500; }
-
-    /* NAV BUTTONS */
-    .quiz-nav { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
-    .btn { padding: 10px 22px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all .15s; font-family: var(--font); }
-    .btn-ghost { background: var(--surface); border: 1.5px solid var(--border); color: var(--text-primary); }
-    .btn-ghost:hover:not(:disabled) { background: var(--surface-2); }
-    .btn-ghost:disabled { opacity: 0.38; cursor: default; }
-    .btn-primary { background: var(--accent); color: white; }
-    .btn-primary:hover { background: var(--accent-dark); }
-    .btn-danger { background: var(--text-primary); color: white; }
-    .btn-danger:hover { background: #333; }
-
-    /* PAGE DOTS (reused as small index chips) */
-    .page-dots { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
-    .page-dot {
-      width: 30px; height: 28px; border-radius: 7px; font-size: 11px; font-weight: 700;
-      cursor: pointer; border: 1.5px solid var(--border); background: var(--surface);
-      color: var(--text-secondary); display: flex; align-items: center; justify-content: center; transition: all .15s;
-    }
-    .page-dot:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* SUBMIT AREA */
-    .submit-area { text-align: center; margin-top: 28px; }
-    .submit-area .btn { padding: 14px 40px; font-size: 15px; border-radius: 14px; }
-
-    /* PROGRESS BAR */
-    .progress-strip { height: 3px; background: var(--surface-3); }
-    .progress-fill { height: 100%; background: var(--accent); transition: width .4s; }
-
-    /* ─── MOBILE ─── */
-    @media (max-width: 600px) {
-      .compare-grid, .card-grid, .ip-children, .gen-grid { grid-template-columns: 1fr; }
-      .chapter-body, .chapter-header { padding: 16px 18px; }
-      .def-row { grid-template-columns: 1fr; gap: 2px; }
-      .hero { padding: 64px 20px 52px; }
-      .hero-stats { gap: 24px; }
-      .toc-grid { grid-template-columns: 1fr 1fr; }
-      .nav-tab { padding: 6px 10px; font-size: 12px; }
-      .quiz-stats-inner { flex-direction: column; align-items: flex-start; gap: 4px; }
-      .quiz-nav { flex-direction: column; align-items: stretch; }
-      .quiz-nav .btn { text-align: center; }
+    @media(max-width:600px){
+      .compare-grid,.card-grid,.ip-children,.gen-grid{grid-template-columns:1fr}
+      .chapter-body,.chapter-header{padding:16px 18px}
+      .def-row{grid-template-columns:1fr;gap:2px}
+      .hero{padding:64px 20px 52px}
+      .hero-stats{gap:24px}
+      .toc-grid{grid-template-columns:1fr 1fr}
+      .nav-tab{padding:6px 10px;font-size:12px}
+      .quiz-stats-inner{flex-direction:column;align-items:flex-start;gap:4px}
+      .quiz-nav{flex-direction:column;align-items:stretch}
+      .quiz-nav .btn{text-align:center}
     }
   </style>
 </head>
 <body>
 
-<!-- ═══ NAV ═══ -->
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo">JIT301</a>
@@ -325,192 +206,197 @@
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════
-     STUDY PAGE
-═══════════════════════════════════════ -->
+<!-- ═══ STUDY PAGE ═══ -->
 <div id="study-page" class="page active">
 
-  <!-- HERO -->
   <section class="hero">
     <p class="hero-eyebrow">コンピュータ &amp; 情報技術</p>
     <h1>Tin học &amp;<br><span>Công nghệ thông tin</span></h1>
-    <p class="hero-sub">Tài liệu học tập song ngữ Nhật–Việt về cơ sở máy tính, mạng, bảo mật và xử lý thông tin.</p>
+    <p class="hero-sub">Tài liệu học tập song ngữ Nhật–Việt — số chương theo giáo trình chính thức.</p>
     <div class="hero-stats">
-      <div><div class="hero-stat-num">57</div><div class="hero-stat-label">Chương &amp; mục</div></div>
+      <div><div class="hero-stat-num">16</div><div class="hero-stat-label">Chương lớn</div></div>
       <div><div class="hero-stat-num">200</div><div class="hero-stat-label">Câu hỏi ôn tập</div></div>
       <div><div class="hero-stat-num">2</div><div class="hero-stat-label">Ngôn ngữ</div></div>
     </div>
   </section>
 
-  <!-- TOC -->
   <div class="toc-section">
     <p class="section-eyebrow">Mục lục</p>
-    <h2 class="section-title">Nội dung</h2>
+    <h2 class="section-title">Nội dung theo giáo trình</h2>
     <div class="toc-grid">
-      <a href="#ch1" class="toc-item"><span class="toc-num">1</span><span class="toc-text">Analog là gì?</span></a>
-      <a href="#ch2" class="toc-item"><span class="toc-num">2</span><span class="toc-text">Digital là gì?</span></a>
-      <a href="#ch3" class="toc-item"><span class="toc-num">3</span><span class="toc-text">Digital vs Analog</span></a>
-      <a href="#ch4" class="toc-item"><span class="toc-num">4</span><span class="toc-text">Lịch sử máy tính</span></a>
-      <a href="#ch5" class="toc-item"><span class="toc-num">5</span><span class="toc-text">Các loại máy tính</span></a>
-      <a href="#ch7" class="toc-item"><span class="toc-num">7</span><span class="toc-text">Tệp tin &amp; Thư mục</span></a>
-      <a href="#ch10" class="toc-item"><span class="toc-num">10</span><span class="toc-text">Web &amp; Internet</span></a>
-      <a href="#ch13" class="toc-item"><span class="toc-num">13</span><span class="toc-text">Email &amp; Netiquette</span></a>
-      <a href="#ch14" class="toc-item"><span class="toc-num">14</span><span class="toc-text">Quyền sở hữu trí tuệ</span></a>
-      <a href="#ch15" class="toc-item"><span class="toc-num">15</span><span class="toc-text">Thế hệ điện thoại</span></a>
-      <a href="#ch18" class="toc-item"><span class="toc-num">18</span><span class="toc-text">Kết nối có dây &amp; Không dây</span></a>
-      <a href="#ch20" class="toc-item"><span class="toc-num">20</span><span class="toc-text">Mạng &amp; Internet</span></a>
-      <a href="#ch22" class="toc-item"><span class="toc-num">22</span><span class="toc-text">Bảo mật &amp; OSI</span></a>
-      <a href="#ch24" class="toc-item"><span class="toc-num">24</span><span class="toc-text">Tỷ lệ hoạt động</span></a>
-      <a href="#ch25" class="toc-item"><span class="toc-num">25</span><span class="toc-text">Cấu tạo máy tính</span></a>
-      <a href="#ch29" class="toc-item"><span class="toc-num">29</span><span class="toc-text">Linh kiện &amp; Mạch logic</span></a>
-      <a href="#ch31" class="toc-item"><span class="toc-num">31</span><span class="toc-text">Nhị phân &amp; Cơ số</span></a>
-      <a href="#ch34" class="toc-item"><span class="toc-num">34</span><span class="toc-text">Lượng thông tin</span></a>
-      <a href="#ch38" class="toc-item"><span class="toc-num">38</span><span class="toc-text">Âm thanh &amp; Hình ảnh</span></a>
-      <a href="#ch50" class="toc-item"><span class="toc-num">50</span><span class="toc-text">Thương mại điện tử</span></a>
-      <a href="#ch56" class="toc-item"><span class="toc-num">56</span><span class="toc-text">Bảo mật máy tính</span></a>
+      <a href="#s1-1" class="toc-item"><span class="toc-num">1.1</span><span class="toc-text">Digital &amp; Analog</span></a>
+      <a href="#s1-2" class="toc-item"><span class="toc-num">1.2</span><span class="toc-text">Lịch sử máy tính</span></a>
+      <a href="#s1-3" class="toc-item"><span class="toc-num">1.3</span><span class="toc-text">Các loại máy tính</span></a>
+      <a href="#s1-4" class="toc-item"><span class="toc-num">1.4</span><span class="toc-text">Chức năng máy tính</span></a>
+      <a href="#s1-5" class="toc-item"><span class="toc-num">1.5–1.7</span><span class="toc-text">File, Thư mục, Ổ đĩa</span></a>
+      <a href="#s2-1" class="toc-item"><span class="toc-num">2.1</span><span class="toc-text">Tìm kiếm trang web</span></a>
+      <a href="#s2-2" class="toc-item"><span class="toc-num">2.2</span><span class="toc-text">Web 2.0</span></a>
+      <a href="#s2-3" class="toc-item"><span class="toc-num">2.3</span><span class="toc-text">Điện toán đám mây</span></a>
+      <a href="#s2-4" class="toc-item"><span class="toc-num">2.4</span><span class="toc-text">Email &amp; Netiquette</span></a>
+      <a href="#s2-5" class="toc-item"><span class="toc-num">2.5</span><span class="toc-text">Quyền sở hữu trí tuệ</span></a>
+      <a href="#s3-1" class="toc-item"><span class="toc-num">3.1</span><span class="toc-text">Thế hệ điện thoại</span></a>
+      <a href="#s3-2" class="toc-item"><span class="toc-num">3.2–3.5</span><span class="toc-text">Truyền thông &amp; Phần cứng</span></a>
+      <a href="#s4-1" class="toc-item"><span class="toc-num">4.1</span><span class="toc-text">Kết nối có dây</span></a>
+      <a href="#s4-2" class="toc-item"><span class="toc-num">4.2</span><span class="toc-text">Kết nối không dây</span></a>
+      <a href="#s5-1" class="toc-item"><span class="toc-num">5.1–5.4</span><span class="toc-text">Mạng máy tính</span></a>
+      <a href="#s5-5" class="toc-item"><span class="toc-num">5.5</span><span class="toc-text">Bảo mật mạng</span></a>
+      <a href="#s6-1" class="toc-item"><span class="toc-num">6.1–6.3</span><span class="toc-text">Giao thức &amp; OSI</span></a>
+      <a href="#s6-4" class="toc-item"><span class="toc-num">6.4–6.5</span><span class="toc-text">HTML &amp; XML</span></a>
+      <a href="#s7-1" class="toc-item"><span class="toc-num">7.1–7.5</span><span class="toc-text">Thương mại điện tử</span></a>
+      <a href="#s8-1" class="toc-item"><span class="toc-num">8.1–8.4</span><span class="toc-text">Mật mã &amp; SSL</span></a>
+      <a href="#s9-1" class="toc-item"><span class="toc-num">9.1–9.6</span><span class="toc-text">Bảo mật &amp; An toàn</span></a>
+      <a href="#s10-1" class="toc-item"><span class="toc-num">10.1–10.6</span><span class="toc-text">Cấu trúc máy tính</span></a>
+      <a href="#s11-2" class="toc-item"><span class="toc-num">11.2–11.4</span><span class="toc-text">Linh kiện &amp; Mạch logic</span></a>
+      <a href="#s12-1" class="toc-item"><span class="toc-num">12.1–12.5</span><span class="toc-text">Cơ số &amp; Nhị phân</span></a>
+      <a href="#s13-1" class="toc-item"><span class="toc-num">13.1–13.5</span><span class="toc-text">Lượng thông tin</span></a>
+      <a href="#s14-1" class="toc-item"><span class="toc-num">14.1–14.4</span><span class="toc-text">Multimedia: MIDI, Âm thanh, Ảnh, Video</span></a>
+      <a href="#s15-1" class="toc-item"><span class="toc-num">15.1–15.3</span><span class="toc-text">Truyền dữ liệu &amp; Nén</span></a>
     </div>
   </div>
 
-  <!-- CONTENT -->
   <div class="content">
 
-    <div class="chapter" id="ch1">
+    <!-- 1.1 -->
+    <div class="chapter" id="s1-1">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 1</div>
-        <div class="chapter-title-jp">アナログ（analog）とは？</div>
-        <div class="chapter-title-vn">Analog là gì?</div>
-      </div>
-      <div class="chapter-body">
-        <div class="def-row"><div class="def-jp">連続的な量のことを表します</div><div class="def-vn">Biểu thị các đại lượng liên tục</div></div>
-        <div class="def-row"><div class="def-jp">電流（mA）または電圧（mV）信号として送信されます</div><div class="def-vn">Được truyền dưới dạng tín hiệu dòng điện (mA) hoặc điện áp (mV)</div></div>
-      </div>
-    </div>
-
-    <div class="chapter" id="ch2">
-      <div class="chapter-header">
-        <div class="chapter-num">Chương 2</div>
-        <div class="chapter-title-jp">デジタル（Digital）とは？</div>
-        <div class="chapter-title-vn">Digital là gì?</div>
-      </div>
-      <div class="chapter-body">
-        <div class="def-row"><div class="def-jp">数値化された量のことを表します</div><div class="def-vn">Biểu thị các đại lượng đã được số hóa</div></div>
-        <div class="def-row"><div class="def-jp">1と0の数字だけを使っています</div><div class="def-vn">Chỉ sử dụng con số 1 và 0</div><div class="def-note">Tương ứng với điện áp cao (On) và thấp (Off)</div></div>
-        <div class="code-block"><pre>0  1  0  1  0  1  0  1  0
-OF ON OF ON OF ON OF ON OF</pre></div>
-      </div>
-    </div>
-
-    <div class="chapter" id="ch3">
-      <div class="chapter-header">
-        <div class="chapter-num">Chương 3</div>
-        <div class="chapter-title-jp">デジタルとアナログの違いとは？</div>
+        <div class="chapter-num">Chương 1 — コンピュータの基礎</div>
+        <div class="chapter-sub">§ 1.1 デジタルとアナログ</div>
+        <div class="chapter-title-jp">デジタルとアナログの違い</div>
         <div class="chapter-title-vn">Sự khác biệt giữa Digital và Analog</div>
       </div>
       <div class="chapter-body">
         <div class="compare-grid">
           <div class="compare-card digital"><div class="compare-label">Digital — デジタル</div><ul>
+            <li>数値化された量 — Đại lượng số hóa, rời rạc</li>
             <li>コピーができる — Có thể sao chép</li>
-            <li>正確で切れ目のある — Chính xác, rời rạc</li>
-            <li>曖昧なものをそのまま残すことができない — Không thể giữ nguyên giá trị mơ hồ</li>
+            <li>正確で切れ目のある — Chính xác, ngắt quãng</li>
+            <li>曖昧なものをそのまま残せない — Không giữ được giá trị mơ hồ</li>
+            <li>1と0の数字だけを使う — Chỉ dùng 0 và 1</li>
           </ul></div>
           <div class="compare-card analog"><div class="compare-label">Analog — アナログ</div><ul>
+            <li>連続的な量 — Đại lượng liên tục</li>
             <li>コピーができない — Không thể sao chép</li>
-            <li>データをそのまま残すことができない — Không thể lưu dữ liệu nguyên trạng</li>
-            <li>曖昧なものをそのまま表現 — Thể hiện trực quan những thứ mơ hồ</li>
+            <li>電流(mA)・電圧(mV)信号 — Tín hiệu dòng điện/điện áp</li>
+            <li>データをそのまま残せない — Không lưu nguyên trạng</li>
+            <li>曖昧なものをそのまま表現できる — Thể hiện trực quan giá trị mơ hồ</li>
           </ul></div>
         </div>
+        <div class="code-block"><pre>デジタル信号:
+0  1  0  1  0  1  0  1  0
+OF ON OF ON OF ON OF ON OF
+(電圧高=ON=1 / 電圧低=OFF=0)</pre></div>
       </div>
     </div>
 
-    <div class="chapter" id="ch4">
+    <!-- 1.2 -->
+    <div class="chapter" id="s1-2">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 4</div>
+        <div class="chapter-num">Chương 1 — コンピュータの基礎</div>
+        <div class="chapter-sub">§ 1.2 コンピュータの歴史</div>
         <div class="chapter-title-jp">コンピュータの歴史</div>
         <div class="chapter-title-vn">Lịch sử máy tính</div>
       </div>
       <div class="chapter-body">
-        <div class="timeline-item"><div class="timeline-year">紀元前</div><div class="timeline-content">アバカス <span>Bàn tính Abacus</span></div></div>
-        <div class="timeline-item"><div class="timeline-year">17世紀</div><div class="timeline-content">パスカルの計算機・ライプニッツの乗算機 <span>Máy tính Pascal &amp; máy nhân Leibniz</span></div></div>
-        <div class="timeline-item"><div class="timeline-year">1930</div><div class="timeline-content">電気機械式 <span>Máy tính điện cơ</span></div></div>
-        <div class="timeline-item"><div class="timeline-year">1939</div><div class="timeline-content">ABC電子式計算機 <span>Máy tính điện tử ABC</span></div></div>
-        <div class="timeline-item"><div class="timeline-year">1946</div><div class="timeline-content">電子式計算機 ENIAC（エニアック） <span>Máy tính điện tử ENIAC</span></div></div>
-        <div class="timeline-item"><div class="timeline-year">1949</div><div class="timeline-content">フォン・ノイマンコンピュータ <span>Máy tính Von Neumann — máy tính hiện đại ngày nay</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">紀元前</div><div class="timeline-content">アバカス（そろばん）<span>Bàn tính Abacus</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">17世紀</div><div class="timeline-content">パスカルの計算機・ライプニッツの乗算機<span>Máy tính Pascal &amp; máy nhân Leibniz</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">1930</div><div class="timeline-content">電気機械式<span>Kiểu điện cơ</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">1939</div><div class="timeline-content">ABC電子式計算機<span>Máy tính điện tử ABC</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">1946</div><div class="timeline-content">電子式計算機 ENIAC（エニアック）<span>Máy tính điện tử ENIAC</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">1949</div><div class="timeline-content">フォン・ノイマンコンピュータ（プログラム内蔵方式）<span>Máy tính Von Neumann — nền tảng máy tính hiện đại</span></div></div>
       </div>
     </div>
 
-    <div class="chapter" id="ch5">
+    <!-- 1.3 + 1.4 -->
+    <div class="chapter" id="s1-3">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 5–6</div>
-        <div class="chapter-title-jp">身の回りのコンピュータ・機能</div>
-        <div class="chapter-title-vn">Các loại máy tính &amp; Chức năng</div>
+        <div class="chapter-num">Chương 1 — コンピュータの基礎</div>
+        <div class="chapter-sub">§ 1.3 身の回りのコンピュータ　／　§ 1.4 コンピュータの機能</div>
+        <div class="chapter-title-jp">コンピュータの種類と機能</div>
+        <div class="chapter-title-vn">Phân loại &amp; Chức năng máy tính</div>
       </div>
       <div class="chapter-body">
         <div class="card-grid">
-          <div class="info-card"><div class="info-card-title">Phân loại</div><ul>
-            <li>スーパーコンピュータ <span class="vn">Siêu máy tính</span></li>
-            <li>大型汎用計算機 <span class="vn">Mainframe</span></li>
-            <li>ワークステーション <span class="vn">Máy trạm</span></li>
-            <li>デスクトップPC <span class="vn">Máy để bàn</span></li>
-            <li>ノートPC <span class="vn">Máy xách tay</span></li>
-            <li>スマートフォン <span class="vn">Điện thoại thông minh</span></li>
+          <div class="info-card"><div class="info-card-title">Phân loại (lớn → nhỏ)</div><ul>
+            <li>スーパーコンピュータ<span class="vn">Siêu máy tính</span></li>
+            <li>大型汎用計算機<span class="vn">Mainframe</span></li>
+            <li>ワークステーション<span class="vn">Máy trạm</span></li>
+            <li>デスクトップPC<span class="vn">Máy để bàn</span></li>
+            <li>ノートPC<span class="vn">Máy xách tay</span></li>
+            <li>ネットブック<span class="vn">Netbook</span></li>
+            <li>スマートフォン<span class="vn">Điện thoại thông minh</span></li>
           </ul></div>
           <div class="info-card"><div class="info-card-title">Chức năng cơ bản</div>
             <div class="formula">コンピュータ = 記憶 ＋ 処理<br><small style="color:var(--text-secondary);font-size:11px">Máy tính = Lưu trữ + Xử lý</small></div>
-            <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">Nguyên lý cơ bản là sự lặp lại của tính toán và lưu trữ. Thiếu một trong hai không thể gọi là máy tính.</p>
+            <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">Nguyên lý cơ bản: sự lặp lại đơn giản của tính toán và lưu trữ. Thiếu một trong hai → không thể gọi là máy tính.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="chapter" id="ch7">
+    <!-- 1.5–1.7 -->
+    <div class="chapter" id="s1-5">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 7–9</div>
+        <div class="chapter-num">Chương 1 — コンピュータの基礎</div>
+        <div class="chapter-sub">§ 1.5 ファイル　／　§ 1.6 フォルダ　／　§ 1.7 ドライブ</div>
         <div class="chapter-title-jp">ファイル・フォルダ・ドライブ</div>
         <div class="chapter-title-vn">Tệp tin, Thư mục &amp; Ổ đĩa</div>
       </div>
       <div class="chapter-body">
-        <div class="def-row"><div class="def-jp">ファイル</div><div class="def-vn">Tệp tin — Dữ liệu được lưu trên phương tiện lưu trữ</div><div class="def-note">Nhận biết qua icon và phần mở rộng (extension): .doc / .xls / .htm</div></div>
-        <div class="def-row"><div class="def-jp">フォルダ</div><div class="def-vn">Thư mục — Nơi chứa để sắp xếp tệp tin</div><div class="def-note">Cấu trúc phân cấp = ディレクトリ構造 (Directory structure)</div></div>
-        <div class="def-row"><div class="def-jp">ドライブ名</div><div class="def-vn">Tên ổ đĩa: (C:) (D:) (F:)...</div><div class="def-note">Đường dẫn (パス): DU LIEU (D:)\keep\fpt\Jit301</div></div>
-        <div class="info-card" style="margin-top:12px"><div class="info-card-title">Phần mở rộng phổ biến</div><ul>
-          <li>.doc <span class="vn">MS Word</span></li>
-          <li>.xls <span class="vn">Excel</span></li>
-          <li>.htm <span class="vn">Trang web</span></li>
-          <li>.zip / .lzh / .gz <span class="vn">File nén</span></li>
-        </ul></div>
+        <div class="def-row"><div class="def-jp">ファイル（File）</div><div class="def-vn">Tệp tin — dữ liệu lưu trên phương tiện lưu trữ, nhận biết qua icon và phần mở rộng</div></div>
+        <div class="def-row"><div class="def-jp">拡張子（Extension）</div><div class="def-vn">.doc (Word) / .xls (Excel) / .htm (Web) / .zip/.lzh/.gz (Nén)</div></div>
+        <div class="def-row"><div class="def-jp">フォルダ（Folder）</div><div class="def-vn">Thư mục — nơi chứa để sắp xếp tệp tin</div></div>
+        <div class="def-row"><div class="def-jp">ディレクトリ構造</div><div class="def-vn">Cấu trúc phân cấp hiển thị trong Explorer</div><div class="def-note">パス例: DU LIEU (D:)\keep\fpt\Jit301</div></div>
+        <div class="def-row"><div class="def-jp">ドライブ名（Drive）</div><div class="def-vn">Ký hiệu ổ đĩa: (C:) (D:) (F:)...</div></div>
       </div>
     </div>
 
-    <div class="chapter" id="ch10">
+    <!-- 2.1 -->
+    <div class="chapter" id="s2-1">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 10–12</div>
-        <div class="chapter-title-jp">Web・Web2.0・クラウドコンピューティング</div>
-        <div class="chapter-title-vn">Web, Web 2.0 &amp; Điện toán đám mây</div>
+        <div class="chapter-num">Chương 2 — インターネット利用</div>
+        <div class="chapter-sub">§ 2.1 ホームページ検索</div>
+        <div class="chapter-title-jp">ホームページ検索</div>
+        <div class="chapter-title-vn">Tìm kiếm trang web</div>
       </div>
       <div class="chapter-body">
-        <div class="def-row"><div class="def-jp">URL</div><div class="def-vn">Uniform Resource Location — Địa chỉ trang web</div></div>
-        <div class="def-row"><div class="def-jp">ブラウザ</div><div class="def-vn">Trình duyệt — Phần mềm xem trang web (IE, Chrome...)</div></div>
+        <div class="def-row"><div class="def-jp">ブラウザ（Browser）</div><div class="def-vn">Trình duyệt — phần mềm xem trang web (IE, Chrome...)</div></div>
+        <div class="def-row"><div class="def-jp">URL</div><div class="def-vn">Uniform Resource Location — địa chỉ trang web</div></div>
+        <div class="def-row"><div class="def-jp">ポータルサイト</div><div class="def-vn">Cổng thông tin: google (www.google.co.jp), yahoo (www.yahoo.co.jp)</div></div>
+      </div>
+    </div>
+
+    <!-- 2.2 -->
+    <div class="chapter" id="s2-2">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 2 — インターネット利用</div>
+        <div class="chapter-sub">§ 2.2 Web 2.0　／　§ 2.3 クラウドコンピューティング</div>
+        <div class="chapter-title-jp">Web 2.0 &amp; クラウドコンピューティング</div>
+        <div class="chapter-title-vn">Web 2.0 &amp; Điện toán đám mây</div>
+      </div>
+      <div class="chapter-body">
         <div class="highlight"><div class="highlight-title">Web 2.0 (2004 — Tim O'Reilly)</div>
-          <p><strong>Web 1.0:</strong> Một chiều (一方向型) — Người dùng chỉ xem.<br>
-            <strong>Web 2.0:</strong> Hai chiều (双方向型) — Tương tác, tạo nội dung.<br>
-            <strong>Long Tail:</strong> Mô hình kinh doanh tăng doanh thu qua nhiều sản phẩm ít người mua.</p>
+          <p><strong>Web 1.0:</strong> 一方向型 — Người dùng chỉ xem (đọc).<br>
+            <strong>Web 2.0:</strong> 双方向型 — Tương tác, tạo nội dung, chia sẻ.<br>
+            <strong>ロングテール（Long Tail）:</strong> Mô hình kinh doanh tăng doanh thu bằng cách cung cấp nhiều chủng loại sản phẩm, dù số người mua mỗi loại ít.</p>
         </div>
         <div class="highlight" style="background:linear-gradient(135deg,#e8f5fb,#f0f9ff)">
-          <div class="highlight-title" style="color:#0071a3">クラウドコンピューティング — Điện toán đám mây (2006, Eric Schmidt)</div>
-          <p>Cung cấp dịch vụ tính toán, lưu trữ qua Internet. Máy tính trên Internet ⟺ Người dùng.</p>
+          <div class="highlight-title" style="color:#0071a3">§ 2.3 クラウドコンピューティング (2006 — Eric Schmidt)</div>
+          <p>Cung cấp dịch vụ tính toán, lưu trữ qua Internet. Máy tính trên Internet ⟺ Người dùng. Ví dụ: Google cung cấp ワープロ (word) và 表計算 (spreadsheet) miễn phí trên Web.</p>
         </div>
       </div>
     </div>
 
-    <div class="chapter" id="ch13">
+    <!-- 2.4 -->
+    <div class="chapter" id="s2-4">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 13</div>
+        <div class="chapter-num">Chương 2 — インターネット利用</div>
+        <div class="chapter-sub">§ 2.4 メール利用の注意</div>
         <div class="chapter-title-jp">メール利用の注意（ネチケット）</div>
         <div class="chapter-title-vn">Lưu ý khi sử dụng Email — Netiquette</div>
       </div>
       <div class="chapter-body">
         <div class="rule-item"><span class="rule-num">1</span><div><div class="rule-jp">自分の氏名、連絡先等を明記する</div><div class="rule-vn">Ghi rõ tên và thông tin liên lạc của bản thân</div></div></div>
-        <div class="rule-item"><span class="rule-num">2</span><div><div class="rule-jp">相手の氏名を明記する</div><div class="rule-vn">Ghi rõ tên của người nhận</div></div></div>
+        <div class="rule-item"><span class="rule-num">2</span><div><div class="rule-jp">相手の氏名を明記する</div><div class="rule-vn">Ghi rõ tên người nhận</div></div></div>
         <div class="rule-item"><span class="rule-num">3</span><div><div class="rule-jp">急な返事を求めない</div><div class="rule-vn">Không yêu cầu trả lời gấp</div></div></div>
         <div class="rule-item"><span class="rule-num">4</span><div><div class="rule-jp">メールアドレスを確認する</div><div class="rule-vn">Kiểm tra địa chỉ email trước khi gửi</div></div></div>
         <div class="rule-item"><span class="rule-num">5</span><div><div class="rule-jp">大きな添付ファイルを送らない</div><div class="rule-vn">Không gửi tệp đính kèm dung lượng lớn</div></div></div>
@@ -518,316 +404,441 @@ OF ON OF ON OF ON OF ON OF</pre></div>
         <div class="rule-item"><span class="rule-num">7</span><div><div class="rule-jp">読めない文字を使わない</div><div class="rule-vn">Không dùng ký tự không đọc được</div></div></div>
         <div class="rule-item"><span class="rule-num">8</span><div><div class="rule-jp">添付ファイルのウィルスをチェックする</div><div class="rule-vn">Kiểm tra virus trong tệp đính kèm</div></div></div>
         <div class="rule-item"><span class="rule-num">9</span><div><div class="rule-jp">礼儀に気を付ける</div><div class="rule-vn">Chú ý đến phép lịch sự</div></div></div>
-        <div class="email-box" style="margin-top:14px">
-          <div class="email-from">📧 Ví dụ email xin tham quan công ty</div>
-          ○○商事株式会社 ○○営業部 課長 ○川○夫 様<br><br>
-          いつもお世話になっております。○○大学○○学部○年の○山○介と申します。<br>
-          <em style="color:var(--text-secondary);font-size:12px">→ Kính gửi... Tôi là sinh viên năm ○ khoa ○○ trường ĐH ○○, tên ○山○介.</em><br><br>
-          つきましては、○月○日(月)～○月○日(金)の間に見学させていただけないでしょうか。<br>
-          <em style="color:var(--text-secondary);font-size:12px">→ Xin có thể sắp xếp cho tôi đến thăm trong khoảng T○/○ đến T○/○ không?</em><br><br>
-          よろしくお願い申し上げます。 <em style="color:var(--text-secondary);font-size:12px">→ Trân trọng kính chào.</em>
-        </div>
       </div>
     </div>
 
-    <div class="chapter" id="ch14">
+    <!-- 2.5 -->
+    <div class="chapter" id="s2-5">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 14</div>
-        <div class="chapter-title-jp">法律（知的所有権）</div>
+        <div class="chapter-num">Chương 2 — インターネット利用</div>
+        <div class="chapter-sub">§ 2.5 法律（知的所有権）</div>
+        <div class="chapter-title-jp">知的所有権</div>
         <div class="chapter-title-vn">Quyền sở hữu trí tuệ</div>
       </div>
       <div class="chapter-body">
-        <div class="ip-branch"><div class="ip-parent">著作権 — Quyền tác giả (Bảo vệ sản phẩm văn hóa)</div>
+        <div class="ip-branch"><div class="ip-parent">著作権 — Quyền tác giả（文化的生産物・表現を保護）</div>
           <div class="ip-children">
             <div class="ip-child">著作者人格権 — Quyền nhân cách tác giả</div>
             <div class="ip-child">著作者財産権 — Quyền tài sản tác giả</div>
             <div class="ip-child">著作隣接権 — Quyền liền kề</div>
           </div>
         </div>
-        <div class="ip-branch"><div class="ip-parent">工業所有権 — Quyền sở hữu công nghiệp (Bảo vệ tiến bộ kỹ thuật)</div>
+        <div class="ip-branch"><div class="ip-parent">工業所有権 — Quyền sở hữu công nghiệp（技術の進歩を保護）</div>
           <div class="ip-children">
-            <div class="ip-child">特許権 — Quyền sáng chế</div>
-            <div class="ip-child">実用新案権 — Giải pháp hữu ích</div>
-            <div class="ip-child">意匠権 — Kiểu dáng công nghiệp</div>
-            <div class="ip-child">商標権 — Quyền thương hiệu</div>
+            <div class="ip-child">特許権 — Quyền sáng chế（新規技術）</div>
+            <div class="ip-child">実用新案権 — Giải pháp hữu ích（改良技術）</div>
+            <div class="ip-child">意匠権 — Kiểu dáng công nghiệp（デザイン）</div>
+            <div class="ip-child">商標権 — Quyền thương hiệu（社名・ロゴ）</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="chapter" id="ch15">
+    <!-- 3.1 -->
+    <div class="chapter" id="s3-1">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 15–17</div>
-        <div class="chapter-title-jp">携帯電話の世代・ハードウェア</div>
-        <div class="chapter-title-vn">Thế hệ điện thoại di động &amp; Phần cứng</div>
+        <div class="chapter-num">Chương 3 — IT機器の現状</div>
+        <div class="chapter-sub">§ 3.1 第3.5世代携帯電話〜第4世代　／　§ 3.2 通信　／　§ 3.3 放送</div>
+        <div class="chapter-title-jp">携帯電話の世代</div>
+        <div class="chapter-title-vn">Thế hệ điện thoại di động</div>
       </div>
       <div class="chapter-body">
         <div class="gen-grid">
-          <div class="gen-card"><div class="gen-year">第1世代 / Thế hệ 1</div><div class="gen-title">アナログ通信</div><div class="gen-sub">Sóng âm → sóng điện từ trực tiếp</div></div>
+          <div class="gen-card"><div class="gen-year">第1世代</div><div class="gen-title">アナログ通信</div><div class="gen-sub">Sóng âm → sóng điện từ trực tiếp</div></div>
           <div class="gen-card"><div class="gen-year">第2世代 (~1992)</div><div class="gen-title">デジタル通信</div><div class="gen-sub">Chất lượng âm thanh tốt hơn, bảo mật cuộc gọi</div></div>
-          <div class="gen-card"><div class="gen-year">第3世代 (~2001)</div><div class="gen-title">高速データ通信</div><div class="gen-sub">Tốc độ truyền dữ liệu được nâng cao</div></div>
-          <div class="gen-card"><div class="gen-year">第3.5世代 (~2006)</div><div class="gen-title">より高速・多機能</div><div class="gen-sub">Nhanh hơn 3G, nhiều ứng dụng mượt mà</div></div>
-          <div class="gen-card" style="grid-column:1/-1"><div class="gen-year">第4世代 / Thế hệ 4</div><div class="gen-title">ブロードバンド前提</div><div class="gen-sub">Băng thông rộng, linh hoạt thay đổi phương thức truyền thông</div></div>
+          <div class="gen-card"><div class="gen-year">第3世代 (~2001)</div><div class="gen-title">高速データ通信</div><div class="gen-sub">Tốc độ truyền dữ liệu nâng cao</div></div>
+          <div class="gen-card"><div class="gen-year">第3.5世代 (~2006)</div><div class="gen-title">より高速・多機能</div><div class="gen-sub">Nhanh hơn 3G, ứng dụng phong phú</div></div>
+          <div class="gen-card" style="grid-column:1/-1"><div class="gen-year">第4世代</div><div class="gen-title">ブロードバンド前提</div><div class="gen-sub">Băng thông rộng, linh hoạt thay đổi phương thức truyền thông tùy môi trường</div></div>
         </div>
-        <div style="margin-top:14px">
-          <div class="def-row"><div class="def-jp">OS（オペレーティングシステム）</div><div class="def-vn">iOS / Android / Windows Phone / Symbian</div><div class="def-note">Cùng OS → nhiều ứng dụng dùng chung dù khác hãng</div></div>
-          <div class="def-row"><div class="def-jp">タッチパネル方式</div><div class="def-vn">抵抗膜 (điện trở) / 静電容量 (điện dung)</div></div>
-          <div class="def-row"><div class="def-jp">液晶・有機EL・SED</div><div class="def-vn">LCD / OLED / SED — các công nghệ màn hình</div></div>
+        <div class="highlight" style="margin-top:14px"><div class="highlight-title">§ 3.3 放送 — Phát sóng</div>
+          <p>ワンセグ放送: 地上デジタル放送と同一内容を小さい画面で表示するサイマル放送 — Phát sóng One-seg là simulcast, hiển thị cùng nội dung với phát sóng mặt đất trên màn hình nhỏ.</p>
         </div>
       </div>
     </div>
 
-    <div class="chapter" id="ch18">
+    <!-- 3.4 + 3.5 -->
+    <div class="chapter" id="s3-2">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 18–19</div>
-        <div class="chapter-title-jp">有線・無線通信手段</div>
-        <div class="chapter-title-vn">Kết nối có dây &amp; Không dây</div>
+        <div class="chapter-num">Chương 3 — IT機器の現状</div>
+        <div class="chapter-sub">§ 3.4 ハードウェア　／　§ 3.5 ソフトウェア</div>
+        <div class="chapter-title-jp">ハードウェア・ソフトウェア</div>
+        <div class="chapter-title-vn">Phần cứng &amp; Phần mềm (Điện thoại di động)</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">液晶（LCD）</div><div class="def-vn">Điều chỉnh độ sáng bằng cách cho/chặn ánh sáng đèn nền</div></div>
+        <div class="def-row"><div class="def-jp">有機EL・SED</div><div class="def-vn">OLED: phát sáng bằng chất hữu cơ / SED: công nghệ mới đang phát triển</div></div>
+        <div class="def-row"><div class="def-jp">OS（オペレーティングシステム）</div><div class="def-vn">iOS / Android / Windows Phone / Symbian — cùng OS → dùng chung nhiều ứng dụng</div></div>
+        <div class="def-row"><div class="def-jp">タッチパネル方式</div><div class="def-vn">抵抗膜方式: đo điện trở dọc/ngang / 静電容量方式: đo điện tích ngón tay–cảm biến</div></div>
+        <div class="def-row"><div class="def-jp">CMOSセンサ（カメラ）</div><div class="def-vn">Phần tử ghi cường độ ánh sáng + bộ khuếch đại xếp liền nhau</div></div>
+        <div class="def-row"><div class="def-jp">SIMカード</div><div class="def-vn">Thẻ IC ghi số thuê bao khi ký hợp đồng với nhà mạng</div></div>
+      </div>
+    </div>
+
+    <!-- 4.1 -->
+    <div class="chapter" id="s4-1">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 4 — データ通信技術</div>
+        <div class="chapter-sub">§ 4.1 有線接続</div>
+        <div class="chapter-title-jp">有線接続</div>
+        <div class="chapter-title-vn">Kết nối có dây</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">CATV（ケーブルテレビ）</div><div class="def-vn">Tận dụng băng thông dư của truyền hình cáp → tốc độ rất cao (~40 Mbps)</div></div>
+        <div class="def-row"><div class="def-jp">ADSL（Asymmetric Digital Subscriber Line）</div><div class="def-vn">Đường dây thuê bao kỹ thuật số bất đối xứng (~50 Mbps). Tổng gọi: xDSL</div></div>
+        <div class="def-row"><div class="def-jp">IP電話</div><div class="def-vn">Gửi/nhận âm thanh dưới dạng dữ liệu số qua Internet (dùng ADSL, FTTH...)</div></div>
+        <div class="def-row"><div class="def-jp">FTTH（Fiber To The Home）</div><div class="def-vn">Cáp quang chuyên dụng → ít nhiễu, tốc độ cao ổn định (~100 Mbps)</div></div>
+        <div class="def-row"><div class="def-jp">PLC（Power Line Communication）</div><div class="def-vn">Truyền dữ liệu qua đường dây điện gia đình 100V. Cần PLC adapter.</div></div>
+      </div>
+    </div>
+
+    <!-- 4.2 -->
+    <div class="chapter" id="s4-2">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 4 — データ通信技術</div>
+        <div class="chapter-sub">§ 4.2 無線通信手段</div>
+        <div class="chapter-title-jp">無線通信手段</div>
+        <div class="chapter-title-vn">Phương thức truyền thông không dây</div>
       </div>
       <div class="chapter-body">
         <div class="card-grid">
-          <div class="info-card"><div class="info-card-title">有線 — Có dây</div><ul>
-            <li>CATV <span class="vn">~40 Mbps</span></li>
-            <li>ADSL <span class="vn">~50 Mbps</span></li>
-            <li>FTTH <span class="vn">~100 Mbps (cáp quang)</span></li>
-            <li>PLC <span class="vn">Qua đường dây điện</span></li>
+          <div class="info-card"><div class="info-card-title">Tốc độ tham khảo</div><ul>
+            <li>IrDA<span class="vn">~1 Mbps, hồng ngoại</span></li>
+            <li>RFID / 非接触ICカード<span class="vn">~200 Kbps</span></li>
+            <li>Bluetooth<span class="vn">~1 Mbps, ~10m</span></li>
+            <li>Wi-Fi（無線LAN）<span class="vn">~54 Mbps</span></li>
           </ul></div>
-          <div class="info-card"><div class="info-card-title">無線 — Không dây</div><ul>
-            <li>IrDA <span class="vn">~1 Mbps, hồng ngoại</span></li>
-            <li>RFID <span class="vn">~200 Kbps, thẻ IC</span></li>
-            <li>Bluetooth <span class="vn">~1 Mbps, ~10m</span></li>
-            <li>Wi-Fi <span class="vn">~54 Mbps, LAN không dây</span></li>
+          <div class="info-card"><div class="info-card-title">Đặc điểm</div><ul>
+            <li>IrDA<span class="vn">Cần tầm nhìn thẳng, không vật cản</span></li>
+            <li>非接触ICカード<span class="vn">Suica, PASMO — không tiếp xúc</span></li>
+            <li>Bluetooth<span class="vn">Chuột, bàn phím, tai nghe, xe hơi</span></li>
+            <li>Wi-Fi = Wireless Fidelity<span class="vn">LAN không dây trong nhà</span></li>
           </ul></div>
         </div>
       </div>
     </div>
 
-    <div class="chapter" id="ch20">
+    <!-- 5.1–5.4 -->
+    <div class="chapter" id="s5-1">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 20–21</div>
+        <div class="chapter-num">Chương 5 — ネットワーク</div>
+        <div class="chapter-sub">§ 5.1 コンピュータネットワーク　／　§ 5.2 インターネット　／　§ 5.3 形態　／　§ 5.4 構成</div>
         <div class="chapter-title-jp">ネットワークとインターネット</div>
         <div class="chapter-title-vn">Mạng máy tính &amp; Internet</div>
       </div>
       <div class="chapter-body">
-        <div class="def-row"><div class="def-jp">インターネット</div><div class="def-vn">"Giữa các mạng" — Mạng của các mạng (WAN kết nối nhau)</div></div>
-        <div style="margin-top:12px;margin-bottom:8px;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase">接続形態 — Hình thái kết nối</div>
-        <div class="def-row"><div class="def-jp">バス型 (Bus)</div><div class="def-vn">Dạng tuyến — một dây cáp cho nhiều máy</div></div>
-        <div class="def-row"><div class="def-jp">スター型 (Star) ★</div><div class="def-vn">Hình sao — Hub trung tâm, phổ biến nhất</div></div>
-        <div class="def-row"><div class="def-jp">リング型 (Ring)</div><div class="def-vn">Dạng vòng — vòng cáp khép kín</div></div>
-        <div class="compare-grid" style="margin-top:14px">
-          <div class="compare-card digital"><div class="compare-label">集中処理システム</div><ul><li>Một máy tính trung tâm quản lý toàn bộ xử lý</li></ul></div>
-          <div class="compare-card analog"><div class="compare-label">分散処理システム</div><ul><li>Phân tán qua nhiều máy tính</li><li>P2P: bình đẳng giữa các máy</li></ul></div>
+        <div class="def-row"><div class="def-jp">コンピュータネットワーク</div><div class="def-vn">Hệ thống cho phép các thiết bị điện tử gửi/nhận dữ liệu bằng điện</div></div>
+        <div class="def-row"><div class="def-jp">インターネット</div><div class="def-vn">"Giữa các mạng" — Mạng của các mạng (WAN kết nối lưới với nhau)</div></div>
+        <div style="margin-top:14px;margin-bottom:8px;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase">§ 5.3 接続形態（3種類）— Hình thái kết nối</div>
+        <div class="def-row"><div class="def-jp">バス型（Bus）</div><div class="def-vn">Dạng tuyến — một dây cáp cho nhiều máy</div></div>
+        <div class="def-row"><div class="def-jp">スター型（Star） ★最もよく使われる</div><div class="def-vn">Hình sao — Hub/Switch trung tâm, phổ biến nhất</div></div>
+        <div class="def-row"><div class="def-jp">リング型（Ring）</div><div class="def-vn">Dạng vòng — vòng cáp khép kín</div></div>
+        <div style="margin-top:14px;margin-bottom:8px;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase">§ 5.4 処理配置（2種類）— Cách bố trí xử lý</div>
+        <div class="compare-grid">
+          <div class="compare-card digital"><div class="compare-label">集中処理システム</div><ul><li>Một máy tính trung tâm quản lý toàn bộ xử lý cốt lõi</li></ul></div>
+          <div class="compare-card analog"><div class="compare-label">分散処理システム</div><ul><li>Phân tán qua nhiều máy tính</li><li>P2P: các máy bình đẳng, cung cấp dịch vụ cho nhau</li></ul></div>
         </div>
       </div>
     </div>
 
-    <div class="chapter" id="ch22">
+    <!-- 5.5 -->
+    <div class="chapter" id="s5-5">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 22</div>
-        <div class="chapter-title-jp">ネットワークセキュリティとプロトコル（OSI）</div>
-        <div class="chapter-title-vn">Bảo mật mạng &amp; Giao thức OSI 7 lớp</div>
+        <div class="chapter-num">Chương 5 — ネットワーク</div>
+        <div class="chapter-sub">§ 5.5 ネットワークセキュリティ</div>
+        <div class="chapter-title-jp">ネットワークセキュリティ</div>
+        <div class="chapter-title-vn">Bảo mật mạng</div>
       </div>
       <div class="chapter-body">
-        <div class="osi-stack">
-          <div class="osi-layer l7"><span>アプリケーション層 — Lớp ứng dụng</span><span class="osi-proto">HTTP/SMTP</span></div>
-          <div class="osi-layer l6"><span>プレゼンテーション層 — Lớp trình diễn</span></div>
-          <div class="osi-layer l5"><span>セッション層 — Lớp phiên</span></div>
-          <div class="osi-layer l4"><span>トランスポート層 — Lớp giao vận</span><span class="osi-proto">TCP</span></div>
-          <div class="osi-layer l3"><span>ネットワーク層 — Lớp mạng</span><span class="osi-proto">IP</span></div>
-          <div class="osi-layer l2"><span>データリンク層 — Lớp liên kết dữ liệu</span></div>
-          <div class="osi-layer l1"><span>物理層 — Lớp vật lý</span></div>
+        <div class="highlight"><div class="highlight-title">Cấu hình bảo mật cơ bản</div>
+          <p>Khi kết nối Internet cần: <strong>Firewall（ファイアウォール）</strong> + DMZ + Máy chủ công khai (公開サーバ) + Máy chủ nội bộ (内部サーバ). Firewall bảo vệ máy chủ khỏi truy cập trái phép từ bên ngoài.</p>
         </div>
-        <div class="def-row" style="margin-top:6px"><div class="def-jp">IPアドレス</div><div class="def-vn">Địa chỉ trên mạng: 192.168.113.24</div></div>
-        <div class="def-row"><div class="def-jp">ドメイン名</div><div class="def-vn">Tên miền: daigaku.ac.jp</div></div>
       </div>
     </div>
 
-    <div class="chapter" id="ch24">
+    <!-- 6.1–6.3 -->
+    <div class="chapter" id="s6-1">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 23–24</div>
-        <div class="chapter-title-jp">システムの稼働率</div>
-        <div class="chapter-title-vn">Đánh giá an toàn &amp; Tỷ lệ hoạt động</div>
+        <div class="chapter-num">Chương 6 — インターネット技術</div>
+        <div class="chapter-sub">§ 6.1 プロトコル　／　§ 6.2 IPアドレスとドメイン名　／　§ 6.3 情報の流れ</div>
+        <div class="chapter-title-jp">プロトコル・OSI 7層モデル</div>
+        <div class="chapter-title-vn">Giao thức &amp; Mô hình OSI 7 lớp</div>
       </div>
       <div class="chapter-body">
-        <div class="def-row"><div class="def-jp">MTBF</div><div class="def-vn">Mean Time Between Failures — Khoảng thời gian hỏng hóc trung bình</div></div>
-        <div class="def-row"><div class="def-jp">MTTR</div><div class="def-vn">Mean Time To Repair — Thời gian sửa chữa trung bình</div></div>
-        <div class="formula">稼働率 = MTBF ÷ (MTBF + MTTR)</div>
-        <div class="formula">直列 (Nối tiếp): A × B</div>
-        <div class="formula">並列 (Song song): 1 − (1−A) × (1−B)</div>
-        <div class="formula">組み合わせ: [1 − (1−A)(1−B)] × C</div>
-      </div>
-    </div>
-
-    <div class="chapter" id="ch25">
-      <div class="chapter-header">
-        <div class="chapter-num">Chương 25–28</div>
-        <div class="chapter-title-jp">コンピュータ・パソコンの構成</div>
-        <div class="chapter-title-vn">Cấu tạo máy tính</div>
-      </div>
-      <div class="chapter-body">
-        <div class="highlight"><div class="highlight-title">5 thành phần cơ bản</div>
-          <p>演算装置 (Xử lý số học) · 記憶装置 (Bộ nhớ) · 制御装置 (Điều khiển) · 入力装置 (Đầu vào) · 出力装置 (Đầu ra)</p>
+        <div class="def-row"><div class="def-jp">プロトコル</div><div class="def-vn">Quy tắc truyền dữ liệu mà máy tính phải tuân theo</div></div>
+        <div class="osi-stack" style="margin-top:10px">
+          <div class="osi-layer l7"><span>7. アプリケーション層 — Lớp ứng dụng</span><span class="osi-proto">HTTP/SMTP/FTP</span></div>
+          <div class="osi-layer l6"><span>6. プレゼンテーション層 — Lớp trình diễn</span></div>
+          <div class="osi-layer l5"><span>5. セッション層 — Lớp phiên</span></div>
+          <div class="osi-layer l4"><span>4. トランスポート層 — Lớp giao vận</span><span class="osi-proto">TCP</span></div>
+          <div class="osi-layer l3"><span>3. ネットワーク層 — Lớp mạng</span><span class="osi-proto">IP</span></div>
+          <div class="osi-layer l2"><span>2. データリンク層 — Lớp liên kết dữ liệu</span></div>
+          <div class="osi-layer l1"><span>1. 物理層 — Lớp vật lý</span></div>
         </div>
-        <div class="def-row"><div class="def-jp">CPU / MPU</div><div class="def-vn">Bộ vi xử lý — Core i7, Core 2 Duo, ATOM (Intel)</div></div>
-        <div class="def-row"><div class="def-jp">マザーボード</div><div class="def-vn">Mainboard — bảng mạch chính (CPU + RAM + Chipset)</div></div>
-        <div class="def-row"><div class="def-jp">RAM (ラム)</div><div class="def-vn">Random Access Memory — đọc/ghi tự do</div></div>
-        <div class="def-row"><div class="def-jp">ROM (ロム)</div><div class="def-vn">Read Only Memory — chỉ đọc (CD-ROM, DVD-ROM)</div></div>
-        <div class="def-row"><div class="def-jp">ハードディスク</div><div class="def-vn">Ổ cứng — đĩa kim loại từ tính quay hàng nghìn vòng/phút</div></div>
+        <div class="def-row" style="margin-top:10px"><div class="def-jp">IPアドレス</div><div class="def-vn">Địa chỉ trên mạng (ví dụ: 192.168.113.24)</div></div>
+        <div class="def-row"><div class="def-jp">ドメイン名</div><div class="def-vn">Tên miền bằng chữ cái (ví dụ: daigaku.ac.jp)</div></div>
       </div>
     </div>
 
-    <div class="chapter" id="ch29">
+    <!-- 6.4–6.5 -->
+    <div class="chapter" id="s6-4">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 29–30</div>
-        <div class="chapter-title-jp">論理素子の歴史・論理回路</div>
+        <div class="chapter-num">Chương 6 — インターネット技術</div>
+        <div class="chapter-sub">§ 6.4 HTML　／　§ 6.5 XML</div>
+        <div class="chapter-title-jp">HTML &amp; XML</div>
+        <div class="chapter-title-vn">Ngôn ngữ đánh dấu HTML &amp; XML</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">HTML（Hyper Text Markup Language）</div><div class="def-vn">Mô tả loại chữ, bố cục, hình ảnh, video, âm thanh, liên kết tệp</div></div>
+        <div class="def-row"><div class="def-jp">XML（eXtensible Markup Language）</div><div class="def-vn">Mở rộng của HTML — người dùng tự định nghĩa thẻ tự do (khác với HTML)</div></div>
+      </div>
+    </div>
+
+    <!-- 7.1–7.5 -->
+    <div class="chapter" id="s7-1">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 7 — ビジネスにおけるインターネット利用</div>
+        <div class="chapter-sub">§ 7.1 電子商取引　／　§ 7.2 標準化　／　§ 7.3 電子マネー　／　§ 7.4 顧客管理　／　§ 7.5 個人情報保護</div>
+        <div class="chapter-title-jp">電子商取引・電子マネー・個人情報保護</div>
+        <div class="chapter-title-vn">Thương mại điện tử, Tiền điện tử &amp; Bảo vệ thông tin cá nhân</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">eコマース（BtoB / BtoC）</div><div class="def-vn">Electronic Commerce — Business to Business / Business to Consumer</div></div>
+        <div class="def-row"><div class="def-jp">EDI（Electronic Data Interchange）</div><div class="def-vn">Chuẩn hóa trao đổi dữ liệu điện tử qua mạng (nhận/đặt hàng, thanh toán)</div></div>
+        <div class="def-row"><div class="def-jp">EOS（Electronic Ordering System）</div><div class="def-vn">Hệ thống đặt hàng trực tuyến</div></div>
+        <div class="def-row"><div class="def-jp">CALS（Commerce At Light Speed）</div><div class="def-vn">Chuẩn hóa điện tử hóa toàn bộ quy trình sản xuất</div></div>
+        <div class="def-row"><div class="def-jp">電子マネー（§7.3）</div><div class="def-vn">クローズドループ型 (VISA Cash) / オープンループ型 (Mondex)</div></div>
+        <div class="def-row"><div class="def-jp">Cookie（§7.4）</div><div class="def-vn">Cơ chế trình duyệt lưu ID website để tự nhận diện lần sau</div></div>
+        <div class="highlight" style="margin-top:14px"><div class="highlight-title">§ 7.5 OECD 8原則 — 8 Nguyên tắc bảo vệ dữ liệu</div>
+          <p>① 目的明確化 (Xác định mục đích) · ② 利用制限 (Giới hạn sử dụng) · ③ 収集制限 (Giới hạn thu thập) · ④ データ内容 (Nội dung chính xác) · ⑤ 安全保護 (Bảo vệ an toàn) · ⑥ 公開 (Công khai) · ⑦ 個人参加 (Tham gia cá nhân) · ⑧ 責任 (Trách nhiệm người quản lý)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8.1–8.4 -->
+    <div class="chapter" id="s8-1">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 8 — 暗号化</div>
+        <div class="chapter-sub">§ 8.1 古典的暗号　／　§ 8.2–8.3 最近の暗号・公開鍵　／　§ 8.4 SSL</div>
+        <div class="chapter-title-jp">暗号化・SSL</div>
+        <div class="chapter-title-vn">Mật mã &amp; SSL</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">暗号化（§8.1）</div><div class="def-vn">Chuyển đổi văn bản gốc sao cho không thể đoán được</div></div>
+        <div class="def-row"><div class="def-jp">復号化</div><div class="def-vn">Khôi phục văn bản gốc từ bản mã</div></div>
+        <div class="def-row"><div class="def-jp">シーザー暗号</div><div class="def-vn">Mật mã cổ điển — dịch chuyển ký tự đi N vị trí (換字式暗号)</div></div>
+        <div class="def-row"><div class="def-jp">SSL（Secure Socket Layer）（§8.4）</div><div class="def-vn">Truyền thông mã hóa bằng khóa công khai + khóa bí mật</div></div>
+        <div class="def-row"><div class="def-jp">確認方法</div><div class="def-vn">Trình duyệt hiện icon 🔒 + giao thức https:// khi nhập thông tin cá nhân</div></div>
+      </div>
+    </div>
+
+    <!-- 9.1–9.6 -->
+    <div class="chapter" id="s9-1">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 9 — セキュリティ</div>
+        <div class="chapter-sub">§ 9.1–9.5 事故・ウィルス・攻撃・パスワード・注意点　／　§ 9.6 安全性評価</div>
+        <div class="chapter-title-jp">セキュリティ &amp; システム安全性評価</div>
+        <div class="chapter-title-vn">Bảo mật &amp; Đánh giá an toàn hệ thống</div>
+      </div>
+      <div class="chapter-body">
+        <div class="sec-item"><span class="sec-tag">§9.1 事故</span><div class="sec-jp">ハードウェアの故障（ハードディスク・CD-ROM が多い）</div><div class="sec-vn">Thiết bị có bộ phận chuyển động dễ hỏng nhất: ổ cứng, CD-ROM</div></div>
+        <div class="sec-item"><span class="sec-tag">§9.2 ウィルス</span><div class="sec-jp">人為的に作成されたプログラム（感染→潜伏→発病）</div><div class="sec-vn">Chương trình do con người tạo — quy trình: lây nhiễm → ủ bệnh → phát bệnh</div></div>
+        <div class="sec-item"><span class="sec-tag">§9.4 パスワード窃盗</span><div class="sec-jp">トロイの木馬: 通常の入力画面と同様に見せてパスワードを盗むプログラム</div><div class="sec-vn">Giả màn hình đăng nhập thật để đánh cắp thông tin đăng nhập</div></div>
+        <div class="sec-item"><span class="sec-tag blue">§9.5 メール</span><div class="sec-jp">exe・vbs・scr・pif の拡張子は即座に削除</div><div class="sec-vn">Xóa ngay tệp đính kèm có phần mở rộng exe, vbs, scr, pif</div></div>
+        <div class="sec-item"><span class="sec-tag green">§9.5 ウィルス対策</span><div class="sec-jp">パターンファイルを少なくとも週1回更新</div><div class="sec-vn">Cập nhật file định nghĩa virus ít nhất 1 lần/tuần</div></div>
+        <div class="sec-item"><span class="sec-tag green">§9.5 パスワード</span><div class="sec-jp">氏名・電話番号・生年月日などは避ける</div><div class="sec-vn">Tránh dùng tên, số điện thoại, ngày sinh làm mật khẩu</div></div>
+        <div class="sec-item"><span class="sec-tag blue">§9.5 ソフトの更新</span><div class="sec-jp">Windows Update — OS・ブラウザ・ドライバを常に最新状態に</div><div class="sec-vn">Luôn cập nhật OS, trình duyệt, driver</div></div>
+        <div style="margin-top:16px">
+          <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:10px">§ 9.6 システムの安全性評価 — Đánh giá an toàn</div>
+          <div class="def-row"><div class="def-jp">MTBF</div><div class="def-vn">Mean Time Between Failures — Khoảng thời gian hỏng hóc trung bình</div></div>
+          <div class="def-row"><div class="def-jp">MTTR</div><div class="def-vn">Mean Time To Repair — Thời gian sửa chữa trung bình</div></div>
+          <div class="formula">稼働率 = MTBF ÷ (MTBF + MTTR)</div>
+          <div class="formula">直列（Nối tiếp）: A × B</div>
+          <div class="formula">並列（Song song）: 1 − (1−A) × (1−B)</div>
+          <div class="formula">組み合わせ: [1 − (1−A)(1−B)] × C</div>
+          <div class="def-row" style="margin-top:8px"><div class="def-jp">信頼度成長曲線</div><div class="def-vn">Đường cong chữ S — lỗi nhiều ban đầu rồi ổn định</div></div>
+          <div class="def-row"><div class="def-jp">バスタブ曲線</div><div class="def-vn">Đường cong bồn tắm — thiết bị cơ khí thông thường (lỗi nhiều lúc đầu và cuối tuổi thọ)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10.1–10.6 -->
+    <div class="chapter" id="s10-1">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 10 — コンピュータの構造</div>
+        <div class="chapter-sub">§ 10.1 構成要素　／　§ 10.2 内部構成　／　§ 10.3–10.5 記憶装置　／　§ 10.6 CPU</div>
+        <div class="chapter-title-jp">コンピュータの構成・記憶装置・CPU</div>
+        <div class="chapter-title-vn">Cấu tạo máy tính, Bộ nhớ &amp; CPU</div>
+      </div>
+      <div class="chapter-body">
+        <div class="highlight"><div class="highlight-title">§ 10.1 コンピュータの5要素</div>
+          <p>演算装置 · 記憶装置 · 制御装置 · 入力装置 · 出力装置<br>
+            <small style="color:var(--text-secondary)">Bộ xử lý số học · Bộ nhớ · Điều khiển · Đầu vào · Đầu ra</small></p>
+        </div>
+        <div class="def-row"><div class="def-jp">§10.2 マザーボード</div><div class="def-vn">Bảng mạch chính (CPU + RAM + Chipset...)</div></div>
+        <div class="def-row"><div class="def-jp">§10.4 RAM（Random Access Memory）</div><div class="def-vn">Bộ nhớ bán dẫn — đọc/ghi tự do</div></div>
+        <div class="def-row"><div class="def-jp">§10.4 ROM（Read Only Memory）</div><div class="def-vn">Bộ nhớ chỉ đọc (CD-ROM, DVD-ROM)</div></div>
+        <div class="def-row"><div class="def-jp">§10.5 ハードディスク</div><div class="def-vn">Đĩa kim loại phủ vật liệu từ tính, quay hàng nghìn vòng/phút</div></div>
+        <div class="def-row"><div class="def-jp">§10.6 CPU / MPU（Micro Processing Unit）</div><div class="def-vn">Intel: Core i7, Core 2 Duo, ATOM. MPU = tên gọi phần cứng của CPU</div></div>
+      </div>
+    </div>
+
+    <!-- 11.2–11.4 -->
+    <div class="chapter" id="s11-2">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 11 — CPUの動作原理</div>
+        <div class="chapter-sub">§ 11.2 論理素子の歴史　／　§ 11.3 動作原理　／　§ 11.4 論理回路</div>
+        <div class="chapter-title-jp">論理素子の歴史 &amp; 論理回路</div>
         <div class="chapter-title-vn">Thế hệ linh kiện logic &amp; Mạch logic</div>
       </div>
       <div class="chapter-body">
-        <div class="timeline-item"><div class="timeline-year">第1世代 ~1940</div><div class="timeline-content">真空管 <span>Đèn chân không (Vacuum tube)</span></div></div>
-        <div class="timeline-item"><div class="timeline-year">第2世代 ~1950後</div><div class="timeline-content">トランジスタ <span>Transistor</span></div></div>
-        <div class="timeline-item"><div class="timeline-year">第3世代 ~1960中</div><div class="timeline-content">IC <span>Mạch tích hợp (Integrated Circuit)</span></div></div>
-        <div class="timeline-item"><div class="timeline-year">第4世代 ~1970初</div><div class="timeline-content">LSI <span>Vi mạch tích hợp cỡ lớn (Large Scale Integration)</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">第1世代 ~1940中</div><div class="timeline-content">真空管（Vacuum Tube）<span>Đèn chân không</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">第2世代 ~1950後</div><div class="timeline-content">トランジスタ（Transistor）<span>Bóng bán dẫn</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">第3世代 ~1960中</div><div class="timeline-content">IC（Integrated Circuit）<span>Mạch tích hợp</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">第4世代 ~1970初</div><div class="timeline-content">LSI（Large Scale Integration）<span>Vi mạch tích hợp cỡ lớn</span></div></div>
         <div class="compare-grid" style="margin-top:14px">
-          <div class="compare-card digital"><div class="compare-label">OR回路 — Mạch OR</div><ul><li>Công tắc song song — đèn sáng khi ít nhất 1 bật</li></ul></div>
-          <div class="compare-card analog"><div class="compare-label">AND回路 — Mạch AND</div><ul><li>Công tắc nối tiếp — đèn chỉ sáng khi CẢ HAI bật</li></ul></div>
+          <div class="compare-card digital"><div class="compare-label">OR回路 — Mạch OR</div><ul><li>スイッチが<strong>並列</strong> — Công tắc song song</li><li>Ít nhất 1 bật → đèn sáng</li></ul></div>
+          <div class="compare-card analog"><div class="compare-label">AND回路 — Mạch AND</div><ul><li>スイッチが<strong>直列</strong> — Công tắc nối tiếp</li><li>Cả hai bật → đèn mới sáng</li></ul></div>
         </div>
       </div>
     </div>
 
-    <div class="chapter" id="ch31">
+    <!-- 12.1–12.5 -->
+    <div class="chapter" id="s12-1">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 31–33</div>
-        <div class="chapter-title-jp">基数・2進数・変換</div>
-        <div class="chapter-title-vn">Cơ số, Nhị phân &amp; Chuyển đổi</div>
+        <div class="chapter-num">Chương 12 — 演算処理</div>
+        <div class="chapter-sub">§ 12.1 基数　／　§ 12.2 変換　／　§ 12.3 足し算　／　§ 12.4 負の表現　／　§ 12.5 掛け算・割り算</div>
+        <div class="chapter-title-jp">基数・2進数演算</div>
+        <div class="chapter-title-vn">Cơ số &amp; Tính toán nhị phân</div>
       </div>
       <div class="chapter-body">
-        <div class="def-row"><div class="def-jp">10進数 — Thập phân</div><div class="def-vn">Cơ số 10: 0,1,2,3,4,5,6,7,8,9</div></div>
-        <div class="def-row"><div class="def-jp">2進数 — Nhị phân</div><div class="def-vn">Cơ số 2: chỉ dùng 0 và 1</div></div>
-        <div class="code-block"><pre>2進数 1010 → 10進数？
-1×2³ + 0×2² + 1×2¹ + 0×2⁰ = 8+0+2+0 = 10
+        <div class="def-row"><div class="def-jp">§12.1 基数（Cơ số）</div><div class="def-vn">Số lượng chữ số làm cơ sở khi biểu diễn giá trị</div></div>
+        <div class="def-row"><div class="def-jp">10進数</div><div class="def-vn">Cơ số 10: chữ số 0〜9</div></div>
+        <div class="def-row"><div class="def-jp">2進数</div><div class="def-vn">Cơ số 2: chỉ 0 và 1 — dùng trong máy tính</div></div>
+        <div class="code-block"><pre>§12.2 2進数 → 10進数:
+1010 → 1×2³ + 0×2² + 1×2¹ + 0×2⁰ = 8+0+2+0 = 10
 
-2進数の足し算:   1 1 0
-               +   1 1
-               ───────
-               1 0 0 1   (ルール: 1+1=10, 繰り上がり)</pre></div>
-        <div class="def-row"><div class="def-jp">符号ビット</div><div class="def-vn">Bit dấu: 0 = dương (+), 1 = âm (−)</div></div>
+§12.3 足し算（Cộng nhị phân）:
+  1 1 0
++   1 1
+───────
+1 0 0 1   (ルール: 1+1=10, 繰り上がり/nhớ)
+
+§12.4 符号ビット: 0 = 正(+), 1 = 負(−)
+§12.5 掛け算・割り算も足し算で実現できる</pre></div>
       </div>
     </div>
 
-    <div class="chapter" id="ch34">
+    <!-- 13.1–13.5 -->
+    <div class="chapter" id="s13-1">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 34–35</div>
-        <div class="chapter-title-jp">情報量・文字の情報量</div>
+        <div class="chapter-num">Chương 13 — 情報量</div>
+        <div class="chapter-sub">§ 13.1–13.2 情報量の単位　／　§ 13.3–13.4 文字の情報量　／　§ 13.5 文字コード</div>
+        <div class="chapter-title-jp">情報量 &amp; 文字コード</div>
         <div class="chapter-title-vn">Đơn vị lượng thông tin &amp; Mã ký tự</div>
       </div>
       <div class="chapter-body">
         <table class="unit-table">
           <thead><tr><th>Đơn vị</th><th>Bằng</th><th>Ghi chú</th></tr></thead>
           <tbody>
-          <tr><td>1 bit</td><td>—</td><td>Đơn vị nhỏ nhất (binary digit)</td></tr>
-          <tr><td>1 byte</td><td>8 bit</td><td>1 ký tự ASCII</td></tr>
+          <tr><td>1 bit</td><td>—</td><td>§13.1 Đơn vị nhỏ nhất (binary digit)</td></tr>
+          <tr><td>1 byte</td><td>8 bit</td><td>§13.3 1 ký tự ASCII</td></tr>
           <tr><td>1 KB</td><td>1,024 byte</td><td>Kilobyte</td></tr>
           <tr><td>1 MB</td><td>1,024 KB</td><td>Megabyte</td></tr>
           <tr><td>1 GB</td><td>1,024 MB</td><td>Gigabyte</td></tr>
           <tr><td>1 TB</td><td>1,024 GB</td><td>Terabyte</td></tr>
           </tbody>
         </table>
-        <div class="def-row"><div class="def-jp">ASCII (英語)</div><div class="def-vn">256 loại ký tự = 8 bit = 1 byte / ký tự</div></div>
-        <div class="def-row"><div class="def-jp">Unicode (日本語)</div><div class="def-vn">65,536 ký tự (hiragana, katakana, kanji, ký hiệu)</div></div>
-        <div class="def-row"><div class="def-jp">文字コード</div><div class="def-vn">Mã ký tự: ASCII / JIS / Shift-JIS / EUC / Unicode</div></div>
+        <div class="def-row"><div class="def-jp">§13.3 ASCII（英語）</div><div class="def-vn">256 loại ký tự = 2⁸ = 8 bit = 1 byte / ký tự</div></div>
+        <div class="def-row"><div class="def-jp">§13.4 日本語（Unicode）</div><div class="def-vn">65,536 ký tự (ひらがな・カタカナ・漢字・記号)</div></div>
+        <div class="def-row"><div class="def-jp">§13.5 文字コード</div><div class="def-vn">ASCII / JIS / Shift-JIS / EUC / Unicode</div></div>
       </div>
     </div>
 
-    <div class="chapter" id="ch38">
+    <!-- 14.1–14.4 -->
+    <div class="chapter" id="s14-1">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 36–43</div>
-        <div class="chapter-title-jp">MIDI・音声・画像・動画の情報量</div>
-        <div class="chapter-title-vn">Lượng thông tin MIDI, Âm thanh, Ảnh tĩnh &amp; Video</div>
+        <div class="chapter-num">Chương 14 — マルチメディア表現</div>
+        <div class="chapter-sub">§ 14.1 MIDI　／　§ 14.2 音声　／　§ 14.3 静止画像　／　§ 14.4 動画像</div>
+        <div class="chapter-title-jp">マルチメディア情報量</div>
+        <div class="chapter-title-vn">Lượng thông tin Multimedia</div>
       </div>
       <div class="chapter-body">
-        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:10px">音声 — Âm thanh</div>
-        <div class="def-row"><div class="def-jp">サンプリング周波数</div><div class="def-vn">Tần số lấy mẫu (Hz) — càng cao chất lượng càng tốt</div></div>
-        <div class="def-row"><div class="def-jp">量子化数</div><div class="def-vn">Số lượng tử hóa — số bậc biểu thị chiều cao sóng</div></div>
-        <div class="exercise"><div class="exercise-title">演習 — CD 640MB ghi được bao nhiêu phút?</div>
-          <p>Stereo, 44.1 kHz, 16 bit (2¹⁶) → 1s = 2×44,100×2 byte = 176,400 byte</p>
-          <div class="result">→ 640 MB ÷ (176,400 × 60) ≈ 約63分</div>
+        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:8px">§ 14.1 MIDI（Musical Instrument Digital Interface）</div>
+        <div class="def-row"><div class="def-jp">MIDI命令</div><div class="def-vn">256種類以内 = 8 bit = 1 byte / lệnh</div></div>
+        <div class="exercise"><div class="exercise-title">§14.1 演習 — 512MB SDカード → 約何時間?</div>
+          <p>1拍=6 byte, 32音同時, 120拍/分 → 6×32×120=23,040 byte/分 = 1,382,400 byte/時間</p>
+          <div class="result">→ 536,870,912 ÷ 1,382,400 ≈ 約388時間</div>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin:14px 0 10px">静止画像 — Ảnh tĩnh</div>
-        <div class="def-row"><div class="def-jp">RGB各8bit = 3 byte/画素</div><div class="def-vn">Mỗi pixel 3 byte (256 bậc × 3 màu R,G,B)</div></div>
-        <div class="def-row"><div class="def-jp">解像度 dpi (dot per inch)</div><div class="def-vn">Độ phân giải máy in</div></div>
-        <div class="exercise"><div class="exercise-title">演習 — A4 / 300 dpi cần bao nhiêu megapixel?</div>
+        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin:14px 0 8px">§ 14.2 音声情報</div>
+        <div class="def-row"><div class="def-jp">サンプリング周波数 (Hz)</div><div class="def-vn">Tần số lấy mẫu — càng cao chất lượng càng tốt</div></div>
+        <div class="def-row"><div class="def-jp">量子化数</div><div class="def-vn">Số bậc biểu thị chiều cao sóng</div></div>
+        <div class="exercise"><div class="exercise-title">§14.2 演習 — CD 640MB → 約何分?</div>
+          <p>Stereo, 44.1 kHz, 2¹⁶ → 1s = 2×44,100×2 byte = 176,400 byte</p>
+          <div class="result">→ 640×1024×1024 ÷ (176,400×60) ≈ 約63分</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin:14px 0 8px">§ 14.3 静止画像</div>
+        <div class="def-row"><div class="def-jp">RGB各8bit = 3 byte/画素（ピクセル）</div><div class="def-vn">Mỗi pixel 3 byte (256 bậc × 3 màu R,G,B)</div></div>
+        <div class="def-row"><div class="def-jp">解像度 dpi（dot per inch）</div><div class="def-vn">Độ phân giải máy in</div></div>
+        <div class="info-card" style="margin:10px 0"><div class="info-card-title">Độ phân giải màn hình</div><ul>
+          <li>QVGA<span class="vn">320×240（Điện thoại）</span></li>
+          <li>VGA<span class="vn">640×480（TV tiêu chuẩn）</span></li>
+          <li>XGA<span class="vn">1024×768（Laptop）</span></li>
+          <li>SXGA<span class="vn">1280×1024（PC）</span></li>
+          <li>UXGA<span class="vn">1600×1200（màn hình HD）</span></li>
+        </ul></div>
+        <div class="exercise"><div class="exercise-title">§14.3 演習 — A4/300dpi → 約何メガピクセル?</div>
           <p>Ngang: 300×21÷2.54=2,480 · Dọc: 300×29.7÷2.54=3,508</p>
           <div class="result">→ 2,480 × 3,508 ≈ 8.7 Megapixel</div>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin:14px 0 10px">動画像 — Video</div>
-        <div class="def-row"><div class="def-jp">映画: 24 fps / テレビ(日本): 30 fps</div><div class="def-vn">Phim: 24 khung/giây · TV Nhật: 30 khung/giây</div></div>
-        <div class="exercise"><div class="exercise-title">演習 — 640×480, RGB 8bit, 30fps → 1秒の情報量</div>
-          <p>1 khung = 640×480×3 byte ≈ 900 KB</p>
-          <div class="result">→ 900 KB × 30 ≈ 約26.4 MB / giây</div>
-        </div>
-        <div class="exercise" style="margin-top:10px"><div class="exercise-title">演習 — MIDI: 512MB SDカード → 何時間?</div>
-          <p>1 phách=6 byte, 32 âm, 120 phách/phút → 6×32×120=23,040 byte/phút</p>
-          <div class="result">→ 536,870,912 ÷ 1,382,400 ≈ 約388時間</div>
+        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin:14px 0 8px">§ 14.4 動画像</div>
+        <div class="def-row"><div class="def-jp">映画: 24fps / テレビ（日本）: 30fps</div><div class="def-vn">Phim: 24 khung/giây · TV Nhật: 30 khung/giây</div></div>
+        <div class="exercise"><div class="exercise-title">§14.4 演習 — 640×480, RGB8bit, 30fps → 1秒の情報量</div>
+          <p>1枚 = 640×480×3 byte ≈ 900 KB</p>
+          <div class="result">→ 900 KB × 30 ≈ 約26.4 MB/秒</div>
         </div>
       </div>
     </div>
 
-    <div class="chapter" id="ch50">
+    <!-- 15.1–15.3 -->
+    <div class="chapter" id="s15-1">
       <div class="chapter-header">
-        <div class="chapter-num">Chương 50–55</div>
-        <div class="chapter-title-jp">電子商取引・個人情報保護・暗号・SSL</div>
-        <div class="chapter-title-vn">Thương mại điện tử, Bảo vệ thông tin &amp; Mật mã</div>
+        <div class="chapter-num">Chương 15 — データ通信</div>
+        <div class="chapter-sub">§ 15.1 通信の情報量　／　§ 15.2 文字情報圧縮　／　§ 15.3 音声情報圧縮</div>
+        <div class="chapter-title-jp">データ通信 &amp; 情報圧縮</div>
+        <div class="chapter-title-vn">Truyền dữ liệu &amp; Nén thông tin</div>
       </div>
       <div class="chapter-body">
-        <div class="def-row"><div class="def-jp">eコマース (BtoB / BtoC)</div><div class="def-vn">Thương mại điện tử — Business to Business / Business to Consumer</div></div>
-        <div class="def-row"><div class="def-jp">EDI</div><div class="def-vn">Electronic Data Interchange — Trao đổi dữ liệu điện tử chuẩn</div></div>
-        <div class="def-row"><div class="def-jp">EOS</div><div class="def-vn">Electronic Ordering System — Đặt hàng trực tuyến</div></div>
-        <div class="def-row"><div class="def-jp">Cookie</div><div class="def-vn">Lưu ID người dùng trên trình duyệt để nhận diện tự động</div></div>
-        <div class="def-row"><div class="def-jp">暗号化 / 復号化</div><div class="def-vn">Mã hóa / Giải mã — シーザー暗号: dịch chuyển ký tự</div></div>
-        <div class="def-row"><div class="def-jp">SSL (Secure Socket Layer)</div><div class="def-vn">Khóa công khai + khóa bí mật; giao thức https + icon khóa 🔒</div></div>
-        <div class="highlight" style="margin-top:12px"><div class="highlight-title">OECD 8 Nguyên tắc bảo vệ dữ liệu cá nhân</div>
-          <p>① Xác định mục đích · ② Giới hạn sử dụng · ③ Giới hạn thu thập · ④ Nội dung chính xác · ⑤ Bảo vệ an toàn · ⑥ Công khai · ⑦ Tham gia cá nhân · ⑧ Trách nhiệm người quản lý</p>
+        <div class="def-row"><div class="def-jp">通信速度の単位: bps（bit per second）</div><div class="def-vn">Số bit truyền mỗi giây</div></div>
+        <div class="def-row"><div class="def-jp">ブロードバンド</div><div class="def-vn">100 Kbps〜1 Mbps以上 / ナローバンド: tốc độ thấp hơn</div></div>
+        <div class="card-grid" style="margin-top:12px">
+          <div class="info-card"><div class="info-card-title">有線 (§15.1)</div><ul>
+            <li>CATV<span class="vn">~40 Mbps</span></li>
+            <li>ADSL<span class="vn">~50 Mbps</span></li>
+            <li>FTTH<span class="vn">~100 Mbps</span></li>
+          </ul></div>
+          <div class="info-card"><div class="info-card-title">無線 (§15.1)</div><ul>
+            <li>IrDA<span class="vn">~1 Mbps</span></li>
+            <li>Bluetooth<span class="vn">~1 Mbps</span></li>
+            <li>Wi-Fi<span class="vn">~54 Mbps</span></li>
+          </ul></div>
         </div>
-      </div>
-    </div>
-
-    <div class="chapter" id="ch56">
-      <div class="chapter-header">
-        <div class="chapter-num">Chương 56–57</div>
-        <div class="chapter-title-jp">パソコン利用時の注意（セキュリティ）</div>
-        <div class="chapter-title-vn">Bảo mật khi sử dụng máy tính</div>
-      </div>
-      <div class="chapter-body">
-        <div class="sec-list">
-          <div class="sec-item"><span class="sec-tag">Sự cố phần cứng</span><div class="sec-jp">ハードウェアの故障 — ハードディスク・CD-ROM</div><div class="sec-vn">Thiết bị có bộ phận chuyển động dễ hỏng nhất: ổ cứng, CD-ROM</div></div>
-          <div class="sec-item"><span class="sec-tag">Virus</span><div class="sec-jp">人為的に作成されたプログラム</div><div class="sec-vn">Chương trình do con người tạo, lây lan và phát bệnh như virus sinh học</div></div>
-          <div class="sec-item"><span class="sec-tag">Trojan Horse</span><div class="sec-jp">トロイの木馬 — パスワード窃盗</div><div class="sec-vn">Giả màn hình đăng nhập, thu thập tên đăng nhập/mật khẩu</div></div>
-          <div class="sec-item"><span class="sec-tag blue">Email</span><div class="sec-jp">exe・vbs・scr・pif の拡張子は即座に削除</div><div class="sec-vn">Xóa ngay tệp đính kèm có phần mở rộng exe, vbs, scr, pif</div></div>
-          <div class="sec-item"><span class="sec-tag green">Antivirus</span><div class="sec-jp">パターンファイルを週1回以上更新</div><div class="sec-vn">Cập nhật file định nghĩa virus ít nhất 1 lần/tuần</div></div>
-          <div class="sec-item"><span class="sec-tag green">Password</span><div class="sec-jp">氏名・電話番号・生年月日などは避ける</div><div class="sec-vn">Tránh dùng tên, số điện thoại, ngày sinh làm mật khẩu</div></div>
-          <div class="sec-item"><span class="sec-tag blue">Windows Update</span><div class="sec-jp">OS・ブラウザ・ドライバを常に最新状態に</div><div class="sec-vn">Luôn cập nhật OS, trình duyệt, driver lên phiên bản mới nhất</div></div>
-        </div>
+        <div class="def-row" style="margin-top:12px"><div class="def-jp">§15.2 文字情報圧縮</div><div class="def-vn">ASCII形式 / バイナリ形式。圧縮拡張子: .zip / .lzh / .gz</div></div>
+        <div class="def-row"><div class="def-jp">§15.3 音声情報圧縮</div><div class="def-vn">フーリエ変換 — phân tích sóng thành các sóng sin (低周波=đặc tính lớn / 高周波=chi tiết)</div></div>
       </div>
     </div>
 
     <a href="#" class="back-top">↑ Lên đầu trang</a>
-  </div><!-- /content -->
+  </div>
 </div><!-- /study-page -->
 
 
-<!-- ═══════════════════════════════════════
-     QUIZ PAGE — làm từng câu, hiện kết quả ngay
-═══════════════════════════════════════ -->
+<!-- ═══ QUIZ PAGE ═══ -->
 <div id="quiz-page" class="page">
-
   <div class="quiz-hero">
     <p class="quiz-hero-eyebrow">JIT301 — 確認テスト</p>
     <h2>Kiểm tra <span>200 câu</span></h2>
   </div>
-
-  <!-- Progress strip -->
   <div class="progress-strip"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
-
-  <!-- Stats bar -->
   <div class="quiz-stats-bar">
     <div class="quiz-stats-inner">
       <span class="quiz-stat-item">Câu: <strong id="stat-current">1 / 200</strong></span>
@@ -835,90 +846,62 @@ OF ON OF ON OF ON OF ON OF</pre></div>
       <span class="quiz-stat-item" style="color:#7a0000">Sai: <strong id="stat-wrong">0</strong></span>
     </div>
   </div>
-
-  <!-- Quiz container -->
   <div class="quiz-container">
     <div id="quiz-question-area"></div>
-
     <div class="score-card" id="quiz-finish-area" style="display:none">
       <div><span class="score-big" id="fa-score">0</span><span class="score-of"> / 200</span></div>
       <div class="score-grade" id="fa-grade"></div>
       <div class="score-bar-wrap"><div class="score-bar-fill" id="fa-bar" style="width:0%"></div></div>
-      <p style="margin-top:14px;font-size:13px;color:var(--text-secondary)">Số câu sai cần làm lại: <strong id="fa-wrong-count" style="color:var(--red)">0</strong></p>
+      <p style="margin-top:14px;font-size:13px;color:var(--text-secondary)">Số câu sai: <strong id="fa-wrong-count" style="color:var(--red)">0</strong></p>
       <div style="display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap">
         <button class="btn btn-primary" onclick="showPage('wrong')">🔁 Làm lại câu sai</button>
         <button class="btn btn-danger" onclick="resetMainQuiz()">Làm lại từ đầu</button>
       </div>
     </div>
   </div>
+</div>
 
-</div><!-- /quiz-page -->
-
-
-<!-- ═══════════════════════════════════════
-     WRONG-ANSWERS PAGE — làm lại câu sai bất cứ lúc nào
-═══════════════════════════════════════ -->
+<!-- ═══ WRONG PAGE ═══ -->
 <div id="wrong-page" class="page">
-
   <div class="quiz-hero">
     <p class="quiz-hero-eyebrow">JIT301 — 復習モード</p>
     <h2>Làm lại <span>câu sai</span></h2>
   </div>
-
   <div class="quiz-container">
-
     <div id="wrong-intro">
       <div class="score-card">
         <p style="font-size:13px;color:var(--text-secondary);font-weight:500">Số câu đang sai cần ôn lại</p>
         <div class="score-big" id="wrong-count-num" style="font-size:48px">0</div>
         <div class="page-dots" id="wrong-list" style="margin-top:18px"></div>
-        <div style="margin-top:22px">
-          <button class="btn btn-primary" id="btn-start-wrong" onclick="startWrongPractice()">▶ Bắt đầu làm lại</button>
-        </div>
+        <div style="margin-top:22px"><button class="btn btn-primary" id="btn-start-wrong" onclick="startWrongPractice()">▶ Bắt đầu làm lại</button></div>
       </div>
     </div>
-
     <div id="wrong-question-area" style="display:none"></div>
-
     <div class="score-card" id="wrong-finish-area" style="display:none">
       <p style="font-size:16px;font-weight:600">✅ Đã ôn lại xong lượt này!</p>
       <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)">Còn lại <strong id="wf-remaining" style="color:var(--red)">0</strong> câu vẫn sai</p>
-      <div style="display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="backToWrongIntro()">↩ Về danh sách câu sai</button>
-      </div>
+      <div style="margin-top:18px"><button class="btn btn-primary" onclick="backToWrongIntro()">↩ Về danh sách câu sai</button></div>
     </div>
-
   </div>
-
-</div><!-- /wrong-page -->
+</div>
 
 <script>
-  // ═══════════════════════════════════════
-  // PAGE SWITCHING
-  // ═══════════════════════════════════════
-  function showPage(which) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById(which + '-page').classList.add('active');
-    const tabs = document.querySelectorAll('.nav-tab');
-    if (which === 'study') tabs[0].classList.add('active');
-    else if (which === 'quiz') tabs[1].classList.add('active');
+  function showPage(which){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById(which+'-page').classList.add('active');
+    const tabs=document.querySelectorAll('.nav-tab');
+    if(which==='study')tabs[0].classList.add('active');
+    else if(which==='quiz')tabs[1].classList.add('active');
     else tabs[2].classList.add('active');
-
-    if (which === 'wrong') {
-      const qArea = document.getElementById('wrong-question-area');
-      // Chỉ làm mới màn hình giới thiệu nếu KHÔNG đang giữa lượt ôn lại
-      if (qArea.style.display === 'none' || qArea.style.display === '') {
-        renderWrongIntro();
-      }
+    if(which==='wrong'){
+      const qa=document.getElementById('wrong-question-area');
+      if(qa.style.display==='none'||qa.style.display==='')renderWrongIntro();
     }
     window.scrollTo(0,0);
   }
 
-  // ═══════════════════════════════════════
-  // QUIZ DATA (200 questions)
-  // ═══════════════════════════════════════
-  const Q = [
+  const Q=[
     {q:"アナログとはどのような量を表すか？",c:["A. 離散的な量","B. 連続的な量","C. 数値化された量","D. デジタル化された量"],a:"B"},
     {q:"アナログ信号として送信される形式はどれか？",c:["A. 0と1のデータ","B. バイナリコード","C. 電流(mA)または電圧(mV)信号","D. パケットデータ"],a:"C"},
     {q:"デジタルとはどのような量を表すか？",c:["A. 連続的な量","B. 波形の量","C. 数値化された量","D. アナログ変換された量"],a:"C"},
@@ -934,432 +917,323 @@ OF ON OF ON OF ON OF ON OF</pre></div>
     {q:"17世紀に登場した計算機の開発者として正しいのはどれか？",c:["A. フォン・ノイマンとエニアック","B. パスカルとライプニッツ","C. アバカスとパスカル","D. エニアックとライプニッツ"],a:"B"},
     {q:"ABC電子式計算機はいつ登場したか？",c:["A. 1930年","B. 1939年","C. 1946年","D. 1949年"],a:"B"},
     {q:"最も処理能力が高いコンピュータはどれか？",c:["A. デスクトップPC","B. ワークステーション","C. スーパーコンピュータ","D. ネットブック"],a:"C"},
-    {q:"コンピュータを一言で表すとどのような機械か？",c:["A. 「入力」して「出力」する機械","B. 「記憶」して「処理」する機械","C. 「演算」して「表示」する機械","D. 「通信」して「保存」する機械"],a:"B"},
-    {q:"コンピュータの基本原理として正しいのはどれか？",c:["A. 複雑な演算と表示の繰り返し","B. 入力と出力の繰り返し","C. 単純な計算と記憶の繰り返し","D. 通信と記憶の繰り返し"],a:"C"},
-    {q:"コンピュータの定義として正しい式はどれか？",c:["A. コンピュータ ＝ 入力 ＋ 出力","B. コンピュータ ＝ 演算 ＋ 通信","C. コンピュータ ＝ 記憶 ＋ 処理","D. コンピュータ ＝ 表示 ＋ 制御"],a:"C"},
-    {q:"ファイルの種類を示すためにファイル名に付けられる名前を何というか？",c:["A. ファイル名","B. アイコン","C. 拡張子","D. ディレクトリ"],a:"C"},
-    {q:"MS Wordファイルの拡張子はどれか？",c:["A. .xls","B. .htm","C. .pdf","D. .doc"],a:"D"},
-    {q:"Excelファイルの拡張子はどれか？",c:["A. .doc","B. .xls","C. .htm","D. .txt"],a:"B"},
-    {q:"ホームページファイルの拡張子はどれか？",c:["A. .doc","B. .xls","C. .htm","D. .mp3"],a:"C"},
-    {q:"フォルダの役割として正しいのはどれか？",c:["A. データを処理するための入れ物","B. ファイルを整理するための入れ物","C. ネットワークを管理するための入れ物","D. アプリケーションを実行するための入れ物"],a:"B"},
-    {q:"エクスプローラに表示される階層構造のことを何というか？",c:["A. パス構造","B. ファイル構造","C. ディレクトリ構造","D. ドライブ構造"],a:"C"},
-    {q:"ドライブ名として使用されるものはどれか？",c:["A. 数字（1, 2, 3...）","B. アルファベット（C:, D:, E:...）","C. 記号（#, @, $...）","D. 漢字"],a:"B"},
-    {q:"ホームページのアドレスのことを何というか？",c:["A. IP","B. URL","C. HTML","D. DNS"],a:"B"},
-    {q:"URLは何の略か？",c:["A. Uniform Resource Location","B. Universal Resource Link","C. Unified Resource Locator","D. Uniform Reference Library"],a:"A"},
-    {q:"Web 2.0という言葉を2004年に提唱した人物は誰か？",c:["A. エリック・シュミット","B. スティーブ・ジョブズ","C. ティム・オライリー","D. ビル・ゲイツ"],a:"C"},
-    {q:"Web 2.0の特徴はどれか？",c:["A. 一方向型のホームページ","B. 双方向型のホームページ","C. 静的なホームページ","D. テキストのみのホームページ"],a:"B"},
-    {q:"Web 1.0の説明として正しいのはどれか？",c:["A. 双方向型なホームページ","B. Web2.0登場以後の一方向型なホームページ","C. Web2.0登場以前の一方向型なホームページ","D. クラウドベースのホームページ"],a:"C"},
-    {q:"「ロングテール」の説明として正しいのはどれか？",c:["A. 購入者数が多い商品だけを提供するモデル","B. 購入者数が少なくても多品種の商品を提供することで収入増をはかるビジネスモデル","C. オンライン広告による収益モデル","D. データをクラウドに保存するモデル"],a:"B"},
-    {q:"クラウドコンピューティングの概念を提唱したのは誰か？",c:["A. ティム・オライリー（2004年）","B. エリック・シュミット（2006年）","C. スティーブ・ジョブズ（2007年）","D. ビル・ゲイツ（2000年）"],a:"B"},
-    {q:"インターネットの意味として正しいのはどれか？",c:["A. 「広い」「通信」という意味","B. 「ネット」の「間」という意味でネットワークを結んだネットワーク","C. 「高速」な「通信網」という意味","D. 「世界規模」の「電話網」という意味"],a:"B"},
-    {q:"メール利用のネチケットとして正しいのはどれか？",c:["A. 大きな添付ファイルを積極的に送る","B. 著作権のあるファイルを送ってよい","C. 急な返事を求めない","D. 自分の氏名は省略する"],a:"C"},
-    {q:"メールの添付ファイルで即座に削除すべき拡張子はどれか？",c:["A. .doc, .xls, .pdf","B. .exe, .vbs, .scr, .pif","C. .jpg, .png, .gif","D. .htm, .html, .xml"],a:"B"},
-    {q:"メール利用時の注意として正しくないのはどれか？",c:["A. メールアドレスを確認する","B. 添付ファイルのウィルスをチェックする","C. 読めない文字を使わない","D. 著作権のあるファイルを送ってよい"],a:"D"},
-    {q:"知的所有権のうち文化的生産物や表現を保護する権利はどれか？",c:["A. 工業所有権","B. 著作権","C. 特許権","D. 商標権"],a:"B"},
-    {q:"著作権に含まれるものとして正しいのはどれか？",c:["A. 特許権・実用新案権・意匠権","B. 著作者人格権・著作者財産権・著作隣接権","C. 商標権・意匠権・著作者財産権","D. 特許権・商標権・著作者人格権"],a:"B"},
-    {q:"著作者人格権の説明として正しいのはどれか？",c:["A. 著作物の複製や放送についての権利を保護するもの","B. 技術の進歩を保護する権利","C. 作品の利用に伴う著作者の人格を保護するもの","D. 編集者やレコード制作会社を保護するもの"],a:"C"},
-    {q:"著作隣接権の説明として正しいのはどれか？",c:["A. 著作者の財産的権利を保護するもの","B. 編集者やレコード制作会社など著作物の制作に携わった人を保護するもの","C. 技術の改良についての権利を保護するもの","D. 製品のデザインを保護するもの"],a:"B"},
-    {q:"工業所有権に含まれないのはどれか？",c:["A. 特許権","B. 意匠権","C. 著作権","D. 商標権"],a:"C"},
-    {q:"特許権の説明として正しいのはどれか？",c:["A. 技術の改良についての権利を保護する","B. 新規の技術についての権利を保護する","C. 製品のデザインについての権利","D. 社名やロゴなどを保護する権利"],a:"B"},
-    {q:"意匠権とは何を保護する権利か？",c:["A. 新規の技術","B. 技術の改良","C. 製品のデザイン","D. 社名やロゴ"],a:"C"},
-    {q:"商標権とは何を保護する権利か？",c:["A. 製品のデザイン","B. 新規の技術","C. 社名やロゴなどの商標","D. 技術の改良"],a:"C"},
-    {q:"実用新案権の説明として正しいのはどれか？",c:["A. 新規の技術についての権利を保護する","B. 技術の改良についての権利を保護する","C. 製品のデザインについての権利","D. 著作者の財産を保護する"],a:"B"},
-    {q:"第1世代携帯電話の通信方式はどれか？",c:["A. デジタル通信","B. アナログ通信","C. 光通信","D. パケット通信"],a:"B"},
-    {q:"第2世代携帯電話が登場した時期はいつか？",c:["A. 1980年ごろ","B. 1992年ごろ","C. 2001年ごろ","D. 2006年ごろ"],a:"B"},
-    {q:"第2世代携帯電話の特徴として正しいのはどれか？",c:["A. アナログ通信","B. データ通信が高速化","C. デジタル通信になり音質が向上した","D. ブロードバンド環境での利用"],a:"C"},
-    {q:"第3世代携帯電話が登場した時期はいつか？",c:["A. 1992年ごろ","B. 1999年ごろ","C. 2001年ごろ","D. 2006年ごろ"],a:"C"},
-    {q:"第3.5世代携帯電話が登場した時期はいつか？",c:["A. 1999年ごろ","B. 2001年ごろ","C. 2006年ごろ","D. 2010年ごろ"],a:"C"},
-    {q:"第4世代携帯電話の特徴として正しいのはどれか？",c:["A. アナログ通信を前提とする","B. ブロードバンド環境での利用を前提とする","C. 音声通話のみに対応する","D. データ通信ができない"],a:"B"},
-    {q:"携帯電話のSIMカードに記録されるものはどれか？",c:["A. アプリケーションデータ","B. 契約者番号","C. メールデータ","D. 写真データ"],a:"B"},
-    {q:"Bluetoothの通信範囲はどの程度か？",c:["A. 約1m","B. 約10m","C. 約100m","D. 約1km"],a:"B"},
-    {q:"Wi-Fiは何の略か？",c:["A. Wireless Function","B. Wide Fidelity","C. Wireless Fidelity","D. Wide Frequency"],a:"C"},
-    {q:"IrDAの説明として正しいのはどれか？",c:["A. 無線LANの規格","B. 赤外線通信の規格","C. Bluetoothの規格","D. 光ファイバの規格"],a:"B"},
-    {q:"IrDAの弱点として正しいのはどれか？",c:["A. 通信速度が非常に遅い","B. 送信機と受信機の間に遮蔽物があると通信できない","C. 電力消費が大きい","D. 接続できる機器数が限られている"],a:"B"},
-    {q:"非接触型ICカードの例として正しいのはどれか？",c:["A. クレジットカード","B. 運転免許証","C. JRのSuicaカード","D. 図書館カード"],a:"C"},
-    {q:"FTTHは何の略か？",c:["A. Fast Transfer To Home","B. Fiber To The Home","C. Free Transfer Through Hub","D. Fixed Terminal To Home"],a:"B"},
-    {q:"FTTHの特徴として正しいのはどれか？",c:["A. 電灯線を利用するため安価","B. 光ファイバを使用するためノイズの影響を受けにくい","C. 電話回線を使用するため普及している","D. ケーブルテレビの回線を利用する"],a:"B"},
-    {q:"ADSLは何の略か？",c:["A. Advanced Digital Subscriber Line","B. Asymmetric Digital Subscriber Line","C. Automatic Digital Service Link","D. Analog Digital Subscriber Line"],a:"B"},
-    {q:"PLC（Power Line Communication）の説明として正しいのはどれか？",c:["A. 光ファイバを利用してデータ通信を行う技術","B. 一般家庭の電灯線を利用してデータ通信を行う技術","C. 無線LAN規格の一種","D. ケーブルテレビの通信技術"],a:"B"},
-    {q:"液晶ディスプレイの構造として正しいのはどれか？",c:["A. 有機物の発光体を使用する","B. バックライトの光を透過・遮断することで明るさを調整する","C. プラズマを使用して発光する","D. LEDを直接点灯・消灯する"],a:"B"},
-    {q:"有機ELディスプレイの特徴はどれか？",c:["A. バックライトを使用して表示する","B. 有機物の発光体によりカラー表示を行う","C. 光ファイバを使用して表示する","D. 液晶を使用して表示する"],a:"B"},
-    {q:"携帯電話のOSとして正しくないのはどれか？",c:["A. iOS","B. Android","C. Symbian","D. MS-DOS"],a:"D"},
-    {q:"タッチパネルの「抵抗膜方式」の説明として正しいのはどれか？",c:["A. 指先とセンサの間の電荷を測定する","B. 押された部分の縦横の抵抗値を測定する","C. 赤外線を使って位置を検出する","D. 超音波を使って位置を検出する"],a:"B"},
-    {q:"タッチパネルの「静電容量方式」の説明として正しいのはどれか？",c:["A. 押された部分の縦横の抵抗値を測定する","B. 指先とセンサの間に蓄えられる電荷を測定する","C. 赤外線を使って位置を検出する","D. 光センサを使って位置を検出する"],a:"B"},
-    {q:"CMOSセンサの説明として正しいのはどれか？",c:["A. 温度を記録する素子と増幅器が並んだ形のセンサ","B. 光の強弱を記録する素子と増幅器が並んだ形のセンサ","C. 電磁波を記録する素子と変換器が並んだ形のセンサ","D. 音波を記録する素子と変換器が並んだ形のセンサ"],a:"B"},
-    {q:"ネットワークの接続形態は何種類あるか？",c:["A. 2種類","B. 3種類","C. 4種類","D. 5種類"],a:"B"},
-    {q:"「スター型」ネットワークの説明として正しいのはどれか？",c:["A. 1本のケーブルに複数のコンピュータが接続されたもの","B. 閉じたケーブルに複数のコンピュータが接続されたもの","C. ハブを中心に複数のコンピュータが接続されたもの","D. 2台のコンピュータが直接接続されたもの"],a:"C"},
-    {q:"最もよく使われるネットワーク接続形態はどれか？",c:["A. バス型","B. スター型","C. リング型","D. メッシュ型"],a:"B"},
-    {q:"「バス型」ネットワークの説明として正しいのはどれか？",c:["A. ハブを中心に複数のコンピュータが接続されたもの","B. 閉じたケーブルに複数のコンピュータが接続されたもの","C. 1本の通信ケーブルに複数のコンピュータが接続されたもの","D. 星形に配置されたコンピュータ同士が接続されたもの"],a:"C"},
-    {q:"「リング型」ネットワークの説明として正しいのはどれか？",c:["A. 1本の通信ケーブルに複数のコンピュータが接続されたもの","B. ハブを中心に複数のコンピュータが接続されたもの","C. 閉じたケーブルに複数のコンピュータが接続されたもの","D. 直線上にコンピュータが接続されたもの"],a:"C"},
-    {q:"コンピュータの処理配置方式は何種類あるか？",c:["A. 1種類","B. 2種類","C. 3種類","D. 4種類"],a:"B"},
-    {q:"P2P（ピアツーピア）の説明として正しいのはどれか？",c:["A. 中心のサーバが処理を管理する構成","B. 対等にサービスを提供しあう構成","C. 1台のコンピュータが全ての処理を行う構成","D. クラウド上で処理を行う構成"],a:"B"},
-    {q:"コンピュータのデータ転送規約のことを何というか？",c:["A. ドメイン","B. プロトコル","C. ポート","D. パケット"],a:"B"},
-    {q:"OSI参照モデルは何層構造か？",c:["A. 5層","B. 6層","C. 7層","D. 8層"],a:"C"},
-    {q:"OSI参照モデルのトランスポート層のプロトコルはどれか？",c:["A. IP","B. TCP","C. HTTP","D. FTP"],a:"B"},
-    {q:"OSI参照モデルのネットワーク層のプロトコルはどれか？",c:["A. TCP","B. HTTP","C. IP","D. SMTP"],a:"C"},
-    {q:"IPアドレスの説明として正しいのはどれか？",c:["A. ネットワーク上の住所にあたる名前（例：192.168.113.24）","B. アルファベットの組み合わせで表現された名前","C. MACアドレスとも呼ばれる","D. インターネット上の会社名"],a:"A"},
-    {q:"ドメイン名の説明として正しいのはどれか？",c:["A. 数字の組み合わせで表現される名前","B. アルファベットの組み合わせで表現された名前（例：daigaku.ac.jp）","C. 16進数で表現される名前","D. ポート番号のこと"],a:"B"},
-    {q:"SSLは何の略か？",c:["A. Secure Server Link","B. Safe Socket Layer","C. Secure Socket Layer","D. Safe Server Layers"],a:"C"},
-    {q:"SSLの説明として正しいのはどれか？",c:["A. ウィルスを検出するためのソフトウェア","B. 公開鍵方式と秘密鍵方式により暗号化した状態で情報通信を行う","C. ファイアウォールの一種","D. IPアドレスを管理するプロトコル"],a:"B"},
-    {q:"個人情報を入力する際にブラウザで確認すべきことはどれか？",c:["A. プロトコルがhttpになっていること","B. プロトコルがftpになっていること","C. 錠のアイコンが出ていてプロトコルがhttpsになっていること","D. URLが長いこと"],a:"C"},
-    {q:"シーザー暗号の説明として正しいのはどれか？",c:["A. 文字の並びを逆順にする暗号方式","B. 文字を何文字かずらすことで暗号化する換字式の暗号方式","C. 0と1で置き換える暗号方式","D. 公開鍵を使った暗号方式"],a:"B"},
-    {q:"暗号化の定義として正しいのはどれか？",c:["A. 原文を原文に戻すこと","B. 与えられた原文が推測できないように変換すること","C. データを圧縮すること","D. パスワードを設定すること"],a:"B"},
-    {q:"復号化の定義として正しいのはどれか？",c:["A. 原文を暗号に変換すること","B. データを圧縮すること","C. 原文に戻すこと","D. パスワードを削除すること"],a:"C"},
-    {q:"トロイの木馬の説明として正しいのはどれか？",c:["A. ネットワークを攻撃するウィルス","B. 通常の入力画面と同様にユーザ名とパスワードを入力させて情報を盗むプログラム","C. ファイルを暗号化して身代金を要求するプログラム","D. スパムメールを送信するプログラム"],a:"B"},
-    {q:"パスワード設定時に避けるべきものはどれか？",c:["A. 記号を含む長いパスワード","B. 大文字と小文字の組み合わせ","C. 自分の氏名や電話番号などの個人情報","D. ランダムな文字と数字の組み合わせ"],a:"C"},
-    {q:"稼働率の計算式として正しいのはどれか？",c:["A. 稼働率 ＝ MTTR / (MTBF ＋ MTTR)","B. 稼働率 ＝ MTBF / (MTBF ＋ MTTR)","C. 稼働率 ＝ MTBF × MTTR","D. 稼働率 ＝ MTTR / MTBF"],a:"B"},
-    {q:"MTBFとは何を表すか？",c:["A. 平均修理時間","B. 最大故障時間","C. 平均故障間隔","D. 最小動作時間"],a:"C"},
-    {q:"MTTRとは何を表すか？",c:["A. 平均故障間隔","B. 最大修理時間","C. 最小故障時間","D. 平均修理時間"],a:"D"},
-    {q:"並列接続した場合の稼働率の計算式はどれか？",c:["A. Aの稼働率 × Bの稼働率","B. 1－(1－Aの稼働率)×(1－Bの稼働率)","C. Aの稼働率 ＋ Bの稼働率","D. (Aの稼働率 ＋ Bの稼働率) / 2"],a:"B"},
-    {q:"直列接続した場合の稼働率の計算式はどれか？",c:["A. Aの稼働率 ＋ Bの稼働率","B. 1－(1－Aの稼働率)×(1－Bの稼働率)","C. Aの稼働率 × Bの稼働率","D. Aの稼働率 / Bの稼働率"],a:"C"},
-    {q:"信頼度成長曲線はどのような形か？",c:["A. 直線","B. S字曲線","C. バスタブ曲線","D. 波形曲線"],a:"B"},
-    {q:"一般の機械装置の故障傾向を表す曲線はどれか？",c:["A. S字曲線","B. 直線","C. バスタブ曲線","D. 正弦波曲線"],a:"C"},
-    {q:"コンピュータの5要素に含まれないのはどれか？",c:["A. 演算装置","B. 記憶装置","C. 通信装置","D. 制御装置"],a:"C"},
-    {q:"CPUは何の機能を担うか？",c:["A. 記憶装置","B. 入力装置","C. 演算装置","D. 出力装置"],a:"C"},
-    {q:"マザーボードの説明として正しいのはどれか？",c:["A. パソコンの電源を管理する基板","B. パソコンの内部において大きな面積を占めるメインの基板","C. グラフィックを処理する専用基板","D. ネットワークに接続するための基板"],a:"B"},
-    {q:"RAMは何の略か？",c:["A. Read Access Memory","B. Random Access Memory","C. Read And Modify","D. Random Allocation Memory"],a:"B"},
-    {q:"ROMは何の略か？",c:["A. Random Output Memory","B. Read Only Memory","C. Rapid Online Memory","D. Read On Module"],a:"B"},
-    {q:"RAMの特徴として正しいのはどれか？",c:["A. 読み取り専用の半導体メモリ","B. 電源を切ってもデータが保持される","C. 自由にデータの読み書きができる半導体メモリ","D. CD-ROMとも呼ばれる"],a:"C"},
-    {q:"ROMの特徴として正しいのはどれか？",c:["A. 自由にデータの読み書きができる","B. 読み取り専用の半導体メモリ","C. 電源を切るとデータが消える","D. キャッシュメモリとも呼ばれる"],a:"B"},
-    {q:"CPUをハードウェアとして見たときの名称はどれか？",c:["A. MPU（Micro Processing Unit）またはマイクロプロセッサ","B. ALU（Arithmetic Logic Unit）","C. GPU（Graphics Processing Unit）","D. FPU（Floating Point Unit）"],a:"A"},
-    {q:"ハードディスクの内部で金属の円板が回転する速度はどの程度か？",c:["A. 1分間に数十回転","B. 1分間に数百回転","C. 1分間に数千回転","D. 1分間に数万回転"],a:"C"},
-    {q:"コンピュータの第1世代（1940年代中〜）に使用された論理素子はどれか？",c:["A. トランジスタ","B. IC","C. LSI","D. 真空管"],a:"D"},
-    {q:"コンピュータの第2世代（1950年代後半〜）に使用された論理素子はどれか？",c:["A. 真空管","B. トランジスタ","C. IC","D. LSI"],a:"B"},
-    {q:"コンピュータの第3世代（1960年代中〜）に使用された論理素子はどれか？",c:["A. 真空管","B. トランジスタ","C. IC","D. LSI"],a:"C"},
-    {q:"コンピュータの第4世代（1970年代初〜）に使用された論理素子はどれか？",c:["A. IC","B. トランジスタ","C. 真空管","D. LSI"],a:"D"},
-    {q:"AND回路のモデルとして正しいのはどれか？",c:["A. スイッチが並列に並んだ回路","B. スイッチが直列に並んだ回路","C. スイッチが星形に並んだ回路","D. スイッチが円形に並んだ回路"],a:"B"},
-    {q:"OR回路のモデルとして正しいのはどれか？",c:["A. スイッチが直列に並んだ回路","B. スイッチが星形に並んだ回路","C. スイッチが並列に並んだ回路","D. スイッチが円形に並んだ回路"],a:"C"},
-    {q:"AND回路でスイッチX=ON、Y=OFFの場合、出力はどうなるか？",c:["A. ON","B. OFF","C. 不定","D. 交互にON/OFF"],a:"B"},
-    {q:"2進数「1010」を10進数に変換すると何か？",c:["A. 8","B. 9","C. 10","D. 12"],a:"C"},
-    {q:"情報量の最小単位は何か？",c:["A. byte","B. KB","C. bit","D. nibble"],a:"C"},
-    {q:"bitは何の略か？",c:["A. Basic Information Technology","B. Binary Digit","C. Byte In Total","D. Base Integer Type"],a:"B"},
-    {q:"1 byteは何 bitか？",c:["A. 4 bit","B. 8 bit","C. 16 bit","D. 32 bit"],a:"B"},
-    {q:"1 KBは何 byteか？",c:["A. 1,000 byte","B. 1,024 byte","C. 1,048 byte","D. 10,000 byte"],a:"B"},
-    {q:"1 MBは何 KBか？",c:["A. 1,000 KB","B. 1,024 KB","C. 1,100 KB","D. 2,048 KB"],a:"B"},
-    {q:"1 GBは何 MBか？",c:["A. 1,000 MB","B. 1,024 MB","C. 1,100 MB","D. 2,048 MB"],a:"B"},
-    {q:"1 TBは何 GBか？",c:["A. 1,000 GB","B. 1,024 GB","C. 1,100 GB","D. 2,048 GB"],a:"B"},
-    {q:"アルファベット1文字の情報量はどれか？",c:["A. 1 bit","B. 4 bit","C. 8 bit（1 byte）","D. 16 bit（2 byte）"],a:"C"},
-    {q:"アルファベット・数字・記号を含む文字の種類は全部でいくつか？",c:["A. 128種類","B. 256種類","C. 512種類","D. 1024種類"],a:"B"},
-    {q:"現在の日本語文字に割り当てられたコード番号の数はいくつか？",c:["A. 32,768個","B. 65,536個","C. 128,000個","D. 256,000個"],a:"B"},
-    {q:"英語の文字コード規格として正しいのはどれか？",c:["A. JISコード","B. ASCIIコード","C. EUCコード","D. シフトJISコード"],a:"B"},
-    {q:"2進数の符号ビットで「1」は何を表すか？",c:["A. 正の数","B. 負の数","C. ゼロ","D. 不定"],a:"B"},
-    {q:"2進数の加算「1＋1」の結果はどれか？",c:["A. 0","B. 1","C. 10（2進数）","D. 11（2進数）"],a:"C"},
-    {q:"サンプリング周波数の単位はどれか？",c:["A. bps","B. Hz（ヘルツ）","C. dpi","D. dB"],a:"B"},
-    {q:"サンプリング周波数が高いほどどうなるか？",c:["A. 音質が低下する","B. ファイルサイズが小さくなる","C. 音質が向上する","D. 通信速度が低下する"],a:"C"},
-    {q:"波の高さの最大値をいくつの整数として表すかのことを何というか？",c:["A. サンプリング周波数","B. ビットレート","C. 量子化数","D. 解像度"],a:"C"},
-    {q:"CDの音声のサンプリング周波数はどれか？",c:["A. 22.05 kHz","B. 44.1 kHz","C. 96 kHz","D. 192 kHz"],a:"B"},
-    {q:"CDの音声データにおける量子化数はどれか？",c:["A. 2⁸（256段階）","B. 2¹²（4,096段階）","C. 2¹⁶（65,536段階）","D. 2²⁴（16,777,216段階）"],a:"C"},
-    {q:"CD（640 MB）に記録できるステレオ音声の時間はおよそどれか？",c:["A. 約30分","B. 約63分","C. 約120分","D. 約200分"],a:"B"},
-    {q:"MIDIは何の略か？",c:["A. Musical Instrument Digital Interface","B. Multi Instrument Data Input","C. Music Interface Digital Instrument","D. Musical Integrated Digital Interface"],a:"A"},
-    {q:"MIDI命令のデータ量はいくらか？",c:["A. 4 bit ＝ 0.5 byte","B. 8 bit ＝ 1 byte","C. 16 bit ＝ 2 byte","D. 32 bit ＝ 4 byte"],a:"B"},
-    {q:"MIDI命令の種類は最大何種類か？",c:["A. 128種類","B. 256種類","C. 512種類","D. 1024種類"],a:"B"},
-    {q:"デジタル画像の構成要素として正しいのはどれか？",c:["A. 線と面の集まり","B. 縦横に並んだ点（画素・ピクセル）の集まり","C. ベクターデータの集まり","D. 音声と映像の集まり"],a:"B"},
-    {q:"「QVGA」の解像度はどれか？",c:["A. 640×480","B. 800×600","C. 320×240","D. 1024×768"],a:"C"},
-    {q:"「VGA」の解像度はどれか？",c:["A. 320×240","B. 640×480","C. 800×600","D. 1024×768"],a:"B"},
-    {q:"「XGA」の解像度はどれか？",c:["A. 640×480","B. 800×600","C. 1024×768","D. 1280×1024"],a:"C"},
-    {q:"RGB各色を256段階で表現する場合、1画素の情報量はいくらか？",c:["A. 1 byte","B. 2 byte","C. 3 byte","D. 4 byte"],a:"C"},
-    {q:"プリンタの解像度を表す単位はどれか？",c:["A. Hz","B. bps","C. dpi","D. MB"],a:"C"},
-    {q:"dpiは何の略か？",c:["A. Data Per Inch","B. Dot Per Inch","C. Display Per Interface","D. Digital Print Index"],a:"B"},
-    {q:"A4サイズに300 dpiで印刷する場合、必要な画素数はおよそどれか？",c:["A. 約2.0メガピクセル","B. 約4.5メガピクセル","C. 約8.7メガピクセル","D. 約12.0メガピクセル"],a:"C"},
-    {q:"映画における1秒あたりの画面書き換え回数はいくつか？",c:["A. 12回","B. 24回","C. 30回","D. 60回"],a:"B"},
-    {q:"日本のテレビ放送における1秒あたりの画面書き換え回数はいくつか？",c:["A. 24回","B. 25回","C. 30回","D. 60回"],a:"C"},
-    {q:"テレビ（640×480、RGB各8 bit、30回/秒）の1秒分の動画の情報量はおよそどれか？",c:["A. 約10 MB","B. 約26.4 MB","C. 約50 MB","D. 約100 MB"],a:"B"},
-    {q:"ブロードバンドとは一般にどのくらいの通信速度か？",c:["A. 10 Kbps以上","B. 100 Kbps〜1 Mbps以上","C. 10 Mbps以上","D. 100 Mbps以上"],a:"B"},
-    {q:"通信速度の単位として正しいのはどれか？",c:["A. Hz","B. dpi","C. bps（bit per second）","D. dB"],a:"C"},
-    {q:"有線通信でFTTHの最大通信速度はどれか？",c:["A. 40 Mbps","B. 50 Mbps","C. 100 Mbps","D. 1 Gbps"],a:"C"},
-    {q:"ADSLの下り最大通信速度はおよそどれか？",c:["A. 10 Mbps","B. 50 Mbps","C. 100 Mbps","D. 1 Gbps"],a:"B"},
-    {q:"無線LANの最大通信速度はどれか？",c:["A. 1 Mbps","B. 11 Mbps","C. 54 Mbps","D. 100 Mbps"],a:"C"},
-    {q:"Bluetoothの通信速度はどれか？",c:["A. 200 Kbps","B. 1 Mbps","C. 11 Mbps","D. 54 Mbps"],a:"B"},
-    {q:"CATVの通信速度はどれか？",c:["A. 10 Mbps","B. 40 Mbps","C. 100 Mbps","D. 1 Gbps"],a:"B"},
-    {q:"音声を圧縮する際に利用される変換は何か？",c:["A. ラプラス変換","B. フーリエ変換","C. Z変換","D. ウェーブレット変換"],a:"B"},
-    {q:"フーリエ変換で分解されるものはどれか？",c:["A. デジタルデータをアナログに変換する","B. 全ての波を波長の違う正弦波に分解する","C. 全ての画像をピクセルに分解する","D. 音声データをMIDI形式に変換する"],a:"B"},
-    {q:"圧縮ファイルの拡張子として正しくないのはどれか？",c:["A. .zip","B. .lzh","C. .gz","D. .mp3"],a:"D"},
-    {q:"HTMLは何の略か？",c:["A. High Text Markup Language","B. Hyper Text Markup Language","C. Hyperlink Text Management Language","D. Home Text Module Language"],a:"B"},
-    {q:"XMLは何の略か？",c:["A. Extended Markup Language","B. eXtensible Markup Language","C. Extended Module Language","D. eXternal Markup Library"],a:"B"},
-    {q:"HTMLとXMLの違いとして正しいのはどれか？",c:["A. HTMLはユーザがタグを自由に定義できる","B. XMLはユーザがタグを自由に定義して利用できる","C. XMLは定義済みのタグしか使えない","D. HTMLはXMLの上位互換"],a:"B"},
-    {q:"電子商取引（eコマース）の正式名称はどれか？",c:["A. Electronic Computer","B. Electronic Commerce","C. Electronic Communication","D. Electronic Content"],a:"B"},
-    {q:"BtoCの意味として正しいのはどれか？",c:["A. 企業間の取引","B. 企業対消費者の取引","C. 政府対消費者の取引","D. 消費者間の取引"],a:"B"},
-    {q:"BtoBの意味として正しいのはどれか？",c:["A. 企業対消費者の取引","B. 政府対政府の取引","C. 企業間の取引","D. 個人間の取引"],a:"C"},
-    {q:"EDIは何の略か？",c:["A. Electronic Data Interchange","B. Electronic Document Interface","C. Extended Data Input","D. Electronic Distribution Interface"],a:"A"},
-    {q:"EOSの説明として正しいのはどれか？",c:["A. 製造業における全製造過程の電子化","B. ネットワークを使った電子データ交換の標準化","C. オンラインの受発注システム","D. 電子マネーシステム"],a:"C"},
-    {q:"CALSは何の略か？",c:["A. Computer Aided Learning System","B. Commerce At Light Speed","C. Computer Automated Logistics System","D. Commerce And Logistics Service"],a:"B"},
-    {q:"ICカードを使った電子マネーの形態として正しいのはどれか？",c:["A. クローズドループ型とオープンループ型","B. インターネット型とオフライン型","C. 前払い型と後払い型","D. 国内型と国際型"],a:"A"},
-    {q:"クローズドループ型電子マネーの代表例はどれか？",c:["A. Mondex","B. VISA キャッシュ","C. Suica","D. PayPal"],a:"B"},
-    {q:"オープンループ型電子マネーの代表例はどれか？",c:["A. VISA キャッシュ","B. Suica","C. Master CardのMondex","D. Edy"],a:"C"},
-    {q:"ブラウザがウェブサイトのID情報を記憶する仕組みは何か？",c:["A. キャッシュ","B. Cookie（クッキー）","C. セッション変数","D. ローカルストレージ"],a:"B"},
-    {q:"日本で制定された個人情報保護の法律名はどれか？",c:["A. 情報セキュリティ法","B. 個人データ保護規則","C. 個人情報の保護に関する法律","D. サイバーセキュリティ基本法"],a:"C"},
-    {q:"OECD8原則の「目的明確化の原則」の説明として正しいのはどれか？",c:["A. データ主体の同意がなければ目的以外に利用してはならない","B. 収集目的を明確にし、データ利用は収集目的に合致するべき","C. 合理的安全保護措置により保護するべき","D. 管理者は諸原則実施の責任を有する"],a:"B"},
-    {q:"OECD8原則の「安全保護の原則」の説明として正しいのはどれか？",c:["A. 収集目的を明確にすること","B. データ主体の同意を得ること","C. 合理的安全保護措置により、紛失・破壊・使用・修正・開示等から保護するべき","D. 管理者が責任を持つこと"],a:"C"},
-    {q:"OECD8原則の「責任の原則」の説明として正しいのはどれか？",c:["A. 収集目的を明確にすること","B. データを公開すること","C. 個人が自己データを確認できること","D. 管理者は諸原則実施の責任を有する"],a:"D"},
-    {q:"OECD8原則の「個人参加の原則」の説明として正しいのはどれか？",c:["A. 管理者が責任を負うこと","B. 自己に関するデータの所在及び内容を確認させ、又は意義申立を保証するべき","C. データを安全に保護すること","D. 収集目的を明確にすること"],a:"B"},
-    {q:"OECD8原則において「収集制限の原則」の説明として正しいのはどれか？",c:["A. データは最新の状態に保つべき","B. 適法・公正な手段により、情報主体に通知又は同意を得て収集されるべき","C. 個人が自己データを確認できること","D. データを暗号化して保管すること"],a:"B"},
-    {q:"OECD8原則において「利用制限の原則」の説明として正しいのはどれか？",c:["A. データ収集の実施方針を公開すること","B. データ主体の同意がある場合、法律の規定による場合以外は目的以外に利用してはならない","C. 合理的な安全保護措置を施すこと","D. データを正確・完全・最新に保つこと"],a:"B"},
-    {q:"OECD8原則の「データ内容の原則」として正しいのはどれか？",c:["A. データを暗号化すること","B. データは公開すること","C. 利用目的に沿ったもので、かつ正確・完全・最新であるべき","D. 管理者が責任を持つこと"],a:"C"},
-    {q:"OECD8原則の「公開の原則」として正しいのはどれか？",c:["A. データを安全に保護すること","B. データ収集の実施方針等を公開し、データの存在・利用目的・管理者等を明示するべき","C. 個人が自己データを確認できること","D. 適法な手段でデータを収集すること"],a:"B"},
-    {q:"「集中処理システム」の説明として正しいのはどれか？",c:["A. 処理を複数のコンピュータで分散して管理する","B. 中心となるコンピュータが中核となる処理すべてを管理する","C. 対等にサービスを提供しあう構成","D. クラウド上で処理を分散する"],a:"B"},
-    {q:"コンピュータネットワークの定義として正しいのはどれか？",c:["A. コンピュータ同士がUSBで接続されたもの","B. 電子機器同士が電気的にデータの送受信をできるようにしたもの","C. インターネットに接続されたコンピュータの集まり","D. 同じ部屋にある複数のコンピュータ"],a:"B"},
-    {q:"ワンセグ放送の説明として正しいのはどれか？",c:["A. 衛星から送信される放送","B. 地上デジタル放送と同一内容の番組を小さい画面で表示するサイマル放送","C. インターネットを通じた放送","D. ケーブルテレビの放送"],a:"B"},
-    {q:"ウィルス対策ソフトのパターンファイルの手動更新頻度として適切なのはどれか？",c:["A. 少なくとも1日に1度","B. 少なくとも1週間に1度","C. 少なくとも1ヶ月に1度","D. 少なくとも1年に1度"],a:"B"},
-    {q:"「基数」の定義として正しいのはどれか？",c:["A. 数値の最大値","B. 数値を扱う際に「基となる数字の個数」","C. 2進数における桁数","D. 10進数との変換比率"],a:"B"},
-    {q:"16進数の基数はいくつか？",c:["A. 8","B. 10","C. 16","D. 32"],a:"C"},
-    {q:"コンピュータの記憶装置に含まれないのはどれか？",c:["A. メモリ（RAM）","B. ハードディスク","C. キャッシュ","D. CPU"],a:"D"},
-    {q:"ネットワークセキュリティでファイアウォールの目的として正しいのはどれか？",c:["A. データを圧縮すること","B. サーバに対するセキュリティを保つこと","C. ネットワーク速度を上げること","D. データを暗号化すること"],a:"B"},
-    {q:"「分散処理システム」の説明として正しいのはどれか？",c:["A. 中心となるコンピュータが全ての処理を管理する","B. 処理を複数のコンピュータで分散して管理する","C. インターネット上のサーバで処理する","D. 1台のコンピュータがネットワーク全体を管理する"],a:"B"},
-    {q:"低い周波数の波が表すものはどれか？",c:["A. 元の波の詳細","B. 元の波の大きな性質","C. 元の波の高周波成分","D. 元の波のノイズ成分"],a:"B"},
-    {q:"高い周波数の波が表すものはどれか？",c:["A. 元の波の大きな性質","B. 元の波の低周波成分","C. 元の波の詳細","D. 元の波の基本成分"],a:"C"},
-    {q:"コンピュータのウィルスの説明として正しいのはどれか？",c:["A. 自然発生するプログラム","B. 人為的に作成されたプログラム","C. ハードウェアの障害","D. ネットワーク障害の一種"],a:"B"},
-    {q:"IP電話の説明として正しいのはどれか？",c:["A. 一般の電話回線を使用した通話","B. 衛星を使用した通話","C. ADSLなどの高速通信を利用してインターネットで音声情報を送受信する","D. Bluetoothを使用した近距離通話"],a:"C"},
-    {q:"デジタル画像において「SXGA」の解像度はどれか？",c:["A. 1024×768","B. 1280×768","C. 1280×1024","D. 1600×1200"],a:"C"},
-    {q:"デジタル画像において「UXGA」の解像度はどれか？",c:["A. 1280×1024","B. 1600×1200","C. 1920×1080","D. 2560×1440"],a:"B"},
-    {q:"MIDI演習：512 MBのSDカードに約何時間記録できるか？",c:["A. 約100時間","B. 約200時間","C. 約388時間","D. 約500時間"],a:"C"},
-    {q:"OSI参照モデルで最下層（物理層）の上の層は何か？",c:["A. ネットワーク層","B. データリンク層","C. トランスポート層","D. セッション層"],a:"B"},
-    {q:"Web 2.0でGoogleが提供するサービスの例として正しいのはどれか？",c:["A. 有料の表計算ソフトをWebで提供","B. 無料で使えるワープロや表計算ソフトをWeb上で提供","C. アプリをダウンロード販売する","D. 企業向けのみの専用サービス"],a:"B"},
-    {q:"コンピュータシステムで初期にエラーが多く発生した後安定する曲線はどれか？",c:["A. S字曲線","B. バスタブ曲線（初期故障型）","C. 直線増加","D. 指数増加"],a:"B"},
-    {q:"OSI参照モデルで最上位の層はどれか？",c:["A. セッション層","B. プレゼンテーション層","C. アプリケーション層","D. トランスポート層"],a:"C"},
-    {q:"xDSLとは何を指すか？",c:["A. FTTHの一種","B. ADSLやSDSL、HDSLなど多くの種類をまとめた総称","C. 光ファイバ通信の規格","D. 電灯線通信の規格"],a:"B"},
-    {q:"コンピュータの5要素のうち「出力装置」の例として正しいのはどれか？",c:["A. キーボード","B. マウス","C. ハードディスク","D. ディスプレイ（モニタ）"],a:"D"},
-    {q:"OSI参照モデルにおいてTCPとIPはそれぞれ何層に対応するか？",c:["A. TCPはネットワーク層、IPはトランスポート層","B. TCPはデータリンク層、IPはネットワーク層","C. TCPはトランスポート層、IPはネットワーク層","D. TCPはアプリケーション層、IPはセッション層"],a:"C"}
+    {q:"コンピュータを一言で表すとどのような機械か？（§1.4）",c:["A. 「入力」して「出力」する機械","B. 「記憶」して「処理」する機械","C. 「演算」して「表示」する機械","D. 「通信」して「保存」する機械"],a:"B"},
+    {q:"コンピュータの基本原理として正しいのはどれか？（§1.4）",c:["A. 複雑な演算と表示の繰り返し","B. 入力と出力の繰り返し","C. 単純な計算と記憶の繰り返し","D. 通信と記憶の繰り返し"],a:"C"},
+    {q:"コンピュータの定義として正しい式はどれか？（§1.4）",c:["A. コンピュータ ＝ 入力 ＋ 出力","B. コンピュータ ＝ 演算 ＋ 通信","C. コンピュータ ＝ 記憶 ＋ 処理","D. コンピュータ ＝ 表示 ＋ 制御"],a:"C"},
+    {q:"ファイルの種類を示すためにファイル名に付けられる名前を何というか？（§1.5）",c:["A. ファイル名","B. アイコン","C. 拡張子","D. ディレクトリ"],a:"C"},
+    {q:"MS Wordファイルの拡張子はどれか？（§1.5）",c:["A. .xls","B. .htm","C. .pdf","D. .doc"],a:"D"},
+    {q:"Excelファイルの拡張子はどれか？（§1.5）",c:["A. .doc","B. .xls","C. .htm","D. .txt"],a:"B"},
+    {q:"ホームページファイルの拡張子はどれか？（§1.5）",c:["A. .doc","B. .xls","C. .htm","D. .mp3"],a:"C"},
+    {q:"フォルダの役割として正しいのはどれか？（§1.6）",c:["A. データを処理するための入れ物","B. ファイルを整理するための入れ物","C. ネットワークを管理するための入れ物","D. アプリケーションを実行するための入れ物"],a:"B"},
+    {q:"エクスプローラに表示される階層構造のことを何というか？（§1.6）",c:["A. パス構造","B. ファイル構造","C. ディレクトリ構造","D. ドライブ構造"],a:"C"},
+    {q:"ドライブ名として使用されるものはどれか？（§1.7）",c:["A. 数字（1, 2, 3...）","B. アルファベット（C:, D:, E:...）","C. 記号（#, @, $...）","D. 漢字"],a:"B"},
+    {q:"ホームページのアドレスのことを何というか？（§2.1）",c:["A. IP","B. URL","C. HTML","D. DNS"],a:"B"},
+    {q:"URLは何の略か？（§2.1）",c:["A. Uniform Resource Location","B. Universal Resource Link","C. Unified Resource Locator","D. Uniform Reference Library"],a:"A"},
+    {q:"Web 2.0という言葉を2004年に提唱した人物は誰か？（§2.2）",c:["A. エリック・シュミット","B. スティーブ・ジョブズ","C. ティム・オライリー","D. ビル・ゲイツ"],a:"C"},
+    {q:"Web 2.0の特徴はどれか？（§2.2）",c:["A. 一方向型のホームページ","B. 双方向型のホームページ","C. 静的なホームページ","D. テキストのみのホームページ"],a:"B"},
+    {q:"Web 1.0の説明として正しいのはどれか？（§2.2）",c:["A. 双方向型なホームページ","B. Web2.0登場以後の一方向型なホームページ","C. Web2.0登場以前の一方向型なホームページ","D. クラウドベースのホームページ"],a:"C"},
+    {q:"「ロングテール」の説明として正しいのはどれか？（§2.2）",c:["A. 購入者数が多い商品だけを提供するモデル","B. 購入者数が少なくても多品種の商品を提供することで収入増をはかるビジネスモデル","C. オンライン広告による収益モデル","D. データをクラウドに保存するモデル"],a:"B"},
+    {q:"クラウドコンピューティングの概念を提唱したのは誰か？（§2.3）",c:["A. ティム・オライリー（2004年）","B. エリック・シュミット（2006年）","C. スティーブ・ジョブズ（2007年）","D. ビル・ゲイツ（2000年）"],a:"B"},
+    {q:"インターネットの意味として正しいのはどれか？（§5.2）",c:["A. 「広い」「通信」という意味","B. 「ネット」の「間」という意味でネットワークを結んだネットワーク","C. 「高速」な「通信網」という意味","D. 「世界規模」の「電話網」という意味"],a:"B"},
+    {q:"メール利用のネチケットとして正しいのはどれか？（§2.4）",c:["A. 大きな添付ファイルを積極的に送る","B. 著作権のあるファイルを送ってよい","C. 急な返事を求めない","D. 自分の氏名は省略する"],a:"C"},
+    {q:"メールの添付ファイルで即座に削除すべき拡張子はどれか？（§9.5）",c:["A. .doc, .xls, .pdf","B. .exe, .vbs, .scr, .pif","C. .jpg, .png, .gif","D. .htm, .html, .xml"],a:"B"},
+    {q:"メール利用時の注意として正しくないのはどれか？（§2.4）",c:["A. メールアドレスを確認する","B. 添付ファイルのウィルスをチェックする","C. 読めない文字を使わない","D. 著作権のあるファイルを送ってよい"],a:"D"},
+    {q:"知的所有権のうち文化的生産物や表現を保護する権利はどれか？（§2.5）",c:["A. 工業所有権","B. 著作権","C. 特許権","D. 商標権"],a:"B"},
+    {q:"著作権に含まれるものとして正しいのはどれか？（§2.5）",c:["A. 特許権・実用新案権・意匠権","B. 著作者人格権・著作者財産権・著作隣接権","C. 商標権・意匠権・著作者財産権","D. 特許権・商標権・著作者人格権"],a:"B"},
+    {q:"著作者人格権の説明として正しいのはどれか？（§2.5）",c:["A. 著作物の複製や放送についての権利を保護するもの","B. 技術の進歩を保護する権利","C. 作品の利用に伴う著作者の人格を保護するもの","D. 編集者やレコード制作会社を保護するもの"],a:"C"},
+    {q:"著作隣接権の説明として正しいのはどれか？（§2.5）",c:["A. 著作者の財産的権利を保護するもの","B. 編集者やレコード制作会社など著作物の制作に携わった人を保護するもの","C. 技術の改良についての権利を保護するもの","D. 製品のデザインを保護するもの"],a:"B"},
+    {q:"工業所有権に含まれないのはどれか？（§2.5）",c:["A. 特許権","B. 意匠権","C. 著作権","D. 商標権"],a:"C"},
+    {q:"特許権の説明として正しいのはどれか？（§2.5）",c:["A. 技術の改良についての権利を保護する","B. 新規の技術についての権利を保護する","C. 製品のデザインについての権利","D. 社名やロゴなどを保護する権利"],a:"B"},
+    {q:"意匠権とは何を保護する権利か？（§2.5）",c:["A. 新規の技術","B. 技術の改良","C. 製品のデザイン","D. 社名やロゴ"],a:"C"},
+    {q:"商標権とは何を保護する権利か？（§2.5）",c:["A. 製品のデザイン","B. 新規の技術","C. 社名やロゴなどの商標","D. 技術の改良"],a:"C"},
+    {q:"実用新案権の説明として正しいのはどれか？（§2.5）",c:["A. 新規の技術についての権利を保護する","B. 技術の改良についての権利を保護する","C. 製品のデザインについての権利","D. 著作者の財産を保護する"],a:"B"},
+    {q:"第1世代携帯電話の通信方式はどれか？（§3.1）",c:["A. デジタル通信","B. アナログ通信","C. 光通信","D. パケット通信"],a:"B"},
+    {q:"第2世代携帯電話が登場した時期はいつか？（§3.1）",c:["A. 1980年ごろ","B. 1992年ごろ","C. 2001年ごろ","D. 2006年ごろ"],a:"B"},
+    {q:"第2世代携帯電話の特徴として正しいのはどれか？（§3.1）",c:["A. アナログ通信","B. データ通信が高速化","C. デジタル通信になり音質が向上した","D. ブロードバンド環境での利用"],a:"C"},
+    {q:"第3世代携帯電話が登場した時期はいつか？（§3.1）",c:["A. 1992年ごろ","B. 1999年ごろ","C. 2001年ごろ","D. 2006年ごろ"],a:"C"},
+    {q:"第3.5世代携帯電話が登場した時期はいつか？（§3.1）",c:["A. 1999年ごろ","B. 2001年ごろ","C. 2006年ごろ","D. 2010年ごろ"],a:"C"},
+    {q:"第4世代携帯電話の特徴として正しいのはどれか？（§3.1）",c:["A. アナログ通信を前提とする","B. ブロードバンド環境での利用を前提とする","C. 音声通話のみに対応する","D. データ通信ができない"],a:"B"},
+    {q:"携帯電話のSIMカードに記録されるものはどれか？（§3.2）",c:["A. アプリケーションデータ","B. 契約者番号","C. メールデータ","D. 写真データ"],a:"B"},
+    {q:"Bluetoothの通信範囲はどの程度か？（§4.2）",c:["A. 約1m","B. 約10m","C. 約100m","D. 約1km"],a:"B"},
+    {q:"Wi-Fiは何の略か？（§4.2）",c:["A. Wireless Function","B. Wide Fidelity","C. Wireless Fidelity","D. Wide Frequency"],a:"C"},
+    {q:"IrDAの説明として正しいのはどれか？（§4.2）",c:["A. 無線LANの規格","B. 赤外線通信の規格","C. Bluetoothの規格","D. 光ファイバの規格"],a:"B"},
+    {q:"IrDAの弱点として正しいのはどれか？（§4.2）",c:["A. 通信速度が非常に遅い","B. 送信機と受信機の間に遮蔽物があると通信できない","C. 電力消費が大きい","D. 接続できる機器数が限られている"],a:"B"},
+    {q:"非接触型ICカードの例として正しいのはどれか？（§4.2）",c:["A. クレジットカード","B. 運転免許証","C. JRのSuicaカード","D. 図書館カード"],a:"C"},
+    {q:"FTTHは何の略か？（§4.1）",c:["A. Fast Transfer To Home","B. Fiber To The Home","C. Free Transfer Through Hub","D. Fixed Terminal To Home"],a:"B"},
+    {q:"FTTHの特徴として正しいのはどれか？（§4.1）",c:["A. 電灯線を利用するため安価","B. 光ファイバを使用するためノイズの影響を受けにくい","C. 電話回線を使用するため普及している","D. ケーブルテレビの回線を利用する"],a:"B"},
+    {q:"ADSLは何の略か？（§4.1）",c:["A. Advanced Digital Subscriber Line","B. Asymmetric Digital Subscriber Line","C. Automatic Digital Service Link","D. Analog Digital Subscriber Line"],a:"B"},
+    {q:"PLC（Power Line Communication）の説明として正しいのはどれか？（§4.1）",c:["A. 光ファイバを利用してデータ通信を行う技術","B. 一般家庭の電灯線を利用してデータ通信を行う技術","C. 無線LAN規格の一種","D. ケーブルテレビの通信技術"],a:"B"},
+    {q:"液晶ディスプレイの構造として正しいのはどれか？（§3.4）",c:["A. 有機物の発光体を使用する","B. バックライトの光を透過・遮断することで明るさを調整する","C. プラズマを使用して発光する","D. LEDを直接点灯・消灯する"],a:"B"},
+    {q:"有機ELディスプレイの特徴はどれか？（§3.4）",c:["A. バックライトを使用して表示する","B. 有機物の発光体によりカラー表示を行う","C. 光ファイバを使用して表示する","D. 液晶を使用して表示する"],a:"B"},
+    {q:"携帯電話のOSとして正しくないのはどれか？（§3.5）",c:["A. iOS","B. Android","C. Symbian","D. MS-DOS"],a:"D"},
+    {q:"タッチパネルの「抵抗膜方式」の説明として正しいのはどれか？（§3.4）",c:["A. 指先とセンサの間の電荷を測定する","B. 押された部分の縦横の抵抗値を測定する","C. 赤外線を使って位置を検出する","D. 超音波を使って位置を検出する"],a:"B"},
+    {q:"タッチパネルの「静電容量方式」の説明として正しいのはどれか？（§3.4）",c:["A. 押された部分の縦横の抵抗値を測定する","B. 指先とセンサの間に蓄えられる電荷を測定する","C. 赤外線を使って位置を検出する","D. 光センサを使って位置を検出する"],a:"B"},
+    {q:"CMOSセンサの説明として正しいのはどれか？（§3.4）",c:["A. 温度を記録する素子と増幅器が並んだ形のセンサ","B. 光の強弱を記録する素子と増幅器が並んだ形のセンサ","C. 電磁波を記録する素子と変換器が並んだ形のセンサ","D. 音波を記録する素子と変換器が並んだ形のセンサ"],a:"B"},
+    {q:"ネットワークの接続形態は何種類あるか？（§5.3）",c:["A. 2種類","B. 3種類","C. 4種類","D. 5種類"],a:"B"},
+    {q:"「スター型」ネットワークの説明として正しいのはどれか？（§5.3）",c:["A. 1本のケーブルに複数のコンピュータが接続されたもの","B. 閉じたケーブルに複数のコンピュータが接続されたもの","C. ハブを中心に複数のコンピュータが接続されたもの","D. 2台のコンピュータが直接接続されたもの"],a:"C"},
+    {q:"最もよく使われるネットワーク接続形態はどれか？（§5.3）",c:["A. バス型","B. スター型","C. リング型","D. メッシュ型"],a:"B"},
+    {q:"「バス型」ネットワークの説明として正しいのはどれか？（§5.3）",c:["A. ハブを中心に複数のコンピュータが接続されたもの","B. 閉じたケーブルに複数のコンピュータが接続されたもの","C. 1本の通信ケーブルに複数のコンピュータが接続されたもの","D. 星形に配置されたコンピュータ同士が接続されたもの"],a:"C"},
+    {q:"「リング型」ネットワークの説明として正しいのはどれか？（§5.3）",c:["A. 1本の通信ケーブルに複数のコンピュータが接続されたもの","B. ハブを中心に複数のコンピュータが接続されたもの","C. 閉じたケーブルに複数のコンピュータが接続されたもの","D. 直線上にコンピュータが接続されたもの"],a:"C"},
+    {q:"コンピュータの処理配置方式は何種類あるか？（§5.4）",c:["A. 1種類","B. 2種類","C. 3種類","D. 4種類"],a:"B"},
+    {q:"P2P（ピアツーピア）の説明として正しいのはどれか？（§5.4）",c:["A. 中心のサーバが処理を管理する構成","B. 対等にサービスを提供しあう構成","C. 1台のコンピュータが全ての処理を行う構成","D. クラウド上で処理を行う構成"],a:"B"},
+    {q:"コンピュータのデータ転送規約のことを何というか？（§6.1）",c:["A. ドメイン","B. プロトコル","C. ポート","D. パケット"],a:"B"},
+    {q:"OSI参照モデルは何層構造か？（§6.1）",c:["A. 5層","B. 6層","C. 7層","D. 8層"],a:"C"},
+    {q:"OSI参照モデルのトランスポート層のプロトコルはどれか？（§6.1）",c:["A. IP","B. TCP","C. HTTP","D. FTP"],a:"B"},
+    {q:"OSI参照モデルのネットワーク層のプロトコルはどれか？（§6.1）",c:["A. TCP","B. HTTP","C. IP","D. SMTP"],a:"C"},
+    {q:"IPアドレスの説明として正しいのはどれか？（§6.2）",c:["A. ネットワーク上の住所にあたる名前（例：192.168.113.24）","B. アルファベットの組み合わせで表現された名前","C. MACアドレスとも呼ばれる","D. インターネット上の会社名"],a:"A"},
+    {q:"ドメイン名の説明として正しいのはどれか？（§6.2）",c:["A. 数字の組み合わせで表現される名前","B. アルファベットの組み合わせで表現された名前（例：daigaku.ac.jp）","C. 16進数で表現される名前","D. ポート番号のこと"],a:"B"},
+    {q:"SSLは何の略か？（§8.4）",c:["A. Secure Server Link","B. Safe Socket Layer","C. Secure Socket Layer","D. Safe Server Layers"],a:"C"},
+    {q:"SSLの説明として正しいのはどれか？（§8.4）",c:["A. ウィルスを検出するためのソフトウェア","B. 公開鍵方式と秘密鍵方式により暗号化した状態で情報通信を行う","C. ファイアウォールの一種","D. IPアドレスを管理するプロトコル"],a:"B"},
+    {q:"個人情報を入力する際にブラウザで確認すべきことはどれか？（§8.4）",c:["A. プロトコルがhttpになっていること","B. プロトコルがftpになっていること","C. 錠のアイコンが出ていてプロトコルがhttpsになっていること","D. URLが長いこと"],a:"C"},
+    {q:"シーザー暗号の説明として正しいのはどれか？（§8.1）",c:["A. 文字の並びを逆順にする暗号方式","B. 文字を何文字かずらすことで暗号化する換字式の暗号方式","C. 0と1で置き換える暗号方式","D. 公開鍵を使った暗号方式"],a:"B"},
+    {q:"暗号化の定義として正しいのはどれか？（§8.1）",c:["A. 原文を原文に戻すこと","B. 与えられた原文が推測できないように変換すること","C. データを圧縮すること","D. パスワードを設定すること"],a:"B"},
+    {q:"復号化の定義として正しいのはどれか？（§8.1）",c:["A. 原文を暗号に変換すること","B. データを圧縮すること","C. 原文に戻すこと","D. パスワードを削除すること"],a:"C"},
+    {q:"トロイの木馬の説明として正しいのはどれか？（§9.4）",c:["A. ネットワークを攻撃するウィルス","B. 通常の入力画面と同様にユーザ名とパスワードを入力させて情報を盗むプログラム","C. ファイルを暗号化して身代金を要求するプログラム","D. スパムメールを送信するプログラム"],a:"B"},
+    {q:"パスワード設定時に避けるべきものはどれか？（§9.5）",c:["A. 記号を含む長いパスワード","B. 大文字と小文字の組み合わせ","C. 自分の氏名や電話番号などの個人情報","D. ランダムな文字と数字の組み合わせ"],a:"C"},
+    {q:"稼働率の計算式として正しいのはどれか？（§9.6）",c:["A. 稼働率 ＝ MTTR / (MTBF ＋ MTTR)","B. 稼働率 ＝ MTBF / (MTBF ＋ MTTR)","C. 稼働率 ＝ MTBF × MTTR","D. 稼働率 ＝ MTTR / MTBF"],a:"B"},
+    {q:"MTBFとは何を表すか？（§9.6）",c:["A. 平均修理時間","B. 最大故障時間","C. 平均故障間隔","D. 最小動作時間"],a:"C"},
+    {q:"MTTRとは何を表すか？（§9.6）",c:["A. 平均故障間隔","B. 最大修理時間","C. 最小故障時間","D. 平均修理時間"],a:"D"},
+    {q:"並列接続した場合の稼働率の計算式はどれか？（§9.6）",c:["A. Aの稼働率 × Bの稼働率","B. 1－(1－Aの稼働率)×(1－Bの稼働率)","C. Aの稼働率 ＋ Bの稼働率","D. (Aの稼働率 ＋ Bの稼働率) / 2"],a:"B"},
+    {q:"直列接続した場合の稼働率の計算式はどれか？（§9.6）",c:["A. Aの稼働率 ＋ Bの稼働率","B. 1－(1－Aの稼働率)×(1－Bの稼働率)","C. Aの稼働率 × Bの稼働率","D. Aの稼働率 / Bの稼働率"],a:"C"},
+    {q:"信頼度成長曲線はどのような形か？（§9.6）",c:["A. 直線","B. S字曲線","C. バスタブ曲線","D. 波形曲線"],a:"B"},
+    {q:"一般の機械装置の故障傾向を表す曲線はどれか？（§9.6）",c:["A. S字曲線","B. 直線","C. バスタブ曲線","D. 正弦波曲線"],a:"C"},
+    {q:"コンピュータの5要素に含まれないのはどれか？（§10.1）",c:["A. 演算装置","B. 記憶装置","C. 通信装置","D. 制御装置"],a:"C"},
+    {q:"CPUは何の機能を担うか？（§10.1）",c:["A. 記憶装置","B. 入力装置","C. 演算装置","D. 出力装置"],a:"C"},
+    {q:"マザーボードの説明として正しいのはどれか？（§10.2）",c:["A. パソコンの電源を管理する基板","B. パソコンの内部において大きな面積を占めるメインの基板","C. グラフィックを処理する専用基板","D. ネットワークに接続するための基板"],a:"B"},
+    {q:"RAMは何の略か？（§10.4）",c:["A. Read Access Memory","B. Random Access Memory","C. Read And Modify","D. Random Allocation Memory"],a:"B"},
+    {q:"ROMは何の略か？（§10.4）",c:["A. Random Output Memory","B. Read Only Memory","C. Rapid Online Memory","D. Read On Module"],a:"B"},
+    {q:"RAMの特徴として正しいのはどれか？（§10.4）",c:["A. 読み取り専用の半導体メモリ","B. 電源を切ってもデータが保持される","C. 自由にデータの読み書きができる半導体メモリ","D. CD-ROMとも呼ばれる"],a:"C"},
+    {q:"ROMの特徴として正しいのはどれか？（§10.4）",c:["A. 自由にデータの読み書きができる","B. 読み取り専用の半導体メモリ","C. 電源を切るとデータが消える","D. キャッシュメモリとも呼ばれる"],a:"B"},
+    {q:"CPUをハードウェアとして見たときの名称はどれか？（§10.6）",c:["A. MPU（Micro Processing Unit）またはマイクロプロセッサ","B. ALU（Arithmetic Logic Unit）","C. GPU（Graphics Processing Unit）","D. FPU（Floating Point Unit）"],a:"A"},
+    {q:"ハードディスクの内部で金属の円板が回転する速度はどの程度か？（§10.5）",c:["A. 1分間に数十回転","B. 1分間に数百回転","C. 1分間に数千回転","D. 1分間に数万回転"],a:"C"},
+    {q:"コンピュータの第1世代に使用された論理素子はどれか？（§11.2）",c:["A. トランジスタ","B. IC","C. LSI","D. 真空管"],a:"D"},
+    {q:"コンピュータの第2世代（1950年代後半〜）に使用された論理素子はどれか？（§11.2）",c:["A. 真空管","B. トランジスタ","C. IC","D. LSI"],a:"B"},
+    {q:"コンピュータの第3世代（1960年代中〜）に使用された論理素子はどれか？（§11.2）",c:["A. 真空管","B. トランジスタ","C. IC","D. LSI"],a:"C"},
+    {q:"コンピュータの第4世代（1970年代初〜）に使用された論理素子はどれか？（§11.2）",c:["A. IC","B. トランジスタ","C. 真空管","D. LSI"],a:"D"},
+    {q:"AND回路のモデルとして正しいのはどれか？（§11.4）",c:["A. スイッチが並列に並んだ回路","B. スイッチが直列に並んだ回路","C. スイッチが星形に並んだ回路","D. スイッチが円形に並んだ回路"],a:"B"},
+    {q:"OR回路のモデルとして正しいのはどれか？（§11.4）",c:["A. スイッチが直列に並んだ回路","B. スイッチが星形に並んだ回路","C. スイッチが並列に並んだ回路","D. スイッチが円形に並んだ回路"],a:"C"},
+    {q:"AND回路でスイッチX=ON、Y=OFFの場合、出力はどうなるか？（§11.4）",c:["A. ON","B. OFF","C. 不定","D. 交互にON/OFF"],a:"B"},
+    {q:"2進数「1010」を10進数に変換すると何か？（§12.2）",c:["A. 8","B. 9","C. 10","D. 12"],a:"C"},
+    {q:"情報量の最小単位は何か？（§13.1）",c:["A. byte","B. KB","C. bit","D. nibble"],a:"C"},
+    {q:"bitは何の略か？（§13.1）",c:["A. Basic Information Technology","B. Binary Digit","C. Byte In Total","D. Base Integer Type"],a:"B"},
+    {q:"1 byteは何 bitか？（§13.2）",c:["A. 4 bit","B. 8 bit","C. 16 bit","D. 32 bit"],a:"B"},
+    {q:"1 KBは何 byteか？（§13.2）",c:["A. 1,000 byte","B. 1,024 byte","C. 1,048 byte","D. 10,000 byte"],a:"B"},
+    {q:"1 MBは何 KBか？（§13.2）",c:["A. 1,000 KB","B. 1,024 KB","C. 1,100 KB","D. 2,048 KB"],a:"B"},
+    {q:"1 GBは何 MBか？（§13.2）",c:["A. 1,000 MB","B. 1,024 MB","C. 1,100 MB","D. 2,048 MB"],a:"B"},
+    {q:"1 TBは何 GBか？（§13.2）",c:["A. 1,000 GB","B. 1,024 GB","C. 1,100 GB","D. 2,048 GB"],a:"B"},
+    {q:"アルファベット1文字の情報量はどれか？（§13.3）",c:["A. 1 bit","B. 4 bit","C. 8 bit（1 byte）","D. 16 bit（2 byte）"],a:"C"},
+    {q:"アルファベット・数字・記号を含む文字の種類は全部でいくつか？（§13.3）",c:["A. 128種類","B. 256種類","C. 512種類","D. 1024種類"],a:"B"},
+    {q:"現在の日本語文字に割り当てられたコード番号の数はいくつか？（§13.4）",c:["A. 32,768個","B. 65,536個","C. 128,000個","D. 256,000個"],a:"B"},
+    {q:"英語の文字コード規格として正しいのはどれか？（§13.5）",c:["A. JISコード","B. ASCIIコード","C. EUCコード","D. シフトJISコード"],a:"B"},
+    {q:"2進数の符号ビットで「1」は何を表すか？（§12.4）",c:["A. 正の数","B. 負の数","C. ゼロ","D. 不定"],a:"B"},
+    {q:"2進数の加算「1＋1」の結果はどれか？（§12.3）",c:["A. 0","B. 1","C. 10（2進数）","D. 11（2進数）"],a:"C"},
+    {q:"サンプリング周波数の単位はどれか？（§14.2）",c:["A. bps","B. Hz（ヘルツ）","C. dpi","D. dB"],a:"B"},
+    {q:"サンプリング周波数が高いほどどうなるか？（§14.2）",c:["A. 音質が低下する","B. ファイルサイズが小さくなる","C. 音質が向上する","D. 通信速度が低下する"],a:"C"},
+    {q:"波の高さの最大値をいくつの整数として表すかのことを何というか？（§14.2）",c:["A. サンプリング周波数","B. ビットレート","C. 量子化数","D. 解像度"],a:"C"},
+    {q:"CDの音声のサンプリング周波数はどれか？（§14.2）",c:["A. 22.05 kHz","B. 44.1 kHz","C. 96 kHz","D. 192 kHz"],a:"B"},
+    {q:"CDの音声データにおける量子化数はどれか？（§14.2）",c:["A. 2⁸（256段階）","B. 2¹²（4,096段階）","C. 2¹⁶（65,536段階）","D. 2²⁴（16,777,216段階）"],a:"C"},
+    {q:"CD（640 MB）に記録できるステレオ音声の時間はおよそどれか？（§14.2演習）",c:["A. 約30分","B. 約63分","C. 約120分","D. 約200分"],a:"B"},
+    {q:"MIDIは何の略か？（§14.1）",c:["A. Musical Instrument Digital Interface","B. Multi Instrument Data Input","C. Music Interface Digital Instrument","D. Musical Integrated Digital Interface"],a:"A"},
+    {q:"MIDI命令のデータ量はいくらか？（§14.1）",c:["A. 4 bit ＝ 0.5 byte","B. 8 bit ＝ 1 byte","C. 16 bit ＝ 2 byte","D. 32 bit ＝ 4 byte"],a:"B"},
+    {q:"MIDI命令の種類は最大何種類か？（§14.1）",c:["A. 128種類","B. 256種類","C. 512種類","D. 1024種類"],a:"B"},
+    {q:"デジタル画像の構成要素として正しいのはどれか？（§14.3）",c:["A. 線と面の集まり","B. 縦横に並んだ点（画素・ピクセル）の集まり","C. ベクターデータの集まり","D. 音声と映像の集まり"],a:"B"},
+    {q:"「QVGA」の解像度はどれか？（§14.3）",c:["A. 640×480","B. 800×600","C. 320×240","D. 1024×768"],a:"C"},
+    {q:"「VGA」の解像度はどれか？（§14.3）",c:["A. 320×240","B. 640×480","C. 800×600","D. 1024×768"],a:"B"},
+    {q:"「XGA」の解像度はどれか？（§14.3）",c:["A. 640×480","B. 800×600","C. 1024×768","D. 1280×1024"],a:"C"},
+    {q:"RGB各色を256段階で表現する場合、1画素の情報量はいくらか？（§14.3）",c:["A. 1 byte","B. 2 byte","C. 3 byte","D. 4 byte"],a:"C"},
+    {q:"プリンタの解像度を表す単位はどれか？（§14.3）",c:["A. Hz","B. bps","C. dpi","D. MB"],a:"C"},
+    {q:"dpiは何の略か？（§14.3）",c:["A. Data Per Inch","B. Dot Per Inch","C. Display Per Interface","D. Digital Print Index"],a:"B"},
+    {q:"A4サイズに300 dpiで印刷する場合、必要な画素数はおよそどれか？（§14.3演習）",c:["A. 約2.0メガピクセル","B. 約4.5メガピクセル","C. 約8.7メガピクセル","D. 約12.0メガピクセル"],a:"C"},
+    {q:"映画における1秒あたりの画面書き換え回数はいくつか？（§14.4）",c:["A. 12回","B. 24回","C. 30回","D. 60回"],a:"B"},
+    {q:"日本のテレビ放送における1秒あたりの画面書き換え回数はいくつか？（§14.4）",c:["A. 24回","B. 25回","C. 30回","D. 60回"],a:"C"},
+    {q:"テレビ（640×480、RGB各8 bit、30回/秒）の1秒分の動画の情報量はおよそどれか？（§14.4演習）",c:["A. 約10 MB","B. 約26.4 MB","C. 約50 MB","D. 約100 MB"],a:"B"},
+    {q:"ブロードバンドとは一般にどのくらいの通信速度か？（§15.1）",c:["A. 10 Kbps以上","B. 100 Kbps〜1 Mbps以上","C. 10 Mbps以上","D. 100 Mbps以上"],a:"B"},
+    {q:"通信速度の単位として正しいのはどれか？（§15.1）",c:["A. Hz","B. dpi","C. bps（bit per second）","D. dB"],a:"C"},
+    {q:"有線通信でFTTHの最大通信速度はどれか？（§15.1）",c:["A. 40 Mbps","B. 50 Mbps","C. 100 Mbps","D. 1 Gbps"],a:"C"},
+    {q:"ADSLの下り最大通信速度はおよそどれか？（§15.1）",c:["A. 10 Mbps","B. 50 Mbps","C. 100 Mbps","D. 1 Gbps"],a:"B"},
+    {q:"無線LANの最大通信速度はどれか？（§15.1）",c:["A. 1 Mbps","B. 11 Mbps","C. 54 Mbps","D. 100 Mbps"],a:"C"},
+    {q:"Bluetoothの通信速度はどれか？（§15.1）",c:["A. 200 Kbps","B. 1 Mbps","C. 11 Mbps","D. 54 Mbps"],a:"B"},
+    {q:"CATVの通信速度はどれか？（§15.1）",c:["A. 10 Mbps","B. 40 Mbps","C. 100 Mbps","D. 1 Gbps"],a:"B"},
+    {q:"音声を圧縮する際に利用される変換は何か？（§15.3）",c:["A. ラプラス変換","B. フーリエ変換","C. Z変換","D. ウェーブレット変換"],a:"B"},
+    {q:"フーリエ変換で分解されるものはどれか？（§15.3）",c:["A. デジタルデータをアナログに変換する","B. 全ての波を波長の違う正弦波に分解する","C. 全ての画像をピクセルに分解する","D. 音声データをMIDI形式に変換する"],a:"B"},
+    {q:"圧縮ファイルの拡張子として正しくないのはどれか？（§15.2）",c:["A. .zip","B. .lzh","C. .gz","D. .mp3"],a:"D"},
+    {q:"HTMLは何の略か？（§6.4）",c:["A. High Text Markup Language","B. Hyper Text Markup Language","C. Hyperlink Text Management Language","D. Home Text Module Language"],a:"B"},
+    {q:"XMLは何の略か？（§6.5）",c:["A. Extended Markup Language","B. eXtensible Markup Language","C. Extended Module Language","D. eXternal Markup Library"],a:"B"},
+    {q:"HTMLとXMLの違いとして正しいのはどれか？（§6.4/6.5）",c:["A. HTMLはユーザがタグを自由に定義できる","B. XMLはユーザがタグを自由に定義して利用できる","C. XMLは定義済みのタグしか使えない","D. HTMLはXMLの上位互換"],a:"B"},
+    {q:"電子商取引（eコマース）の正式名称はどれか？（§7.1）",c:["A. Electronic Computer","B. Electronic Commerce","C. Electronic Communication","D. Electronic Content"],a:"B"},
+    {q:"BtoCの意味として正しいのはどれか？（§7.1）",c:["A. 企業間の取引","B. 企業対消費者の取引","C. 政府対消費者の取引","D. 消費者間の取引"],a:"B"},
+    {q:"BtoBの意味として正しいのはどれか？（§7.1）",c:["A. 企業対消費者の取引","B. 政府対政府の取引","C. 企業間の取引","D. 個人間の取引"],a:"C"},
+    {q:"EDIは何の略か？（§7.2）",c:["A. Electronic Data Interchange","B. Electronic Document Interface","C. Extended Data Input","D. Electronic Distribution Interface"],a:"A"},
+    {q:"EOSの説明として正しいのはどれか？（§7.2）",c:["A. 製造業における全製造過程の電子化","B. ネットワークを使った電子データ交換の標準化","C. オンラインの受発注システム","D. 電子マネーシステム"],a:"C"},
+    {q:"CALSは何の略か？（§7.2）",c:["A. Computer Aided Learning System","B. Commerce At Light Speed","C. Computer Automated Logistics System","D. Commerce And Logistics Service"],a:"B"},
+    {q:"ICカードを使った電子マネーの形態として正しいのはどれか？（§7.3）",c:["A. クローズドループ型とオープンループ型","B. インターネット型とオフライン型","C. 前払い型と後払い型","D. 国内型と国際型"],a:"A"},
+    {q:"クローズドループ型電子マネーの代表例はどれか？（§7.3）",c:["A. Mondex","B. VISA キャッシュ","C. Suica","D. PayPal"],a:"B"},
+    {q:"オープンループ型電子マネーの代表例はどれか？（§7.3）",c:["A. VISA キャッシュ","B. Suica","C. Master CardのMondex","D. Edy"],a:"C"},
+    {q:"ブラウザがウェブサイトのID情報を記憶する仕組みは何か？（§7.4）",c:["A. キャッシュ","B. Cookie（クッキー）","C. セッション変数","D. ローカルストレージ"],a:"B"},
+    {q:"日本で制定された個人情報保護の法律名はどれか？（§7.5）",c:["A. 情報セキュリティ法","B. 個人データ保護規則","C. 個人情報の保護に関する法律","D. サイバーセキュリティ基本法"],a:"C"},
+    {q:"OECD8原則の「目的明確化の原則」の説明として正しいのはどれか？（§7.5）",c:["A. データ主体の同意がなければ目的以外に利用してはならない","B. 収集目的を明確にし、データ利用は収集目的に合致するべき","C. 合理的安全保護措置により保護するべき","D. 管理者は諸原則実施の責任を有する"],a:"B"},
+    {q:"OECD8原則の「安全保護の原則」の説明として正しいのはどれか？（§7.5）",c:["A. 収集目的を明確にすること","B. データ主体の同意を得ること","C. 合理的安全保護措置により、紛失・破壊・使用・修正・開示等から保護するべき","D. 管理者が責任を持つこと"],a:"C"},
+    {q:"OECD8原則の「責任の原則」の説明として正しいのはどれか？（§7.5）",c:["A. 収集目的を明確にすること","B. データを公開すること","C. 個人が自己データを確認できること","D. 管理者は諸原則実施の責任を有する"],a:"D"},
+    {q:"OECD8原則の「個人参加の原則」の説明として正しいのはどれか？（§7.5）",c:["A. 管理者が責任を負うこと","B. 自己に関するデータの所在及び内容を確認させ、又は意義申立を保証するべき","C. データを安全に保護すること","D. 収集目的を明確にすること"],a:"B"},
+    {q:"OECD8原則「収集制限の原則」の説明として正しいのはどれか？（§7.5）",c:["A. データは最新の状態に保つべき","B. 適法・公正な手段により、情報主体に通知又は同意を得て収集されるべき","C. 個人が自己データを確認できること","D. データを暗号化して保管すること"],a:"B"},
+    {q:"OECD8原則「利用制限の原則」の説明として正しいのはどれか？（§7.5）",c:["A. データ収集の実施方針を公開すること","B. データ主体の同意がある場合、法律の規定による場合以外は目的以外に利用してはならない","C. 合理的な安全保護措置を施すこと","D. データを正確・完全・最新に保つこと"],a:"B"},
+    {q:"OECD8原則「データ内容の原則」として正しいのはどれか？（§7.5）",c:["A. データを暗号化すること","B. データは公開すること","C. 利用目的に沿ったもので、かつ正確・完全・最新であるべき","D. 管理者が責任を持つこと"],a:"C"},
+    {q:"OECD8原則「公開の原則」として正しいのはどれか？（§7.5）",c:["A. データを安全に保護すること","B. データ収集の実施方針等を公開し、データの存在・利用目的・管理者等を明示するべき","C. 個人が自己データを確認できること","D. 適法な手段でデータを収集すること"],a:"B"},
+    {q:"「集中処理システム」の説明として正しいのはどれか？（§5.4）",c:["A. 処理を複数のコンピュータで分散して管理する","B. 中心となるコンピュータが中核となる処理すべてを管理する","C. 対等にサービスを提供しあう構成","D. クラウド上で処理を分散する"],a:"B"},
+    {q:"コンピュータネットワークの定義として正しいのはどれか？（§5.1）",c:["A. コンピュータ同士がUSBで接続されたもの","B. 電子機器同士が電気的にデータの送受信をできるようにしたもの","C. インターネットに接続されたコンピュータの集まり","D. 同じ部屋にある複数のコンピュータ"],a:"B"},
+    {q:"ワンセグ放送の説明として正しいのはどれか？（§3.3）",c:["A. 衛星から送信される放送","B. 地上デジタル放送と同一内容の番組を小さい画面で表示するサイマル放送","C. インターネットを通じた放送","D. ケーブルテレビの放送"],a:"B"},
+    {q:"ウィルス対策ソフトのパターンファイルの手動更新頻度として適切なのはどれか？（§9.5）",c:["A. 少なくとも1日に1度","B. 少なくとも1週間に1度","C. 少なくとも1ヶ月に1度","D. 少なくとも1年に1度"],a:"B"},
+    {q:"「基数」の定義として正しいのはどれか？（§12.1）",c:["A. 数値の最大値","B. 数値を扱う際に「基となる数字の個数」","C. 2進数における桁数","D. 10進数との変換比率"],a:"B"},
+    {q:"16進数の基数はいくつか？（§12.1）",c:["A. 8","B. 10","C. 16","D. 32"],a:"C"},
+    {q:"コンピュータの記憶装置に含まれないのはどれか？（§10.2）",c:["A. メモリ（RAM）","B. ハードディスク","C. キャッシュ","D. CPU"],a:"D"},
+    {q:"ネットワークセキュリティでファイアウォールの目的として正しいのはどれか？（§5.5）",c:["A. データを圧縮すること","B. サーバに対するセキュリティを保つこと","C. ネットワーク速度を上げること","D. データを暗号化すること"],a:"B"},
+    {q:"「分散処理システム」の説明として正しいのはどれか？（§5.4）",c:["A. 中心となるコンピュータが全ての処理を管理する","B. 処理を複数のコンピュータで分散して管理する","C. インターネット上のサーバで処理する","D. 1台のコンピュータがネットワーク全体を管理する"],a:"B"},
+    {q:"低い周波数の波が表すものはどれか？（§15.3）",c:["A. 元の波の詳細","B. 元の波の大きな性質","C. 元の波の高周波成分","D. 元の波のノイズ成分"],a:"B"},
+    {q:"高い周波数の波が表すものはどれか？（§15.3）",c:["A. 元の波の大きな性質","B. 元の波の低周波成分","C. 元の波の詳細","D. 元の波の基本成分"],a:"C"},
+    {q:"コンピュータのウィルスの説明として正しいのはどれか？（§9.2）",c:["A. 自然発生するプログラム","B. 人為的に作成されたプログラム","C. ハードウェアの障害","D. ネットワーク障害の一種"],a:"B"},
+    {q:"IP電話の説明として正しいのはどれか？（§4.1）",c:["A. 一般の電話回線を使用した通話","B. 衛星を使用した通話","C. ADSLなどの高速通信を利用してインターネットで音声情報を送受信する","D. Bluetoothを使用した近距離通話"],a:"C"},
+    {q:"デジタル画像において「SXGA」の解像度はどれか？（§14.3）",c:["A. 1024×768","B. 1280×768","C. 1280×1024","D. 1600×1200"],a:"C"},
+    {q:"デジタル画像において「UXGA」の解像度はどれか？（§14.3）",c:["A. 1280×1024","B. 1600×1200","C. 1920×1080","D. 2560×1440"],a:"B"},
+    {q:"MIDI演習：512 MBのSDカードに約何時間記録できるか？（§14.1演習）",c:["A. 約100時間","B. 約200時間","C. 約388時間","D. 約500時間"],a:"C"},
+    {q:"OSI参照モデルで最下層（物理層）の上の層は何か？（§6.1）",c:["A. ネットワーク層","B. データリンク層","C. トランスポート層","D. セッション層"],a:"B"},
+    {q:"Web 2.0でGoogleが提供するサービスの例として正しいのはどれか？（§2.2）",c:["A. 有料の表計算ソフトをWebで提供","B. 無料で使えるワープロや表計算ソフトをWeb上で提供","C. アプリをダウンロード販売する","D. 企業向けのみの専用サービス"],a:"B"},
+    {q:"コンピュータシステムで初期にエラーが多く発生した後安定する曲線はどれか？（§9.6）",c:["A. S字曲線","B. バスタブ曲線（初期故障型）","C. 直線増加","D. 指数増加"],a:"B"},
+    {q:"OSI参照モデルで最上位の層はどれか？（§6.1）",c:["A. セッション層","B. プレゼンテーション層","C. アプリケーション層","D. トランスポート層"],a:"C"},
+    {q:"xDSLとは何を指すか？（§4.1）",c:["A. FTTHの一種","B. ADSLやSDSL、HDSLなど多くの種類をまとめた総称","C. 光ファイバ通信の規格","D. 電灯線通信の規格"],a:"B"},
+    {q:"コンピュータの5要素のうち「出力装置」の例として正しいのはどれか？（§10.1）",c:["A. キーボード","B. マウス","C. ハードディスク","D. ディスプレイ（モニタ）"],a:"D"},
+    {q:"OSI参照モデルにおいてTCPとIPはそれぞれ何層に対応するか？（§6.1）",c:["A. TCPはネットワーク層、IPはトランスポート層","B. TCPはデータリンク層、IPはネットワーク層","C. TCPはトランスポート層、IPはネットワーク層","D. TCPはアプリケーション層、IPはセッション層"],a:"C"}
   ];
 
-  // ═══════════════════════════════════════
-  // STATE
-  // ═══════════════════════════════════════
-  let answers = {};          // qi -> chữ cái đã chọn (lần gần nhất)
-  let wrongSet = new Set();  // các câu hiện đang sai, cần ôn lại
-  let mainIndex = 0;         // câu hiện tại trong bài kiểm tra chính
-  let mainAnswered = false;  // câu hiện tại đã chọn đáp án chưa
-  let correctCount = 0;
-  let wrongCount = 0;
+  let answers={},wrongSet=new Set(),mainIndex=0,mainAnswered=false,correctCount=0,wrongCount=0;
+  let wrongQueue=[],wrongIndex=0,wrongModeAnswered=false,wrongModeChoice=null;
 
-  let wrongQueue = [];       // hàng đợi các câu cần ôn lại trong lượt hiện tại
-  let wrongIndex = 0;
-  let wrongModeAnswered = false;
-  let wrongModeChoice = null;
-
-  function getLetter(c) { return c.split('.')[0].trim(); }
-
-  function updateWrongBadge() {
-    const badge = document.getElementById('wrong-badge');
-    if (wrongSet.size > 0) { badge.style.display = 'inline-block'; badge.textContent = wrongSet.size; }
-    else badge.style.display = 'none';
+  function getLetter(c){return c.split('.')[0].trim();}
+  function updateWrongBadge(){
+    const b=document.getElementById('wrong-badge');
+    if(wrongSet.size>0){b.style.display='inline-block';b.textContent=wrongSet.size;}
+    else b.style.display='none';
   }
 
-  // ═══════════════════════════════════════
-  // MAIN QUIZ — làm từng câu, 200 câu tổng
-  // ═══════════════════════════════════════
-  function renderMainQuestion() {
-    const qArea = document.getElementById('quiz-question-area');
-    const finishArea = document.getElementById('quiz-finish-area');
-
-    if (mainIndex >= Q.length) {
-      qArea.style.display = 'none';
-      showMainFinish();
-      return;
-    }
-
-    qArea.style.display = 'block';
-    finishArea.style.display = 'none';
-
-    const qi = mainIndex;
-    const q = Q[qi];
-    const answeredLetter = answers[qi];
-    const locked = mainAnswered;
-
-    document.getElementById('stat-current').textContent = `${qi+1} / ${Q.length}`;
-    document.getElementById('stat-correct').textContent = correctCount;
-    document.getElementById('stat-wrong').textContent = wrongCount;
-    document.getElementById('progress-fill').style.width = `${(qi/Q.length)*100}%`;
-
-    qArea.innerHTML = `
-      <div class="q-card">
-        <div class="q-num">問題 ${qi+1} / ${Q.length}</div>
-        <div class="q-text">${q.q}</div>
-        <div class="choices">
-          ${q.c.map(ch => {
-            const letter = getLetter(ch);
-            let cls = 'choice-btn';
-            if (locked) {
-              if (letter === q.a) cls += ' correct';
-              else if (letter === answeredLetter) cls += ' wrong';
-            }
-            return `<button class="${cls}" onclick="chooseMainAnswer('${letter}')" ${locked?'disabled':''}>${ch}</button>`;
-          }).join('')}
-        </div>
-        ${locked ? (
-          answeredLetter === q.a
-            ? `<div class="correct-hint">✅ Chính xác!</div>`
-            : `<div class="correct-hint" style="color:#7a0000;background:var(--red-soft)">❌ Sai rồi — đáp án đúng: ${q.a}. Câu này đã được lưu vào mục <strong>🔁 Câu sai</strong>.</div>`
-        ) : ''}
-      </div>
-      <div class="quiz-nav" style="justify-content:flex-end">
-        ${locked ? `<button class="btn btn-primary" onclick="nextMainQuestion()">${qi+1 < Q.length ? 'Câu tiếp theo →' : 'Xem kết quả →'}</button>` : ''}
-      </div>
-    `;
+  function renderMainQuestion(){
+    const qArea=document.getElementById('quiz-question-area');
+    const fin=document.getElementById('quiz-finish-area');
+    if(mainIndex>=Q.length){qArea.style.display='none';showMainFinish();return;}
+    qArea.style.display='block';fin.style.display='none';
+    const qi=mainIndex,q=Q[qi],answeredLetter=answers[qi],locked=mainAnswered;
+    document.getElementById('stat-current').textContent=`${qi+1} / ${Q.length}`;
+    document.getElementById('stat-correct').textContent=correctCount;
+    document.getElementById('stat-wrong').textContent=wrongCount;
+    document.getElementById('progress-fill').style.width=`${(qi/Q.length)*100}%`;
+    qArea.innerHTML=`<div class="q-card">
+      <div class="q-num">問題 ${qi+1} / ${Q.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="choices">${q.c.map(ch=>{
+        const l=getLetter(ch);let cls='choice-btn';
+        if(locked){if(l===q.a)cls+=' correct';else if(l===answeredLetter)cls+=' wrong';}
+        return`<button class="${cls}" onclick="chooseMainAnswer('${l}')" ${locked?'disabled':''}>${ch}</button>`;
+      }).join('')}</div>
+      ${locked?(answeredLetter===q.a
+        ?`<div class="correct-hint">✅ Chính xác!</div>`
+        :`<div class="correct-hint" style="color:#7a0000;background:var(--red-soft)">❌ Sai — đáp án đúng: ${q.a}. Đã lưu vào <strong>🔁 Câu sai</strong>.</div>`
+      ):''}
+    </div>
+    <div class="quiz-nav" style="justify-content:flex-end">
+      ${locked?`<button class="btn btn-primary" onclick="nextMainQuestion()">${qi+1<Q.length?'Câu tiếp theo →':'Xem kết quả →'}</button>`:''}
+    </div>`;
   }
 
-  function chooseMainAnswer(letter) {
-    if (mainAnswered) return;
-    const qi = mainIndex;
-    answers[qi] = letter;
-    mainAnswered = true;
-    if (letter === Q[qi].a) {
-      correctCount++;
-      wrongSet.delete(qi);
-    } else {
-      wrongCount++;
-      wrongSet.add(qi);
-    }
-    updateWrongBadge();
-    renderMainQuestion();
+  function chooseMainAnswer(letter){
+    if(mainAnswered)return;
+    const qi=mainIndex;answers[qi]=letter;mainAnswered=true;
+    if(letter===Q[qi].a){correctCount++;wrongSet.delete(qi);}
+    else{wrongCount++;wrongSet.add(qi);}
+    updateWrongBadge();renderMainQuestion();
+  }
+  function nextMainQuestion(){mainIndex++;mainAnswered=false;renderMainQuestion();window.scrollTo(0,0);}
+  function showMainFinish(){
+    document.getElementById('quiz-finish-area').style.display='block';
+    document.getElementById('progress-fill').style.width='100%';
+    document.getElementById('stat-current').textContent=`${Q.length} / ${Q.length}`;
+    const pct=Math.round(correctCount/Q.length*100);
+    const grade=pct>=90?'優秀 🏆':pct>=70?'合格 ✅':pct>=50?'もう少し 📚':'不合格 ❌';
+    document.getElementById('fa-score').textContent=correctCount;
+    document.getElementById('fa-grade').textContent=`${pct}% — ${grade}`;
+    document.getElementById('fa-wrong-count').textContent=wrongSet.size;
+    const bar=document.getElementById('fa-bar');
+    bar.style.background=pct>=70?'#34c759':pct>=50?'#ff9500':'#ff3b30';
+    bar.style.width='0%';setTimeout(()=>{bar.style.width=pct+'%';},50);
+  }
+  function resetMainQuiz(){
+    if(!confirm('Làm lại từ đầu sẽ xóa toàn bộ kết quả. Tiếp tục?'))return;
+    answers={};wrongSet.clear();mainIndex=0;mainAnswered=false;correctCount=0;wrongCount=0;
+    document.getElementById('progress-fill').style.width='0%';
+    updateWrongBadge();renderMainQuestion();window.scrollTo(0,0);
   }
 
-  function nextMainQuestion() {
-    mainIndex++;
-    mainAnswered = false;
-    renderMainQuestion();
-    window.scrollTo(0,0);
-  }
-
-  function showMainFinish() {
-    document.getElementById('quiz-finish-area').style.display = 'block';
-    document.getElementById('progress-fill').style.width = '100%';
-    document.getElementById('stat-current').textContent = `${Q.length} / ${Q.length}`;
-    const pct = Math.round(correctCount / Q.length * 100);
-    const grade = pct>=90?'優秀 🏆':pct>=70?'合格 ✅':pct>=50?'もう少し 📚':'不合格 ❌';
-    document.getElementById('fa-score').textContent = correctCount;
-    document.getElementById('fa-grade').textContent = `${pct}% — ${grade}`;
-    document.getElementById('fa-wrong-count').textContent = wrongSet.size;
-    const bar = document.getElementById('fa-bar');
-    bar.style.background = pct>=70?'#34c759':pct>=50?'#ff9500':'#ff3b30';
-    bar.style.width = '0%';
-    setTimeout(()=>{ bar.style.width = pct+'%'; }, 50);
-  }
-
-  function resetMainQuiz() {
-    if (!confirm('Làm lại từ đầu sẽ xóa toàn bộ kết quả và danh sách câu sai đã lưu. Tiếp tục?')) return;
-    answers = {};
-    wrongSet.clear();
-    mainIndex = 0;
-    mainAnswered = false;
-    correctCount = 0;
-    wrongCount = 0;
-    document.getElementById('progress-fill').style.width = '0%';
-    updateWrongBadge();
-    renderMainQuestion();
-    window.scrollTo(0,0);
-  }
-
-  // ═══════════════════════════════════════
-  // WRONG-ANSWER PRACTICE — làm lại bất cứ lúc nào
-  // ═══════════════════════════════════════
-  function renderWrongIntro() {
-    const arr = Array.from(wrongSet).sort((a,b)=>a-b);
-    document.getElementById('wrong-intro').style.display = 'block';
-    document.getElementById('wrong-question-area').style.display = 'none';
-    document.getElementById('wrong-finish-area').style.display = 'none';
-    document.getElementById('wrong-count-num').textContent = arr.length;
-
-    const listEl = document.getElementById('wrong-list');
-    const btn = document.getElementById('btn-start-wrong');
-    if (arr.length === 0) {
-      listEl.innerHTML = '<p style="font-size:13px;color:var(--text-secondary);grid-column:1/-1">🎉 Tuyệt vời! Hiện không có câu sai nào.</p>';
-      btn.style.display = 'none';
-    } else {
-      btn.style.display = 'inline-block';
-      listEl.innerHTML = arr.map(i => `<span class="page-dot" style="cursor:default;background:var(--red-soft);color:#c00;border-color:rgba(200,0,0,0.2)">${i+1}</span>`).join('');
+  function renderWrongIntro(){
+    const arr=Array.from(wrongSet).sort((a,b)=>a-b);
+    document.getElementById('wrong-intro').style.display='block';
+    document.getElementById('wrong-question-area').style.display='none';
+    document.getElementById('wrong-finish-area').style.display='none';
+    document.getElementById('wrong-count-num').textContent=arr.length;
+    const listEl=document.getElementById('wrong-list'),btn=document.getElementById('btn-start-wrong');
+    if(arr.length===0){
+      listEl.innerHTML='<p style="font-size:13px;color:var(--text-secondary)">🎉 Không có câu sai nào!</p>';
+      btn.style.display='none';
+    }else{
+      btn.style.display='inline-block';
+      listEl.innerHTML=arr.map(i=>`<span class="page-dot" style="cursor:default;background:var(--red-soft);color:#c00;border-color:rgba(200,0,0,0.2)">${i+1}</span>`).join('');
     }
     updateWrongBadge();
   }
-
-  function startWrongPractice() {
-    wrongQueue = Array.from(wrongSet).sort((a,b)=>a-b);
-    if (wrongQueue.length === 0) return;
-    wrongIndex = 0;
-    wrongModeAnswered = false;
-    wrongModeChoice = null;
-    document.getElementById('wrong-intro').style.display = 'none';
-    document.getElementById('wrong-finish-area').style.display = 'none';
-    document.getElementById('wrong-question-area').style.display = 'block';
-    renderWrongQuestion();
-    window.scrollTo(0,0);
+  function startWrongPractice(){
+    wrongQueue=Array.from(wrongSet).sort((a,b)=>a-b);
+    if(!wrongQueue.length)return;
+    wrongIndex=0;wrongModeAnswered=false;wrongModeChoice=null;
+    document.getElementById('wrong-intro').style.display='none';
+    document.getElementById('wrong-finish-area').style.display='none';
+    document.getElementById('wrong-question-area').style.display='block';
+    renderWrongQuestion();window.scrollTo(0,0);
   }
-
-  function renderWrongQuestion() {
-    const qArea = document.getElementById('wrong-question-area');
-    if (wrongIndex >= wrongQueue.length) { showWrongFinish(); return; }
-
-    const qi = wrongQueue[wrongIndex];
-    const q = Q[qi];
-    const locked = wrongModeAnswered;
-
-    qArea.innerHTML = `
-      <div class="page-info"><span>Ôn lại: câu ${wrongIndex+1} / ${wrongQueue.length}</span><span>Còn sai: ${wrongSet.size}</span></div>
-      <div class="q-card">
-        <div class="q-num">問題 ${qi+1}</div>
-        <div class="q-text">${q.q}</div>
-        <div class="choices">
-          ${q.c.map(ch => {
-            const letter = getLetter(ch);
-            let cls = 'choice-btn';
-            if (locked) {
-              if (letter === q.a) cls += ' correct';
-              else if (letter === wrongModeChoice) cls += ' wrong';
-            }
-            return `<button class="${cls}" onclick="chooseWrongAnswer('${letter}')" ${locked?'disabled':''}>${ch}</button>`;
-          }).join('')}
-        </div>
-        ${locked ? (
-          wrongModeChoice === q.a
-            ? `<div class="correct-hint">✅ Chính xác! Câu này đã được gỡ khỏi danh sách câu sai.</div>`
-            : `<div class="correct-hint" style="color:#7a0000;background:var(--red-soft)">❌ Vẫn sai — đáp án đúng: ${q.a}</div>`
-        ) : ''}
-      </div>
-      <div class="quiz-nav" style="justify-content:flex-end">
-        ${locked ? `<button class="btn btn-primary" onclick="nextWrongQuestion()">${wrongIndex+1 < wrongQueue.length ? 'Câu tiếp theo →' : 'Hoàn thành →'}</button>` : ''}
-      </div>
-    `;
+  function renderWrongQuestion(){
+    const qArea=document.getElementById('wrong-question-area');
+    if(wrongIndex>=wrongQueue.length){showWrongFinish();return;}
+    const qi=wrongQueue[wrongIndex],q=Q[qi],locked=wrongModeAnswered;
+    qArea.innerHTML=`<div class="page-info"><span>Ôn lại: ${wrongIndex+1} / ${wrongQueue.length}</span><span>Còn sai: ${wrongSet.size}</span></div>
+    <div class="q-card">
+      <div class="q-num">問題 ${qi+1}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="choices">${q.c.map(ch=>{
+        const l=getLetter(ch);let cls='choice-btn';
+        if(locked){if(l===q.a)cls+=' correct';else if(l===wrongModeChoice)cls+=' wrong';}
+        return`<button class="${cls}" onclick="chooseWrongAnswer('${l}')" ${locked?'disabled':''}>${ch}</button>`;
+      }).join('')}</div>
+      ${locked?(wrongModeChoice===q.a
+        ?`<div class="correct-hint">✅ Chính xác! Đã gỡ khỏi danh sách câu sai.</div>`
+        :`<div class="correct-hint" style="color:#7a0000;background:var(--red-soft)">❌ Vẫn sai — đáp án đúng: ${q.a}</div>`
+      ):''}
+    </div>
+    <div class="quiz-nav" style="justify-content:flex-end">
+      ${locked?`<button class="btn btn-primary" onclick="nextWrongQuestion()">${wrongIndex+1<wrongQueue.length?'Câu tiếp theo →':'Hoàn thành →'}</button>`:''}
+    </div>`;
   }
-
-  function chooseWrongAnswer(letter) {
-    if (wrongModeAnswered) return;
-    wrongModeAnswered = true;
-    wrongModeChoice = letter;
-    const qi = wrongQueue[wrongIndex];
-    answers[qi] = letter;
-    if (letter === Q[qi].a) {
-      wrongSet.delete(qi);
-      correctCount++;
-    } else {
-      wrongCount++;
-    }
-    updateWrongBadge();
-    renderWrongQuestion();
+  function chooseWrongAnswer(letter){
+    if(wrongModeAnswered)return;
+    wrongModeAnswered=true;wrongModeChoice=letter;
+    const qi=wrongQueue[wrongIndex];answers[qi]=letter;
+    if(letter===Q[qi].a){wrongSet.delete(qi);correctCount++;}
+    else wrongCount++;
+    updateWrongBadge();renderWrongQuestion();
   }
-
-  function nextWrongQuestion() {
-    wrongIndex++;
-    wrongModeAnswered = false;
-    wrongModeChoice = null;
-    renderWrongQuestion();
-    window.scrollTo(0,0);
+  function nextWrongQuestion(){wrongIndex++;wrongModeAnswered=false;wrongModeChoice=null;renderWrongQuestion();window.scrollTo(0,0);}
+  function showWrongFinish(){
+    document.getElementById('wrong-question-area').style.display='none';
+    document.getElementById('wrong-finish-area').style.display='block';
+    document.getElementById('wf-remaining').textContent=wrongSet.size;
   }
+  function backToWrongIntro(){renderWrongIntro();window.scrollTo(0,0);}
 
-  function showWrongFinish() {
-    document.getElementById('wrong-question-area').style.display = 'none';
-    document.getElementById('wrong-finish-area').style.display = 'block';
-    document.getElementById('wf-remaining').textContent = wrongSet.size;
-  }
-
-  function backToWrongIntro() {
-    renderWrongIntro();
-    window.scrollTo(0,0);
-  }
-
-  // ═══════════════════════════════════════
-  // INIT
-  // ═══════════════════════════════════════
-  renderMainQuestion();
-  updateWrongBadge();
+  renderMainQuestion();updateWrongBadge();
 </script>
 </body>
 </html>
