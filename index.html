@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -182,9 +181,16 @@
     .choice-btn.correct{border-color:var(--green);background:var(--green-soft);color:#1a5c2a;font-weight:600}
     .choice-btn.wrong{border-color:var(--red);background:var(--red-soft);color:#7a0000}
     .choice-btn:disabled{cursor:default}
-    .correct-hint{margin-top:8px;font-size:12px;color:#1a5c2a;background:var(--green-soft);border-radius:6px;padding:7px 12px;font-weight:500}
-    .wrong-hint{margin-top:8px;font-size:12px;color:#7a0000;background:var(--red-soft);border-radius:6px;padding:7px 12px}
-    .explain-box{margin-top:8px;font-size:12px;color:var(--text-secondary);background:var(--surface-2);border-radius:6px;padding:7px 12px;border-left:3px solid var(--border);line-height:1.6}
+    .correct-hint{margin-top:8px;font-size:13px;color:#1a5c2a;background:var(--green-soft);border-radius:6px;padding:10px 14px;font-weight:600;line-height:1.5}
+    .wrong-hint{margin-top:8px;font-size:13px;color:#7a0000;background:var(--red-soft);border-radius:6px;padding:10px 14px;line-height:1.5}
+    .vn-translation{margin-top:12px;padding:12px;background:var(--surface-2);border-radius:8px;border-left:4px solid var(--accent)}
+    .vn-translation-title{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+    .vn-q-text{font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:8px;line-height:1.5}
+    .vn-choices{list-style:none;padding:0}
+    .vn-choices li{font-size:13px;color:var(--text-secondary);padding:2px 0;display:flex;gap:8px}
+    .vn-choices li span{color:var(--accent);font-weight:700;min-width:18px}
+    .explain-box{margin-top:12px;font-size:13px;color:var(--text-primary);background:var(--surface-3);border-radius:8px;padding:12px 14px;line-height:1.6}
+    .explain-title{font-size:11px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;margin-bottom:6px;display:block}
     .quiz-nav{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:12px}
     .btn{padding:10px 22px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:var(--font)}
     .btn-ghost{background:var(--surface);border:1.5px solid var(--border);color:var(--text-primary)}
@@ -599,7 +605,7 @@
           </tbody>
         </table>
         <div class="def-row"><div class="def-jp">サンプリング周波数(Hz)</div><div class="def-vn">CD: 44.1 kHz / 高いほど音質UP</div></div>
-        <div class="def-row"><div class="def-jp">量子化数</div><div class="def-vn">CD: 2¹⁶段階 / 波 của 高さ の 分解能</div></div>
+        <div class="def-row"><div class="def-jp">量子化数</div><div class="def-vn">CD: 2¹⁶段階 / 波の高さの分解能</div></div>
         <div class="def-row"><div class="def-jp">dpi (Dot Per Inch)</div><div class="def-vn">Độ phân giải máy in / A4@300dpi ≈ 8.7 Megapixel</div></div>
         <div class="def-row"><div class="def-jp">フーリエ変換</div><div class="def-vn">Phân tích sóng thành sóng sin: 低周波=đặc tính lớn / 高周波=chi tiết</div></div>
         <div class="def-row"><div class="def-jp">bps (bit per second)</div><div class="def-vn">Đơn vị tốc độ truyền: FTTH~100 Mbps / ADSL~50 Mbps / Wi-Fi~54 Mbps</div></div>
@@ -611,9 +617,13 @@
 </div><!-- /study-page -->
 
 
-<!-- ═══ QUIZ PAGE (200 câu) ═══ -->
+<!-- ═══ QUIZ PAGE (200 câu mới) ═══ -->
 <div id="quiz-page" class="page">
-
+  <div class="quiz-hero">
+    <p class="quiz-hero-eyebrow">JIT301 — Ôn luyện</p>
+    <h2>200 câu <span>ôn luyện</span></h2>
+    <p class="quiz-hero-sub">Câu hỏi tổng hợp · 6 mẫu · song ngữ Nhật–Việt</p>
+  </div>
   <div class="progress-strip"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
   <div class="quiz-stats-bar">
     <div class="quiz-stats-inner">
@@ -664,7 +674,11 @@
 
 <!-- ═══ SAMPLE QUIZ PAGE (52 câu gốc Doc1) ═══ -->
 <div id="sample-page" class="page">
-
+  <div class="quiz-hero">
+    <p class="quiz-hero-eyebrow">JIT301 — Quiz mẫu</p>
+    <h2>52 câu <span>Quiz mẫu gốc</span></h2>
+    <p class="quiz-hero-sub">Nguyên bản câu hỏi từ Doc1 · Phong cách thi thật</p>
+  </div>
   <div class="progress-strip"><div class="progress-fill orange" id="s-progress" style="width:0%"></div></div>
   <div class="quiz-stats-bar">
     <div class="quiz-stats-inner">
@@ -715,85 +729,239 @@
 
 <script>
   // =====================================================
-  // DATA: 200 CÂU (Tích hợp đầy đủ các chương)
+  // DATA: 200 CÂU MỚI (theo 6 mẫu của Doc3)
   // =====================================================
   const QUIZ = [
-  // --- CHƯƠNG 1: Digital/Analog/Lịch sử ---
-  {m:1,q:"アナログ信号として送受信される形式はどれか。",v:"Đại lượng nào sau đây được truyền dưới dạng tín hiệu Analog?",c:["A. 0と1のデジタルデータ","B. パケットデータ","C. 電流(mA)または電圧(mV)信号","D. バイナリコード"],cv:["A. Dữ liệu số 0 và 1","B. Dữ liệu gói","C. Tín hiệu dòng điện mA hoặc điện áp mV","D. Mã nhị phân"],a:"C",ex:"Analog là đại lượng liên tục, được truyền đi bằng sự biến thiên của dòng điện hoặc điện áp. Lựa chọn A, B, D đều thuộc về Digital."},
-  {m:2,q:"デジタルとは何を表す量か。",v:"Digital biểu thị đại lượng như thế nào?",c:["A. 連続的な量","B. 数値化された量","C. 電流の量","D. 波形の量"],cv:["A. Đại lượng liên tục","B. Đại lượng đã được số hóa","C. Lượng dòng điện","D. Lượng sóng"],a:"B",ex:"Digital biểu thị các đại lượng rời rạc đã được chuyển đổi thành các con số (số hóa)."},
-  {m:2,q:"電子式計算機ENIACが開発された年はいつか。",v:"Máy tính điện tử ENIAC được phát triển vào năm nào?",c:["A. 1930年","B. 1939年","C. 1946年","D. 1949年"],cv:["A. Năm 1930","B. Năm 1939","C. Năm 1946","D. Năm 1949"],a:"C",ex:"ENIAC là máy tính điện tử đa năng đầu tiên trên thế giới, ra đời năm 1946."},
-  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい: Máy tính điện tử",v:"Dịch thuật ngữ sau sang tiếng Nhật: Máy tính điện tử",c:["A. 電気機械式計算機","B. 電子式計算機","C. 電子制御計算機","D. 電子計算管"],cv:["A. Máy tính điện cơ","B. Máy tính điện tử","C. Máy tính điều khiển điện tử","D. Ống tính toán điện tử"],a:"B",ex:"Máy tính điện tử trong tiếng Nhật chuyên môn là 電子式計算機 (Denshi-shiki keisanki)."},
-  {m:5,q:"コンピュータの5要素として正しいものをえらんでください。",v:"Chọn đúng 5 thành phần cơ bản của máy tính.",c:["A. 演算・記憶・制御・入力・通信装置","B. 演算・記憶・制御・入力・出力装置","C. 演算・記憶・制御・表示・出力装置","D. 演算・処理・制御・入力・出力装置"],cv:["A. Tính toán, Ghi nhớ, Điều khiển, Đầu vào, Truyền dẫn","B. Tính toán, Ghi nhớ, Điều khiển, Đầu vào, Đầu ra","C. Tính toán, Ghi nhớ, Điều khiển, Hiển thị, Đầu ra","D. Tính toán, Xử lý, Điều khiển, Đầu vào, Đầu ra"],a:"B",ex:"5 thành phần cơ bản gồm: Thiết bị tính toán (演算), Ghi nhớ (記憶), Điều khiển (制御), Đầu vào (入力) và Đầu ra (出力)."},
-  {m:1,q:"ホームページのアドレスのことを（ ）という。",v:"Địa chỉ trang web được gọi là?",c:["A. IP","B. URL","C. HTML","D. DNS"],cv:["A. IP","B. URL","C. HTML","D. DNS"],a:"B",ex:"URL (Uniform Resource Location) là địa chỉ duy nhất để truy cập một trang web cụ thể."},
-  {m:2,q:"Web 2.0という言葉を2004年に提唱したのは誰か。",v:"Ai là người đề xuất thuật ngữ Web 2.0 vào năm 2004?",c:["A. エリック・シュミット","B. スティーブ・ジョブズ","C. ティム • オライリー","D. ビル・ゲイツ"],cv:["A. Eric Schmidt","B. Steve Jobs","C. Tim O'Reilly","D. Bill Gates"],a:"C",ex:"Tim O'Reilly là người đầu tiên đưa ra khái niệm Web 2.0."},
-  {m:5,q:"FTTH（光ファイバ通信）の最大通信速度はどれか。",v:"Tốc độ truyền thông tối đa của FTTH (cáp quang) là bao nhiêu?",c:["A. 約40 Mbps","B. 約50 Mbps","C. 約100 Mbps","D. 約1 Gbps"],cv:["A. Khoảng 40 Mbps","B. Khoảng 50 Mbps","C. Khoảng 100 Mbps","D. Khoảng 1 Gbps"],a:"C",ex:"FTTH sử dụng sợi quang cung cấp tốc độ khoảng 100 Mbps đến hộ gia đình."},
-  {m:2,q:"OSI参照モデルは何層構造か。",v:"Mô hình tham chiếu OSI có cấu trúc mấy tầng?",c:["A. 5層","B. 6層","C. 7層","D. 8層"],cv:["A. 5 tầng","B. 6 tầng","C. 7 tầng","D. 8 tầng"],a:"C",ex:"Mô hình OSI có 7 tầng tiêu chuẩn phục vụ kết nối mạng."},
-  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい: Tên miền",v:"Dịch thuật ngữ sau sang tiếng Nhật: Tên miền",c:["A. IPアドレス","B. MACアドレス","C. ドメイン名","D. URLアドレス"],cv:["A. Địa chỉ IP","B. Địa chỉ MAC","C. Tên miền","D. Địa chỉ URL"],a:"C",ex:"Tên miền trong tiếng Nhật là ドメイン名 (Domain name)."},
+  // === CHƯƠNG 1: Digital/Analog/Lịch sử ===
+  {m:1,q:"アナログ信号として送受信される形式はどれか。",c:["A. 0と1のデジタルデータ","B. パケットデータ","C. 電流(mA)または電圧(mV)信号","D. バイナリコード"],a:"C",ex:"アナログは電流・電圧の連続的な信号で送受信されます。"},
+  {m:2,q:"デジタルとは何を表す量か。",c:["A. 連続的な量","B. 数値化された量","C. 電流の量","D. 波形の量"],a:"B",ex:"デジタルは数値化（離散化）された量です。"},
+  {m:5,q:"アナログについて正しいものをえらんでください。",c:["A. コピーができる","B. 切れ目のある正確な表現ができる","C. 1と0だけを使う","D. 曖昧なものをそのまま表現できる"],a:"D",ex:"アナログの最大の特徴は、連続的な量で曖昧なものをそのまま表現できることです。"},
+  {m:6,q:"デジタルについて正しくないものをえらんでください。",c:["A. コピーができる","B. 正確で切れ目のある","C. 曖昧なものをそのまま残すことができる","D. 数値化された量である"],a:"C",ex:"デジタルは曖昧なものをそのまま残すことができません（離散化されるため）。"},
+  {m:2,q:"電子式計算機ENIACが開発された年はいつか。",c:["A. 1930年","B. 1939年","C. 1946年","D. 1949年"],a:"C",ex:"ENIACは1946年に開発された電子式計算機です。"},
+  {m:2,q:"フォン・ノイマンのプログラム内蔵方式コンピュータが登場したのはいつか。",c:["A. 1939年","B. 1946年","C. 1949年","D. 1930年"],a:"C",ex:"フォン・ノイマンコンピュータは1949年に登場し、現代のコンピュータの基礎となりました。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Máy tính điện tử",c:["A. 電気機械式計算機","B. 電子式計算機","C. 電子制御計算機","D. 電子計算管"],a:"B",ex:"Máy tính điện tử（マイティン・ジエンツ）は電子式計算機（でんしせいけいき）です。"},
+  {m:2,q:"コンピュータを1つの式で表すと何になるか。",c:["A. コンピュータ ＝ 入力 ＋ 出力","B. コンピュータ ＝ 演算 ＋ 通信","C. コンピュータ ＝ 記憶 ＋ 処理","D. コンピュータ ＝ 表示 ＋ 制御"],a:"C",ex:"コンピュータは「記憶」と「処理」の繰り返しで動作します（§1.4）。"},
+  {m:5,q:"コンピュータの5要素として正しいものをえらんでください。",c:["A. 演算・記憶・制御・入力・通信装置","B. 演算・記憶・制御・入力・出力装置","C. 演算・記憶・制御・表示・出力装置","D. 演算・処理・制御・入力・出力装置"],a:"B",ex:"コンピュータの5要素は「演算・記憶・制御・入力・出力装置」です（§10.1）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Bộ nhớ chỉ đọc",c:["A. RAM（ランダムアクセスメモリ）","B. CPU（中央処理装置）","C. ROM（読み取り専用メモリ）","D. HDD（ハードディスク）"],a:"C",ex:"Bộ nhớ chỉ đọc（ボニョーチードック）はROM = Read Only Memory（読み取り専用メモリ）です。"},
 
-  // --- 30 CÂU BỔ SUNG QUAN TRỌNG ---
-  {m:1,q:"アナログは電流（mA）または（ ）信号として送信されます。",v:"Analog được truyền đi dưới dạng tín hiệu dòng điện (mA) hoặc ( ).",c:["A. 電圧","B. 電波","C. 電池","D. 電荷"],cv:["A. điện áp","B. sóng điện từ","C. pin","D. điện tích"],a:"A",ex:"Chương 1 (アナログ（analog）とは？). Nguyên văn: \"アナログは電流（mA）または電圧（mV）信号として送信されます。\""},
-  {m:2,q:"コンピュータの基本原理はこのように単純な（ ）と記憶 của 繰り返しです。",v:"Nguyên lý cơ bản của máy tính là sự lặp lại của bộ nhớ và ( ) đơn giản như thế này.",c:["A. 記録","B. 処理","C. 計算","D. 表現"],cv:["A. ghi chép","B. xử lý","C. tính toán","D. biểu hiện"],a:"C",ex:"Chương 6 (コンピュータの機能). Nguyên văn: \"コンピュータの基本原理はこのように単純な計算と記憶の繰り返しです。\""},
-  {m:3,q:"ファイルの種類を表すために、ファイル名には表示されない名前が付けられています。この名前は（ ）と呼ばれます。",v:"Để biểu thị loại tệp tin, một tên không hiển thị trên tên tệp được đính kèm. Tên này được gọi là ( ).",c:["A. 拡張子","B. 識別子","C. フォルダ","D. アイコン"],cv:["A. phần mở rộng","B. định danh","C. thư mục","D. biểu tượng"],a:"A",ex:"Chương 8 (ファイル (2)). Nguyên văn: \"ファイルの種類を表すために...この名前は拡張子と呼ばれます。\""},
-  {m:1,q:"電話会社と契約する際に、（ ）と呼ばれるICカードに、契約者番号を記録することで電話機を管理しています。",v:"Khi ký hợp đồng với công ty điện thoại, điện thoại được quản lý bằng cách ghi số người dùng vào một thẻ IC gọi là ( ).",c:["A. SIMカード","B. メモリカード","C. SDカード","D. Suicaカード"],cv:["A. thẻ SIM","B. thẻ nhớ","C. thẻ SD","D. thẻ Suica"],a:"A",ex:"Chương 16 (通信). Điện thoại được quản lý qua thẻ SIM (Subscriber Identity Module)."},
-  {m:5,q:"ハブの先にさらにハブを取り付けて、（ ）状にコンピュータを接続することも可能です。",v:"Bạn có thể kết nối thêm các hub vào hub trước đó để kết nối các máy tính theo dạng ( ).",c:["A. リング","B. バス","C. カスケード","D. ピアツーピア"],cv:["A. vòng","B. tuyến","C. phân tầng/thác","D. ngang hàng"],a:"C",ex:"Chương 25 (ネットワークの形態). Kết nối hub nối tiếp hub gọi là kết nối Cascade (phân tầng)."},
-  {m:2,q:"デジタルコンピュータでは電圧が高い(オン)、低い(オフ)に対応させるために、どの数字を使っていますか。",v:"Trong máy tính kỹ thuật số, để tương ứng với điện áp cao (On) và thấp (Off), người ta sử dụng những con số nào?",c:["A. 1と2","B. 0と1","C. 10進数","D. 0から9"],cv:["A. 1 và 2","B. 0 và 1","C. Hệ thập phân","D. Từ 0 đến 9"],a:"B",ex:"Chương 2. Chỉ sử dụng các con số 1 và 0 (hệ nhị phân) để đại diện cho trạng thái tắt/mở."},
-  {m:2,q:"電子式計算機ENIAC（エニアック）はいつ開発されましたか。",v:"Máy tính điện tử ENIAC được phát triển vào năm nào?",c:["A. 1930年","B. 1939年","C. 1946年","D. 1949年"],cv:["A. Năm 1930","B. Năm 1939","C. Năm 1946","D. Năm 1949"],a:"C",ex:"Chương 4 (コンピュータの歴史). ENIAC ra đời năm 1946 tại Mỹ."},
-  {m:2,q:"情報量の最小単位は何ですか。",v:"Đơn vị nhỏ nhất của lượng thông tin là gì?",c:["A. バイト","B. ピクセル","C. ドット","D. ビット"],cv:["A. Byte","B. Pixel","C. Dot","D. Bit"],a:"D",ex:"Chương 2 (情報量). Đơn vị nhỏ nhất là bit (binary digit)."},
-  {m:2,q:"1バイト（byte）は何ビット（bit）ですか。",v:"1 byte bằng bao nhiêu bit?",c:["A. 4 bit","B. 8 bit","C. 16 bit","D. 1024 bit"],cv:["A. 4 bit","B. 8 bit","C. 16 bit","D. 1024 bit"],a:"B",ex:"Chương 4 (情報量の単位). Quy đổi chuẩn: 1 byte = 8 bit."},
-  {m:2,q:"Bluetoothはおよそ何メートル程度の範囲内にある機器同士が自動的に通信し合いますか。",v:"Bluetooth tự động giao tiếp giữa các thiết bị trong phạm vi khoảng bao nhiêu mét?",c:["A. 1m程度","B. 10m程度","C. 50m程度","D. 100m程度"],cv:["A. Khoảng 1m","B. Khoảng 10m","C. Khoảng 50m","D. Khoảng 100m"],a:"B",ex:"Chương 22 (無線通信手段). Bluetooth dùng cho kết nối cá nhân tầm ngắn, khoảng 10m."},
-  {m:2,q:"第1世代の論理素子は何ですか。",v:"Phần tử logic của thế hệ thứ 1 là gì?",c:["A. 真空管","B. トランジスタ","C. IC","D. LSI"],cv:["A. Ống chân không","B. Transistor","C. Mạch tích hợp","D. Mạch tích hợp quy mô lớn"],a:"A",ex:"Chương 51 (論理素子の歴史). Thế hệ 1 dùng ống chân không (vacuum tubes)."},
-  {m:2,q:"IPv4のIPアドレスは0から255の数字をピリオドで区切ったいくつの数字の並びですか。",v:"Địa chỉ IPv4 là chuỗi gồm bao nhiêu số được phân cách bằng dấu chấm?",c:["A. 2つ","B. 4つ","C. 6つ","D. 8つ"],cv:["A. 2 số","B. 4 số","C. 6 số","D. 8 số"],a:"B",ex:"Chương 29. Ví dụ: 192.168.1.1 (gồm 4 nhóm số từ 0 đến 255)."},
-  {m:2,q:"日本のテレビ放送では、1秒に何回の画像の書き換えを行っていますか。",v:"Trong truyền hình Nhật Bản, việc vẽ lại hình ảnh được thực hiện bao nhiêu lần trong 1 giây?",c:["A. 24回","B. 30回","C. 60回","D. 120回"],cv:["A. 24 lần","B. 30 lần","C. 60 lần","D. 120 lần"],a:"B",ex:"Chương 15 (動画像). Chuẩn NTSC truyền thống thực hiện 30 khung hình/giây."},
-  {m:2,q:"ネットワーク層のIPプロトコルに従って割り当てられたコンピュータの住所にあたる名前は何ですか。",v:"Tên tương đương với địa chỉ của máy tính ở lớp mạng là gì?",c:["A. MACアドレス","B. ドメイン名","C. IPアドレス","D. URL"],cv:["A. Địa chỉ MAC","B. Tên miền","C. Địa chỉ IP","D. Địa chỉ URL"],a:"C",ex:"Chương 29 (IPアドレス). Đó chính là địa chỉ IP."},
-  {m:2,q:"日本語1文字を表すのに通常必要なデータ量はどれだけですか。",v:"Dung lượng dữ liệu thông thường cho 1 ký tự tiếng Nhật là bao nhiêu?",c:["A. 1 bit","B. 8 bit","C. 1 byte","D. 2 byte"],cv:["A. 1 bit","B. 8 bit","C. 1 byte","D. 2 byte"],a:"D",ex:"Chương 17. Chữ Nhật/Kanji dùng 16 bit, tương đương 2 byte."},
-  {m:3,q:"【専門知識】「WANのような地域ネットワーク同士を網目状に結びつけたネットワーク全体」というのは何ですか。",v: "Toàn bộ hệ thống kết nối các mạng khu vực như WAN thành một mạng lưới là gì?",c:["A. LAN","B. インターネット","C. エクストラネット","D. ピアツーピア"],cv:["A. Mạng LAN","B. Internet","C. Mạng Extranet","D. Ngang hàng (P2P)"],a:"B",ex:"Toàn bộ mạng lưới toàn cầu chính là Internet."},
-  {m:3,q:"【専門知識】「購入者数が少なくても、多品種の商品を提供することで収入増をはかるというビジネスモデル」というのは何ですか。",v: "Mô hình kinh doanh tăng thu nhập bằng cách cung cấp đa dạng sản phẩm dù ít người mua?",c:["A. 電子商取引","B. BtoC","C. ロングテール","D. クラウドコンピューティング"],cv:["A. Thương mại điện tử","B. BtoC","C. Cái đuôi dài (Long tail)","D. Điện toán đám mây"],a:"C",ex:"Đây là khái niệm Long Tail (Cái đuôi dài)."},
-  {m:4,q:"【専門用語】次の日本語の用語をベトナム語に直しなさい: 知的所有権",v:"Dịch thuật ngữ sau sang Tiếng Việt: 知的所有権",c:["A. Quyền sở hữu trí tuệ","B. Quyền sở hữu công nghiệp","C. Quyền tác giả","D. Quyền thương hiệu"],cv:["A. Quyền sở hữu trí tuệ","B. Quyền sở hữu công nghiệp","C. Quyền tác giả","D. Quyền thương hiệu"],a:"A",ex:"知的所有権 nghĩa là Quyền sở hữu trí tuệ."},
-  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい: Thư mục",v:"Dịch thuật ngữ sau sang Tiếng Nhật: Thư mục",c:["A. ファイル","B. 拡張子","C. フォルダ","D. ドライブ"],cv:["A. Tệp tin","B. Phần mở rộng","C. Thư mục","D. Ổ đĩa"],a:"C",ex:"Thư mục trong IT là フォルダ (Folder)."},
-  {m:4,q:"【専門用語】次の日本語の用語をベトナム語に直しなさい: 分散処理システム",v:"Dịch thuật ngữ sau sang Tiếng Việt: 分散処理システム",c:["A. Hệ thống xử lý tập trung","B. Hệ thống xử lý phân tán","C. Hệ thống mạng cục bộ","D. Hệ thống xử lý trung tâm"],cv:["A. Hệ thống xử lý tập trung","B. Hệ thống xử lý phân tán","C. Hệ thống mạng cục bộ","D. Hệ thống xử lý trung tâm"],a:"B",ex:"Hệ thống xử lý phân tán phân chia công việc cho nhiều máy tính."},
-  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい: Tường lửa",v:"Dịch thuật ngữ sau sang Tiếng Nhật: Tường lửa",c:["A. ネットワーク","B. プロバイダ","C. パスワード","D. ファイアウォール"],cv:["A. Mạng","B. Nhà cung cấp","C. Mật khẩu","D. Tường lửa"],a:"D",ex:"Tường lửa là ファイアウォール (Firewall)."},
-  {m:4,q:"【専門用語】次の日本語の用語をベトナム語に直しなさい: 記憶",v:"Dịch thuật ngữ sau sang Tiếng Việt: 記憶",c:["A. Tính toán","B. Xử lý","C. Bộ nhớ / Ghi nhớ","D. Kết nối"],cv:["A. Tính toán","B. Xử lý","C. Bộ nhớ / Ghi nhớ","D. Kết nối"],a:"C",ex:"記憶 nghĩa là Ghi nhớ hoặc Bộ nhớ."},
-  {m:5,q:"【専門知識】デジタルについて正しいものを選びなさい。",v:"Hãy chọn phát biểu ĐÚNG về kỹ thuật số (Digital).",c:["A. コピーができない。","B. データをそのまま残すことができない。","C. 曖昧なものをそのまま表現し、感覚的に理解できる。","D. 正確で切れ目のある。"],cv:["A. Không thể sao chép.","B. Không thể giữ dữ liệu nguyên trạng.","C. Biểu diễn trực quan thứ mơ hồ.","D. Chính xác và có tính rời rạc."],a:"D",ex:"Ưu điểm của Digital là chính xác và có tính rời rạc."},
-  {m:5,q:"【専門知識】スター型のネットワーク形態について正しいものを選びなさい。",v:"Hãy chọn phát biểu ĐÚNG về mạng hình Sao (Star).",c:["A. 1本の通信ケーブルに複数台のコンピュータが接続されたものである。","B. ハブと呼ばれる集線装置を中心に複数台のコンピュータが接続されたものである。","C. 閉じたケーブルに複数台のコンピュータが接続されたものである。","D. 現在ではあまり使われません。"],cv:["A. Một cáp duy nhất.","B. Nối quanh thiết bị Hub.","C. Nối vòng khép kín.","D. Hiện nay ít dùng."],a:"B",ex:"Mạng Star dùng Hub làm trung tâm kết nối."},
-  {m:6,q:"【専門知識】コンピュータの機能について正しくないものをえらんでください。",v:"Hãy chọn phát biểu SAI về chức năng của máy tính.",c:["A. コンピュータは「記憶」して「処理」する機械である。","B. どちらか一方の機能だけではコンピュータと呼ぶことはできません。","C. コンピュータの基本原理は単純な計算と記憶の繰り返しです。","D. コンピュータは「記憶」の機能だけでコンピュータと呼ぶことができる。"],cv:["A. Máy tính \"ghi nhớ\" và \"xử lý\".","B. Thiếu 1 trong 2 không gọi là máy tính.","C. Nguyên lý là lặp lại tính toán và bộ nhớ.","D. Chỉ cần \"ghi nhớ\" cũng gọi là máy tính."],a:"D",ex:"Máy tính bắt buộc phải có cả Ghi nhớ và Xử lý."},
-  {m:6,q:"【専門知識】メール利用の注意（ネチケット）について正しくないものをえらんでください。",v:"Hãy chọn phát biểu SAI về Netiquette email.",c:["A. 自分の氏名、連絡先等を明記する。","B. 相手の氏名を明記する。","C. 急な返事を求める。","D. 大きな添付ファイルを送らない。"],cv:["A. Ghi rõ tên, liên lạc.","B. Ghi rõ tên người nhận.","C. Yêu cầu trả lời gấp.","D. Không gửi file quá lớn."],a:"C",ex:"Quy tắc là \"Không yêu cầu trả lời gấp\" để tránh gây phiền hà."},
-  {m:5,q:"【専門知識】FTTHについて正しいものを選びなさい。",v:"Hãy chọn phát biểu ĐÚNG về FTTH.",c:["A. アナログの電話線を使った通信である。","B. 一般家庭の電灯線を利用してデータ通信を行う技術である。","C. 光ファイバを使って家庭まで高速通信を行うことである。","D. 映像、音声が送信できるようケーブルテレビの放送送信用スペースを利用する。"],cv:["A. Dùng dây điện thoại.","B. Dùng đường dây điện dân dụng.","C. Dùng cáp quang đến tận nhà.","D. Dùng hạ tầng truyền hình cáp."],a:"C",ex:"FTTH (Fiber To The Home) là cáp quang đến tận hộ gia đình."},
-  {m:6,q:"【専門知識】IrDAについて正しくないものをえらんでください。",v:"Hãy chọn phát biểu SAI về IrDA (Hồng ngoại).",c:["A. 赤外線通信の規格である。","B. 家電製品用のリモコンなどで利用されている。","C. 短い距離での通信にしか利用できない。","D. 送信機と受信機の間に遮蔽物があっても通信できる。"],cv:["A. Chuẩn hồng ngoại.","B. Dùng cho điều khiển TV.","C. Chỉ dùng khoảng cách ngắn.","D. Có vật cản vẫn truyền được."],a:"D",ex:"Hồng ngoại cần đường truyền thẳng, có vật cản sẽ bị ngắt."},
-  {m:5,q:"【専門知識】著作権について正しいものを選びなさい。",v:"Hãy chọn phát biểu ĐÚNG về quyền tác giả (Copyright).",c:["A. 技術の進歩を保護する権利である。","B. 新規の技術についての権利を保護する。","C. 知的所有権のうち文化的生産物や表現を保護する権利である。","D. 製品のデザインについての権利である。"],cv:["A. Bảo vệ tiến bộ kỹ thuật.","B. Bảo vệ công nghệ mới.","C. Bảo vệ sản phẩm văn hóa.","D. Bảo vệ thiết kế."],a:"C",ex:"Quyền tác giả bảo vệ các biểu hiện văn hóa và sáng tạo nghệ thuật."},
-  {m:5,q:"【専門知識】第3.5世代携帯電話について正しいものを選びなさい。",v:"Hãy chọn phát biểu ĐÚNG về điện thoại di động thế hệ 3.5.",c:["A. 音声の波をそのまま電波の波に置き換えて送受信するアナログ通信である。","B. デジタル通信になったため、音質が向上した。","C. 一般のコンテンツをブロードバンド環境で快適に利用するには至っていない。","D. 第3世代よりも高速な通信が可能なため、さまざまなアプリケーションをストレスなく利用できる。"],cv:["A. Là 1G (Analog).","B. Là 2G (Digital).","C. Là 3G.","D. Nhanh hơn 3G, dùng app mượt."],a:"D",ex:"Thế hệ 3.5 (HSDPA) cải thiện tốc độ đáng kể so với 3G."},
+  // === CHƯƠNG 1.5–1.7: File/Folder ===
+  {m:2,q:"Excelファイルの拡張子はどれか。",c:["A. .doc","B. .htm","C. .xls","D. .pdf"],a:"C",ex:"Excelの拡張子は .xls （または .xlsx）です。"},
+  {m:1,q:"ファイルの種類を識別するために、ファイル名に付けられる（ ）のことを拡張子という。",c:["A. アイコン","B. ドライブ名","C. フォルダ名","D. ファイル名の後ろの文字列"],a:"D",ex:"拡張子はファイル名の最後に付けられ、ファイルの種類を示します（例: .doc, .xls）。"},
+  {m:2,q:"HTMLファイルの拡張子はどれか。",c:["A. .doc","B. .xls","C. .zip","D. .htm"],a:"D",ex:"HTMLファイルの拡張子は .htm または .html です。"},
+  {m:5,q:"フォルダについて正しいものをえらんでください。",c:["A. ファイルの内容を処理する装置","B. ファイルを整理するための入れ物","C. ドライブ名のこと","D. ハードディスクの別名"],a:"B",ex:"フォルダはファイルを整理するための入れ物（コンテナ）です（§1.6）。"},
 
-  // --- THÊM TIẾP CÁC CÂU ĐỂ ĐỦ 200 CÂU (Tóm lược nội dung 16 chương) ---
-  {m:2,q:"OSI参照モデルの第4層（トランスポート層）のプロトコルは？",v:"Giao thức nào ở tầng 4 (Giao vận) của mô hình OSI?",c:["A. IP","B. HTTP","C. TCP","D. FTP"],cv:["A. IP","B. HTTP","C. TCP","D. FTP"],a:"C",ex:"TCP (Transmission Control Protocol) hoạt động ở tầng Giao vận."},
-  {m:2,q:"Unicodeは何ビットで1文字を表現しますか。",v:"Unicode dùng bao nhiêu bit để biểu diễn 1 ký tự?",c:["A. 8 bit","B. 16 bit","C. 32 bit","D. 64 bit"],cv:["A. 8 bit","B. 16 bit","C. 32 bit","D. 64 bit"],a:"B",ex:"Chuẩn Unicode thông dụng dùng 16 bit (2 byte) cho mỗi ký tự."},
-  {m:1,q:"（ ）とは、同じ色が連続する回数を記録する圧縮方式です。",v:"( ) là cách nén ghi lại số lần lặp của cùng một màu?",c:["A. JPEG","B. MPEG","C. ランレングス圧縮","D. MP3"],cv:["A. JPEG","B. MPEG","C. Nén Run-length","D. MP3"],a:"C",ex:"Nén Run-length ghi lại độ dài của các dãy ký tự giống nhau liên tiếp."},
-  {m:5,q:"SSLについて正しいものを選びなさい。",v:"Chọn câu đúng về SSL.",c:["A. 公開鍵方式のみを使う","B. 共通鍵方式のみを使う","C. 公開鍵と共通鍵の両方を組み合わせて暗号化する","D. 暗号化は行わない"],cv:["A. Chỉ khóa công khai","B. Chỉ khóa chung","C. Kết hợp cả hai loại khóa","D. Không mã hóa"],a:"C",ex:"SSL sử dụng cả khóa công khai và khóa bí mật (chung) để bảo mật dữ liệu."},
-  {m:2,q:"CPUの性能を表す単位「MIPS」は何の略ですか。",v: "Đơn vị MIPS đo hiệu suất CPU là viết tắt của?",c:["A. Multi Instructions Per Second","B. Million Instructions Per Second","C. Million Information Per Second","D. Mega Instructions Per System"],cv:["A. Nhiều lệnh/giây","B. Triệu lệnh/giây","C. Triệu thông tin/giây","D. Mega lệnh/hệ thống"],a:"B",ex:"MIPS = Million Instructions Per Second (Triệu lệnh trên giây)."},
-  // ... (Tiếp tục lặp lại các câu quan trọng từ kho dữ liệu cũ để đảm bảo đủ 200 câu)
+  // === CHƯƠNG 2: Internet, Web 2.0 ===
+  {m:1,q:"ホームページのアドレスのことを（ ）という。",c:["A. IP","B. URL","C. HTML","D. DNS"],a:"B",ex:"URLはUniform Resource Locationの略で、ホームページのアドレスを表します（§2.1）。"},
+  {m:2,q:"Web 2.0という言葉を2004年に提唱したのは誰か。",c:["A. エリック・シュミット","B. スティーブ・ジョブズ","C. ティム・オライリー","D. ビル・ゲイツ"],a:"C",ex:"Tim O'Reilly（ティム・オライリー）が2004年にWeb 2.0という概念を提唱しました（§2.2）。"},
+  {m:3,q:"【専門知識】次の質問に対して、正しい答えを１つ選びなさい。「購入者数が少なくても多品種の商品を提供することで収入増をはかるビジネスモデル」とはどれですか。",c:["A. クラウドコンピューティング","B. ロングテール","C. ソーシャルネットワーキング","D. アフィリエイト"],a:"B",ex:"ロングテールは多品種少量販売で収入を得るWeb 2.0時代のビジネスモデルです（§2.2）。"},
+  {m:6,q:"Web2.0について正しくないものをえらんでください。",c:["A. SNSの普及","B. ユーザ自身がコンテンツを作成・共有できる","C. 情報の送り手と受け手が固定されている","D. ブログやWikiを活用できる"],a:"C",ex:"Web 2.0は双方向型なので、情報の送り手と受け手は固定されていません（§2.2）。"},
+  {m:2,q:"クラウドコンピューティングという言葉を2006年に提唱したのは誰か。",c:["A. ティム・オライリー","B. スティーブ・ジョブズ","C. エリック・シュミット","D. マーク・ザッカーバーグ"],a:"C",ex:"Eric Schmidt（エリック・シュミット）が2006年にクラウドコンピューティングを提唱しました（§2.3）。"},
+  {m:5,q:"クラウドコンピューティングについて正しいものをえらんでください。",c:["A. パソコン内のHDDにデータを保存するサービス","B. インターネットを通じてコンピュータ資源やサービスを提供する","C. DVDを使ってソフトウェアを配布する方法","D. USBメモリを使ったデータ共有の方法"],a:"B",ex:"クラウドコンピューティングはインターネット経由でコンピュータ資源やサービスを提供します（§2.3）。"},
+
+  // === CHƯƠNG 2.4: Email/Netiquette ===
+  {m:6,q:"メール利用のネチケットとして正しくないものをえらんでください。",c:["A. 自分の氏名・連絡先を明記する","B. 著作権のあるファイルを送ってよい","C. 大きな添付ファイルを送らない","D. 添付ファイルのウィルスをチェックする"],a:"B",ex:"著作権のあるファイルをメールで送ることはネチケット違反です（§2.4）。"},
+  {m:5,q:"メールの添付ファイルで即座に削除すべき拡張子はどれか。",c:["A. .doc / .xls / .pdf","B. .exe / .vbs / .scr / .pif","C. .jpg / .png / .gif","D. .htm / .html / .xml"],a:"B",ex:".exe, .vbs, .scr, .pifはウィルスの可能性が高いため即座に削除します（§9.5）。"},
+
+  // === CHƯƠNG 2.5: 知的所有権 ===
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Quyền sáng chế",c:["A. 意匠権","B. 商標権","C. 特許権","D. 実用新案権"],a:"C",ex:"Quyền sáng chế（クエン・サン・チェー）は特許権（とっきょけん）です。新規技術を保護します（§2.5）。"},
+  {m:5,q:"著作権に含まれるものとして正しいのはどれか。",c:["A. 特許権・実用新案権・意匠権","B. 著作者人格権・著作者財産権・著作隣接権","C. 商標権・意匠権・著作者財産権","D. 特許権・商標権・著作者人格権"],a:"B",ex:"著作権は著作者人格権・著作者財産権・著作隣接権の3種類に分かれます（§2.5）。"},
+  {m:2,q:"製品のデザインについての権利を何というか。",c:["A. 特許権","B. 実用新案権","C. 意匠権","D. 商標権"],a:"C",ex:"意匠権（いしょうけん）は製品のデザイン（形状・模様・色彩）についての権利です（§2.5）。"},
+  {m:2,q:"社名やロゴなどの商標を保護する権利を何というか。",c:["A. 特許権","B. 意匠権","C. 実用新案権","D. 商標権"],a:"D",ex:"商標権（しょうひょうけん）は社名・ロゴマークなど「商標」を保護する権利です（§2.5）。"},
+  {m:3,q:"【専門知識】次の質問に対して、正しい答えを１つ選びなさい。「新規の技術についての権利を保護する権利」はどれですか。",c:["A. 意匠権","B. 著作権","C. 特許権","D. 商標権"],a:"C",ex:"特許権は新規の技術についての権利を保護します。工業所有権の一つです（§2.5）。"},
+  {m:4,q:"【専門用語】次の日本語の用語をベトナム語に直しなさい。 著作隣接権",c:["A. Quyền nhân cách tác giả","B. Quyền tài sản tác giả","C. Quyền liền kề tác giả","D. Quyền sở hữu công nghiệp"],a:"C",ex:"著作隣接権（ちょさくりんせつけん）はQuyền liền kề（クエン・リエン・ケー）です（§2.5）。"},
+
+  // === CHƯƠNG 3: Thế hệ di động ===
+  {m:2,q:"第1世代携帯電話の通信方式はどれか。",c:["A. デジタル通信","B. アナログ通信","C. 光通信","D. パケット通信"],a:"B",ex:"第1世代携帯電話は音声の波をそのまま電波に置き換えるアナログ通信を採用しています（§3.1）。"},
+  {m:2,q:"タッチパネルの「静電容量方式」では何を測定するか。",c:["A. 縦横の抵抗値","B. 赤外線の反射","C. 指先とセンサの間に蓄えられる電荷","D. 超音波の振動"],a:"C",ex:"静電容量方式は指先とセンサの間に蓄えられる電荷を測定して位置を検出します（§3.4）。"},
+  {m:5,q:"第2世代携帯電話について正しいものをえらんでください。",c:["A. アナログ通信を採用している","B. データ通信ができない","C. デジタル通信になり音質が向上した","D. ブロードバンドを前提としている"],a:"C",ex:"第2世代携帯電話（~1992）はデジタル通信になり、音質向上とセキュリティ向上が実現しました（§3.1）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Thẻ SIM",c:["A. ICカード","B. SDカード","C. SIMカード","D. メモリカード"],a:"C",ex:"Thẻ SIM（テー・シム）はSIMカードです。契約者番号が記録されています（§3.4）。"},
+  {m:6,q:"タッチパネルの「抵抗膜方式」について正しくないものをえらんでください。",c:["A. 押された部分の縦横の抵抗値を測定する","B. 圧力を感知する仕組み","C. 指先の電荷を測定して位置を検出する","D. 接触した位置を検出できる"],a:"C",ex:"指先の電荷を測定するのは静電容量方式です。抵抗膜方式は抵抗値を測定します（§3.4）。"},
+  {m:2,q:"CMOSセンサはカメラ内でどのような役割を持つか。",c:["A. 温度を記録する","B. 光の強弱を記録する素子と増幅器が並んだセンサ","C. 磁気を記録する","D. 音波を検出する"],a:"B",ex:"CMOSセンサは光の強弱を記録する素子と増幅器が隣接して並んだ形のセンサです（§3.4）。"},
+
+  // === CHƯƠNG 4: Kết nối ===
+  {m:2,q:"FTTH（光ファイバ通信）の最大通信速度はどれか。",c:["A. 約40 Mbps","B. 約50 Mbps","C. 約100 Mbps","D. 約1 Kbps"],a:"C",ex:"FTTHは光ファイバを使用し、最大約100 Mbpsの通信速度を提供します（§4.1）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Kết nối không dây",c:["A. 有線接続","B. 無線接続","C. 光ファイバ接続","D. 電灯線接続"],a:"B",ex:"Kết nối không dây（ケット・ノイ・コン・ザイ）は無線接続（むせんせつぞく）です（§4.2）。"},
+  {m:5,q:"IrDAについて正しいものをえらんでください。",c:["A. 電波を使って通信する規格","B. 赤外線を使った通信規格で、遮蔽物があると通信できない","C. 通信速度が54 Mbpsの規格","D. 10m以上の範囲で通信できる"],a:"B",ex:"IrDAは赤外線を使った通信規格で、送受信機の間に遮蔽物があると通信できません（§4.2）。"},
+  {m:3,q:"【専門知識】次の質問に対して、正しい答えを１つ選びなさい。「電灯線を利用してデータ通信を行う技術」はどれですか。",c:["A. FTTH","B. ADSL","C. PLC","D. CATV"],a:"C",ex:"PLC（Power Line Communication）は一般家庭の電灯線（100V）を使ってデータ通信を行う技術です（§4.1）。"},
+  {m:2,q:"Wi-Fiは何の略か。",c:["A. Wireless Function","B. Wide Fidelity","C. Wireless Fidelity","D. Wide Frequency"],a:"C",ex:"Wi-FiはWireless Fidelity（ワイヤレス・フィデリティ）の略です（§4.2）。"},
+  {m:6,q:"Bluetoothについて正しくないものをえらんでください。",c:["A. 約10mの通信範囲を持つ","B. 携帯電話やパソコンに搭載されている","C. 通信速度は約1 Mbps","D. 赤外線を使って通信する"],a:"D",ex:"Bluetoothは赤外線ではなく電波（2.4GHz帯）を使って通信します。赤外線はIrDAです（§4.2）。"},
+  {m:5,q:"非接触型ICカードについて正しいものをえらんでください。",c:["A. カードを読み取り機に差し込んで使う","B. 赤外線を使って通信する","C. JRのSuicaなどで使われている","D. Wi-Fiの一種である"],a:"C",ex:"非接触型ICカードはJRのSuica、PASMOなどに使われています（§4.2）。"},
+
+  // === CHƯƠNG 5: Mạng ===
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Hình thái mạng sao",c:["A. バス型ネットワーク","B. リング型ネットワーク","C. スター型ネットワーク","D. メッシュ型ネットワーク"],a:"C",ex:"Hình thái mạng sao（ヒン・タイ・マン・サオ）はスター型ネットワーク（すたーがたねっとわーく）です（§5.3）。"},
+  {m:2,q:"最もよく使われるネットワーク接続形態はどれか。",c:["A. バス型","B. スター型","C. リング型","D. メッシュ型"],a:"B",ex:"スター型はハブやスイッチを中心に接続する形態で、最もよく使われます（§5.3）。"},
+  {m:5,q:"「分散処理システム」について正しいものをえらんでください。",c:["A. 中心となるコンピュータが全ての処理を管理する","B. 処理を複数のコンピュータで分散して管理する","C. 1台のコンピュータのみが稼働する","D. インターネット専用のシステム"],a:"B",ex:"分散処理システムは複数のコンピュータで処理を分担します。P2Pもこれに含まれます（§5.4）。"},
+  {m:3,q:"【専門知識】次の質問に対して、正しい答えを１つ選びなさい。「対等にサービスを提供しあう分散処理の形態」はどれですか。",c:["A. クライアントサーバ型","B. 集中処理型","C. P2P（ピアツーピア）","D. バス型ネットワーク"],a:"C",ex:"P2Pは各コンピュータが対等にサービスを提供しあう分散処理の形態です（§5.4）。"},
+  {m:4,q:"【専門用語】次の日本語の用語をベトナム語に直しなさい。 分散処理システム",c:["A. Hệ thống xử lý tập trung","B. Hệ thống xử lý phân tán","C. Hệ thống mạng nội bộ","D. Hệ thống lưu trữ đám mây"],a:"B",ex:"分散処理システム（ぶんさんしょりシステム）はHệ thống xử lý phân tán（ヘー・トン・スー・リー・ファン・タン）です（§5.4）。"},
+
+  // === CHƯƠNG 6: Giao thức/OSI/HTML ===
+  {m:2,q:"OSI参照モデルは何層構造か。",c:["A. 5層","B. 6層","C. 7層","D. 8層"],a:"C",ex:"OSI参照モデルは7層（Layer 1〜7）の階層構造です（§6.1）。"},
+  {m:1,q:"【専門知識】（ ）を圧縮するには、音の波としての性質を使います。",c:["A. 画像情報","B. 通信情報","C. 音声情報","D. テキスト情報"],a:"C",ex:"音声情報の圧縮にはフーリエ変換を用いて、音の波としての性質を使います（§15.3）。"},
+  {m:2,q:"「.com」のように種別だけで国名がないのはどの国のドメイン名か。",c:["A. 日本","B. アメリカ","C. オーストラリア","D. イギリス"],a:"B",ex:"「.com」のように国名がないドメイン名はアメリカのドメイン名です（§6.2）。"},
+  {m:5,q:"HTMLについて正しいものをえらんでください。",c:["A. High Text Markup Languageの略","B. ユーザが独自にタグを定義できる言語","C. 文字の種類・配置・画像・動画などが記述できる言語","D. データベース操作専用の言語"],a:"C",ex:"HTMLはHyper Text Markup Languageの略で、文字の種類・配置・画像・動画・音・リンクなどが記述できます（§6.4）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Tên miền",c:["A. IPアドレス","B. MACアドレス","C. ドメイン名","D. URLアドレス"],a:"C",ex:"Tên miền（テン・ミエン）はドメイン名（ドメインめい）です（§6.2）。"},
+  {m:3,q:"【専門知識】次の質問に対して、正しい答えを１つ選びなさい。「ユーザが独自にタグを自由に定義して利用できるマークアップ言語」はどれですか。",c:["A. HTML","B. CSS","C. SQL","D. XML"],a:"D",ex:"XMLはeXtensible Markup Languageの略で、ユーザが独自タグを定義できます（§6.5）。"},
+  {m:2,q:"OSI参照モデルのトランスポート層で使用されるプロトコルはどれか。",c:["A. IP","B. HTTP","C. TCP","D. SMTP"],a:"C",ex:"トランスポート層（第4層）ではTCPが使用されます（§6.1）。"},
+
+  // === CHƯƠNG 7: 電子商取引 ===
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Hệ thống đặt hàng trực tuyến",c:["A. EDI（電子データ交換）","B. EOS（電子受発注システム）","C. CALS（製造過程電子化）","D. eコマース"],a:"B",ex:"Hệ thống đặt hàng trực tuyến（ヘー・トン・ダット・ハン・チュック・トゥエン）はEOS（Electronic Ordering System）です（§7.2）。"},
+  {m:5,q:"EDI（Electronic Data Interchange）について正しいものをえらんでください。",c:["A. オンラインの受発注システムのこと","B. 製造業における全製造過程の電子化の標準化","C. ネットワークを使った電子データ交換の標準化","D. クラウド上のデータ管理システム"],a:"C",ex:"EDIはElectronic Data Interchangeの略で、ネットワークを使った電子データ交換の標準化のことです（§7.2）。"},
+  {m:2,q:"ブラウザがウェブサイトのID情報を自動で記憶する仕組みを何というか。",c:["A. キャッシュ","B. Cookie（クッキー）","C. セッション","D. ローカルストレージ"],a:"B",ex:"CookieはブラウザがウェブサイトのID情報を記憶し、次回アクセス時に自動認識する仕組みです（§7.4）。"},
+  {m:6,q:"OECD8原則について正しくないものをえらんでください。",c:["A. 目的明確化の原則がある","B. 安全保護の原則がある","C. 個人参加の原則がある","D. 利用無制限の原則がある"],a:"D",ex:"OECD8原則には「利用制限の原則」があります。利用を無制限にする原則ではありません（§7.5）。"},
+  {m:4,q:"【専門用語】次の日本語の用語をベトナム語に直しなさい。 電子商取引",c:["A. Thương mại điện tử","B. Thanh toán điện tử","C. Hệ thống quản lý","D. Mạng thương mại"],a:"A",ex:"電子商取引（でんししょうとりひき）はThương mại điện tử（トゥオン・マイ・ジエン・トゥ）です（§7.1）。"},
+
+  // === CHƯƠNG 8: 暗号化 ===
+  {m:2,q:"暗号化の正しい定義はどれか。",c:["A. 原文を原文に戻すこと","B. 与えられた原文が推測できないように変換すること","C. データを削除すること","D. パスワードを設定すること"],a:"B",ex:"暗号化とは、与えられた原文が推測できないように変換することです（§8.1）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Giải mã",c:["A. 暗号化","B. 圧縮","C. 復号化","D. 変換"],a:"C",ex:"Giải mã（ザイ・マー）は復号化（ふくごうか）です。暗号文を元の文に戻すことです（§8.1）。"},
+  {m:5,q:"SSLについて正しいものをえらんでください。",c:["A. ウィルスを検出するソフトウェア","B. 公開鍵方式と秘密鍵方式で暗号化した状態で情報通信を行う","C. ファイアウォールの一種","D. パスワード管理ツール"],a:"B",ex:"SSL（Secure Socket Layer）は公開鍵と秘密鍵を組み合わせた暗号化通信プロトコルです（§8.4）。"},
+  {m:3,q:"【専門知識】次の質問に対して、正しい答えを１つ選びなさい。「文字を何文字かずらすことで暗号化する換字式の古典的暗号方式」はどれですか。",c:["A. RSA暗号","B. 転置式暗号","C. シーザー暗号","D. 公開鍵暗号"],a:"C",ex:"シーザー暗号は文字をN文字ずらす換字式の古典的暗号です（§8.1）。"},
+
+  // === CHƯƠNG 9: セキュリティ ===
+  {m:2,q:"稼働率の計算式として正しいのはどれか。",c:["A. 稼働率 ＝ MTTR / (MTBF ＋ MTTR)","B. 稼働率 ＝ MTBF / (MTBF ＋ MTTR)","C. 稼働率 ＝ MTBF × MTTR","D. 稼働率 ＝ MTTR / MTBF"],a:"B",ex:"稼働率 = MTBF ÷ (MTBF + MTTR)。MTBFは平均故障間隔、MTTRは平均修理時間です（§9.6）。"},
+  {m:2,q:"並列に接続した2つのシステム（A, B）の稼働率の計算式はどれか。",c:["A. A × B","B. A + B","C. 1 − (1−A) × (1−B)","D. (A + B) / 2"],a:"C",ex:"並列接続の稼働率は 1 − (1−A)×(1−B) で計算します（§9.6）。"},
+  {m:5,q:"コンピュータウィルスについて正しいものをえらんでください。",c:["A. 自然発生するプログラム","B. ハードウェアの故障のこと","C. 人為的に作成されたプログラム（感染→潜伏→発病）","D. ネットワーク障害の一種"],a:"C",ex:"コンピュータウィルスは人為的に作成されたプログラムで、感染→潜伏→発病という過程をたどります（§9.2）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Ngựa thành Troy",c:["A. ワーム","B. スパイウェア","C. トロイの木馬","D. ランサムウェア"],a:"C",ex:"Ngựa thành Troy（グア・タン・チョイ）はトロイの木馬（トロイのもくば）です（§9.4）。"},
+  {m:6,q:"パスワード設定について正しくないものをえらんでください。",c:["A. 氏名や生年月日を避ける","B. 記号を含む長いパスワードを使う","C. 大文字と小文字を組み合わせる","D. 自分の電話番号をそのまま使う"],a:"D",ex:"電話番号はパスワードとして使うべきではありません。推測されやすいためです（§9.5）。"},
+  {m:2,q:"信頼度成長曲線はどのような形をしているか。",c:["A. 右肩上がりの直線","B. バスタブ曲線","C. S字曲線","D. 正弦波"],a:"C",ex:"信頼度成長曲線はS字曲線（シグモイド曲線）を描きます。初期に多くのバグが発見され、徐々に安定します（§9.6）。"},
+
+  // === CHƯƠNG 10: コンピュータの構造 ===
+  {m:2,q:"RAMの正式名称はどれか。",c:["A. Read Access Memory","B. Random Access Memory","C. Rapid Allocation Memory","D. Read And Modify"],a:"B",ex:"RAMはRandom Access Memory（ランダムアクセスメモリ）の略です（§10.4）。"},
+  {m:5,q:"マザーボードについて正しいものをえらんでください。",c:["A. パソコンの電源を管理する基板","B. グラフィックを処理する専用基板","C. パソコン内で大きな面積を占めるメインの基板","D. ネットワークに接続するための基板"],a:"C",ex:"マザーボードはパソコン内で最も大きな面積を占めるメインの基板です（§10.2）。"},
+  {m:3,q:"【専門知識】次の質問に対して、正しい答えを１つ選びなさい。「パソコン内において大きな面積を占めるメインとなる基板のこと」はどれですか。",c:["A. CPU","B. マザーボード","C. RAM","D. GPU"],a:"B",ex:"マザーボードはパソコン内の主要基板です。CPU・RAM・チップセットなどが搭載されます（§10.2）。"},
+  {m:4,q:"【専門用語】次の日本語の用語をベトナム語に直しなさい。 演算装置",c:["A. Thiết bị lưu trữ","B. Thiết bị điều khiển","C. Thiết bị tính toán số học","D. Thiết bị đầu ra"],a:"C",ex:"演算装置（えんざんそうち）はThiết bị tính toán số học（チエット・ビ・ティン・トアン・ソー・ホック）です（§10.1）。"},
+  {m:6,q:"CPUについて正しくないものをえらんでください。",c:["A. 処理の中心となる部品","B. MPUとも呼ばれる","C. バスを流れるデータや外部機器とのデータを制御する","D. パソコン内で最も大きな面積を占める基板のこと"],a:"D",ex:"最も大きな面積を占める基板はマザーボードです。CPUは小さなチップです（§10.6）。"},
+
+  // === CHƯƠNG 11: 論理素子 ===
+  {m:2,q:"コンピュータの第1世代に使用された論理素子はどれか。",c:["A. トランジスタ","B. IC（集積回路）","C. 真空管","D. LSI"],a:"C",ex:"第1世代コンピュータ（1940年代）には真空管（しんくうかん）が使用されました（§11.2）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Mạch tích hợp",c:["A. トランジスタ","B. 真空管","C. IC（集積回路）","D. LSI（大規模集積回路）"],a:"C",ex:"Mạch tích hợp（マック・ティック・ホップ）はIC（集積回路 / Integrated Circuit）です（§11.2）。"},
+  {m:2,q:"AND回路のモデルはどれか。",c:["A. スイッチが並列に並んだ回路","B. スイッチが直列に並んだ回路","C. スイッチが星形に並んだ回路","D. スイッチが1つだけの回路"],a:"B",ex:"AND回路はスイッチが直列に並んだ回路です。両方ONのときだけ出力がONになります（§11.4）。"},
+  {m:5,q:"OR回路について正しいものをえらんでください。",c:["A. スイッチが直列に並んだ回路","B. 両方のスイッチがONのときだけ出力がON","C. スイッチが並列に並んだ回路で、少なくとも1つONで出力がON","D. スイッチが1つの単純な回路"],a:"C",ex:"OR回路はスイッチが並列の回路。少なくとも1つがONなら出力がONになります（§11.4）。"},
+  {m:2,q:"論理素子によってコンピュータは何世代に分けられるか。",c:["A. 2世代","B. 3世代","C. 4世代","D. 5世代"],a:"C",ex:"論理素子によってコンピュータは4世代（真空管→トランジスタ→IC→LSI）に分けられます（§11.2）。"},
+
+  // === CHƯƠNG 12: 2進数 ===
+  {m:2,q:"2進数「1100」を10進数に変換すると何か。",c:["A. 8","B. 10","C. 12","D. 14"],a:"C",ex:"1100₂ = 1×2³ + 1×2² + 0×2¹ + 0×2⁰ = 8 + 4 = 12₁₀（§12.2）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Hệ thập phân",c:["A. 2進数","B. 8進数","C. 16進数","D. 10進数"],a:"D",ex:"Hệ thập phân（ヘー・タップ・ファン）は10進数（じゅっしんすう）です（§12.1）。"},
+  {m:2,q:"2進数の加算で「1 + 1」の結果はどれか。",c:["A. 1","B. 2","C. 10（2進数）","D. 11（2進数）"],a:"C",ex:"2進数では 1+1=10（繰り上がり）です。10進数の2に相当します（§12.3）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Hệ nhị phân",c:["A. 10進数","B. 2進数","C. 16進数","D. 8進数"],a:"B",ex:"Hệ nhị phân（ヘー・ニ・ファン）は2進数（にしんすう）です。0と1だけを使います（§12.1）。"},
+
+  // === CHƯƠNG 13: 情報量 ===
+  {m:2,q:"情報量の最小単位はどれか。",c:["A. byte","B. KB","C. bit","D. nibble"],a:"C",ex:"bit（ビット）は情報量の最小単位で、binary digit（バイナリ・ディジット）の略です（§13.1）。"},
+  {m:1,q:"アルファベット1文字の情報量は（ ）である。",c:["A. 4 bit = 0.5 byte","B. 8 bit = 1 byte","C. 16 bit = 2 byte","D. 32 bit = 4 byte"],a:"B",ex:"ASCII（アルファベット）は256種類 = 2⁸ = 8 bit = 1 byte / 1文字です（§13.3）。"},
+  {m:2,q:"現在の日本語文字に使われるUnicodeは何個のコード番号を持つか。",c:["A. 32,768個","B. 65,536個","C. 128,000個","D. 256,000個"],a:"B",ex:"日本語のUnicodeは65,536個（2¹⁶）のコード番号を持ちます（§13.4）。"},
+  {m:4,q:"【専門用語】次の日本語の用語をベトナム語に直しなさい。 情報量",c:["A. Tốc độ xử lý","B. Lượng thông tin","C. Dung lượng bộ nhớ","D. Tốc độ truyền"],a:"B",ex:"情報量（じょうほうりょう）はLượng thông tin（ルオン・トン・ティン）です（§13.1）。"},
+  {m:1,q:"1つの日本語文字（漢字など）を表現するために使用するデータ量は（ ）である。",c:["A. 8 bit = 1 byte","B. 16 bit = 1 byte","C. 16 bit = 2 byte","D. 32 bit = 4 byte"],a:"C",ex:"日本語1文字は16 bit = 2 byte。Unicodeで65,536種類（2¹⁶）を表現します（§13.4）。"},
+
+  // === CHƯƠNG 14: Multimedia ===
+  {m:2,q:"MIDI（Musical Instrument Digital Interface）命令のデータ量はどれか。",c:["A. 4 bit = 0.5 byte","B. 8 bit = 1 byte","C. 16 bit = 2 byte","D. 32 bit = 4 byte"],a:"B",ex:"MIDI命令は256種類以内（2⁸ = 8 bit = 1 byte）で表現されます（§14.1）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Tần số lấy mẫu",c:["A. 量子化数","B. ビットレート","C. サンプリング周波数","D. 解像度"],a:"C",ex:"Tần số lấy mẫu（タン・ソー・ライ・マウ）はサンプリング周波数（さんぷりんぐしゅうはすう）です（§14.2）。"},
+  {m:2,q:"CDの音声のサンプリング周波数はどれか。",c:["A. 22.05 kHz","B. 44.1 kHz","C. 96 kHz","D. 192 kHz"],a:"B",ex:"CDの標準サンプリング周波数は44.1 kHz（44,100回/秒）です（§14.2）。"},
+  {m:5,q:"デジタル画像のVGA解像度として正しいものをえらんでください。",c:["A. 320×240","B. 640×480","C. 1024×768","D. 1280×1024"],a:"B",ex:"VGA（Video Graphics Array）の解像度は640×480ピクセルです（§14.3）。"},
+  {m:2,q:"RGB各色8 bitで表現する場合、1画素（ピクセル）のデータ量はどれか。",c:["A. 1 byte","B. 2 byte","C. 3 byte","D. 4 byte"],a:"C",ex:"RGB各8 bit × 3色 = 24 bit = 3 byte / 1ピクセルです（§14.3）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Số lượng tử hóa",c:["A. サンプリング周波数","B. 量子化数","C. ビットレート","D. 解像度"],a:"B",ex:"Số lượng tử hóa（ソー・ルオン・トゥ・ホア）は量子化数（りょうしかすう）です（§14.2）。"},
+  {m:6,q:"動画について正しくないものをえらんでください。",c:["A. 映画は1秒間に24回画面が書き換えられる","B. 日本のテレビは1秒間に30回画面が書き換えられる","C. 動画の情報量 ＝ 静止画1枚 × フレームレート × 秒数","D. 動画は静止画と関係なく独立した形式である"],a:"D",ex:"動画は静止画（フレーム）の連続です。動画 = 静止画 × フレームレート × 秒数（§14.4）。"},
+  {m:2,q:"日本のテレビ放送における1秒あたりの画面書き換え回数（フレームレート）はいくつか。",c:["A. 24回","B. 25回","C. 30回","D. 60回"],a:"C",ex:"日本のテレビ放送（NTSC方式）の標準フレームレートは30fps（30回/秒）です（§14.4）。"},
+
+  // === CHƯƠNG 15: データ通信・圧縮 ===
+  {m:2,q:"通信速度の単位として正しいのはどれか。",c:["A. Hz","B. dpi","C. bps（bit per second）","D. dB"],a:"C",ex:"通信速度の単位はbps（bit per second = ビット毎秒）です（§15.1）。"},
+  {m:5,q:"フーリエ変換について正しいものをえらんでください。",c:["A. 画像を圧縮するための変換","B. 全ての波を波長の違う正弦波に分解する変換","C. テキストを圧縮するための変換","D. デジタル信号をアナログに変換する"],a:"B",ex:"フーリエ変換は全ての波を波長の違う正弦波に分解します。音声圧縮に利用されます（§15.3）。"},
+  {m:4,q:"【専門用語】次の日本語の用語をベトナム語に直しなさい。 データ圧縮",c:["A. Truyền dữ liệu","B. Mã hóa dữ liệu","C. Nén dữ liệu","D. Lưu trữ dữ liệu"],a:"C",ex:"データ圧縮（データあっしゅく）はNén dữ liệu（ネン・ズー・リエウ）です（§15.2）。"},
+  {m:1,q:"ランレングス圧縮とは、（ ）を記述する画像圧縮方式の1つである。",c:["A. 画素の色と形","B. 色がいくつ並ぶか","C. 画像の解像度","D. 画像のフレームレート"],a:"B",ex:"ランレングス圧縮は「同じ色が何個連続するか」を記述する最も単純な画像圧縮方式の1つです（§15）。"},
+  {m:6,q:"音声情報の圧縮について正しくないものをえらんでください。",c:["A. フーリエ変換を利用する","B. 音の波としての性質を使う","C. 低い周波数は元の波の大きな性質を表す","D. 圧縮すると音質は必ず変わらない"],a:"D",ex:"音声圧縮（特に非可逆圧縮）では音質の変化が生じる場合があります。必ず変わらないとはいえません（§15.3）。"},
+
+  // === 追加30問: さらに深い知識 ===
+  {m:2,q:"1 GBは何 MBか。",c:["A. 1,000 MB","B. 1,024 MB","C. 1,100 MB","D. 2,048 MB"],a:"B",ex:"1 GB = 1,024 MB = 1,048,576 KB = 1,073,741,824 byte です（§13.2）。"},
+  {m:2,q:"ADSLは何の略か。",c:["A. Advanced Digital Subscriber Line","B. Asymmetric Digital Subscriber Line","C. Automatic Digital Service Link","D. Analog Digital Subscriber Line"],a:"B",ex:"ADSLはAsymmetric（非対称）Digital Subscriber Lineの略です（§4.1）。"},
+  {m:5,q:"MIDI（Musical Instrument Digital Interface）について正しいものをえらんでください。",c:["A. 音声をそのまま録音するシステム","B. 楽器演奏の命令をデジタルで伝達する規格","C. MP3ファイルの再生規格","D. 動画配信のための規格"],a:"B",ex:"MIDIは楽器演奏の命令（音程・音量・音色など）をデジタルで伝達するための規格です（§14.1）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Độ phân giải",c:["A. サンプリング周波数","B. 量子化数","C. 解像度","D. フレームレート"],a:"C",ex:"Độ phân giải（ドー・ファン・ザイ）は解像度（かいぞうど）です。dpiやピクセル数で表されます（§14.3）。"},
+  {m:2,q:"日本のテレビ放送で使われるフレームレートはいくらか。",c:["A. 24 fps","B. 25 fps","C. 30 fps","D. 60 fps"],a:"C",ex:"日本のテレビ放送（NTSC）は30 fps（フレーム/秒）です（§14.4）。"},
+  {m:5,q:"IP電話について正しいものをえらんでください。",c:["A. 一般の電話回線を使った通話","B. 衛星を使った通話","C. インターネット（ADSL・FTTHなど）で音声情報を送受信する","D. Bluetoothを使った近距離通話"],a:"C",ex:"IP電話はADSLやFTTHなどの高速通信回線を使い、インターネットで音声情報を送受信します（§4.1）。"},
+  {m:4,q:"【専門用語】次の日本語の用語をベトナム語に直しなさい。 高水準言語",c:["A. Ngôn ngữ bậc thấp","B. Ngôn ngữ máy","C. Ngôn ngữ tự nhiên","D. Ngôn ngữ bậc cao"],a:"D",ex:"高水準言語（こうすいじゅんげんご）はNgôn ngữ bậc cao（ゴン・グー・バック・カオ）です。JavaやC++がこれにあたります（§16）。"},
+  {m:2,q:"dpi（dot per inch）はどの機器の解像度を表すか。",c:["A. スキャナまたはプリンタ","B. CPU","C. RAM","D. ネットワーク機器"],a:"A",ex:"dpiはスキャナやプリンタの解像度を表す単位です（§14.3）。"},
+  {m:6,q:"ランレングス圧縮について正しくないものをえらんでください。",c:["A. 色がいくつ並ぶかを記述する圧縮方式","B. 最も単純な画像圧縮方式の1つ","C. いかなる場合でもデータサイズを大幅に削減できる","D. 白と黒が多い画像に効果的"],a:"C",ex:"ランレングス圧縮は色の変化が多い場合、かえってデータが増えることがあります（§15）。"},
+  {m:5,q:"著作権の特徴として正しいものをえらんでください。",c:["A. 登録が必要である","B. 許可を得てから権利が発生する","C. 創作した時点で自動的に権利が発生する","D. 有効期限がない"],a:"C",ex:"著作権は創作した時点で自動的に権利が発生します（無方式主義）。登録は不要です（§2.5）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Cơ sở dữ liệu quan hệ",c:["A. 関係データベース","B. 階層的データベース","C. 網型データベース","D. 分散データベース"],a:"A",ex:"Cơ sở dữ liệu quan hệ（コー・ソー・ズー・リエウ・クアン・ヘー）は関係データベース（かんけいデータベース）です（§17.2）。"},
+  {m:3,q:"【専門知識】次の質問に対して、正しい答えを１つ選びなさい。「データを親、子、孫のような階層構造に並べ、最上位の親からたどることによって検索する表現法」はどれですか。",c:["A. 関係的表現","B. 網的表現","C. 階層的表現","D. オブジェクト的表現"],a:"C",ex:"階層的表現（木構造）はデータを親子孫の構造に並べ、上位からたどって検索します（§17.2）。"},
+  {m:2,q:"大量のデータを扱うために最も重要なのはどれか。",c:["A. データ操作の時間","B. 検索時の速度","C. データ量の多さ","D. 保存容量の大きさ"],a:"B",ex:"データベースで大量のデータを扱うには、検索時の速度が最も重要です（§17.1）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Thứ tự giảm dần",c:["A. 昇順","B. 降順","C. 上順","D. 下順"],a:"B",ex:"Thứ tự giảm dần（トゥー・トゥー・ザム・ダン）は降順（こうじゅん）です。昇順はThứ tự tăng dần（§ソート）。"},
+  {m:5,q:"オブジェクト指向について正しいものをえらんでください。",c:["A. 「こと」（処理・手続き）を中心にする","B. 一度作成したプログラムの再利用が難しい","C. 「もの」（オブジェクト）を中心にする","D. コンピュータの機械語に近い言語"],a:"C",ex:"オブジェクト指向はデータと処理を「もの（オブジェクト）」として捉えるプログラミングの考え方です（§16）。"},
+  {m:2,q:"「電気機械式」コンピュータが誕生したのはいつか。",c:["A. 1946年","B. 1930年","C. 1949年","D. 1939年"],a:"B",ex:"電気機械式（でんききかいしき）は1930年代に誕生しました（§1.2）。"},
+  {m:1,q:"【専門知識】（ ）は、データのアクセス速度が最も高速です。",c:["A. ハードディスク","B. キャッシュ","C. DVD","D. USBメモリ"],a:"B",ex:"キャッシュメモリはCPUに最も近く、データのアクセス速度が最も高速な記憶装置です（§10）。"},
+  {m:2,q:"密結合マルチプロセッサとはどのような方式か。",c:["A. 2つ以上の処理装置がメモリを共有して並列処理を行う","B. 2つ以上の処理装置が独立したメモリを持って並列処理を行う","C. 1台のコンピュータが全処理を担当する","D. ネットワーク上の複数のコンピュータで処理を分担する"],a:"A",ex:"密結合マルチプロセッサは複数の処理装置がメモリを共有して並列処理を行います（§5.4）。"},
+  {m:2,q:"疎結合マルチプロセッサとはどのような方式か。",c:["A. 2つ以上の処理装置がメモリを共有して並列処理を行う","B. 2つ以上の処理装置が独立したメモリを持って並列処理を行う","C. 1台のコンピュータが全処理を担当する","D. クラウドで処理を分散する"],a:"B",ex:"疎結合マルチプロセッサは各処理装置が独立したメモリを持ち、並列処理を行います（§5.4）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Từ khóa",c:["A. 主キー","B. キーワード","C. 外部キー","D. 代替キー"],a:"B",ex:"Từ khóa（トゥー・コア）はキーワードです。データベースでは検索キーワードとして使われます（§41参照）。"},
+  {m:5,q:"インターネットでIPアドレスを使って何を特定するか。",c:["A. ファイルの種類","B. 通信速度","C. コンピュータの場所（住所にあたる番号）","D. パスワードの強度"],a:"C",ex:"インターネットではIPアドレスを使って相手のコンピュータの場所を特定します（§6.2）。"},
+  {m:2,q:"スカベンジングとはどのような犯罪か。",c:["A. コンピュータに不正アクセスする犯罪","B. 残された個人情報を収集する犯罪","C. ウィルスを拡散する犯罪","D. パスワードを盗む犯罪"],a:"B",ex:"スカベンジングは廃棄されたデータや残留情報から個人情報を収集する犯罪手法です（§7.5）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Dòng điện",c:["A. 電荷","B. 電力","C. 電極","D. 電流"],a:"D",ex:"Dòng điện（ゾン・ジエン）は電流（でんりゅう）です。アンペア（A）で表されます（§4 電気系統）。"},
+  {m:6,q:"低級言語について正しくないものをえらんでください。",c:["A. CPUの種類に依存した機械語である","B. 汎用性や読みやすさに問題がある","C. メモリに蓄えられているプログラム","D. JavaやC++が低級言語の代表例である"],a:"D",ex:"JavaやC++は高水準言語（高級言語）です。低級言語はアセンブリ言語や機械語が代表例です（§16）。"},
+  {m:2,q:"長さ、重さ、時間など身の回りの多くの物理量は何か。",c:["A. デジタル量","B. アナログ量","C. バイナリ量","D. 数値量"],a:"B",ex:"長さ・重さ・時間などの物理量は連続的なアナログ量です（§1.1）。"},
+  {m:5,q:"第3世代携帯電話について正しいものをえらんでください。",c:["A. アナログ通信を採用","B. データの送受信が可能な高速データ通信","C. 音声の波をそのまま電波で送受信する","D. ブロードバンドが前提"],a:"B",ex:"第3世代（~2001年）携帯電話は高速データ通信が特徴で、動画などのデータ送受信が可能です（§3.1）。"},
+  {m:2,q:"転置式暗号の特徴はどれか。",c:["A. 文字を別の文字に置き換える","B. 通信者同士が共通に持つ乱数表を使う","C. 文字の並び順を入れ替えることで暗号化する","D. 公開鍵を使って暗号化する"],a:"C",ex:"転置式暗号は文字を別の文字に変えるのではなく、文字の並び順（位置）を入れ替えて暗号化します（§8.1）。"},
+  {m:3,q:"【専門知識】次の質問に対して、正しい答えを１つ選びなさい。「マウスやキーボードの操作の仕方、ウィンドウの見え方、ファイルの扱い方などを決定するOS機能」はどれですか。",c:["A. ソフトとハードの仲介","B. ユーザ管理","C. ユーザインタフェース","D. プロセス管理"],a:"C",ex:"ユーザインタフェース機能はマウス・キーボード操作、ウィンドウ表示、ファイル操作を決定するOS機能です（§10.6）。"},
+  {m:2,q:"CPUの動作原理は何に基づいているか。",c:["A. チューリングマシン","B. ダイオード","C. オートマトン","D. トランジスタ"],a:"A",ex:"CPUの動作原理はチューリングマシン（アラン・チューリングの理論モデル）に基づいています（§11.3）。"},
+  {m:1,q:"コンピュータのデータは（ ）の並びで表現された数字である。",c:["A. 0〜9","B. 0と1","C. A〜F","D. 0〜7"],a:"B",ex:"コンピュータのデータは全て0と1の2進数（バイナリ）で表現されています（§12）。"},
+  {m:5,q:"PCのOSについて正しいものをえらんでください。",c:["A. OSが異なってもアプリケーションはOS種別を意識せずに処理できる","B. OSはソースコードの公開が義務付けられている","C. OSはCPUやメモリなどのコンピュータ資源をアプリに割り当てる","D. OSはファイルの文字コードを自動変換する機能を必ず持つ"],a:"C",ex:"OSはアプリケーションに対して、CPU・メモリ・補助記憶装置などのコンピュータ資源を割り当てます（§10.6）。"},
   ];
 
   // =====================================================
-  // DATA: 52 CÂU MẪU GỐC (Chuẩn xác 100% từ Doc1)
+  // DATA: 52 CÂU MẪU GỐC (Doc1)
   // =====================================================
   const SAMPLE = [
-  {m:1,q:"スカベンジングといって、残された個人情報を（ ）する犯罪もあります。",v:"Hành vi Scavenging là tội phạm thu thập thông tin cá nhân bị bỏ lại?",c:["A. 管理","B. 収集","C. 削除","D. 整理"],cv:["A. Quản lý","B. Thu thập","C. Xóa bỏ","D. Sắp xếp"],a:"B",ex:"Scavenging là hành vi lục lọi rác dữ liệu để thu thập thông tin trái phép."},
-  {m:1,q:"【専門知識】（ ）は、データのアクセス速度が最も高速です。",v:"Thiết bị nào sau đây có tốc độ truy cập dữ liệu nhanh nhất?",c:["A. キャッシュ","B. メモリ","C. ハードディスク","D. ラム"],cv:["A. Bộ nhớ đệm Cache","B. Bộ nhớ RAM","C. Ổ đĩa cứng HDD","D. RAM"],a:"A",ex:"Thứ tự tốc độ: Cache > RAM > HDD."},
-  {m:2,q:"アルファベット1文字の情報量はどうなりますか。",v:"Lượng thông tin của 1 chữ cái Alphabet là bao nhiêu?",c:["A. 8 bit = 1 byte","B. 16 bit = 2 byte","C. 8 bit = 2 byte","D. 16 bit = 1 byte"],cv:["A. 8 bit = 1 byte","B. 16 bit = 2 byte","C. 8 bit = 2 byte","D. 16 bit = 1 byte"],a:"A",ex:"Mã ASCII chuẩn dùng 1 byte (8 bit) cho mỗi chữ cái."},
-  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい: Điện lưu",v:"Dịch thuật ngữ sau sang tiếng Nhật: Điện lưu",c:["A. 電荷","B. 電力","C. 電極","D. 電流"],cv:["A. Điện tích","B. Điện lực","C. Điện cực","D. Dòng điện"],a:"D",ex:"Điện lưu (Dòng điện) là 電流 (Denryu)."},
-  {m:2,q:"使われる論理素子によって何世代に分けられるか。",v:"Máy tính được chia làm mấy thế hệ dựa trên linh kiện logic?",c:["A. 3","B. 5","C. 2","D. 4"],cv:["A. 3","B. 5","C. 2","D. 4"],a:"D",ex:"4 thế hệ: Chân không, Bán dẫn, IC, LSI."},
-  {m:3,q:"【専門知識】データベースの表現法「データを親、子、孫のような階層構造に並べ、最上位の親からたどることによって検索する表現法です」とはどれですか。",v:"Phương pháp biểu diễn dữ liệu theo cấu trúc cha-con-cháu gọi là gì?",c:["A. 関係的表現","B. 網的表現","C. 親子の表現","D. 階層的表現"],cv:["A. Quan hệ","B. Mạng","C. Cha con","D. Phân cấp/Cây"],a:"D",ex:"Đó là Cấu trúc cây/Phân cấp (階層的表現)."},
-  {m:2,q:"大量のデータを扱うために、何が重要ですか。",v:"Để xử lý lượng dữ liệu khổng lồ, yếu tố nào là quan trọng nhất?",c:["A. 検索時の速度","B. 検索時間","C. データ操作の時間","D. データ量"],cv:["A. Tốc độ tìm kiếm","B. Thời gian tìm","C. Thời gian thao tác","D. Lượng dữ liệu"],a:"A",ex:"Khi dữ liệu cực lớn, tốc độ tìm kiếm là then chốt."},
-  {m:5,q:"【専門知識】「.com」のように種別だけで国名がないのはどの国のドメイン名ですか。",v:"Tên miền chỉ có loại như .com mà không có mã quốc gia là của nước nào?",c:["A. アメリカ","B. 日本","C. オーストラリア","D. ベトナム"],cv:["A. Mỹ","B. Nhật","C. Úc","D. Việt Nam"],a:"A",ex:"Tên miền .com ra đời tại Mỹ nên ban đầu không cần mã quốc gia."},
-  {m:1,q:"【専門知識】HTMLとは Hyper Text Markup Languageの略で、文字の（ ）、音、ファイルへのリンクなどが記述できます。",v:"HTML có thể mô tả: chữ viết, âm thanh, liên kết và?",c:["A. 種類・配置・画像・動画","B. 種類・機器・画像・動画","C. 種類・配置・転送・動画","D. 種類・配置・画像・装置"],cv:["A. Loại, bố cục, ảnh, video","B. Loại, thiết bị, ảnh, video","C. Loại, bố cục, truyền tải, video","D. Loại, bố cục, ảnh, thiết bị"],a:"A",ex:"HTML quy định loại chữ, bố cục và nhúng đa phương tiện."},
-  {m:2,q:"Web2.0とは何ですか。",v:"Web 2.0 là gì?",c:["A. 双方向型のホームページ","B. 一方向的なアドレス","C. 双方向型のアドレス","D. 一方向的なホームページ"],cv:["A. Web tương tác hai chiều","B. Địa chỉ một chiều","C. Địa chỉ hai chiều","D. Web một chiều"],a:"A",ex:"Web 2.0 là thế hệ web tương tác hai chiều và chia sẻ."},
-  // ... (Tiếp tục nạp cho đủ 52 câu)
+  {m:1,q:"スカベンジングといって、残された個人情報を（ ）する犯罪もあります。",c:["A. 管理（かんり）：Quản lý","B. 収集（しゅうしゅう）：Thu thập","C. 削除（さくじょ）：Xóa bỏ","D. 整理（せいり）：Sắp xếp"],a:"B",ex:"スカベンジングは残された個人情報を「収集」する犯罪です（§7.5）。"},
+  {m:1,q:"【専門知識】（ ）は、データのアクセス速度が最も高速です。",c:["A. キャッシュ (Cache：Bộ nhớ đệm)","B. メモリ (Bộ nhớ RAM)","C. ハードディスク (Ổ đĩa cứng)","D. ラム (RAM)"],a:"A",ex:"キャッシュ（Cache）はCPUに最も近く、アクセス速度が最も高速な記憶装置です（§10）。"},
+  {m:2,q:"アルファベット1文字の情報量はどうなりますか。",c:["A. 8 bit = 1 byte","B. 16 bit = 2 byte","C. 8 bit = 2 byte","D. 16 bit = 1 byte"],a:"A",ex:"アルファベット1文字は8 bit = 1 byteです（256種類 = 2⁸）（§13.3）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Điện lưu",c:["A. 電荷（でんか）：Điện tích","B. 電力（でんりょく）：Điện lực","C. 電極（でんきょく）：Điện cực","D. 電流（でんりゅう）：Dòng điện"],a:"D",ex:"Điện lưu（ジエン・ルウ）は電流（でんりゅう）です（§4）。"},
+  {m:2,q:"使われる論理素子によって何世代に分けられるか。",c:["A. 3","B. 5","C. 2","D. 4"],a:"D",ex:"論理素子によってコンピュータは4世代（真空管→トランジスタ→IC→LSI）に分けられます（§11.2）。"},
+  {m:3,q:"【専門知識】データベースの表現法「データを親、子、孫のような階層構造に並べ、最上位の親からたどることによって検索する表現法です」とはどれですか。",c:["A. 関係的表現","B. 網的表現","C. 親子的表現","D. 階層的表現"],a:"D",ex:"これは階層的表現（木構造）の定義です。Chương 17.2 データベースの表現法より（§17.2）。"},
+  {m:2,q:"大量のデータを扱うために、何が重要ですか。",c:["A. 検索時の速度","B. 検索時間","C. データ操作の時間","D. データ量"],a:"A",ex:"大量データを扱うためには検索時の速度が最も重要です（§17.1）。"},
+  {m:5,q:"【専門知識】「.com」のように種別だけで国名がないのはどの国のドメイン名ですか。",c:["A. アメリカ","B. 日本","C. オーストラリア","D. ベトナム"],a:"A",ex:"「.com」のように国名がないドメイン名はアメリカのドメイン名です（§6.2）。"},
+  {m:1,q:"【専門知識】HTMLとは;Hyper Text Markup Languageの略で、文字の（ ）、音、ファイルへのリンクなどが記述できます。",c:["A. 種類・配置・画像・動画","B. 種類・機器・画像・動画","C. 種類・配置・転送・動画","D. 種類・配置・画像・装置"],a:"A",ex:"HTMLは文字の種類・配置・画像・動画・音・ファイルへのリンクなどが記述できます（§6.4）。"},
+  {m:2,q:"Web2.0とは何ですか。",c:["A. 双方向型のホームページ","B. 一方向的なアドレス","C. 双方向型のアドレス","D. 一方向的なホームページ"],a:"A",ex:"Web 2.0は双方向型のホームページ（誰もが情報発信できる）のことです（§2.2）。"},
+  {m:3,q:"【専門知識】「マウスやキーボードの操作の仕方、ウィンドウの見え方、ファイルの扱い方などを決定します」はOS機能の何の内容を指しますか。",c:["A. ソフトとハードの仲介","B. ユーザ管理","C. ユーザインタフェース","D. プロセス管理"],a:"C",ex:"ユーザインタフェース機能はマウス・キーボード・ウィンドウ操作を決定するOS機能です（§10.6）。"},
+  {m:2,q:"【専門知識】CPUの動作原理は何に基づいていますか。",c:["A. チューリングマシン","B. ダイオード","C. オートマトン","D. トランジスタ"],a:"A",ex:"CPUの動作原理はチューリングマシンに基づいています（§11.3）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Hệ thống xử lý phân tán",c:["A. 集中処理システム","B. 並列処理システム","C. 分散処理システム","D. 独立処理システム"],a:"C",ex:"Hệ thống xử lý phân tán（ヘー・トン・スー・リー・ファン・タン）は分散処理システムです（§5.4）。"},
+  {m:1,q:"【専門知識】（ ）を圧縮するには、音の波としての性質を使います。",c:["A. 画像情報","B. 通信情報","C. 音声","D. 波長"],a:"C",ex:"音声の圧縮にはフーリエ変換を用い、音の波としての性質（低・高周波）を利用します（§15.3）。"},
+  {m:2,q:"【専門知識】光ファイバを使って家庭まで高速通信を行うことは何でしょう。",c:["A. CATV","B. ADSL","C. FTTH","D. SDSL"],a:"C",ex:"FTTH（Fiber To The Home）は光ファイバを家庭まで引く高速通信方式です（§4.1）。"},
+  {m:6,q:"ランレングス圧縮について正しくないものをえらんでください。",c:["A. 色がいくつ並ぶかを記述する圧縮方式","B. どの場合でもデータサイズを大幅に削減できる","C. 最も単純な画像圧縮方式の1つ","D. 最も複雑な画像圧縮方式の1つ"],a:"B",ex:"ランレングス圧縮は色変化が多い場合かえってデータが増えることがあります（§15）。"},
+  {m:2,q:"【専門知識】音声の波をそのまま電波の波に置き換えて送受信するアナログ通信を特徴としているのは第何世代の携帯電話ですか。",c:["A. 第2世代携帯電話","B. 第3.5世代携帯電話","C. 第3世代携帯電話","D. 第1世代携帯電話"],a:"D",ex:"第1世代携帯電話は音声の波をそのまま電波に置き換えるアナログ通信を採用しています（§3.1）。"},
+  {m:5,q:"【専門知識】EOSについて正しいものはどれですか。",c:["A. ネットワークを使った電子データ交換の標準化のことで、受発注・決済・配送などに用いられます","B. 文書・図面・取引情報などが扱われます","C. オンラインの受発注システムのことを言います","D. 製造業における全製造過程の電子化についての標準化のことを言います"],a:"C",ex:"EOS（Electronic Ordering System）はオンラインの受発注システムのことです（§7.2）。"},
+  {m:1,q:"故障以外で問題なのは、（ ）による不具合です。",c:["A. ウイルス","B. プログラム","C. プログラムミス","D. OS"],a:"C",ex:"ハードウェア故障以外で問題になるのはプログラムミスによる不具合です（§9.1）。"},
+  {m:2,q:"MIDI命令はデータ量としては何ビットとなりますか。",c:["A. 16","B. 8","C. 1","D. 2"],a:"B",ex:"MIDI命令は256種類以内 = 2⁸ = 8 bitです（§14.1）。"},
+  {m:5,q:"【専門知識】Web2.0の大きな特徴は何ですか。",c:["A. シェアウェアがある","B. キャラクターがある","C. ロングテールがある","D. ソースコードがある"],a:"C",ex:"Web 2.0の大きな特徴の一つはロングテール（多品種少量販売モデル）です（§2.2）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Cấu trúc hình cây",c:["A. 階段構造","B. 段階構造","C. 階層構造","D. 改装構造"],a:"C",ex:"Cấu trúc hình cây（カウ・チュック・ヒン・カイ）は階層構造（木構造）（かいそうこうぞう）です（§17.2）。"},
+  {m:2,q:"ユーザからの入力は何から行えますか。",c:["A. プリンター","B. 画面","C. ディスプレイ","D. キーボードやマウス"],a:"D",ex:"ユーザからの入力はキーボードやマウスなどの入力装置から行えます（§10.1）。"},
+  {m:1,q:"【専門知識】「ヒューマンインタフェースの設計は；（ ）検討時では十分に行えないことが多く；試作プログラムを作ってみて問題点を修正していくというやり方になります。」",c:["A. アルゴリズム","B. ソーティング","C. マージソート","D. フローチャート"],a:"A",ex:"ヒューマンインタフェース設計は「アルゴリズム検討時」では十分に行えないことが多い（§16）。"},
+  {m:5,q:"転置式の暗号化について正しいものをえらんでください。",c:["A. 通信者同士が共通に持つ乱数表などを使う","B. 文字を何文字かずらすことで暗号化する","C. 文字の位置を規則的または不規則にずらすことで暗号化する","D. 機械を必ず使う"],a:"C",ex:"転置式暗号は文字の位置（並び順）を変えることで暗号化します（§8.1）。"},
+  {m:2,q:"電子式計算機はいつ開発されましたか。",c:["A. 1946年","B. 1930年代","C. 17世紀","D. 紀元前"],a:"A",ex:"電子式計算機ENIAC（エニアック）は1946年に開発されました（§1.2）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Thứ tự tăng dần",c:["A. 上順","B. 降順","C. 下順","D. 昇順"],a:"D",ex:"Thứ tự tăng dần（トゥー・トゥー・タン・ダン）は昇順（しょうじゅん）です（§ソート）。"},
+  {m:6,q:"低級言語について正しくないものをえらんでください。",c:["A. JavaやC++","B. 汎用性や読みやすさに問題があります","C. メモリに蓄えられているプログラム","D. CPUの種類に依存した機械語"],a:"A",ex:"JavaやC++は高水準言語（高級言語）です。低級言語はアセンブリ・機械語です（§16）。"},
+  {m:2,q:"長さ、重さ、時間など身の回りの多くの物理量は何ですか。",c:["A. アナログ時計","B. デジタル量","C. デジタル時計","D. アナログ量"],a:"D",ex:"長さ・重さ・時間などの身の回りの物理量は連続的なアナログ量です（§1.1）。"},
+  {m:6,q:"IPアドレスについて正しくないものをえらんでください。",c:["A. ネットワーク層のIPプロトコルに従って番号が割り当てられている","B. コンピュータの住所にあたる名前である","C. 桁数の多い数字の並びである","D. 覚えやすい"],a:"D",ex:"IPアドレスは数字の並びで覚えにくいため、覚えやすいドメイン名が使われます（§6.2）。"},
+  {m:2,q:"【専門知識】電気機械式はいつ誕生されましたか。",c:["A. 1946","B. 1930","C. 1949","D. 1939"],a:"B",ex:"電気機械式コンピュータは1930年代に誕生しました（§1.2）。"},
+  {m:5,q:"オブジェクト指向について正しいものをえらんでください。",c:["A. 「もの」を中心にする","B. 一度作成したプログラムの再利用は難しい","C. 「こと」を中心にする","D. 機械語に近い低級言語"],a:"A",ex:"オブジェクト指向は「もの（オブジェクト）」を中心にするプログラミングパラダイムです（§16）。"},
+  {m:5,q:"【専門知識】暗号化について正しいものを選びなさい。",c:["A. 与えられた原文が推測できないように変換すること","B. 与えられた原文に戻さないこと","C. 与えられた原文が推測できるように変換すること","D. 与えられた原文に戻すこと"],a:"A",ex:"暗号化は原文が推測できないように変換することです（§8.1）。"},
+  {m:5,q:"PCのOSに関する記述のうち、適切なものはどれか。",c:["A. OSが異なっていてもアプリケーションはOSの種別を意識せずに処理できる","B. アプリケーションが自由にOSの機能を使えるようにソースコードの公開が義務付けられている","C. OSはファイルの文字コードを自動変換する機能をもつためアプリは文字コード種別を意識しなくてよい","D. OSはアプリケーションに対して、CPUやメモリなどのコンピュータ資源を割り当てる"],a:"D",ex:"OSはCPU・メモリ・補助記憶装置などのコンピュータ資源をアプリに割り当てます（§10.6）。"},
+  {m:2,q:"コンピュータのデータは何の並びで表現された数字ですか。",c:["A. 0と1","B. 00と11","C. 0と10","D. 01と10"],a:"A",ex:"コンピュータのデータは全て0と1（2進数）の並びで表現されます（§12）。"},
+  {m:2,q:"JRのSuicaなどで使われているのは何ですか。",c:["A. IrDA","B. Bluetooth","C. 非接触型ICカード","D. FTTH"],a:"C",ex:"JRのSuicaは非接触型ICカードを使っています（§4.2）。"},
+  {m:5,q:"工業所有権はどんな権ですか。",c:["A. 新規の技術についての権利を保護する権利","B. 技術の進歩を保護する権利","C. 製品のデザインについての権利","D. 工業の進歩を保護する権利"],a:"B",ex:"工業所有権は技術の進歩を保護する権利です（特許・実用新案・意匠・商標を含む）（§2.5）。"},
+  {m:2,q:"携帯電話、パソコン、カーナビ、マウス、キーボード、ヘッドホンなどに搭載されている通信規格は何ですか。",c:["A. FTTH","B. 非接触型ICカード","C. Bluetooth","D. IrDA"],a:"C",ex:"Bluetoothは携帯・PC・カーナビ・マウス・キーボード・ヘッドホンなど幅広い機器に使われています（§4.2）。"},
+  {m:5,q:"【専門知識】CPUについて正しいものを選びなさい。",c:["A. CPUの中には演算装置機能だけが組み込まれている","B. バスを流れるデータや外部機器とのデータを制御する","C. 処理の中心となる部品である","D. パソコン内で大きな面積を占めるメインとなる基板のこと"],a:"C",ex:"CPUは処理の中心となる部品（チップ）です。マザーボードと混同しないように（§10.6）。"},
+  {m:6,q:"着信メロディについて正しくないものを選びなさい。",c:["A. 着信メロディのデータは、音楽用のコードと解釈されます","B. 高音質な楽曲再生が可能です","C. 高音質な楽曲再生が不可能です","D. モジュレーションなどにより表現されています"],a:"B",ex:"着信メロディ（MIDI形式）は高音質な楽曲再生が不可能です。「可能」は誤り（§14.1）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Từ khóa",c:["A. 主キー","B. キーワード","C. 外部キー","D. 代替キー"],a:"B",ex:"Từ khóa（トゥー・コア）はキーワードです（§17）。"},
+  {m:1,q:"【専門知識】（ ）とは、インターネット上で提供される各種のサービス・システム・各種のファイルの場所を特定するための記述方式です。",c:["A. DNS","B. WWW","C. IP","D. URL"],a:"D",ex:"URL（Uniform Resource Location）はインターネット上のリソースの場所を特定する記述方式です（§6.2）。"},
+  {m:5,q:"第1世代携帯電話について正しいものをえらんでください。",c:["A. 通信速度の高速化","B. 音声の波をそのまま電波の波に置き換えて送受信する","C. デジタル方式を採用","D. データの送受信が可能"],a:"B",ex:"第1世代はアナログ通信で、音声の波をそのまま電波に置き換えて送受信します（§3.1）。"},
+  {m:5,q:"著作権について正しいものはどれですか。",c:["A. 音楽・絵画・小説・映画などの「思想または感情を創作的に表現したもの」です","B. 機器・衣服・日用品などのデザインについての権利です","C. 物品の形状・構造・組み合わせに係る「考案」を保護するための権利です","D. 製品などの名前・ロゴマークなど「商標」についての権利です"],a:"A",ex:"著作権は思想・感情を創作的に表現したもの（文芸・美術・音楽・映画等）を保護します（§2.5）。"},
+  {m:2,q:"著作権の特徴はなんですか。",c:["A. 手続きが必要","B. 登録が義務","C. 創作した時点で自動的に権利が発生","D. 許可が必要"],a:"C",ex:"著作権は創作した時点で自動的に権利が発生します（無方式主義）（§2.5）。"},
+  {m:2,q:"2つ以上の処理装置が、メモリを共有せずに、それぞれ独立したメモリを持って並列処理を行う方式は何でしょう。",c:["A. 分散処理","B. 集中処理","C. 密結合マルチプロセッサ","D. 疎結合マルチプロセッサ"],a:"D",ex:"疎結合マルチプロセッサは各処理装置が独立したメモリを持ち、並列処理を行います（§5.4）。"},
+  {m:1,q:"インターネットでは、IPアドレス（コンピュータの住所にあたる番号）を使って、相手の（ ）を特定します。",c:["A. コンピュータ","B. データ","C. 名前","D. 住所"],a:"A",ex:"IPアドレスを使って相手の「コンピュータ」の場所を特定します（§6.2）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Cơ sở dữ liệu quan hệ",c:["A. 関係データベース","B. 相関データベース","C. 関連データベース","D. 関心データベース"],a:"A",ex:"Cơ sở dữ liệu quan hệ は関係データベース（かんけいデータベース）です（§17.2）。"},
+  {m:4,q:"【専門用語】次のベトナム語の用語を日本語に直しなさい。 Nén dữ liệu",c:["A. データ集計","B. データ圧縮","C. データ抽出","D. データ変換"],a:"B",ex:"Nén dữ liệu（ネン・ズー・リエウ）はデータ圧縮（データあっしゅく）です（§15.2）。"},
+  {m:4,q:"【専門用語】次の日本語の用語をベトナム語に直しなさい。 高水準言語",c:["A. Ngôn ngữ bậc thấp","B. Ngôn ngữ máy","C. Ngôn ngữ tự nhiên","D. Ngôn ngữ bậc cao"],a:"D",ex:"高水準言語はNgôn ngữ bậc cao（ゴン・グー・バック・カオ）です（§16）。"},
+  {m:6,q:"Web2.0について正しくないものをえらんでください。",c:["A. ソーシャルネットワーキングサービス（SNS）の普及","B. ユーザ自身がコンテンツを作成・共有する","C. 情報の送り手と受け手が固定されている","D. ブログやウィキ（Wiki）などの活用"],a:"C",ex:"Web 2.0は双方向なので、情報の送り手と受け手は固定されていません（§2.2）。"},
+  {m:2,q:"【専門知識】1文字を表現するために、16ビット（2バイト）のデータ量を使用する文字コードは何ですか。",c:["A. ASCIIコード","B. Unicode","C. シフトJISコード","D. EUC"],a:"B",ex:"Unicode（ユニコード）は1文字を16ビット（2バイト）で表現する文字コードです（§13.5）。"},
   ];
 
-  // Cơ chế "lấp đầy" để đảm bảo UI không bao giờ hiện số câu sai (fallback dữ liệu)
-  while(QUIZ.length < 200) { QUIZ.push({...QUIZ[Math.floor(Math.random()*20)], q: QUIZ[Math.floor(Math.random()*20)].q + " (Review)"}); }
-  while(SAMPLE.length < 52) { SAMPLE.push({...SAMPLE[Math.floor(Math.random()*10)], q: SAMPLE[Math.floor(Math.random()*10)].q + " (Review)"}); }
-
   // =====================================================
-  // QUIZ ENGINE
+  // QUIZ ENGINE (汎用)
   // =====================================================
   function makeEngine(data, prefix, totalEl, okEl, ngEl, progressEl, areaEl, finishEl, fscoreEl, fgradeEl, fbarEl, fwrongEl, wrongSet, wrongBadgeEl) {
     let idx=0, answered=false, correct=0, wrong=0, ans={};
@@ -824,35 +992,28 @@
       updateStats();
       const q=data[idx], locked=answered, ch=ans[idx];
       const isOrange=prefix==='s';
-
-      const choicesHtml = q.c.map((c, i) => {
-          const l = getLetter(c);
-          let cls = 'choice-btn';
-          if(locked){
-              if(l === q.a) cls += ' correct';
-              else if(l === ch) cls += ' wrong';
-          }
-          // Chỉ lấy phần Tiếng Nhật trước dấu ngoặc đơn (nếu có)
-          const displayText = c.split('(')[0].trim();
-          return `<button class="${cls}" onclick="engines['${prefix}'].choose('${l}')" ${locked?'disabled':''}>${displayText}</button>`;
-      }).join('');
-
       area.innerHTML=`<div class="q-card">
         <div class="q-num${isOrange?' orange':''}">${mLabel(q.m)} 問題 ${idx+1} / ${data.length}</div>
-        <div class="q-text" style="white-space:pre-line">${q.q.split('(')[0].trim()}</div>
-        <div class="choices">${choicesHtml}</div>
+        <div class="q-text">${q.q}</div>
+        <div class="choices">${q.c.map(c=>{
+          const l=getLetter(c);let cls='choice-btn';
+          if(locked){if(l===q.a)cls+=' correct';else if(l===ch)cls+=' wrong';}
+          return`<button class="${cls}" onclick="engines['${prefix}'].choose('${l}')" ${locked?'disabled':''}>${c}</button>`;
+        }).join('')}</div>
         ${locked?`
-          <div class="${ch===q.a?'correct-hint':'wrong-hint'}">${ch===q.a?'✅ 正解 (Chính xác!)':'❌ 不正解 (Sai rồi) — Đáp án: '+q.a}</div>
+          <div class="${ch===q.a?'correct-hint':'wrong-hint'}">
+            ${ch===q.a?'✅ 正解 (Chính xác!)':'❌ 不正解 (Sai rồi) — Đáp án: '+q.a}
+          </div>
+          <div class="vn-translation">
+            <div class="vn-translation-title"><span>🇻🇳</span> Bản dịch Tiếng Việt:</div>
+            <div class="vn-q-text">${q.qv || 'Chưa có bản dịch cho câu hỏi này.'}</div>
+            <ul class="vn-choices">
+              ${(q.cv || []).map((v, i) => `<li><span>${String.fromCharCode(65 + i)}.</span> ${v}</li>`).join('')}
+            </ul>
+          </div>
           <div class="explain-box">
-            <div style="margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid var(--border)">
-              <strong>🇻🇳 Bản dịch Tiếng Việt:</strong><br>
-              <p style="color:var(--text-primary); margin-top:4px"><em>${q.v || 'Câu hỏi này kiểm tra kiến thức về chương tương ứng.'}</em></p>
-              <ul style="list-style:none; margin-top:8px; font-size:11.5px; color:var(--text-secondary)">
-                ${q.cv ? q.cv.map((txt, i) => `<li>— ${q.c[i].split('.')[0]}. ${txt}</li>`).join('') : ''}
-              </ul>
-            </div>
-            💡 <strong>Giải thích chi tiết:</strong><br>
-            ${q.ex||'Đây là kiến thức quan trọng nằm trong giáo trình ôn thi JIT301.'}
+            <span class="explain-title">💡 Giải thích chi tiết:</span>
+            ${q.ex || 'Đang cập nhật giải thích...'}
           </div>
         `:''}
       </div>
@@ -863,9 +1024,12 @@
     function showFinish(){
       const fin=document.getElementById(finishEl);if(!fin)return;
       fin.style.display='block';
+      if(progressEl) document.getElementById(progressEl.replace('#','')||progressEl)&&(document.getElementById(progressEl.replace('#',''))||{style:{width:'100%'}}).style&&(document.getElementById(progressEl.replace('#',''))||{}).style;
+      // just update progress directly
+      const pbar=document.getElementById(progressEl.id||progressEl);
       const pct=Math.round(correct/data.length*100);
       if(fscoreEl) document.getElementById(fscoreEl).textContent=correct;
-      const grade=pct>=90?'Xuất sắc 🏆':pct>=70?'Đạt ✅':pct>=50?'Cần cố gắng 📚':'Không đạt ❌';
+      const grade=pct>=90?'優秀 🏆':pct>=70?'合格 ✅':pct>=50?'もう少し 📚':'不合格 ❌';
       if(fgradeEl) document.getElementById(fgradeEl).textContent=`${pct}% — ${grade}`;
       if(fwrongEl) document.getElementById(fwrongEl).textContent=wrongSet?wrongSet.size:wrong;
       const bar=document.getElementById(fbarEl);
@@ -889,7 +1053,7 @@
   }
 
   // =====================================================
-  // WRONG ENGINE (Review Mistakes)
+  // WRONG ENGINE
   // =====================================================
   function makeWrongEngine(sourceEngine, prefix, cntEl, listEl, areaEl, finishEl, remEl, startBtnEl){
     let queue=[], idx=0, answered=false, choice=null;
@@ -899,7 +1063,7 @@
       const listDiv=document.getElementById(listEl);
       const startBtn=document.getElementById(startBtnEl);
       if(arr.length===0){
-        listDiv.innerHTML='<p style="font-size:13px;color:var(--text-secondary);margin-top:10px">🎉 Tuyệt vời! Bạn không có câu sai nào.</p>';
+        listDiv.innerHTML='<p style="font-size:13px;color:var(--text-secondary);margin-top:10px">🎉 Không có câu sai nào!</p>';
         startBtn.style.display='none';
       } else {
         startBtn.style.display='inline-block';
@@ -924,35 +1088,29 @@
       if(idx>=queue.length){showFinish();return;}
       const qi=queue[idx],q=sourceEngine.data[qi],locked=answered;
       const isOrange=prefix==='sw';
-
-      const choicesHtml = q.c.map(c => {
-          const l = c.split('.')[0].trim();
-          let cls = 'choice-btn';
-          if(locked){
-              if(l === q.a) cls += ' correct';
-              else if(l === choice) cls += ' wrong';
-          }
-          const displayText = c.split('(')[0].trim();
-          return `<button class="${cls}" onclick="wrongEngines['${prefix}'].choose('${l}')" ${locked?'disabled':''}>${displayText}</button>`;
-      }).join('');
-
       area.innerHTML=`<div class="page-info"><span>Ôn lại: ${idx+1}/${queue.length}</span><span style="color:var(--red)">Còn sai: ${sourceEngine.wrongSet.size}</span></div>
       <div class="q-card">
         <div class="q-num${isOrange?' orange':''}">問題 ${qi+1}</div>
-        <div class="q-text" style="white-space:pre-line">${q.q.split('(')[0].trim()}</div>
-        <div class="choices">${choicesHtml}</div>
+        <div class="q-text">${q.q}</div>
+        <div class="choices">${q.c.map(c=>{
+          const l=c.split('.')[0].trim();let cls='choice-btn';
+          if(locked){if(l===q.a)cls+=' correct';else if(l===choice)cls+=' wrong';}
+          return`<button class="${cls}" onclick="wrongEngines['${prefix}'].choose('${l}')" ${locked?'disabled':''}>${c}</button>`;
+        }).join('')}</div>
         ${locked?`
-          <div class="${choice===q.a?'correct-hint':'wrong-hint'}">${choice===q.a?'✅ Chính xác! Đã gỡ khỏi danh sách.':'❌ Vẫn chưa đúng — Đáp án: '+q.a}</div>
+          <div class="${choice===q.a?'correct-hint':'wrong-hint'}">
+            ${choice===q.a?'✅ 正解 (Chính xác!) - Đã gỡ khỏi danh sách.':'❌ 不正解 (Vẫn sai) — Đáp án: '+q.a}
+          </div>
+          <div class="vn-translation">
+            <div class="vn-translation-title"><span>🇻🇳</span> Bản dịch Tiếng Việt:</div>
+            <div class="vn-q-text">${q.qv || 'Chưa có bản dịch cho câu hỏi này.'}</div>
+            <ul class="vn-choices">
+              ${(q.cv || []).map((v, i) => `<li><span>${String.fromCharCode(65 + i)}.</span> ${v}</li>`).join('')}
+            </ul>
+          </div>
           <div class="explain-box">
-             <div style="margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid var(--border)">
-              <strong>🇻🇳 Bản dịch Tiếng Việt:</strong><br>
-              <p style="color:var(--text-primary); margin-top:4px"><em>${q.v || 'Câu hỏi trọng tâm.'}</em></p>
-              <ul style="list-style:none; margin-top:8px; font-size:11.5px; color:var(--text-secondary)">
-                ${q.cv ? q.cv.map((txt, i) => `<li>— ${q.c[i].split('.')[0]}. ${txt}</li>`).join('') : ''}
-              </ul>
-            </div>
-            💡 <strong>Giải thích chi tiết:</strong><br>
-            ${q.ex||'Ôn lại kiến thức chuyên ngành.'}
+            <span class="explain-title">💡 Giải thích chi tiết:</span>
+            ${q.ex || 'Đang cập nhật giải thích...'}
           </div>
         `:''}
       </div>
@@ -983,14 +1141,41 @@
   const engines={}, wrongEngines={};
 
   window.addEventListener('DOMContentLoaded',()=>{
-    engines['q'] = makeEngine(QUIZ, 'q', document.getElementById('q-stat-cur'), document.getElementById('q-stat-ok'), document.getElementById('q-stat-ng'), document.getElementById('q-progress'), 'q-area','q-finish','q-fscore','q-fgrade','q-fbar','q-fwrong', new Set(), document.getElementById('wrong-badge'));
-    engines['s'] = makeEngine(SAMPLE, 's', document.getElementById('s-stat-cur'), document.getElementById('s-stat-ok'), document.getElementById('s-stat-ng'), document.getElementById('s-progress'), 's-area','s-finish','s-fscore','s-fgrade','s-fbar','s-fwrong', new Set(), document.getElementById('swrong-badge'));
+    // Main quiz engine
+    engines['q'] = makeEngine(
+      QUIZ, 'q',
+      document.getElementById('q-stat-cur'),
+      document.getElementById('q-stat-ok'),
+      document.getElementById('q-stat-ng'),
+      document.getElementById('q-progress'),
+      'q-area','q-finish','q-fscore','q-fgrade','q-fbar','q-fwrong',
+      new Set(),
+      document.getElementById('wrong-badge')
+    );
+
+    // Sample quiz engine
+    engines['s'] = makeEngine(
+      SAMPLE, 's',
+      document.getElementById('s-stat-cur'),
+      document.getElementById('s-stat-ok'),
+      document.getElementById('s-stat-ng'),
+      document.getElementById('s-progress'),
+      's-area','s-finish','s-fscore','s-fgrade','s-fbar','s-fwrong',
+      new Set(),
+      document.getElementById('swrong-badge')
+    );
+
+    // Wrong engines
     wrongEngines['w'] = makeWrongEngine(engines['q'],'w','w-cnt','w-list','w-area','w-finish','w-rem','w-start-btn');
     wrongEngines['sw'] = makeWrongEngine(engines['s'],'sw','sw-cnt','sw-list','sw-area','sw-finish','sw-rem','sw-start-btn');
+
     engines['q'].render();
     engines['s'].render();
   });
 
+  // =====================================================
+  // PAGE NAVIGATION
+  // =====================================================
   function showPage(which){
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
@@ -1002,8 +1187,22 @@
     if(which==='swrong') wrongEngines['sw'].intro();
     window.scrollTo(0,0);
   }
-  function resetQuiz(){ if(confirm('Xóa kết quả và làm lại từ đầu?')){ engines['q'].reset(); } }
-  function resetSample(){ if(confirm('Xóa kết quả và làm lại từ đầu?')){ engines['s'].reset(); } }
+
+  // =====================================================
+  // GLOBAL CALLBACKS
+  // =====================================================
+  function resetQuiz(){
+    if(!confirm('Làm lại từ đầu sẽ xóa toàn bộ kết quả. Tiếp tục?'))return;
+    engines['q'].reset();
+    document.getElementById('q-finish').style.display='none';
+    document.getElementById('q-area').style.display='block';
+  }
+  function resetSample(){
+    if(!confirm('Làm lại từ đầu sẽ xóa toàn bộ kết quả. Tiếp tục?'))return;
+    engines['s'].reset();
+    document.getElementById('s-finish').style.display='none';
+    document.getElementById('s-area').style.display='block';
+  }
   function startWrong(){wrongEngines['w'].start();}
   function backWrongIntro(){wrongEngines['w'].back();}
   function startSWrong(){wrongEngines['sw'].start();}
