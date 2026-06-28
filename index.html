@@ -3,1179 +3,1363 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JIT401 — Ôn thi IT Nhật Bản</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <title>JIT301 — Tin học & Công nghệ thông tin</title>
   <style>
     :root {
-      --bg: #F6F7FB;
-      --card: #FFFFFF;
-      --primary: #4361EE;
-      --primary-hover: #3451D1;
-      --primary-light: #EEF1FD;
-      --accent: #F72585;
-      --accent-light: #FEE8F3;
-      --success: #2DC653;
-      --success-light: #E6F9EC;
-      --warning: #F7B731;
-      --warning-light: #FEF9E7;
-      --error: #EF233C;
-      --error-light: #FEE8EB;
-      --text: #1A1D2E;
-      --text-sub: #6B7280;
-      --text-muted: #9CA3AF;
-      --border: #E5E8F0;
-      --hover: #F0F3FF;
-      --sidebar-w: 280px;
-      --radius: 14px;
-      --radius-sm: 8px;
-      --shadow: 0 2px 12px rgba(67,97,238,0.07);
-      --shadow-md: 0 8px 32px rgba(67,97,238,0.12);
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-2: #f5f5f7;
+      --surface-3: #ebebed;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #86868b;
+      --accent: #0071e3;
+      --accent-soft: #e8f0fb;
+      --accent-dark: #0058b0;
+      --green: #34c759;
+      --green-soft: #e8f8ed;
+      --red: #ff3b30;
+      --red-soft: #fff0ef;
+      --orange: #ff9500;
+      --border: rgba(0,0,0,0.08);
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.10);
+      --radius: 18px;
+      --radius-sm: 10px;
+      --font: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --font-display: -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
     }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', 'Noto Sans JP', -apple-system, sans-serif;
-      line-height: 1.65;
-      overflow-x: hidden;
-      font-size: 15px;
-    }
-
-    /* ── LAYOUT ── */
-    .app { display: flex; min-height: 100vh; }
-
-    /* ── SIDEBAR ── */
-    .sidebar {
-      width: var(--sidebar-w);
-      background: var(--card);
-      border-right: 1.5px solid var(--border);
-      position: fixed; top: 0; left: 0; bottom: 0;
-      display: flex; flex-direction: column;
-      z-index: 200; overflow: hidden;
-    }
-    .sidebar-logo {
-      padding: 28px 24px 20px;
-      display: flex; align-items: center; gap: 14px;
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(245,245,247,0.88);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
     }
-    .logo-icon {
-      width: 42px; height: 42px;
-      background: linear-gradient(135deg, var(--primary), #7B2FBE);
-      color: #fff; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; font-weight: 900; font-family: 'JetBrains Mono', monospace;
-      flex-shrink: 0;
+    .nav-inner {
+      max-width: 980px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 52px; padding: 0 24px;
     }
-    .logo-text { font-weight: 900; font-size: 18px; color: var(--text); }
-    .logo-sub { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-top: 1px; }
+    .nav-logo { font-size: 17px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.3px; text-decoration: none; }
+    .nav-tabs { display: flex; gap: 2px; background: var(--surface-3); border-radius: 10px; padding: 3px; }
+    .nav-tab {
+      font-size: 13px; font-weight: 500; color: var(--text-secondary);
+      padding: 6px 16px; border-radius: 8px; border: none; background: transparent;
+      cursor: pointer; transition: all 0.18s; white-space: nowrap;
+    }
+    .nav-tab.active { background: var(--surface); color: var(--text-primary); box-shadow: 0 1px 4px rgba(0,0,0,0.12); font-weight: 600; }
+    .nav-tab:hover:not(.active) { color: var(--text-primary); background: rgba(255,255,255,0.5); }
+    .nav-badge { display:inline-block; min-width:16px; height:16px; padding:0 4px; background:var(--red); color:#fff; border-radius:8px; font-size:10px; font-weight:700; line-height:16px; text-align:center; margin-left:4px; vertical-align:middle; }
 
-    .sidebar-scroll { flex: 1; overflow-y: auto; padding: 16px 12px 24px; }
-    .sidebar-scroll::-webkit-scrollbar { width: 4px; }
-    .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    /* ─── PAGES ─── */
+    .page { display: none; }
+    .page.active { display: block; }
 
-    .nav-group-label {
-      font-size: 10px; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 1.5px; color: var(--text-muted);
-      padding: 8px 12px 10px; margin-top: 4px;
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(160deg, #0a0a0f 0%, #1a1a2e 50%, #0d2137 100%);
+      padding: 90px 24px 72px; text-align: center; position: relative; overflow: hidden;
     }
-    .nav-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 12px; border-radius: var(--radius-sm);
-      cursor: pointer; transition: all 180ms ease;
-      margin-bottom: 2px; color: var(--text-sub);
-      font-size: 13.5px; font-weight: 500;
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,113,227,0.28) 0%, transparent 70%);
     }
-    .nav-item:hover { background: var(--hover); color: var(--primary); }
-    .nav-item.active { background: var(--primary-light); color: var(--primary); font-weight: 700; }
-    .nav-item .ch-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; color: var(--text-muted);
-      width: 22px; flex-shrink: 0; font-weight: 500;
-    }
-    .nav-item.active .ch-num { color: var(--primary); opacity: 0.6; }
-    .nav-star { font-size: 10px; opacity: 0.7; flex-shrink: 0; }
+    .hero-eyebrow { font-size: 12px; font-weight: 600; color: #0a84ff; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 18px; position: relative; }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(32px,5.5vw,60px); font-weight: 700; color: #f5f5f7; letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 18px; position: relative; }
+    .hero h1 span { color: #0a84ff; }
+    .hero-sub { font-size: 18px; color: rgba(245,245,247,0.6); max-width: 500px; margin: 0 auto 40px; position: relative; line-height: 1.55; }
+    .hero-stats { display: flex; justify-content: center; gap: 48px; position: relative; flex-wrap: wrap; }
+    .hero-stat-num { font-size: 30px; font-weight: 700; color: #f5f5f7; letter-spacing: -1px; line-height: 1; }
+    .hero-stat-label { font-size: 12px; color: rgba(245,245,247,0.45); margin-top: 4px; }
 
-    /* ── MAIN ── */
-    .main {
-      margin-left: var(--sidebar-w);
-      flex: 1; display: flex; flex-direction: column;
-      min-height: 100vh;
-    }
-    .topbar {
-      background: var(--card);
-      border-bottom: 1.5px solid var(--border);
-      padding: 0 40px;
-      display: flex; align-items: center; gap: 0;
-      position: sticky; top: 0; z-index: 100;
-      height: 56px; flex-shrink: 0;
-    }
-    .tab-btn {
-      padding: 0 20px; height: 56px;
-      display: flex; align-items: center; gap: 8px;
-      font-size: 14px; font-weight: 600; color: var(--text-sub);
-      cursor: pointer; border-bottom: 2.5px solid transparent;
-      transition: all 160ms ease; white-space: nowrap;
-    }
-    .tab-btn:hover { color: var(--primary); }
-    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
-    .tab-icon { font-size: 16px; }
+    /* ─── SECTION WRAPPER ─── */
+    .toc-section { padding: 56px 24px 0; max-width: 980px; margin: 0 auto; }
+    .section-eyebrow { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+    .section-title { font-family: var(--font-display); font-size: clamp(24px,3.5vw,38px); font-weight: 700; letter-spacing: -0.8px; color: var(--text-primary); margin-bottom: 28px; }
 
-    .content { flex: 1; padding: 40px; max-width: 860px; margin: 0 auto; width: 100%; }
+    /* TOC GRID */
+    .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(196px,1fr)); gap: 10px; }
+    .toc-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 13px 15px; text-decoration: none; color: var(--text-primary); transition: box-shadow .18s, transform .18s; display: flex; align-items: center; gap: 10px; }
+    .toc-item:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .toc-num { font-size: 11px; font-weight: 700; color: var(--accent); min-width: 24px; height: 24px; background: var(--accent-soft); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .toc-text { font-size: 13px; font-weight: 500; line-height: 1.3; }
 
-    /* ── VIEWS ── */
-    .view { display: none; }
-    .view.active { display: block; animation: fadeUp 320ms ease; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    /* ─── CONTENT ─── */
+    .content { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
 
-    /* ── CHAPTER HEADER ── */
-    .ch-header { margin-bottom: 36px; }
-    .ch-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-    .badge {
-      padding: 4px 12px; border-radius: 99px;
-      font-size: 12px; font-weight: 700;
-      display: inline-flex; align-items: center; gap: 5px;
+    /* CHAPTER */
+    .chapter { margin-bottom: 40px; scroll-margin-top: 66px; }
+    .chapter-header { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius) var(--radius) 0 0; padding: 24px 28px 20px; box-shadow: var(--shadow-sm); }
+    .chapter-num { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+    .chapter-title-jp { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: var(--text-primary); line-height: 1.25; }
+    .chapter-title-vn { font-size: 14px; color: var(--text-secondary); margin-top: 3px; }
+    .chapter-body { background: var(--surface); border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); padding: 20px 28px 24px; box-shadow: var(--shadow-sm); }
+
+    /* DEF ROW */
+    .def-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 18px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
+    .def-row:last-child { border-bottom: none; }
+    .def-jp { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+    .def-vn { font-size: 13px; color: var(--text-secondary); }
+    .def-note { grid-column: 1/-1; font-size: 12px; color: var(--text-tertiary); margin-top: 1px; }
+
+    /* CARD GRID */
+    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+    .info-card { background: var(--surface-2); border-radius: var(--radius-sm); padding: 14px 16px; border: 1px solid var(--border); }
+    .info-card-title { font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px; }
+    .info-card ul { padding: 0; list-style: none; }
+    .info-card li { font-size: 13px; color: var(--text-primary); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: baseline; }
+    .info-card li:last-child { border-bottom: none; }
+    .info-card li .vn { font-size: 11px; color: var(--text-tertiary); }
+
+    /* CODE */
+    .code-block { background: #1d1d1f; border-radius: var(--radius-sm); padding: 16px 18px; margin: 14px 0; overflow-x: auto; }
+    .code-block pre { font-family: var(--font-mono); font-size: 12px; color: #a8ff78; line-height: 1.7; white-space: pre; }
+
+    /* FORMULA */
+    .formula { background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; margin: 12px 0; font-size: 14px; font-weight: 500; color: var(--text-primary); font-family: var(--font-mono); }
+
+    /* COMPARE */
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+    .compare-card { border-radius: var(--radius-sm); padding: 16px 18px; border: 1px solid var(--border); }
+    .compare-card.digital { background: #e8f0fb; border-color: rgba(0,113,227,0.2); }
+    .compare-card.analog { background: #fef3ea; border-color: rgba(255,140,0,0.2); }
+    .compare-label { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px; }
+    .compare-card.digital .compare-label { color: #0071e3; }
+    .compare-card.analog .compare-label { color: #d16000; }
+    .compare-card li { font-size: 13px; color: var(--text-primary); padding: 4px 0 4px 14px; position: relative; border-bottom: 1px solid rgba(0,0,0,0.06); line-height: 1.45; list-style: none; }
+    .compare-card li::before { content: '—'; position: absolute; left: 0; color: var(--text-tertiary); }
+    .compare-card li:last-child { border-bottom: none; }
+
+    /* TIMELINE */
+    .timeline-item { display: flex; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-year { font-size: 12px; font-weight: 700; color: var(--accent); min-width: 72px; padding-top: 1px; font-family: var(--font-mono); }
+    .timeline-content { font-size: 13px; color: var(--text-primary); }
+    .timeline-content span { color: var(--text-secondary); font-size: 12px; display: block; }
+
+    /* HIGHLIGHT */
+    .highlight { background: linear-gradient(135deg, #e8f0fb 0%, #f0f5ff 100%); border: 1px solid rgba(0,113,227,0.15); border-radius: var(--radius-sm); padding: 16px 18px; margin: 12px 0; }
+    .highlight-title { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 7px; }
+    .highlight p { font-size: 13px; color: var(--text-primary); line-height: 1.6; }
+
+    /* RULE LIST */
+    .rule-item { display: flex; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+    .rule-item:last-child { border-bottom: none; }
+    .rule-num { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .rule-jp { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+    .rule-vn { font-size: 12px; color: var(--text-secondary); }
+
+    /* IP TREE */
+    .ip-branch { margin-bottom: 14px; }
+    .ip-parent { font-size: 13px; font-weight: 600; color: var(--text-primary); padding: 8px 12px; background: var(--surface-2); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 6px; }
+    .ip-children { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding-left: 18px; }
+    .ip-child { font-size: 12px; color: var(--text-secondary); padding: 6px 11px; background: var(--surface); border: 1px solid var(--border); border-radius: 7px; display: flex; gap: 7px; align-items: center; }
+    .ip-child::before { content: '›'; color: var(--accent); font-weight: 700; }
+
+    /* OSI */
+    .osi-stack { display: flex; flex-direction: column; gap: 3px; margin: 10px 0; }
+    .osi-layer { padding: 9px 14px; border-radius: 7px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 500; }
+    .osi-layer.l7 { background: #e8f0fb; }
+    .osi-layer.l6 { background: #edf0fb; }
+    .osi-layer.l5 { background: #f0eefb; }
+    .osi-layer.l4 { background: #fae8fb; }
+    .osi-layer.l3 { background: #fbeef0; }
+    .osi-layer.l2 { background: #fdf5e8; }
+    .osi-layer.l1 { background: #f0fbe8; }
+    .osi-proto { font-size: 10px; font-weight: 700; color: var(--accent); background: white; padding: 2px 7px; border-radius: 10px; }
+
+    /* UNIT TABLE */
+    .unit-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+    .unit-table th { font-size: 10px; font-weight: 700; color: var(--text-tertiary); letter-spacing: 1px; text-transform: uppercase; text-align: left; padding: 7px 10px; border-bottom: 2px solid var(--border); }
+    .unit-table td { font-size: 13px; padding: 10px; border-bottom: 1px solid var(--border); color: var(--text-primary); font-family: var(--font-mono); }
+    .unit-table tr:last-child td { border-bottom: none; }
+    .unit-table tr:nth-child(even) td { background: var(--surface-2); }
+
+    /* SEC LIST */
+    .sec-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .sec-item:last-child { border-bottom: none; }
+    .sec-tag { display: inline-block; font-size: 10px; font-weight: 700; color: #c00; background: var(--red-soft); border: 1px solid rgba(200,0,0,0.15); border-radius: 5px; padding: 2px 7px; letter-spacing: 0.5px; margin-bottom: 5px; }
+    .sec-tag.blue { color: var(--accent); background: var(--accent-soft); border-color: rgba(0,113,227,0.15); }
+    .sec-tag.green { color: #0a7a0a; background: var(--green-soft); border-color: rgba(0,100,0,0.15); }
+    .sec-jp { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 2px; }
+    .sec-vn { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* EXERCISE */
+    .exercise { background: linear-gradient(135deg,#f5f5f7 0%,#eef2ff 100%); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; margin: 12px 0; }
+    .exercise-title { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+    .exercise p { font-size: 13px; color: var(--text-primary); line-height: 1.65; margin-bottom: 6px; }
+    .exercise .result { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--accent); margin-top: 8px; }
+
+    /* GEN GRID */
+    .gen-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-top: 6px; }
+    .gen-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; }
+    .gen-year { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
+    .gen-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .gen-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+    /* EMAIL */
+    .email-box { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px 20px; margin: 12px 0; font-size: 13px; line-height: 1.8; color: var(--text-primary); }
+    .email-from { font-weight: 600; margin-bottom: 8px; color: var(--accent); }
+
+    .back-top { display: block; text-align: center; margin: 48px auto 16px; color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .back-top:hover { text-decoration: underline; }
+
+    /* ═══════════════════════════════════════
+       QUIZ PAGE
+    ═══════════════════════════════════════ */
+    #quiz-page, #wrong-page { background: var(--bg); min-height: 100vh; }
+
+    .quiz-hero {
+      background: linear-gradient(160deg, #0a0a0f 0%, #1a1a2e 50%, #0d2137 100%);
+      padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden;
     }
-    .badge-num { background: var(--primary); color: #fff; }
-    .badge-star { background: var(--warning-light); color: #B07500; }
-    .badge-vn { background: var(--success-light); color: #1A7A38; }
-    .ch-jp { font-size: 36px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 6px; line-height: 1.2; font-family: 'Noto Sans JP', 'Inter', sans-serif; }
-    .ch-vn { font-size: 20px; color: var(--text-sub); font-weight: 600; margin-bottom: 20px; }
-    .ch-summary {
-      background: var(--primary-light); border-radius: var(--radius);
-      padding: 18px 22px; font-size: 14px; color: #334;
-      border-left: 4px solid var(--primary); line-height: 1.7;
+    .quiz-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,113,227,0.22) 0%, transparent 70%); }
+    .quiz-hero-eyebrow { font-size: 12px; font-weight: 600; color: #0a84ff; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 14px; position: relative; }
+    .quiz-hero h2 { font-family: var(--font-display); font-size: clamp(26px,4vw,44px); font-weight: 700; color: #f5f5f7; letter-spacing: -1px; line-height: 1.1; margin-bottom: 14px; position: relative; }
+    .quiz-hero h2 span { color: #0a84ff; }
+
+    /* QUIZ STATS BAR */
+    .quiz-stats-bar {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 10px 24px;
     }
+    .quiz-stats-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .quiz-stat-item { font-size: 13px; color: var(--text-secondary); }
+    .quiz-stat-item strong { color: var(--text-primary); font-weight: 600; }
 
-    /* ── KNOWLEDGE CARDS ── */
-    .section-divider {
-      font-size: 10.5px; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 1.5px; color: var(--text-muted);
-      margin: 28px 0 14px; display: flex; align-items: center; gap: 10px;
+    /* SCORE BANNER */
+    .score-banner { max-width: 720px; margin: 24px auto; padding: 0 24px; }
+    .score-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 28px 32px; text-align: center; box-shadow: var(--shadow-sm); }
+    .score-big { font-size: 56px; font-weight: 700; color: var(--accent); letter-spacing: -2px; line-height: 1; }
+    .score-of { font-size: 22px; color: var(--text-tertiary); }
+    .score-grade { font-size: 22px; font-weight: 600; color: var(--text-primary); margin-top: 8px; }
+    .score-bar-wrap { margin-top: 16px; background: var(--surface-3); border-radius: 8px; height: 10px; overflow: hidden; }
+    .score-bar-fill { height: 100%; border-radius: 8px; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
+
+    /* QUIZ CONTAINER */
+    .quiz-container { max-width: 720px; margin: 0 auto; padding: 20px 24px 60px; }
+
+    /* PAGE INFO */
+    .page-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 13px; color: var(--text-secondary); }
+
+    /* QUESTION CARD */
+    .q-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px 22px; margin-bottom: 12px; box-shadow: var(--shadow-sm); }
+    .q-num { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 6px; letter-spacing: 0.5px; }
+    .q-text { font-size: 15px; font-weight: 500; color: var(--text-primary); margin-bottom: 14px; line-height: 1.5; }
+    .choices { display: flex; flex-direction: column; gap: 7px; }
+    .choice-btn {
+      width: 100%; text-align: left; padding: 10px 14px; border-radius: 8px; border: 1.5px solid var(--border);
+      background: var(--surface-2); color: var(--text-primary); font-size: 13.5px; cursor: pointer;
+      transition: all .15s; font-family: var(--font); line-height: 1.45;
     }
-    .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .choice-btn:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
+    .choice-btn.selected { border-color: var(--accent); background: var(--accent-soft); color: #003d7a; font-weight: 500; }
+    .choice-btn.correct { border-color: var(--green); background: var(--green-soft); color: #1a5c2a; font-weight: 600; }
+    .choice-btn.wrong { border-color: var(--red); background: var(--red-soft); color: #7a0000; }
+    .choice-btn.reveal-correct { border-color: var(--green); background: var(--green-soft); color: #1a5c2a; }
+    .choice-btn:disabled { cursor: default; }
+    .correct-hint { margin-top: 8px; font-size: 12px; color: #1a5c2a; background: var(--green-soft); border-radius: 6px; padding: 7px 12px; font-weight: 500; }
 
-    .k-card {
-      background: var(--card); border: 1.5px solid var(--border);
-      border-radius: var(--radius); margin-bottom: 14px;
-      box-shadow: var(--shadow); overflow: hidden;
-      transition: border-color 200ms, box-shadow 200ms;
+    /* NAV BUTTONS */
+    .quiz-nav { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+    .btn { padding: 10px 22px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all .15s; font-family: var(--font); }
+    .btn-ghost { background: var(--surface); border: 1.5px solid var(--border); color: var(--text-primary); }
+    .btn-ghost:hover:not(:disabled) { background: var(--surface-2); }
+    .btn-ghost:disabled { opacity: 0.38; cursor: default; }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-danger { background: var(--text-primary); color: white; }
+    .btn-danger:hover { background: #333; }
+
+    /* PAGE DOTS (reused as small index chips) */
+    .page-dots { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+    .page-dot {
+      width: 30px; height: 28px; border-radius: 7px; font-size: 11px; font-weight: 700;
+      cursor: pointer; border: 1.5px solid var(--border); background: var(--surface);
+      color: var(--text-secondary); display: flex; align-items: center; justify-content: center; transition: all .15s;
     }
-    .k-card:hover { border-color: #C5D0FF; box-shadow: var(--shadow-md); }
-    .k-card-head {
-      padding: 20px 24px; cursor: pointer;
-      display: flex; align-items: center; gap: 18px;
-      user-select: none;
-    }
-    .k-icon { font-size: 26px; width: 50px; height: 50px; background: var(--bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: 200ms; }
-    .k-card.open .k-icon { background: var(--primary-light); }
-    .k-labels { flex: 1; min-width: 0; }
-    .k-jp-term { font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-family: 'Noto Sans JP', sans-serif; }
-    .k-yomi { font-size: 11.5px; color: var(--primary); font-family: 'JetBrains Mono', monospace; font-weight: 600; background: var(--primary-light); padding: 2px 8px; border-radius: 5px; }
-    .k-vn-sub { font-size: 13.5px; color: var(--text-sub); font-weight: 500; margin-top: 3px; }
-    .k-arrow { font-size: 11px; color: var(--text-muted); transition: transform 300ms ease; flex-shrink: 0; }
-    .k-card.open .k-arrow { transform: rotate(180deg); }
+    .page-dot:hover { border-color: var(--accent); color: var(--accent); }
 
-    .k-card-body { display: none; padding: 0 24px 24px; border-top: 1px solid var(--border); background: #FAFBFF; }
-    .k-card.open .k-card-body { display: block; }
+    /* SUBMIT AREA */
+    .submit-area { text-align: center; margin-top: 28px; }
+    .submit-area .btn { padding: 14px 40px; font-size: 15px; border-radius: 14px; }
 
-    .info-row { margin-top: 18px; }
-    .info-label { font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-    .info-box {
-      padding: 14px 18px; border-radius: var(--radius-sm);
-      font-size: 14px; line-height: 1.7; border: 1px solid transparent;
-    }
-    .info-box p + p { margin-top: 6px; }
-    .info-blue { background: #F0F4FF; border-color: #C8D5FF; color: #233580; }
-    .info-gray { background: var(--bg); border-color: var(--border); color: var(--text); }
-    .info-green { background: var(--success-light); border-color: #B7EFC9; color: #145E27; }
-    .info-yellow { background: var(--warning-light); border-color: #FDDFA0; color: #7A5000; }
-    .info-accent { background: var(--accent-light); border-color: #FFBFE6; color: #8A0048; }
+    /* PROGRESS BAR */
+    .progress-strip { height: 3px; background: var(--surface-3); }
+    .progress-fill { height: 100%; background: var(--accent); transition: width .4s; }
 
-    /* ── TRANSLATION TABLE ── */
-    .trans-table-wrap { overflow-x: auto; margin-top: 12px; }
-    .trans-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-    .trans-table th { background: var(--primary); color: #fff; padding: 10px 14px; text-align: left; font-weight: 700; font-size: 12px; letter-spacing: 0.5px; }
-    .trans-table th:first-child { border-radius: var(--radius-sm) 0 0 0; }
-    .trans-table th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
-    .trans-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
-    .trans-table tr:last-child td { border-bottom: none; }
-    .trans-table tr:nth-child(even) td { background: #FAFBFF; }
-    .trans-table .jp-cell { font-family: 'Noto Sans JP', sans-serif; font-weight: 700; color: var(--text); }
-    .trans-table .kw-cell { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--primary); background: var(--primary-light); padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
-    .trans-table .vn-cell { color: var(--text-sub); }
-    .trans-table .note-cell { font-size: 12px; color: var(--text-muted); font-style: italic; }
-
-    /* ── QUIZ ── */
-    .quiz-wrap { max-width: 680px; margin: 0 auto; }
-    .quiz-card { background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; padding: 44px; box-shadow: var(--shadow-md); }
-    .q-meta { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-    .q-text { font-size: 22px; font-weight: 800; line-height: 1.45; margin-bottom: 10px; }
-    .q-jp { font-size: 14px; color: var(--text-muted); font-family: 'Noto Sans JP', sans-serif; margin-bottom: 32px; }
-    .opts-list { display: flex; flex-direction: column; gap: 10px; }
-    .opt-btn {
-      background: var(--card); border: 2px solid var(--border);
-      padding: 16px 20px; border-radius: 10px;
-      cursor: pointer; font-size: 15.5px; font-weight: 600;
-      text-align: left; transition: all 140ms ease;
-      display: flex; align-items: center; gap: 16px;
-      color: var(--text);
-    }
-    .opt-btn:hover:not(.locked) { border-color: var(--primary); background: var(--hover); }
-    .opt-btn .opt-label { width: 28px; height: 28px; border-radius: 50%; background: var(--bg); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--text-muted); flex-shrink: 0; transition: 140ms; }
-    .opt-btn.correct { background: var(--success-light); border-color: var(--success); color: #0C5E20; }
-    .opt-btn.correct .opt-label { background: var(--success); border-color: var(--success); color: #fff; }
-    .opt-btn.wrong { background: var(--error-light); border-color: var(--error); color: #8B0016; }
-    .opt-btn.wrong .opt-label { background: var(--error); border-color: var(--error); color: #fff; }
-    .quiz-feedback { margin-top: 20px; padding: 16px 20px; border-radius: 10px; font-size: 14px; display: none; }
-    .quiz-feedback.show { display: block; }
-    .quiz-feedback.correct { background: var(--success-light); border: 1px solid #B7EFC9; color: #145E27; }
-    .quiz-feedback.wrong { background: var(--error-light); border: 1px solid #FFBCBE; color: #8B0016; }
-    .quiz-feedback strong { font-size: 15px; display: block; margin-bottom: 6px; }
-    .progress-bar-wrap { height: 5px; background: var(--border); border-radius: 99px; margin-bottom: 28px; overflow: hidden; }
-    .progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 99px; transition: width 400ms ease; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--primary); color: #fff;
-      padding: 12px 24px; border-radius: var(--radius-sm);
-      font-size: 14px; font-weight: 700; cursor: pointer;
-      border: none; transition: 160ms; margin-top: 24px;
-    }
-    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: var(--primary);
-      padding: 12px 24px; border-radius: var(--radius-sm);
-      font-size: 14px; font-weight: 700; cursor: pointer;
-      border: 2px solid var(--primary); transition: 160ms; margin-top: 24px; margin-left: 10px;
-    }
-    .btn-outline:hover { background: var(--primary-light); }
-
-    .quiz-score-card { text-align: center; }
-    .score-circle { width: 120px; height: 120px; border-radius: 50%; background: var(--primary-light); border: 4px solid var(--primary); display: flex; align-items: center; justify-content: center; flex-direction: column; margin: 20px auto; }
-    .score-num { font-size: 38px; font-weight: 900; color: var(--primary); line-height: 1; }
-    .score-denom { font-size: 13px; color: var(--text-sub); font-weight: 600; }
-
-    /* ── FLASHCARD ── */
-    .flash-wrap { max-width: 560px; margin: 0 auto; padding: 20px 0 40px; }
-    .flash-controls { display: flex; align-items: center; gap: 12px; justify-content: center; margin-bottom: 30px; }
-    .flash-counter { font-size: 14px; font-weight: 700; color: var(--text-sub); }
-    .flash-scene { width: 100%; height: 300px; perspective: 1000px; cursor: pointer; margin-bottom: 24px; }
-    .flash-inner { position: relative; width: 100%; height: 100%; transition: transform 0.55s cubic-bezier(0.4,0,0.2,1); transform-style: preserve-3d; }
-    .flash-scene.flipped .flash-inner { transform: rotateY(180deg); }
-    .flash-face {
-      position: absolute; width: 100%; height: 100%;
-      backface-visibility: hidden; border-radius: 20px;
-      border: 1.5px solid var(--border); background: var(--card);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 36px; text-align: center; box-shadow: var(--shadow-md);
-    }
-    .flash-back-face { transform: rotateY(180deg); background: var(--primary-light); border-color: #C5D0FF; }
-    .flash-hint { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700; }
-    .flash-jp { font-size: 30px; font-weight: 900; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 8px; }
-    .flash-yomi { font-size: 13px; color: var(--primary); font-family: 'JetBrains Mono', monospace; font-weight: 600; background: var(--primary); color: #fff; padding: 3px 10px; border-radius: 6px; margin-bottom: 0; }
-    .flash-vn-term { font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
-    .flash-vn-desc { font-size: 14px; color: var(--text-sub); line-height: 1.6; }
-    .flash-btns { display: flex; gap: 10px; justify-content: center; }
-    .flash-btn { padding: 10px 22px; border-radius: var(--radius-sm); border: 2px solid var(--border); background: var(--card); font-size: 14px; font-weight: 700; cursor: pointer; transition: 150ms; color: var(--text); }
-    .flash-btn:hover { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
-    .flash-btn.next { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .flash-btn.next:hover { background: var(--primary-hover); }
-
-    /* ── START / EMPTY ── */
-    .start-card { text-align: center; padding: 60px 32px; background: var(--card); border-radius: 20px; border: 1.5px solid var(--border); box-shadow: var(--shadow); }
-    .start-icon { font-size: 56px; margin-bottom: 16px; }
-    .start-title { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
-    .start-sub { font-size: 15px; color: var(--text-sub); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      :root { --sidebar-w: 0px; }
-      .sidebar { display: none; }
-      .main { margin-left: 0; }
-      .content { padding: 24px 16px; }
-      .ch-jp { font-size: 26px; }
-      .quiz-card { padding: 24px; }
+    /* ─── MOBILE ─── */
+    @media (max-width: 600px) {
+      .compare-grid, .card-grid, .ip-children, .gen-grid { grid-template-columns: 1fr; }
+      .chapter-body, .chapter-header { padding: 16px 18px; }
+      .def-row { grid-template-columns: 1fr; gap: 2px; }
+      .hero { padding: 64px 20px 52px; }
+      .hero-stats { gap: 24px; }
+      .toc-grid { grid-template-columns: 1fr 1fr; }
+      .nav-tab { padding: 6px 10px; font-size: 12px; }
+      .quiz-stats-inner { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .quiz-nav { flex-direction: column; align-items: stretch; }
+      .quiz-nav .btn { text-align: center; }
     }
   </style>
 </head>
 <body>
-<div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-icon">J</div>
-      <div>
-        <div class="logo-text">JIT401</div>
-        <div class="logo-sub">Ôn thi IT Nhật Bản</div>
-      </div>
-    </div>
-    <div class="sidebar-scroll">
-      <div class="nav-group-label">16 Chương</div>
-      <div id="sidebar-nav"></div>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <div class="main">
-    <div class="topbar">
-      <div class="tab-btn active" id="tab-study" onclick="switchTab('study')"><span class="tab-icon">📚</span> Bài học</div>
-      <div class="tab-btn" id="tab-table" onclick="switchTab('table')"><span class="tab-icon">📋</span> Bảng từ vựng</div>
-      <div class="tab-btn" id="tab-quiz" onclick="switchTab('quiz')"><span class="tab-icon">✏️</span> Luyện tập</div>
-      <div class="tab-btn" id="tab-flash" onclick="switchTab('flash')"><span class="tab-icon">🎴</span> Flashcard</div>
-    </div>
-
-    <div class="content">
-      <div id="view-study" class="view active"></div>
-      <div id="view-table" class="view"></div>
-      <div id="view-quiz" class="view"></div>
-      <div id="view-flash" class="view"></div>
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">JIT301</a>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="showPage('study')">📖 Tài liệu</button>
+      <button class="nav-tab" onclick="showPage('quiz')">✏️ Kiểm tra</button>
+      <button class="nav-tab" onclick="showPage('wrong')">🔁 Câu sai<span class="nav-badge" id="wrong-badge" style="display:none">0</span></button>
     </div>
   </div>
-</div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     STUDY PAGE
+═══════════════════════════════════════ -->
+<div id="study-page" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">コンピュータ &amp; 情報技術</p>
+    <h1>Tin học &amp;<br><span>Công nghệ thông tin</span></h1>
+    <p class="hero-sub">Tài liệu học tập song ngữ Nhật–Việt về cơ sở máy tính, mạng, bảo mật và xử lý thông tin.</p>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">57</div><div class="hero-stat-label">Chương &amp; mục</div></div>
+      <div><div class="hero-stat-num">200</div><div class="hero-stat-label">Câu hỏi ôn tập</div></div>
+      <div><div class="hero-stat-num">2</div><div class="hero-stat-label">Ngôn ngữ</div></div>
+    </div>
+  </section>
+
+  <!-- TOC -->
+  <div class="toc-section">
+    <p class="section-eyebrow">Mục lục</p>
+    <h2 class="section-title">Nội dung</h2>
+    <div class="toc-grid">
+      <a href="#ch1" class="toc-item"><span class="toc-num">1</span><span class="toc-text">Analog là gì?</span></a>
+      <a href="#ch2" class="toc-item"><span class="toc-num">2</span><span class="toc-text">Digital là gì?</span></a>
+      <a href="#ch3" class="toc-item"><span class="toc-num">3</span><span class="toc-text">Digital vs Analog</span></a>
+      <a href="#ch4" class="toc-item"><span class="toc-num">4</span><span class="toc-text">Lịch sử máy tính</span></a>
+      <a href="#ch5" class="toc-item"><span class="toc-num">5</span><span class="toc-text">Các loại máy tính</span></a>
+      <a href="#ch7" class="toc-item"><span class="toc-num">7</span><span class="toc-text">Tệp tin &amp; Thư mục</span></a>
+      <a href="#ch10" class="toc-item"><span class="toc-num">10</span><span class="toc-text">Web &amp; Internet</span></a>
+      <a href="#ch13" class="toc-item"><span class="toc-num">13</span><span class="toc-text">Email &amp; Netiquette</span></a>
+      <a href="#ch14" class="toc-item"><span class="toc-num">14</span><span class="toc-text">Quyền sở hữu trí tuệ</span></a>
+      <a href="#ch15" class="toc-item"><span class="toc-num">15</span><span class="toc-text">Thế hệ điện thoại</span></a>
+      <a href="#ch18" class="toc-item"><span class="toc-num">18</span><span class="toc-text">Kết nối có dây &amp; Không dây</span></a>
+      <a href="#ch20" class="toc-item"><span class="toc-num">20</span><span class="toc-text">Mạng &amp; Internet</span></a>
+      <a href="#ch22" class="toc-item"><span class="toc-num">22</span><span class="toc-text">Bảo mật &amp; OSI</span></a>
+      <a href="#ch24" class="toc-item"><span class="toc-num">24</span><span class="toc-text">Tỷ lệ hoạt động</span></a>
+      <a href="#ch25" class="toc-item"><span class="toc-num">25</span><span class="toc-text">Cấu tạo máy tính</span></a>
+      <a href="#ch29" class="toc-item"><span class="toc-num">29</span><span class="toc-text">Linh kiện &amp; Mạch logic</span></a>
+      <a href="#ch31" class="toc-item"><span class="toc-num">31</span><span class="toc-text">Nhị phân &amp; Cơ số</span></a>
+      <a href="#ch34" class="toc-item"><span class="toc-num">34</span><span class="toc-text">Lượng thông tin</span></a>
+      <a href="#ch38" class="toc-item"><span class="toc-num">38</span><span class="toc-text">Âm thanh &amp; Hình ảnh</span></a>
+      <a href="#ch50" class="toc-item"><span class="toc-num">50</span><span class="toc-text">Thương mại điện tử</span></a>
+      <a href="#ch56" class="toc-item"><span class="toc-num">56</span><span class="toc-text">Bảo mật máy tính</span></a>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <div class="chapter" id="ch1">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 1</div>
+        <div class="chapter-title-jp">アナログ（analog）とは？</div>
+        <div class="chapter-title-vn">Analog là gì?</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">連続的な量のことを表します</div><div class="def-vn">Biểu thị các đại lượng liên tục</div></div>
+        <div class="def-row"><div class="def-jp">電流（mA）または電圧（mV）信号として送信されます</div><div class="def-vn">Được truyền dưới dạng tín hiệu dòng điện (mA) hoặc điện áp (mV)</div></div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch2">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 2</div>
+        <div class="chapter-title-jp">デジタル（Digital）とは？</div>
+        <div class="chapter-title-vn">Digital là gì?</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">数値化された量のことを表します</div><div class="def-vn">Biểu thị các đại lượng đã được số hóa</div></div>
+        <div class="def-row"><div class="def-jp">1と0の数字だけを使っています</div><div class="def-vn">Chỉ sử dụng con số 1 và 0</div><div class="def-note">Tương ứng với điện áp cao (On) và thấp (Off)</div></div>
+        <div class="code-block"><pre>0  1  0  1  0  1  0  1  0
+OF ON OF ON OF ON OF ON OF</pre></div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch3">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 3</div>
+        <div class="chapter-title-jp">デジタルとアナログの違いとは？</div>
+        <div class="chapter-title-vn">Sự khác biệt giữa Digital và Analog</div>
+      </div>
+      <div class="chapter-body">
+        <div class="compare-grid">
+          <div class="compare-card digital"><div class="compare-label">Digital — デジタル</div><ul>
+            <li>コピーができる — Có thể sao chép</li>
+            <li>正確で切れ目のある — Chính xác, rời rạc</li>
+            <li>曖昧なものをそのまま残すことができない — Không thể giữ nguyên giá trị mơ hồ</li>
+          </ul></div>
+          <div class="compare-card analog"><div class="compare-label">Analog — アナログ</div><ul>
+            <li>コピーができない — Không thể sao chép</li>
+            <li>データをそのまま残すことができない — Không thể lưu dữ liệu nguyên trạng</li>
+            <li>曖昧なものをそのまま表現 — Thể hiện trực quan những thứ mơ hồ</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch4">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 4</div>
+        <div class="chapter-title-jp">コンピュータの歴史</div>
+        <div class="chapter-title-vn">Lịch sử máy tính</div>
+      </div>
+      <div class="chapter-body">
+        <div class="timeline-item"><div class="timeline-year">紀元前</div><div class="timeline-content">アバカス <span>Bàn tính Abacus</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">17世紀</div><div class="timeline-content">パスカルの計算機・ライプニッツの乗算機 <span>Máy tính Pascal &amp; máy nhân Leibniz</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">1930</div><div class="timeline-content">電気機械式 <span>Máy tính điện cơ</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">1939</div><div class="timeline-content">ABC電子式計算機 <span>Máy tính điện tử ABC</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">1946</div><div class="timeline-content">電子式計算機 ENIAC（エニアック） <span>Máy tính điện tử ENIAC</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">1949</div><div class="timeline-content">フォン・ノイマンコンピュータ <span>Máy tính Von Neumann — máy tính hiện đại ngày nay</span></div></div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch5">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 5–6</div>
+        <div class="chapter-title-jp">身の回りのコンピュータ・機能</div>
+        <div class="chapter-title-vn">Các loại máy tính &amp; Chức năng</div>
+      </div>
+      <div class="chapter-body">
+        <div class="card-grid">
+          <div class="info-card"><div class="info-card-title">Phân loại</div><ul>
+            <li>スーパーコンピュータ <span class="vn">Siêu máy tính</span></li>
+            <li>大型汎用計算機 <span class="vn">Mainframe</span></li>
+            <li>ワークステーション <span class="vn">Máy trạm</span></li>
+            <li>デスクトップPC <span class="vn">Máy để bàn</span></li>
+            <li>ノートPC <span class="vn">Máy xách tay</span></li>
+            <li>スマートフォン <span class="vn">Điện thoại thông minh</span></li>
+          </ul></div>
+          <div class="info-card"><div class="info-card-title">Chức năng cơ bản</div>
+            <div class="formula">コンピュータ = 記憶 ＋ 処理<br><small style="color:var(--text-secondary);font-size:11px">Máy tính = Lưu trữ + Xử lý</small></div>
+            <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">Nguyên lý cơ bản là sự lặp lại của tính toán và lưu trữ. Thiếu một trong hai không thể gọi là máy tính.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch7">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 7–9</div>
+        <div class="chapter-title-jp">ファイル・フォルダ・ドライブ</div>
+        <div class="chapter-title-vn">Tệp tin, Thư mục &amp; Ổ đĩa</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">ファイル</div><div class="def-vn">Tệp tin — Dữ liệu được lưu trên phương tiện lưu trữ</div><div class="def-note">Nhận biết qua icon và phần mở rộng (extension): .doc / .xls / .htm</div></div>
+        <div class="def-row"><div class="def-jp">フォルダ</div><div class="def-vn">Thư mục — Nơi chứa để sắp xếp tệp tin</div><div class="def-note">Cấu trúc phân cấp = ディレクトリ構造 (Directory structure)</div></div>
+        <div class="def-row"><div class="def-jp">ドライブ名</div><div class="def-vn">Tên ổ đĩa: (C:) (D:) (F:)...</div><div class="def-note">Đường dẫn (パス): DU LIEU (D:)\keep\fpt\Jit301</div></div>
+        <div class="info-card" style="margin-top:12px"><div class="info-card-title">Phần mở rộng phổ biến</div><ul>
+          <li>.doc <span class="vn">MS Word</span></li>
+          <li>.xls <span class="vn">Excel</span></li>
+          <li>.htm <span class="vn">Trang web</span></li>
+          <li>.zip / .lzh / .gz <span class="vn">File nén</span></li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch10">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 10–12</div>
+        <div class="chapter-title-jp">Web・Web2.0・クラウドコンピューティング</div>
+        <div class="chapter-title-vn">Web, Web 2.0 &amp; Điện toán đám mây</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">URL</div><div class="def-vn">Uniform Resource Location — Địa chỉ trang web</div></div>
+        <div class="def-row"><div class="def-jp">ブラウザ</div><div class="def-vn">Trình duyệt — Phần mềm xem trang web (IE, Chrome...)</div></div>
+        <div class="highlight"><div class="highlight-title">Web 2.0 (2004 — Tim O'Reilly)</div>
+          <p><strong>Web 1.0:</strong> Một chiều (一方向型) — Người dùng chỉ xem.<br>
+            <strong>Web 2.0:</strong> Hai chiều (双方向型) — Tương tác, tạo nội dung.<br>
+            <strong>Long Tail:</strong> Mô hình kinh doanh tăng doanh thu qua nhiều sản phẩm ít người mua.</p>
+        </div>
+        <div class="highlight" style="background:linear-gradient(135deg,#e8f5fb,#f0f9ff)">
+          <div class="highlight-title" style="color:#0071a3">クラウドコンピューティング — Điện toán đám mây (2006, Eric Schmidt)</div>
+          <p>Cung cấp dịch vụ tính toán, lưu trữ qua Internet. Máy tính trên Internet ⟺ Người dùng.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch13">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 13</div>
+        <div class="chapter-title-jp">メール利用の注意（ネチケット）</div>
+        <div class="chapter-title-vn">Lưu ý khi sử dụng Email — Netiquette</div>
+      </div>
+      <div class="chapter-body">
+        <div class="rule-item"><span class="rule-num">1</span><div><div class="rule-jp">自分の氏名、連絡先等を明記する</div><div class="rule-vn">Ghi rõ tên và thông tin liên lạc của bản thân</div></div></div>
+        <div class="rule-item"><span class="rule-num">2</span><div><div class="rule-jp">相手の氏名を明記する</div><div class="rule-vn">Ghi rõ tên của người nhận</div></div></div>
+        <div class="rule-item"><span class="rule-num">3</span><div><div class="rule-jp">急な返事を求めない</div><div class="rule-vn">Không yêu cầu trả lời gấp</div></div></div>
+        <div class="rule-item"><span class="rule-num">4</span><div><div class="rule-jp">メールアドレスを確認する</div><div class="rule-vn">Kiểm tra địa chỉ email trước khi gửi</div></div></div>
+        <div class="rule-item"><span class="rule-num">5</span><div><div class="rule-jp">大きな添付ファイルを送らない</div><div class="rule-vn">Không gửi tệp đính kèm dung lượng lớn</div></div></div>
+        <div class="rule-item"><span class="rule-num">6</span><div><div class="rule-jp">著作権のあるファイルを送らない</div><div class="rule-vn">Không gửi tệp có bản quyền</div></div></div>
+        <div class="rule-item"><span class="rule-num">7</span><div><div class="rule-jp">読めない文字を使わない</div><div class="rule-vn">Không dùng ký tự không đọc được</div></div></div>
+        <div class="rule-item"><span class="rule-num">8</span><div><div class="rule-jp">添付ファイルのウィルスをチェックする</div><div class="rule-vn">Kiểm tra virus trong tệp đính kèm</div></div></div>
+        <div class="rule-item"><span class="rule-num">9</span><div><div class="rule-jp">礼儀に気を付ける</div><div class="rule-vn">Chú ý đến phép lịch sự</div></div></div>
+        <div class="email-box" style="margin-top:14px">
+          <div class="email-from">📧 Ví dụ email xin tham quan công ty</div>
+          ○○商事株式会社 ○○営業部 課長 ○川○夫 様<br><br>
+          いつもお世話になっております。○○大学○○学部○年の○山○介と申します。<br>
+          <em style="color:var(--text-secondary);font-size:12px">→ Kính gửi... Tôi là sinh viên năm ○ khoa ○○ trường ĐH ○○, tên ○山○介.</em><br><br>
+          つきましては、○月○日(月)～○月○日(金)の間に見学させていただけないでしょうか。<br>
+          <em style="color:var(--text-secondary);font-size:12px">→ Xin có thể sắp xếp cho tôi đến thăm trong khoảng T○/○ đến T○/○ không?</em><br><br>
+          よろしくお願い申し上げます。 <em style="color:var(--text-secondary);font-size:12px">→ Trân trọng kính chào.</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch14">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 14</div>
+        <div class="chapter-title-jp">法律（知的所有権）</div>
+        <div class="chapter-title-vn">Quyền sở hữu trí tuệ</div>
+      </div>
+      <div class="chapter-body">
+        <div class="ip-branch"><div class="ip-parent">著作権 — Quyền tác giả (Bảo vệ sản phẩm văn hóa)</div>
+          <div class="ip-children">
+            <div class="ip-child">著作者人格権 — Quyền nhân cách tác giả</div>
+            <div class="ip-child">著作者財産権 — Quyền tài sản tác giả</div>
+            <div class="ip-child">著作隣接権 — Quyền liền kề</div>
+          </div>
+        </div>
+        <div class="ip-branch"><div class="ip-parent">工業所有権 — Quyền sở hữu công nghiệp (Bảo vệ tiến bộ kỹ thuật)</div>
+          <div class="ip-children">
+            <div class="ip-child">特許権 — Quyền sáng chế</div>
+            <div class="ip-child">実用新案権 — Giải pháp hữu ích</div>
+            <div class="ip-child">意匠権 — Kiểu dáng công nghiệp</div>
+            <div class="ip-child">商標権 — Quyền thương hiệu</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch15">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 15–17</div>
+        <div class="chapter-title-jp">携帯電話の世代・ハードウェア</div>
+        <div class="chapter-title-vn">Thế hệ điện thoại di động &amp; Phần cứng</div>
+      </div>
+      <div class="chapter-body">
+        <div class="gen-grid">
+          <div class="gen-card"><div class="gen-year">第1世代 / Thế hệ 1</div><div class="gen-title">アナログ通信</div><div class="gen-sub">Sóng âm → sóng điện từ trực tiếp</div></div>
+          <div class="gen-card"><div class="gen-year">第2世代 (~1992)</div><div class="gen-title">デジタル通信</div><div class="gen-sub">Chất lượng âm thanh tốt hơn, bảo mật cuộc gọi</div></div>
+          <div class="gen-card"><div class="gen-year">第3世代 (~2001)</div><div class="gen-title">高速データ通信</div><div class="gen-sub">Tốc độ truyền dữ liệu được nâng cao</div></div>
+          <div class="gen-card"><div class="gen-year">第3.5世代 (~2006)</div><div class="gen-title">より高速・多機能</div><div class="gen-sub">Nhanh hơn 3G, nhiều ứng dụng mượt mà</div></div>
+          <div class="gen-card" style="grid-column:1/-1"><div class="gen-year">第4世代 / Thế hệ 4</div><div class="gen-title">ブロードバンド前提</div><div class="gen-sub">Băng thông rộng, linh hoạt thay đổi phương thức truyền thông</div></div>
+        </div>
+        <div style="margin-top:14px">
+          <div class="def-row"><div class="def-jp">OS（オペレーティングシステム）</div><div class="def-vn">iOS / Android / Windows Phone / Symbian</div><div class="def-note">Cùng OS → nhiều ứng dụng dùng chung dù khác hãng</div></div>
+          <div class="def-row"><div class="def-jp">タッチパネル方式</div><div class="def-vn">抵抗膜 (điện trở) / 静電容量 (điện dung)</div></div>
+          <div class="def-row"><div class="def-jp">液晶・有機EL・SED</div><div class="def-vn">LCD / OLED / SED — các công nghệ màn hình</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch18">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 18–19</div>
+        <div class="chapter-title-jp">有線・無線通信手段</div>
+        <div class="chapter-title-vn">Kết nối có dây &amp; Không dây</div>
+      </div>
+      <div class="chapter-body">
+        <div class="card-grid">
+          <div class="info-card"><div class="info-card-title">有線 — Có dây</div><ul>
+            <li>CATV <span class="vn">~40 Mbps</span></li>
+            <li>ADSL <span class="vn">~50 Mbps</span></li>
+            <li>FTTH <span class="vn">~100 Mbps (cáp quang)</span></li>
+            <li>PLC <span class="vn">Qua đường dây điện</span></li>
+          </ul></div>
+          <div class="info-card"><div class="info-card-title">無線 — Không dây</div><ul>
+            <li>IrDA <span class="vn">~1 Mbps, hồng ngoại</span></li>
+            <li>RFID <span class="vn">~200 Kbps, thẻ IC</span></li>
+            <li>Bluetooth <span class="vn">~1 Mbps, ~10m</span></li>
+            <li>Wi-Fi <span class="vn">~54 Mbps, LAN không dây</span></li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch20">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 20–21</div>
+        <div class="chapter-title-jp">ネットワークとインターネット</div>
+        <div class="chapter-title-vn">Mạng máy tính &amp; Internet</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">インターネット</div><div class="def-vn">"Giữa các mạng" — Mạng của các mạng (WAN kết nối nhau)</div></div>
+        <div style="margin-top:12px;margin-bottom:8px;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase">接続形態 — Hình thái kết nối</div>
+        <div class="def-row"><div class="def-jp">バス型 (Bus)</div><div class="def-vn">Dạng tuyến — một dây cáp cho nhiều máy</div></div>
+        <div class="def-row"><div class="def-jp">スター型 (Star) ★</div><div class="def-vn">Hình sao — Hub trung tâm, phổ biến nhất</div></div>
+        <div class="def-row"><div class="def-jp">リング型 (Ring)</div><div class="def-vn">Dạng vòng — vòng cáp khép kín</div></div>
+        <div class="compare-grid" style="margin-top:14px">
+          <div class="compare-card digital"><div class="compare-label">集中処理システム</div><ul><li>Một máy tính trung tâm quản lý toàn bộ xử lý</li></ul></div>
+          <div class="compare-card analog"><div class="compare-label">分散処理システム</div><ul><li>Phân tán qua nhiều máy tính</li><li>P2P: bình đẳng giữa các máy</li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch22">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 22</div>
+        <div class="chapter-title-jp">ネットワークセキュリティとプロトコル（OSI）</div>
+        <div class="chapter-title-vn">Bảo mật mạng &amp; Giao thức OSI 7 lớp</div>
+      </div>
+      <div class="chapter-body">
+        <div class="osi-stack">
+          <div class="osi-layer l7"><span>アプリケーション層 — Lớp ứng dụng</span><span class="osi-proto">HTTP/SMTP</span></div>
+          <div class="osi-layer l6"><span>プレゼンテーション層 — Lớp trình diễn</span></div>
+          <div class="osi-layer l5"><span>セッション層 — Lớp phiên</span></div>
+          <div class="osi-layer l4"><span>トランスポート層 — Lớp giao vận</span><span class="osi-proto">TCP</span></div>
+          <div class="osi-layer l3"><span>ネットワーク層 — Lớp mạng</span><span class="osi-proto">IP</span></div>
+          <div class="osi-layer l2"><span>データリンク層 — Lớp liên kết dữ liệu</span></div>
+          <div class="osi-layer l1"><span>物理層 — Lớp vật lý</span></div>
+        </div>
+        <div class="def-row" style="margin-top:6px"><div class="def-jp">IPアドレス</div><div class="def-vn">Địa chỉ trên mạng: 192.168.113.24</div></div>
+        <div class="def-row"><div class="def-jp">ドメイン名</div><div class="def-vn">Tên miền: daigaku.ac.jp</div></div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch24">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 23–24</div>
+        <div class="chapter-title-jp">システムの稼働率</div>
+        <div class="chapter-title-vn">Đánh giá an toàn &amp; Tỷ lệ hoạt động</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">MTBF</div><div class="def-vn">Mean Time Between Failures — Khoảng thời gian hỏng hóc trung bình</div></div>
+        <div class="def-row"><div class="def-jp">MTTR</div><div class="def-vn">Mean Time To Repair — Thời gian sửa chữa trung bình</div></div>
+        <div class="formula">稼働率 = MTBF ÷ (MTBF + MTTR)</div>
+        <div class="formula">直列 (Nối tiếp): A × B</div>
+        <div class="formula">並列 (Song song): 1 − (1−A) × (1−B)</div>
+        <div class="formula">組み合わせ: [1 − (1−A)(1−B)] × C</div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch25">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 25–28</div>
+        <div class="chapter-title-jp">コンピュータ・パソコンの構成</div>
+        <div class="chapter-title-vn">Cấu tạo máy tính</div>
+      </div>
+      <div class="chapter-body">
+        <div class="highlight"><div class="highlight-title">5 thành phần cơ bản</div>
+          <p>演算装置 (Xử lý số học) · 記憶装置 (Bộ nhớ) · 制御装置 (Điều khiển) · 入力装置 (Đầu vào) · 出力装置 (Đầu ra)</p>
+        </div>
+        <div class="def-row"><div class="def-jp">CPU / MPU</div><div class="def-vn">Bộ vi xử lý — Core i7, Core 2 Duo, ATOM (Intel)</div></div>
+        <div class="def-row"><div class="def-jp">マザーボード</div><div class="def-vn">Mainboard — bảng mạch chính (CPU + RAM + Chipset)</div></div>
+        <div class="def-row"><div class="def-jp">RAM (ラム)</div><div class="def-vn">Random Access Memory — đọc/ghi tự do</div></div>
+        <div class="def-row"><div class="def-jp">ROM (ロム)</div><div class="def-vn">Read Only Memory — chỉ đọc (CD-ROM, DVD-ROM)</div></div>
+        <div class="def-row"><div class="def-jp">ハードディスク</div><div class="def-vn">Ổ cứng — đĩa kim loại từ tính quay hàng nghìn vòng/phút</div></div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch29">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 29–30</div>
+        <div class="chapter-title-jp">論理素子の歴史・論理回路</div>
+        <div class="chapter-title-vn">Thế hệ linh kiện logic &amp; Mạch logic</div>
+      </div>
+      <div class="chapter-body">
+        <div class="timeline-item"><div class="timeline-year">第1世代 ~1940</div><div class="timeline-content">真空管 <span>Đèn chân không (Vacuum tube)</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">第2世代 ~1950後</div><div class="timeline-content">トランジスタ <span>Transistor</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">第3世代 ~1960中</div><div class="timeline-content">IC <span>Mạch tích hợp (Integrated Circuit)</span></div></div>
+        <div class="timeline-item"><div class="timeline-year">第4世代 ~1970初</div><div class="timeline-content">LSI <span>Vi mạch tích hợp cỡ lớn (Large Scale Integration)</span></div></div>
+        <div class="compare-grid" style="margin-top:14px">
+          <div class="compare-card digital"><div class="compare-label">OR回路 — Mạch OR</div><ul><li>Công tắc song song — đèn sáng khi ít nhất 1 bật</li></ul></div>
+          <div class="compare-card analog"><div class="compare-label">AND回路 — Mạch AND</div><ul><li>Công tắc nối tiếp — đèn chỉ sáng khi CẢ HAI bật</li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch31">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 31–33</div>
+        <div class="chapter-title-jp">基数・2進数・変換</div>
+        <div class="chapter-title-vn">Cơ số, Nhị phân &amp; Chuyển đổi</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">10進数 — Thập phân</div><div class="def-vn">Cơ số 10: 0,1,2,3,4,5,6,7,8,9</div></div>
+        <div class="def-row"><div class="def-jp">2進数 — Nhị phân</div><div class="def-vn">Cơ số 2: chỉ dùng 0 và 1</div></div>
+        <div class="code-block"><pre>2進数 1010 → 10進数？
+1×2³ + 0×2² + 1×2¹ + 0×2⁰ = 8+0+2+0 = 10
+
+2進数の足し算:   1 1 0
+               +   1 1
+               ───────
+               1 0 0 1   (ルール: 1+1=10, 繰り上がり)</pre></div>
+        <div class="def-row"><div class="def-jp">符号ビット</div><div class="def-vn">Bit dấu: 0 = dương (+), 1 = âm (−)</div></div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch34">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 34–35</div>
+        <div class="chapter-title-jp">情報量・文字の情報量</div>
+        <div class="chapter-title-vn">Đơn vị lượng thông tin &amp; Mã ký tự</div>
+      </div>
+      <div class="chapter-body">
+        <table class="unit-table">
+          <thead><tr><th>Đơn vị</th><th>Bằng</th><th>Ghi chú</th></tr></thead>
+          <tbody>
+          <tr><td>1 bit</td><td>—</td><td>Đơn vị nhỏ nhất (binary digit)</td></tr>
+          <tr><td>1 byte</td><td>8 bit</td><td>1 ký tự ASCII</td></tr>
+          <tr><td>1 KB</td><td>1,024 byte</td><td>Kilobyte</td></tr>
+          <tr><td>1 MB</td><td>1,024 KB</td><td>Megabyte</td></tr>
+          <tr><td>1 GB</td><td>1,024 MB</td><td>Gigabyte</td></tr>
+          <tr><td>1 TB</td><td>1,024 GB</td><td>Terabyte</td></tr>
+          </tbody>
+        </table>
+        <div class="def-row"><div class="def-jp">ASCII (英語)</div><div class="def-vn">256 loại ký tự = 8 bit = 1 byte / ký tự</div></div>
+        <div class="def-row"><div class="def-jp">Unicode (日本語)</div><div class="def-vn">65,536 ký tự (hiragana, katakana, kanji, ký hiệu)</div></div>
+        <div class="def-row"><div class="def-jp">文字コード</div><div class="def-vn">Mã ký tự: ASCII / JIS / Shift-JIS / EUC / Unicode</div></div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch38">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 36–43</div>
+        <div class="chapter-title-jp">MIDI・音声・画像・動画の情報量</div>
+        <div class="chapter-title-vn">Lượng thông tin MIDI, Âm thanh, Ảnh tĩnh &amp; Video</div>
+      </div>
+      <div class="chapter-body">
+        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:10px">音声 — Âm thanh</div>
+        <div class="def-row"><div class="def-jp">サンプリング周波数</div><div class="def-vn">Tần số lấy mẫu (Hz) — càng cao chất lượng càng tốt</div></div>
+        <div class="def-row"><div class="def-jp">量子化数</div><div class="def-vn">Số lượng tử hóa — số bậc biểu thị chiều cao sóng</div></div>
+        <div class="exercise"><div class="exercise-title">演習 — CD 640MB ghi được bao nhiêu phút?</div>
+          <p>Stereo, 44.1 kHz, 16 bit (2¹⁶) → 1s = 2×44,100×2 byte = 176,400 byte</p>
+          <div class="result">→ 640 MB ÷ (176,400 × 60) ≈ 約63分</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin:14px 0 10px">静止画像 — Ảnh tĩnh</div>
+        <div class="def-row"><div class="def-jp">RGB各8bit = 3 byte/画素</div><div class="def-vn">Mỗi pixel 3 byte (256 bậc × 3 màu R,G,B)</div></div>
+        <div class="def-row"><div class="def-jp">解像度 dpi (dot per inch)</div><div class="def-vn">Độ phân giải máy in</div></div>
+        <div class="exercise"><div class="exercise-title">演習 — A4 / 300 dpi cần bao nhiêu megapixel?</div>
+          <p>Ngang: 300×21÷2.54=2,480 · Dọc: 300×29.7÷2.54=3,508</p>
+          <div class="result">→ 2,480 × 3,508 ≈ 8.7 Megapixel</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase;margin:14px 0 10px">動画像 — Video</div>
+        <div class="def-row"><div class="def-jp">映画: 24 fps / テレビ(日本): 30 fps</div><div class="def-vn">Phim: 24 khung/giây · TV Nhật: 30 khung/giây</div></div>
+        <div class="exercise"><div class="exercise-title">演習 — 640×480, RGB 8bit, 30fps → 1秒の情報量</div>
+          <p>1 khung = 640×480×3 byte ≈ 900 KB</p>
+          <div class="result">→ 900 KB × 30 ≈ 約26.4 MB / giây</div>
+        </div>
+        <div class="exercise" style="margin-top:10px"><div class="exercise-title">演習 — MIDI: 512MB SDカード → 何時間?</div>
+          <p>1 phách=6 byte, 32 âm, 120 phách/phút → 6×32×120=23,040 byte/phút</p>
+          <div class="result">→ 536,870,912 ÷ 1,382,400 ≈ 約388時間</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch50">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 50–55</div>
+        <div class="chapter-title-jp">電子商取引・個人情報保護・暗号・SSL</div>
+        <div class="chapter-title-vn">Thương mại điện tử, Bảo vệ thông tin &amp; Mật mã</div>
+      </div>
+      <div class="chapter-body">
+        <div class="def-row"><div class="def-jp">eコマース (BtoB / BtoC)</div><div class="def-vn">Thương mại điện tử — Business to Business / Business to Consumer</div></div>
+        <div class="def-row"><div class="def-jp">EDI</div><div class="def-vn">Electronic Data Interchange — Trao đổi dữ liệu điện tử chuẩn</div></div>
+        <div class="def-row"><div class="def-jp">EOS</div><div class="def-vn">Electronic Ordering System — Đặt hàng trực tuyến</div></div>
+        <div class="def-row"><div class="def-jp">Cookie</div><div class="def-vn">Lưu ID người dùng trên trình duyệt để nhận diện tự động</div></div>
+        <div class="def-row"><div class="def-jp">暗号化 / 復号化</div><div class="def-vn">Mã hóa / Giải mã — シーザー暗号: dịch chuyển ký tự</div></div>
+        <div class="def-row"><div class="def-jp">SSL (Secure Socket Layer)</div><div class="def-vn">Khóa công khai + khóa bí mật; giao thức https + icon khóa 🔒</div></div>
+        <div class="highlight" style="margin-top:12px"><div class="highlight-title">OECD 8 Nguyên tắc bảo vệ dữ liệu cá nhân</div>
+          <p>① Xác định mục đích · ② Giới hạn sử dụng · ③ Giới hạn thu thập · ④ Nội dung chính xác · ⑤ Bảo vệ an toàn · ⑥ Công khai · ⑦ Tham gia cá nhân · ⑧ Trách nhiệm người quản lý</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter" id="ch56">
+      <div class="chapter-header">
+        <div class="chapter-num">Chương 56–57</div>
+        <div class="chapter-title-jp">パソコン利用時の注意（セキュリティ）</div>
+        <div class="chapter-title-vn">Bảo mật khi sử dụng máy tính</div>
+      </div>
+      <div class="chapter-body">
+        <div class="sec-list">
+          <div class="sec-item"><span class="sec-tag">Sự cố phần cứng</span><div class="sec-jp">ハードウェアの故障 — ハードディスク・CD-ROM</div><div class="sec-vn">Thiết bị có bộ phận chuyển động dễ hỏng nhất: ổ cứng, CD-ROM</div></div>
+          <div class="sec-item"><span class="sec-tag">Virus</span><div class="sec-jp">人為的に作成されたプログラム</div><div class="sec-vn">Chương trình do con người tạo, lây lan và phát bệnh như virus sinh học</div></div>
+          <div class="sec-item"><span class="sec-tag">Trojan Horse</span><div class="sec-jp">トロイの木馬 — パスワード窃盗</div><div class="sec-vn">Giả màn hình đăng nhập, thu thập tên đăng nhập/mật khẩu</div></div>
+          <div class="sec-item"><span class="sec-tag blue">Email</span><div class="sec-jp">exe・vbs・scr・pif の拡張子は即座に削除</div><div class="sec-vn">Xóa ngay tệp đính kèm có phần mở rộng exe, vbs, scr, pif</div></div>
+          <div class="sec-item"><span class="sec-tag green">Antivirus</span><div class="sec-jp">パターンファイルを週1回以上更新</div><div class="sec-vn">Cập nhật file định nghĩa virus ít nhất 1 lần/tuần</div></div>
+          <div class="sec-item"><span class="sec-tag green">Password</span><div class="sec-jp">氏名・電話番号・生年月日などは避ける</div><div class="sec-vn">Tránh dùng tên, số điện thoại, ngày sinh làm mật khẩu</div></div>
+          <div class="sec-item"><span class="sec-tag blue">Windows Update</span><div class="sec-jp">OS・ブラウザ・ドライバを常に最新状態に</div><div class="sec-vn">Luôn cập nhật OS, trình duyệt, driver lên phiên bản mới nhất</div></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#" class="back-top">↑ Lên đầu trang</a>
+  </div><!-- /content -->
+</div><!-- /study-page -->
+
+
+<!-- ═══════════════════════════════════════
+     QUIZ PAGE — làm từng câu, hiện kết quả ngay
+═══════════════════════════════════════ -->
+<div id="quiz-page" class="page">
+
+  <div class="quiz-hero">
+    <p class="quiz-hero-eyebrow">JIT301 — 確認テスト</p>
+    <h2>Kiểm tra <span>200 câu</span></h2>
+  </div>
+
+  <!-- Progress strip -->
+  <div class="progress-strip"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+
+  <!-- Stats bar -->
+  <div class="quiz-stats-bar">
+    <div class="quiz-stats-inner">
+      <span class="quiz-stat-item">Câu: <strong id="stat-current">1 / 200</strong></span>
+      <span class="quiz-stat-item" style="color:#1a5c2a">Đúng: <strong id="stat-correct">0</strong></span>
+      <span class="quiz-stat-item" style="color:#7a0000">Sai: <strong id="stat-wrong">0</strong></span>
+    </div>
+  </div>
+
+  <!-- Quiz container -->
+  <div class="quiz-container">
+    <div id="quiz-question-area"></div>
+
+    <div class="score-card" id="quiz-finish-area" style="display:none">
+      <div><span class="score-big" id="fa-score">0</span><span class="score-of"> / 200</span></div>
+      <div class="score-grade" id="fa-grade"></div>
+      <div class="score-bar-wrap"><div class="score-bar-fill" id="fa-bar" style="width:0%"></div></div>
+      <p style="margin-top:14px;font-size:13px;color:var(--text-secondary)">Số câu sai cần làm lại: <strong id="fa-wrong-count" style="color:var(--red)">0</strong></p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="showPage('wrong')">🔁 Làm lại câu sai</button>
+        <button class="btn btn-danger" onclick="resetMainQuiz()">Làm lại từ đầu</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /quiz-page -->
+
+
+<!-- ═══════════════════════════════════════
+     WRONG-ANSWERS PAGE — làm lại câu sai bất cứ lúc nào
+═══════════════════════════════════════ -->
+<div id="wrong-page" class="page">
+
+  <div class="quiz-hero">
+    <p class="quiz-hero-eyebrow">JIT301 — 復習モード</p>
+    <h2>Làm lại <span>câu sai</span></h2>
+  </div>
+
+  <div class="quiz-container">
+
+    <div id="wrong-intro">
+      <div class="score-card">
+        <p style="font-size:13px;color:var(--text-secondary);font-weight:500">Số câu đang sai cần ôn lại</p>
+        <div class="score-big" id="wrong-count-num" style="font-size:48px">0</div>
+        <div class="page-dots" id="wrong-list" style="margin-top:18px"></div>
+        <div style="margin-top:22px">
+          <button class="btn btn-primary" id="btn-start-wrong" onclick="startWrongPractice()">▶ Bắt đầu làm lại</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="wrong-question-area" style="display:none"></div>
+
+    <div class="score-card" id="wrong-finish-area" style="display:none">
+      <p style="font-size:16px;font-weight:600">✅ Đã ôn lại xong lượt này!</p>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-secondary)">Còn lại <strong id="wf-remaining" style="color:var(--red)">0</strong> câu vẫn sai</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="backToWrongIntro()">↩ Về danh sách câu sai</button>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /wrong-page -->
 
 <script>
-  /* ────────────────────────────────────────
-     DATA — ALL 16 CHAPTERS
-  ──────────────────────────────────────── */
-  const DATA = [
-    {
-      num: 1, title: "コンピュータの基礎", vn: "Kiến thức cơ bản về máy tính",
-      stars: 5,
-      summary: "Giới thiệu lịch sử máy tính, nguyên lý 'Ghi nhớ + Xử lý', sự khác biệt giữa Digital và Analog, và kiến trúc Von Neumann — nền tảng của mọi máy tính hiện đại.",
-      concepts: [
-        { term: "デジタル / アナログ", yomi: "でじたる / あなろぐ", vnTerm: "Digital / Analog", icon: "🔢",
-          jp: "数値化された量（Digital）と連続的な量（Analog）。電圧高=1、低=0。",
-          vn: "Digital: đại lượng số hóa (chỉ có 0 và 1). Analog: đại lượng liên tục (âm thanh, nhiệt độ, ánh sáng).",
-          tip: "Ưu điểm Digital: sao chép chính xác, lưu trữ dễ. Ưu điểm Analog: biểu diễn tự nhiên.",
-          example: "Đồng hồ kim = Analog. Đồng hồ điện tử = Digital."
-        },
-        { term: "ノイマン型コンピュータ", yomi: "のいまんがた", vnTerm: "Kiến trúc Von Neumann", icon: "🧠",
-          jp: "プログラムをデータと同様に記憶装置に格納する方式（1949年）。",
-          vn: "Lưu chương trình trong bộ nhớ giống như dữ liệu → máy tính đa năng ra đời.",
-          tip: "ENIAC (1946) là máy tính điện tử đầu tiên — dùng ống chân không (~20.000 ống), tính đạn đạo.",
-          example: "1949: Von Neumann → Máy tính ngày nay."
-        },
-        { term: "コンピュータの定義", yomi: "こんぴゅーたのていぎ", vnTerm: "Định nghĩa máy tính", icon: "💻",
-          jp: "記憶 ＋ 処理 の両方を持つ装置。どちらかだけでは不可。",
-          vn: "Máy tính = Ghi nhớ (Memory) + Xử lý (Processing). Thiếu một trong hai thì không phải máy tính.",
-          tip: "Máy tính bỏ túi chỉ tính = xử lý, không phải máy tính theo định nghĩa này."
-        },
-      ],
-      vocab: [
-        ["デジタル", "でじたる", "Digital", "Số hóa — chỉ có 0 và 1"],
-        ["アナログ", "あなろぐ", "Analog", "Đại lượng liên tục"],
-        ["コンピュータ", "こんぴゅーた", "Computer", "Máy tính (phải có cả ghi nhớ và xử lý)"],
-        ["ENIAC", "えにあっく", "ENIAC", "Máy tính điện tử đầu tiên (1946)"],
-        ["ノイマン型", "のいまんがた", "Von Neumann", "Kiến trúc lưu chương trình (1949)"],
-        ["真空管", "しんくうかん", "Ống chân không", "Linh kiện điện tử thế hệ 1"],
-        ["拡張子", "かくちょうし", "Extension", "Đuôi file (.doc, .xls, .jpg...)"],
-        ["パス", "ぱす", "Path (đường dẫn)", "Vị trí file trong thư mục"],
-      ],
-      quizzes: [
-        { q: "Máy tính được định nghĩa là thiết bị có hai chức năng nào?", jp: "コンピュータの定義にある2つの機能は？", opts: ["Nhập và Xuất", "Ghi nhớ và Xử lý", "Bật và Tắt", "Mạng và Lưu trữ"], ans: 1, exp: "Máy tính phải có CẢ HAI: Ghi nhớ (記憶) và Xử lý (処理). Thiếu một thì không phải máy tính." },
-        { q: "ENIAC được chế tạo năm nào và dùng để làm gì?", jp: "ENIACはいつ、何のために作られた？", opts: ["1949 — Dự báo thời tiết", "1946 — Tính đường đạn đạo", "1946 — Xử lý văn bản", "1949 — Chơi cờ"], ans: 1, exp: "ENIAC ra đời năm 1946, dùng ~20.000 ống chân không, mục đích tính toán đường đạn đạo cho quân đội." },
-        { q: "Đặc điểm nổi bật của kiến trúc Von Neumann là gì?", jp: "ノイマン型の特徴は？", opts: ["Chỉ dùng ống chân không", "Lưu chương trình trong bộ nhớ giống dữ liệu", "Không có bộ nhớ", "Chỉ tính số nguyên"], ans: 1, exp: "Von Neumann (1949) đề xuất lưu chương trình vào bộ nhớ, giúp máy tính linh hoạt, đa năng." },
-      ]
-    },
-    {
-      num: 2, title: "インターネット利用・法律", vn: "Sử dụng Internet & Pháp luật",
-      stars: 5,
-      summary: "Web 2.0, mô hình Long Tail, luật sở hữu trí tuệ (bản quyền vs công nghiệp), đạo đức mạng (Netiquette) và bảo vệ thông tin cá nhân.",
-      concepts: [
-        { term: "Web 2.0", yomi: "うぇぶにーてんぜろ", vnTerm: "Web 2.0", icon: "🌐",
-          jp: "誰もが情報を発信できる双方向型メディア。2004年にティム・オライリーが提唱。",
-          vn: "Chuyển từ truyền thông một chiều (xem) sang hai chiều (đọc + viết). Blog, SNS, YouTube, Wikipedia.",
-          tip: "Công nghệ nền: RSS (cập nhật tin tức), Ajax (web nhanh không reload), Trackback.",
-          example: "Ajax dùng trong Google Maps — bản đồ cuộn mượt không cần tải lại trang."
-        },
-        { term: "ロングテール", yomi: "ろんぐてーる", vnTerm: "Đuôi dài (Long Tail)", icon: "📉",
-          jp: "販売数が少ない多品種商品を大量に揃えることで収益を上げるビジネスモデル。",
-          vn: "Thay vì chỉ bán hàng best-seller, bán thêm vô số sản phẩm ngách — tổng doanh thu vẫn lớn.",
-          tip: "Ngược với quy tắc 80/20 truyền thống. Amazon, Netflix là ví dụ điển hình.",
-          example: "Amazon bán sách hiếm mà cửa hàng truyền thống không thể trữ kho."
-        },
-        { term: "著作権 vs 工業所有権", yomi: "ちょさくけん vs こうぎょうしょゆうけん", vnTerm: "Bản quyền vs Quyền sở hữu công nghiệp", icon: "⚖️",
-          jp: "著作権=文化的創作物保護（登録不要）。工業所有権=技術保護（特許庁登録必要）。",
-          vn: "Bản quyền: tự động bảo vệ ngay khi tạo ra (nhạc, sách, phần mềm). Sở hữu công nghiệp: phải đăng ký (sáng chế, kiểu dáng, nhãn hiệu).",
-          tip: "4 loại quyền sở hữu công nghiệp: Sáng chế (特許権) — Giải pháp hữu ích (実用新案権) — Kiểu dáng (意匠権) — Nhãn hiệu (商標権)."
-        },
-      ],
-      vocab: [
-        ["Web 2.0", "うぇぶにーてんぜろ", "Web 2.0", "Web tương tác hai chiều (2004, Tim O'Reilly)"],
-        ["ロングテール", "ろんぐてーる", "Long Tail", "Mô hình bán hàng đa dạng mặt hàng ngách"],
-        ["Ajax", "あじゃっくす", "Ajax", "Cập nhật web không cần load lại trang"],
-        ["RSS", "あーるえすえす", "RSS", "Đăng ký nhận tin tức tự động"],
-        ["著作権", "ちょさくけん", "Bản quyền", "Bảo vệ tác phẩm sáng tạo (tự động)"],
-        ["特許権", "とっきょけん", "Quyền sáng chế", "Bảo vệ công nghệ mới"],
-        ["意匠権", "いしょうけん", "Quyền kiểu dáng", "Bảo vệ thiết kế sản phẩm"],
-        ["商標権", "しょうひょうけん", "Quyền nhãn hiệu", "Bảo vệ tên thương hiệu, logo"],
-        ["ネチケット", "ねちけっと", "Netiquette", "Đạo đức ứng xử trên mạng"],
-        ["クラウドコンピューティング", "くらうど", "Cloud computing", "Dịch vụ qua Internet (Google 2006)"],
-      ],
-      quizzes: [
-        { q: "Web 2.0 được đề xuất năm nào và bởi ai?", jp: "Web 2.0はいつ誰が提唱した？", opts: ["2000 — Bill Gates", "2004 — Tim O'Reilly", "2006 — Eric Schmidt", "2001 — Tim Berners-Lee"], ans: 1, exp: "Tim O'Reilly đề xuất khái niệm Web 2.0 năm 2004, chỉ web hai chiều mà ai cũng có thể tạo nội dung." },
-        { q: "Mô hình Long Tail có đặc điểm gì?", jp: "ロングテールの特徴は？", opts: ["Bán ít mặt hàng với giá cao", "Bán đa dạng mặt hàng ngách để tăng doanh thu", "Chỉ bán hàng best-seller", "Giảm giá hàng tồn kho"], ans: 1, exp: "Long Tail: bán nhiều mặt hàng ít khách, tổng gộp lại tạo ra doanh thu lớn. Điển hình: Amazon, Netflix." },
-        { q: "Quyền sở hữu loại nào cần đăng ký tại Cục Sở hữu công nghiệp (特許庁)?", jp: "特許庁への登録が必要な権利は？", opts: ["Bản quyền tác giả", "Quyền sở hữu công nghiệp", "Quyền nhân cách", "Quyền hàng xóm"], ans: 1, exp: "Sở hữu công nghiệp (sáng chế, kiểu dáng...) cần đăng ký. Bản quyền thì tự động phát sinh ngay khi tạo ra." },
-      ]
-    },
-    {
-      num: 3, title: "IT機器（携帯・ディスプレイ）", vn: "Thiết bị IT (Điện thoại & Màn hình)",
-      stars: 4,
-      summary: "Các thế hệ điện thoại di động (1G→4G), phân loại màn hình (LCD, OLED, SED), hai loại cảm ứng và các công nghệ kết nối không dây.",
-      concepts: [
-        { term: "携帯電話の世代", yomi: "けいたいでんわのせだい", vnTerm: "Thế hệ điện thoại di động", icon: "📱",
-          jp: "1G=アナログ。2G(1992)=デジタル音声。3G(2001)=高速データ。3.5G(2006)=さらに高速。",
-          vn: "1G: Analog (chỉ thoại). 2G (1992): Digital, SMS. 3G (2001): Internet mobile. 3.5G (2006): Tốc độ cao hơn.",
-          tip: "Mốc quan trọng: 1G=Analog / 2G trở đi=Digital."
-        },
-        { term: "タッチパネルの方式", yomi: "たっちぱねるのほうしき", vnTerm: "Công nghệ cảm ứng", icon: "👆",
-          jp: "抵抗膜方式=圧力検知・安価・シングルタッチ。静電容量方式=電荷検知・マルチタッチ対応。",
-          vn: "Kháng trở (Resistive): ấn lực → rẻ, 1 điểm chạm. Điện dung (Capacitive): điện tích ngón tay → đa điểm, smartphone.",
-          tip: "Smartphone đều dùng cảm ứng điện dung (静電容量方式) vì hỗ trợ đa điểm chạm."
-        },
-      ],
-      vocab: [
-        ["第1世代", "だいいちせだい", "1G", "Analog, chỉ thoại"],
-        ["第2世代", "だいにせだい", "2G (1992)", "Digital, SMS ra đời"],
-        ["第3世代", "だいさんせだい", "3G (2001)", "Internet mobile, video call"],
-        ["LCD", "えるしーでぃー", "Màn hình tinh thể lỏng", "Tiết kiệm điện, cần đèn nền"],
-        ["有機EL/OLED", "ゆうきいーえる", "OLED", "Tự phát sáng, không cần đèn nền"],
-        ["抵抗膜方式", "ていこうまくほうしき", "Cảm ứng kháng trở", "Nhấn lực, giá rẻ, 1 điểm"],
-        ["静電容量方式", "せいでんようりょうほうしき", "Cảm ứng điện dung", "Đa điểm, dùng cho smartphone"],
-        ["Bluetooth", "ぶるーとぅーす", "Bluetooth", "Không dây ~10m, tự kết nối"],
-        ["Wi-Fi", "わいふぁい", "Wi-Fi", "Mạng không dây LAN"],
-        ["SIMカード", "しむかーど", "SIM Card", "Thẻ lưu thông tin thuê bao"],
-      ],
-      quizzes: [
-        { q: "Loại cảm ứng nào hỗ trợ đa điểm chạm (multitouch) trên smartphone?", jp: "マルチタッチに対応するタッチパネル方式は？", opts: ["Kháng trở (抵抗膜方式)", "Điện dung (静電容量方式)", "Hồng ngoại (赤外線)", "Siêu âm"], ans: 1, exp: "Cảm ứng điện dung phát hiện điện tích ngón tay, hỗ trợ nhiều điểm chạm đồng thời." },
-        { q: "Điện thoại thế hệ 1G có đặc điểm gì?", jp: "第1世代携帯電話の特徴は？", opts: ["Kỹ thuật số, có SMS", "Analog, chỉ thoại", "3G, Internet mobile", "Hỗ trợ video call"], ans: 1, exp: "1G là công nghệ analog, chỉ truyền giọng nói, không có tính năng kỹ thuật số." },
-      ]
-    },
-    {
-      num: 4, title: "データ通信技術（有線・無線）", vn: "Công nghệ truyền dữ liệu (Có dây & Không dây)",
-      stars: 4,
-      summary: "Các loại kết nối Internet (CATV, ADSL, FTTH, PLC), so sánh tốc độ bps, và các công nghệ không dây phổ biến.",
-      concepts: [
-        { term: "ADSL", yomi: "えーでぃーえすえる", vnTerm: "ADSL (đường dây thuê bao số không đối xứng)", icon: "📞",
-          jp: "非対称デジタル加入者線。電話線を利用。上り＜下り（非対称）。局から遠いほど速度低下。",
-          vn: "Dùng đường dây điện thoại. Không đối xứng: download nhanh hơn upload. Càng xa tổng đài thì càng chậm.",
-          tip: "Nhớ: A trong ADSL = Asymmetric (Không đối xứng)."
-        },
-        { term: "FTTH", yomi: "えふてぃーてぃーえいち", vnTerm: "FTTH (Cáp quang đến nhà)", icon: "🔆",
-          jp: "Fiber To The Home。光ファイバを家庭まで引く。ノイズ耐性高い・最高速・安定。",
-          vn: "Kéo cáp quang tận nhà. Tốc độ cao nhất (~100 Mbps), ổn định, không bị nhiễu.",
-          tip: "FTTH là chuẩn kết nối tốt nhất hiện tại cho hộ gia đình."
-        },
-        { term: "PLC", yomi: "ぴーえるしー", vnTerm: "PLC (Truyền qua dây điện)", icon: "🔌",
-          jp: "Power Line Communication。家庭の100Vコンセントを使って通信。PLCアダプタが必要。",
-          vn: "Truyền dữ liệu qua đường dây điện 100V (ổ cắm). Cần adapter PLC.",
-          tip: "Không cần dây LAN mới, tận dụng hạ tầng điện sẵn có."
-        },
-      ],
-      vocab: [
-        ["CATV", "けーぶるてれび", "Cáp TV", "Dùng cáp TV để truyền Internet"],
-        ["ADSL", "えーでぃーえすえる", "ADSL", "Dây điện thoại, không đối xứng, giảm theo khoảng cách"],
-        ["FTTH", "えふてぃーてぃーえいち", "FTTH", "Cáp quang đến nhà, tốc độ cao nhất"],
-        ["PLC", "ぴーえるしー", "PLC", "Truyền qua dây điện 100V"],
-        ["IP電話", "あいぴーでんわ", "VoIP", "Gọi thoại qua Internet"],
-        ["bps", "びーぴーえす", "bps", "Đơn vị tốc độ (bit/giây)"],
-        ["ブロードバンド", "ぶろーどばんど", "Broadband", "Băng rộng ≥100 Kbps"],
-        ["パケット", "ぱけっと", "Packet", "Gói dữ liệu nhỏ để truyền"],
-        ["IrDA", "あいあーるでぃーえー", "IrDA", "Hồng ngoại, ngắn, cần thẳng hướng"],
-      ],
-      quizzes: [
-        { q: "ADSL có đặc điểm 'không đối xứng' nghĩa là gì?", jp: "ADSLの『非対称』とは？", opts: ["Upload = Download", "Download nhanh hơn Upload", "Upload nhanh hơn Download", "Không có sự khác biệt"], ans: 1, exp: "ADSL: Asymmetric DSL — tốc độ download (下り) lớn hơn upload (上り). Phù hợp người dùng cá nhân xem nhiều hơn đăng." },
-        { q: "Công nghệ truyền Internet nào dùng đường dây điện 100V tại nhà?", jp: "家庭の100Vコンセントを使う通信方式は？", opts: ["FTTH", "ADSL", "PLC", "Bluetooth"], ans: 2, exp: "PLC (Power Line Communication) truyền dữ liệu qua dây điện điện lực, cần adapter PLC ở mỗi đầu." },
-      ]
-    },
-    {
-      num: 5, title: "ネットワーク構成・セキュリティ", vn: "Cấu hình mạng & Bảo mật",
-      stars: 5,
-      summary: "Ba kiểu topology mạng (Bus, Star, Ring), hệ thống xử lý tập trung vs phân tán, P2P, Client-Server, và vai trò của Firewall & DMZ.",
-      concepts: [
-        { term: "ネットワークトポロジ", yomi: "ねっとわーくとぽろじ", vnTerm: "Topology mạng", icon: "🌐",
-          jp: "バス型（衝突発生）・スター型（ハブ中心・最もよく使われる）・リング型（1台故障で全停止）。",
-          vn: "Bus: 1 dây chung → hay va chạm dữ liệu. Star: qua Hub trung tâm → phổ biến nhất. Ring: vòng khép kín → 1 hỏng = ngừng hết.",
-          tip: "Thi hay hỏi: Star là phổ biến nhất. Ring là dễ gãy nhất."
-        },
-        { term: "DMZ（非武装地帯）", yomi: "でぃーえむぜっと", vnTerm: "DMZ (Vùng phi quân sự)", icon: "🛡️",
-          jp: "外部公開サーバを置く緩衝地帯。構成：Internet → Firewall → DMZ(Webサーバ) → 内部ネット。",
-          vn: "Khu vực đệm giữa Internet và mạng nội bộ, đặt các server công khai (Web, Email). Bảo vệ mạng nội bộ.",
-          tip: "DMZ = vùng an toàn nhưng nửa công khai — server bên DMZ bị hack không ảnh hưởng mạng nội bộ."
-        },
-      ],
-      vocab: [
-        ["LAN", "らん", "LAN", "Mạng cục bộ (trong tòa nhà)"],
-        ["WAN", "わん", "WAN", "Mạng diện rộng (liên tỉnh/quốc gia)"],
-        ["バス型", "ばすがた", "Bus topology", "Dây chung, hay va chạm"],
-        ["スター型", "すたーがた", "Star topology", "Hub trung tâm, phổ biến nhất"],
-        ["リング型", "りんぐがた", "Ring topology", "1 máy hỏng = ngừng toàn mạng"],
-        ["P2P", "ぴーつーぴー", "Peer-to-Peer", "Ngang hàng, chia sẻ trực tiếp"],
-        ["クライアントサーバ", "くらいあんとさーば", "Client-Server", "Phân chia vai trò phục vụ và yêu cầu"],
-        ["ファイアウォール", "ふぁいあうぉーる", "Firewall", "Chặn truy cập trái phép từ ngoài"],
-        ["DMZ", "でぃーえむぜっと", "DMZ", "Vùng đệm đặt server công khai"],
-        ["ハブ", "はぶ", "Hub", "Thiết bị trung tâm kết nối mạng"],
-      ],
-      quizzes: [
-        { q: "Kiểu topology mạng nào được sử dụng phổ biến nhất hiện nay?", jp: "最もよく使われるトポロジは？", opts: ["Bus", "Ring", "Star (スター型)", "Mesh"], ans: 2, exp: "Star topology dùng Hub/Switch làm trung tâm, dễ mở rộng, 1 máy hỏng không ảnh hưởng máy khác." },
-        { q: "DMZ trong bảo mật mạng được dùng để làm gì?", jp: "DMZの役割は？", opts: ["Lưu backup dữ liệu nội bộ", "Đặt server công khai như Web, Email", "Thay thế Firewall", "Kết nối Wi-Fi"], ans: 1, exp: "DMZ là vùng đệm đặt server công khai (Web, Email) — Internet vào được DMZ nhưng không vào mạng nội bộ." },
-      ]
-    },
-    {
-      num: 6, title: "インターネット技術（OSI・IP・HTML）", vn: "Công nghệ Internet (OSI, IP, HTML)",
-      stars: 5,
-      summary: "Mô hình OSI 7 lớp, địa chỉ IP (IPv4/IPv6), DNS, ngôn ngữ web HTML/XML/CSS, và mã hóa SSL.",
-      concepts: [
-        { term: "OSI 7層モデル", yomi: "OSI 7そうもでる", vnTerm: "Mô hình OSI 7 lớp", icon: "🪜",
-          jp: "物理→データリンク→ネットワーク(IP)→トランスポート(TCP)→セッション→プレゼンテーション→アプリケーション(HTTP)。",
-          vn: "7 lớp chuẩn hóa giao tiếp mạng: Lớp 1 Vật lý → L2 Liên kết → L3 Mạng (IP) → L4 Vận chuyển (TCP) → L5 Phiên → L6 Trình bày → L7 Ứng dụng (HTTP).",
-          tip: "Ghi nhớ: HTTP=lớp 7, TCP=lớp 4, IP=lớp 3."
-        },
-        { term: "IPv4 vs IPv6", yomi: "あいぴーぶいよん vs あいぴーぶいろく", vnTerm: "IPv4 vs IPv6", icon: "📍",
-          jp: "IPv4=32bit（約43億アドレス）。IPv6=128bit（アドレス不足解消）。",
-          vn: "IPv4: 32-bit → ~4,3 tỷ địa chỉ, sắp hết. IPv6: 128-bit → gần như vô hạn.",
-          tip: "IPv6 = 128 bit = 4 lần IPv4. Giải quyết khủng hoảng địa chỉ IP."
-        },
-        { term: "HTML vs XML", yomi: "えいちてぃーえむえる vs えっくすえむえる", vnTerm: "HTML vs XML", icon: "💻",
-          jp: "HTML=タグ固定。XML=ユーザが自由にタグを定義できる拡張可能なマークアップ言語。",
-          vn: "HTML: thẻ cố định (<p>, <h1>...). XML: tự định nghĩa thẻ theo ý muốn → dùng trao đổi dữ liệu.",
-          tip: "Thi hay hỏi: XML = tự định nghĩa thẻ (HTML thì không được)."
-        },
-      ],
-      vocab: [
-        ["OSI", "おーえすあい", "OSI Model", "Mô hình 7 lớp chuẩn hóa giao tiếp mạng"],
-        ["HTTP", "えいちてぃーてぃーぴー", "HTTP", "Giao thức web, lớp 7 (Application)"],
-        ["TCP", "てぃーしーぴー", "TCP", "Giao thức tin cậy, lớp 4 (Transport)"],
-        ["IP", "あいぴー", "IP", "Địa chỉ mạng, lớp 3 (Network)"],
-        ["IPv4", "あいぴーぶいよん", "IPv4", "32-bit, ~4.3 tỷ địa chỉ"],
-        ["IPv6", "あいぴーぶいろく", "IPv6", "128-bit, giải quyết thiếu địa chỉ"],
-        ["DNS", "でぃーえぬえす", "DNS", "Chuyển đổi tên miền ↔ IP"],
-        ["HTML", "えいちてぃーえむえる", "HTML", "Ngôn ngữ web, thẻ cố định"],
-        ["XML", "えっくすえむえる", "XML", "Ngôn ngữ đánh dấu mở rộng, tự định nghĩa thẻ"],
-        ["SSL", "えすえすえる", "SSL/HTTPS", "Mã hóa web, dùng https + icon khóa"],
-      ],
-      quizzes: [
-        { q: "Giao thức HTTP nằm ở lớp mấy trong mô hình OSI?", jp: "HTTPはOSIの何層？", opts: ["Lớp 3 (Network)", "Lớp 4 (Transport)", "Lớp 6 (Presentation)", "Lớp 7 (Application)"], ans: 3, exp: "HTTP là giao thức tầng Ứng dụng — lớp 7 (Application Layer). TCP ở lớp 4, IP ở lớp 3." },
-        { q: "IPv6 có số bit địa chỉ là bao nhiêu?", jp: "IPv6のビット数は？", opts: ["32 bit", "64 bit", "128 bit", "256 bit"], ans: 2, exp: "IPv6 dùng 128-bit thay vì 32-bit của IPv4, giải quyết tình trạng thiếu địa chỉ IP toàn cầu." },
-        { q: "Sự khác biệt chính giữa HTML và XML là gì?", jp: "HTMLとXMLの主な違いは？", opts: ["HTML nhanh hơn XML", "XML có thẻ cố định, HTML tự do", "HTML thẻ cố định, XML có thể tự định nghĩa thẻ", "Không có sự khác biệt"], ans: 2, exp: "XML = eXtensible Markup Language — cho phép người dùng tự định nghĩa thẻ. HTML có thẻ cố định như <p>, <h1>..." },
-      ]
-    },
-    {
-      num: 7, title: "ビジネスとインターネット", vn: "Kinh doanh & Internet (e-Commerce)",
-      stars: 4,
-      summary: "Các mô hình thương mại điện tử (BtoB, BtoC, CtoC), hệ thống EDI/EOS/CALS, tiền điện tử, Cookie và CRM.",
-      concepts: [
-        { term: "電子商取引の分類", yomi: "でんししょうとりひきのぶんるい", vnTerm: "Phân loại TMĐT", icon: "🛒",
-          jp: "BtoB=企業間。BtoC=企業対消費者。CtoC=個人間（オークション）。BtoG=企業対政府。",
-          vn: "B2B: doanh nghiệp ↔ doanh nghiệp. B2C: shop ↔ khách hàng. C2C: người ↔ người (đấu giá). B2G: công ty ↔ chính phủ.",
-          tip: "C2C là mô hình marketplace như eBay, Mercari, Chợ Tốt."
-        },
-        { term: "Cookie", yomi: "くっきー", vnTerm: "Cookie", icon: "🍪",
-          jp: "ブラウザにID情報を記憶させる仕組み。再アクセス時に自動認証・個人化表示。",
-          vn: "File nhỏ lưu trên trình duyệt người dùng. Khi quay lại, website nhận ra bạn và cá nhân hóa nội dung.",
-          tip: "Cookie giúp không cần đăng nhập lại, nhưng có thể bị dùng để theo dõi hành vi."
-        },
-      ],
-      vocab: [
-        ["BtoB", "びーとぅーびー", "B2B", "Doanh nghiệp ↔ Doanh nghiệp"],
-        ["BtoC", "びーとぅーしー", "B2C", "Doanh nghiệp ↔ Người tiêu dùng"],
-        ["CtoC", "しーとぅーしー", "C2C", "Cá nhân ↔ Cá nhân (đấu giá, marketplace)"],
-        ["EDI", "いーでぃーあい", "EDI", "Trao đổi dữ liệu điện tử (đặt hàng, thanh toán)"],
-        ["EOS", "いーおーえす", "EOS", "Hệ thống đặt hàng trực tuyến, 24h"],
-        ["CALS", "きゃるす", "CALS", "Số hóa toàn bộ quy trình sản xuất"],
-        ["Cookie", "くっきー", "Cookie", "Lưu thông tin trình duyệt để nhận dạng người dùng"],
-        ["CRM", "しーあーるえむ", "CRM", "Quản lý quan hệ khách hàng"],
-        ["電子マネー", "でんしまねー", "Tiền điện tử", "Thanh toán số không dùng tiền mặt"],
-      ],
-      quizzes: [
-        { q: "Mô hình thương mại điện tử nào phù hợp với Mercari (ứng dụng bán đồ cũ giữa người dùng)?", jp: "メルカリのビジネスモデルは？", opts: ["BtoB", "BtoC", "CtoC", "BtoG"], ans: 2, exp: "Mercari là C2C — mô hình cá nhân bán cho cá nhân thông qua nền tảng trung gian." },
-        { q: "Cookie dùng để làm gì?", jp: "Cookieの用途は？", opts: ["Mã hóa dữ liệu", "Lưu thông tin người dùng trên trình duyệt để nhận dạng", "Tăng tốc website", "Ngăn virus"], ans: 1, exp: "Cookie lưu ID hoặc thông tin phiên đăng nhập, giúp website nhận ra người dùng khi quay lại." },
-      ]
-    },
-    {
-      num: 8, title: "暗号化・認証", vn: "Mã hóa & Xác thực",
-      stars: 5,
-      summary: "Mật mã cổ điển (Caesar, Scytale), mã hóa đối xứng vs bất đối xứng, SSL, chữ ký số và cơ quan chứng thực (CA).",
-      concepts: [
-        { term: "共通鍵 vs 公開鍵", yomi: "きょうつうかぎ vs こうかいかぎ", vnTerm: "Mã hóa đối xứng vs Bất đối xứng", icon: "🔐",
-          jp: "共通鍵=暗号化・復号に同じ鍵。公開鍵=暗号化鍵は公開・復号は秘密鍵のみ。",
-          vn: "Đối xứng (共通鍵): cùng 1 chìa khóa mã hóa và giải mã — nhanh nhưng phải chia sẻ khóa bí mật. Bất đối xứng (公開鍵): 1 khóa công khai mã hóa, 1 khóa riêng giải mã — an toàn hơn.",
-          tip: "SSL dùng KẾT HỢP cả hai: bất đối xứng để trao đổi khóa, đối xứng để truyền dữ liệu (nhanh hơn)."
-        },
-        { term: "デジタル署名", yomi: "でじたるしょめい", vnTerm: "Chữ ký số", icon: "✍️",
-          jp: "秘密鍵で暗号化 → 公開鍵で復号できれば本人証明。改ざん検知も可能。",
-          vn: "Người gửi ký bằng khóa riêng (bí mật). Người nhận dùng khóa công khai để xác minh → chứng minh đúng người gửi.",
-          tip: "Chữ ký số: dùng khóa RIÊNG để ký (ngược với mã hóa bình thường dùng khóa công khai)."
-        },
-      ],
-      vocab: [
-        ["シーザー暗号", "しーざーあんごう", "Mật mã Caesar", "Đổi chỗ ký tự (換字式)"],
-        ["スキュタレー暗号", "すきゅたれーあんごう", "Mật mã Scytale", "Cuộn băng quanh que (転置式)"],
-        ["共通鍵方式", "きょうつうかぎほうしき", "Mã hóa đối xứng", "Cùng khóa mã hóa/giải mã, nhanh"],
-        ["公開鍵方式", "こうかいかぎほうしき", "Mã hóa bất đối xứng", "Khóa công khai + khóa riêng"],
-        ["SSL", "えすえすえる", "SSL", "https + icon khóa, kết hợp 2 phương pháp"],
-        ["デジタル署名", "でじたるしょめい", "Chữ ký số", "Xác minh danh tính người gửi"],
-        ["CA（認証局）", "しーえー", "CA (Certificate Authority)", "Cơ quan phát hành chứng chỉ số"],
-      ],
-      quizzes: [
-        { q: "Trong mã hóa bất đối xứng, khóa nào được dùng để GIẢI MÃ?", jp: "公開鍵方式で復号に使う鍵は？", opts: ["Khóa công khai", "Khóa riêng (bí mật)", "Cả hai", "Không cần khóa"], ans: 1, exp: "Mã hóa bất đối xứng: Khóa công khai để MÃ HÓA, khóa riêng (bí mật) để GIẢI MÃ." },
-        { q: "SSL là gì và nhận ra nó bằng dấu hiệu gì trên trình duyệt?", jp: "SSLとは何か？ブラウザでどう識別する？", opts: ["Giao thức chặn quảng cáo — dấu X đỏ", "Mã hóa web an toàn — https + icon ổ khóa", "Tăng tốc mạng — icon sấm chớp", "Xác thực email — địa chỉ @"], ans: 1, exp: "SSL (Secure Socket Layer) mã hóa dữ liệu truyền. Nhận ra qua https:// và biểu tượng ổ khóa 🔒." },
-      ]
-    },
-    {
-      num: 9, title: "セキュリティ・システム安全性", vn: "Bảo mật & Độ an toàn hệ thống",
-      stars: 5,
-      summary: "Các loại malware (Virus, Worm, Trojan), phương thức tấn công (DoS, Phishing), công thức tính tỷ lệ hoạt động (稼働率), và xác thực sinh trắc học.",
-      concepts: [
-        { term: "マルウェアの種類", yomi: "まるうぇあのしゅるい", vnTerm: "Các loại malware", icon: "🦠",
-          jp: "ウィルス=寄生・自己増殖。ワーム=単独増殖・ネット経由。トロイの木馬=正規に偽装・情報窃取。",
-          vn: "Virus: bám vào file khác, tự nhân bản. Worm: tự lan qua mạng, không cần file chủ. Trojan: giả dạng phần mềm hợp lệ để đánh cắp dữ liệu.",
-          tip: "Worm khác Virus: Worm tự nhân bản độc lập, không cần bám vào chương trình khác."
-        },
-        { term: "稼働率の計算", yomi: "かどうりつのけいさん", vnTerm: "Tính tỷ lệ hoạt động (Availability)", icon: "📊",
-          jp: "稼働率 = MTBF ÷ (MTBF + MTTR)。直列 = A×B。並列 = 1-(1-A)(1-B)。",
-          vn: "Tỷ lệ hoạt động = MTBF ÷ (MTBF + MTTR). Nối tiếp = A×B. Song song = 1-(1-A)×(1-B).",
-          tip: "MTBF = Mean Time Between Failures (thời gian bình quân giữa 2 lần hỏng). MTTR = Mean Time To Repair (thời gian sửa chữa trung bình)."
-        },
-      ],
-      vocab: [
-        ["ウィルス", "うぃるす", "Virus", "Bám vào file, tự nhân bản"],
-        ["ワーム", "わーむ", "Worm", "Tự lan qua mạng, không cần file chủ"],
-        ["トロイの木馬", "とろいのもくば", "Trojan Horse", "Giả dạng phần mềm hợp lệ"],
-        ["DoS攻撃", "どすこうげき", "DoS Attack", "Gửi ồ ạt request làm server tê liệt"],
-        ["フィッシング", "ふぃっしんぐ", "Phishing", "Giả mạo web/email để lấy thông tin"],
-        ["スキャベンジング", "すきゃべんじんぐ", "Scavenging", "Thu thập dữ liệu từ rác thải"],
-        ["MTBF", "えむてぃーびーえふ", "MTBF", "Thời gian bình quân giữa 2 lần hỏng"],
-        ["MTTR", "えむてぃーてぃーあーる", "MTTR", "Thời gian sửa chữa trung bình"],
-        ["稼働率", "かどうりつ", "Availability", "Tỷ lệ hoạt động bình thường"],
-        ["生体認証", "せいたいにんしょう", "Biometrics", "Xác thực bằng vân tay, khuôn mặt..."],
-      ],
-      quizzes: [
-        { q: "Loại malware nào tự lan truyền qua mạng mà KHÔNG cần bám vào file khác?", jp: "他のプログラムに寄生せず、単独でネット経由に増殖するマルウェアは？", opts: ["Virus", "Worm", "Trojan", "Spyware"], ans: 1, exp: "Worm (ワーム) tự sao chép và lan qua mạng mà không cần file chủ. Virus thì cần bám vào file khác." },
-        { q: "Công thức tính tỷ lệ hoạt động (稼働率) là gì?", jp: "稼働率の公式は？", opts: ["MTTR ÷ MTBF", "MTBF ÷ MTTR", "MTBF ÷ (MTBF + MTTR)", "MTTR ÷ (MTBF + MTTR)"], ans: 2, exp: "稼働率 = MTBF ÷ (MTBF + MTTR). MTBF: thời gian hoạt động trung bình. MTTR: thời gian sửa chữa trung bình." },
-        { q: "Hai máy chủ nối tiếp nhau, mỗi máy có tỷ lệ hoạt động 0.9. Tỷ lệ hoạt động tổng là bao nhiêu?", jp: "稼働率0.9の装置を直列接続した場合の稼働率は？", opts: ["0.99", "0.9", "0.81", "0.45"], ans: 2, exp: "Nối tiếp (直列): tỷ lệ = A × B = 0.9 × 0.9 = 0.81. Song song thì: 1-(1-0.9)×(1-0.9) = 0.99." },
-      ]
-    },
-    {
-      num: 10, title: "コンピュータの構造（ハードウェア）", vn: "Cấu trúc máy tính (Phần cứng)",
-      stars: 5,
-      summary: "5 yếu tố của máy tính, phân loại RAM/ROM, hệ thống nhớ phân cấp (cache→RAM→HDD), cấu trúc ổ cứng (track, sector).",
-      concepts: [
-        { term: "コンピュータの5大要素", yomi: "こんぴゅーたのごだいようそ", vnTerm: "5 yếu tố của máy tính", icon: "🖥️",
-          jp: "演算装置＋制御装置=CPU。記憶装置=メモリ・HDD。入力装置=キーボード。出力装置=ディスプレイ。",
-          vn: "1. Tính toán (演算) + 2. Điều khiển (制御) → CPU. 3. Lưu trữ (記憶). 4. Nhập (入力). 5. Xuất (出力).",
-          tip: "CPU = yếu tố 1 + 2. Bộ nhớ = yếu tố 3. Keyboard/Mouse = yếu tố 4. Monitor/Printer = yếu tố 5."
-        },
-        { term: "RAM vs ROM", yomi: "らむ vs ろむ", vnTerm: "RAM vs ROM", icon: "💾",
-          jp: "RAM=揮発性（電源OFF→消去）。ROM=不揮発性（電源OFF→保持）。SRAM=高速・高価・キャッシュ用。",
-          vn: "RAM (揮発性): mất điện là mất dữ liệu → dùng làm bộ nhớ chính. ROM (不揮発性): tắt nguồn vẫn giữ → BIOS, firmware. SRAM: nhanh nhất, làm cache CPU.",
-          tip: "Cache (SRAM) > RAM (DRAM) > HDD — thứ tự từ nhanh đến chậm, nhỏ đến lớn."
-        },
-      ],
-      vocab: [
-        ["CPU", "しーぴーゆー", "CPU", "Bộ xử lý trung tâm (演算+制御)"],
-        ["RAM", "らむ", "RAM", "Bộ nhớ chính, mất điện là mất dữ liệu"],
-        ["ROM", "ろむ", "ROM", "Bộ nhớ chỉ đọc, tắt vẫn giữ dữ liệu"],
-        ["DRAM", "でぃーらむ", "DRAM", "RAM thông thường, rẻ, cần làm mới định kỳ"],
-        ["SRAM", "えすらむ", "SRAM", "Cache CPU, nhanh nhất, đắt tiền"],
-        ["VRAM", "ぶいらむ", "VRAM", "RAM dành riêng cho card đồ họa"],
-        ["キャッシュ", "きゃっしゅ", "Cache", "Bộ nhớ đệm tốc độ cao nhất"],
-        ["トラック", "とらっく", "Track", "Đường đồng tâm trên đĩa HDD"],
-        ["セクタ", "せくた", "Sector", "Đơn vị quản lý nhỏ nhất của HDD"],
-        ["マザーボード", "まざーぼーど", "Mainboard", "Bo mạch chủ kết nối tất cả linh kiện"],
-      ],
-      quizzes: [
-        { q: "Loại RAM nào được dùng làm cache trong CPU vì tốc độ cao nhất?", jp: "CPUのキャッシュに使われる高速なRAMは？", opts: ["DRAM", "VRAM", "SRAM", "ROM"], ans: 2, exp: "SRAM (Static RAM) nhanh nhất, không cần làm mới định kỳ, dùng làm cache CPU. DRAM thì rẻ hơn, dùng cho RAM thông thường." },
-        { q: "Đơn vị quản lý nhỏ nhất của ổ đĩa HDD là gì?", jp: "HDDの管理の最小単位は？", opts: ["Track (トラック)", "Cluster", "Sector (セクタ)", "Block"], ans: 2, exp: "Sector (セクタ) là đơn vị nhỏ nhất trên HDD. Track là đường đồng tâm, chia thành nhiều Sector." },
-      ]
-    },
-    {
-      num: 11, title: "CPUの動作原理・論理回路", vn: "Nguyên lý CPU & Mạch logic",
-      stars: 4,
-      summary: "4 thế hệ linh kiện điện tử (ống chân không → Transistor → IC → LSI), mạch logic cơ bản (AND, OR, NOT) và nguyên lý máy Turing.",
-      concepts: [
-        { term: "電子素子の4世代", yomi: "でんしそしのよんせだい", vnTerm: "4 thế hệ linh kiện điện tử", icon: "⚡",
-          jp: "1代=真空管(1940s)→2代=トランジスタ(1950s)→3代=IC(1960s)→4代=LSI(1970s)。",
-          vn: "1G: Ống chân không (1940s) → 2G: Transistor (1950s) → 3G: IC (1960s, ~10 transistor) → 4G: LSI (1970s, hàng nghìn đến triệu transistor).",
-          tip: "Mỗi thế hệ: nhỏ hơn, nhanh hơn, tiêu thụ ít điện hơn, rẻ hơn."
-        },
-        { term: "論理回路（AND・OR・NOT）", yomi: "ろんりかいろ", vnTerm: "Mạch logic (AND, OR, NOT)", icon: "🔁",
-          jp: "OR=スイッチ並列（どちらかON）。AND=スイッチ直列（両方ON）。NOT=反転。",
-          vn: "OR: song song — chỉ cần 1 đầu vào =1 là ra 1. AND: nối tiếp — phải cả 2 đầu vào =1 mới ra 1. NOT: đảo ngược 0↔1.",
-          tip: "AND = chuỗi nối tiếp (series). OR = song song (parallel). Hình vẽ dễ nhớ hơn bảng chân trị."
-        },
-      ],
-      vocab: [
-        ["真空管", "しんくうかん", "Ống chân không", "Linh kiện thế hệ 1 (1940s), to, nóng"],
-        ["トランジスタ", "とらんじすた", "Transistor", "Linh kiện thế hệ 2 (1950s)"],
-        ["IC", "あいしー", "IC (Integrated Circuit)", "Linh kiện thế hệ 3 (1960s), ~10 transistor"],
-        ["LSI", "えるえすあい", "LSI (Large Scale IC)", "Linh kiện thế hệ 4 (1970s), hàng nghìn đến triệu transistor"],
-        ["AND回路", "あんどかいろ", "Cổng AND", "Nối tiếp — cả 2 =1 mới ra 1"],
-        ["OR回路", "おーかいろ", "Cổng OR", "Song song — 1 trong 2 =1 là ra 1"],
-        ["NOT回路", "のっとかいろ", "Cổng NOT", "Đảo ngược: 0→1, 1→0"],
-        ["チューリングマシン", "ちゅーりんぐ", "Máy Turing", "Mô hình toán học nền tảng của CPU"],
-      ],
-      quizzes: [
-        { q: "Cổng logic AND hoạt động như công tắc mắc như thế nào?", jp: "AND回路はスイッチをどのように接続する？", opts: ["Song song (並列)", "Nối tiếp (直列)", "Xen kẽ", "Ngẫu nhiên"], ans: 1, exp: "AND = nối tiếp (直列). Cả hai công tắc phải ON thì mạch mới thông. OR = song song (並列)." },
-        { q: "LSI thuộc thế hệ linh kiện điện tử nào và ra đời vào thập niên nào?", jp: "LSIは第何世代でいつ登場した？", opts: ["Thế hệ 2, 1950s", "Thế hệ 3, 1960s", "Thế hệ 4, 1970s", "Thế hệ 1, 1940s"], ans: 2, exp: "LSI (Large Scale Integration) là thế hệ 4, xuất hiện đầu những năm 1970, tích hợp hàng nghìn đến triệu transistor." },
-      ]
-    },
-    {
-      num: 12, title: "演算処理・数値表現", vn: "Xử lý tính toán & Biểu diễn số",
-      stars: 5,
-      summary: "Hệ nhị phân (2进数), thập lục phân (16进数), chuyển đổi cơ số, bù 2 (2の補数), bit shift và sai số làm tròn.",
-      concepts: [
-        { term: "基数変換（2進数↔10進数）", yomi: "きすうへんかん", vnTerm: "Chuyển đổi cơ số", icon: "🔢",
-          jp: "2進数→10進数：各桁に2の(桁-1)乗を掛けて合計。例：1010(2)=8+0+2+0=10。",
-          vn: "2→10: nhân mỗi bit với 2^(vị trí). Ví dụ: 1010₂ = 1×2³+0×2²+1×2¹+0×2⁰ = 8+0+2+0 = 10₁₀.",
-          tip: "2 chữ số hex = 1 byte (8 bit). Nhớ: 4 bit nhị phân = 1 chữ số hex."
-        },
-        { term: "2の補数", yomi: "にのほすう", vnTerm: "Bù 2 (Two's complement)", icon: "➖",
-          jp: "負の数を表す標準方式。1の補数（ビット反転）+1。引き算を足し算回路で実現できる。",
-          vn: "Biểu diễn số âm: đảo hết bit (bù 1) rồi cộng thêm 1 = bù 2. Ưu điểm: dùng mạch cộng để tính trừ.",
-          tip: "Ví dụ: -3 trong 4 bit = bù 2 của 0011 = đảo→1100, +1→1101."
-        },
-        { term: "ビットシフト", yomi: "びっとしふと", vnTerm: "Bit Shift", icon: "↔️",
-          jp: "左シフト n回 = ×2ⁿ。右シフト n回 = ÷2ⁿ。",
-          vn: "Dịch trái n lần = nhân 2ⁿ. Dịch phải n lần = chia 2ⁿ. Nhanh hơn phép nhân/chia thực sự.",
-          tip: "1010 dịch trái 1 = 10100 = ×2."
-        },
-      ],
-      vocab: [
-        ["2進数", "にしんすう", "Nhị phân", "Chỉ 0 và 1"],
-        ["10進数", "じっしんすう", "Thập phân", "0-9, hệ đếm thông thường"],
-        ["16進数", "じゅうろくしんすう", "Thập lục phân", "0-9, A-F"],
-        ["符号ビット", "ふごうびっと", "Bit dấu", "Bit đầu tiên: 0=dương, 1=âm"],
-        ["1の補数", "いちのほすう", "Bù 1", "Đảo ngược tất cả bit"],
-        ["2の補数", "にのほすう", "Bù 2", "Bù 1 + 1 — chuẩn biểu diễn số âm"],
-        ["左シフト", "ひだりしふと", "Dịch trái", "×2ⁿ"],
-        ["右シフト", "みぎしふと", "Dịch phải", "÷2ⁿ"],
-        ["丸め誤差", "まるめごさ", "Sai số làm tròn", "Do không biểu diễn được chính xác số thập phân"],
-      ],
-      quizzes: [
-        { q: "1010 (nhị phân) bằng bao nhiêu trong hệ thập phân?", jp: "2進数1010を10進数に変換すると？", opts: ["8", "10", "12", "14"], ans: 1, exp: "1×2³ + 0×2² + 1×2¹ + 0×2⁰ = 8 + 0 + 2 + 0 = 10₁₀." },
-        { q: "Dịch trái một số nhị phân 2 lần tương đương với phép tính gì?", jp: "2進数を左に2回シフトすると？", opts: ["÷4", "÷2", "×2", "×4"], ans: 3, exp: "Dịch trái 1 lần = ×2. Dịch trái 2 lần = ×2² = ×4." },
-      ]
-    },
-    {
-      num: 13, title: "情報量・文字コード", vn: "Lượng thông tin & Mã ký tự",
-      stars: 5,
-      summary: "Đơn vị thông tin (bit, byte, KB, MB, GB), dung lượng ký tự (tiếng Anh=1 byte, tiếng Nhật=2 byte), và các bộ mã Unicode, ASCII.",
-      concepts: [
-        { term: "情報量の単位", yomi: "じょうほうりょうのたんい", vnTerm: "Đơn vị lượng thông tin", icon: "📦",
-          jp: "1 byte=8 bit。1 KB=1,024 byte。1 MB=1,024 KB。1 GB=1,024 MB。1 TB=1,024 GB。",
-          vn: "bit là đơn vị nhỏ nhất (0 hoặc 1). 1 byte = 8 bit. Đơn vị máy tính dùng 1024 (=2¹⁰) không phải 1000.",
-          tip: "KB = Kilobyte = 2¹⁰ = 1024 byte. Khác với km = 1000m."
-        },
-        { term: "文字コード", yomi: "もじこーど", vnTerm: "Mã ký tự (Character encoding)", icon: "🔤",
-          jp: "ASCII=英語標準。日本語=JIS/シフトJIS/EUC/Unicode。Unicode=世界共通2byte。",
-          vn: "ASCII: mã tiếng Anh chuẩn (128 ký tự, 7-bit). Unicode: mã thống nhất toàn cầu, mỗi ký tự 2 byte → xóa bỏ lỗi hiển thị (文字化け).",
-          tip: "Ký tự tiếng Anh = 1 byte (256 loại = 2⁸). Ký tự tiếng Nhật = 2 byte (65.536 loại = 2¹⁶)."
-        },
-      ],
-      vocab: [
-        ["bit", "びっと", "Bit", "Đơn vị nhỏ nhất (0 hoặc 1)"],
-        ["byte", "ばいと", "Byte", "1 byte = 8 bit"],
-        ["KB", "きろばいと", "Kilobyte", "1 KB = 1,024 byte"],
-        ["MB", "めがばいと", "Megabyte", "1 MB = 1,024 KB"],
-        ["GB", "ぎがばいと", "Gigabyte", "1 GB = 1,024 MB"],
-        ["TB", "てらばいと", "Terabyte", "1 TB = 1,024 GB"],
-        ["ASCII", "あすきー", "ASCII", "Mã ký tự tiếng Anh chuẩn"],
-        ["Unicode", "ゆにこーど", "Unicode", "Mã thống nhất toàn cầu (2 byte/ký tự)"],
-        ["シフトJIS", "しふとじす", "Shift-JIS", "Mã tiếng Nhật phổ biến trên Windows"],
-        ["文字化け", "もじばけ", "Mojibake (lỗi mã)", "Hiển thị sai ký tự do mã không khớp"],
-      ],
-      quizzes: [
-        { q: "1 Kilobyte (KB) bằng bao nhiêu byte?", jp: "1 KBは何byte？", opts: ["1,000 byte", "1,024 byte", "1,048 byte", "512 byte"], ans: 1, exp: "Máy tính dùng hệ nhị phân: 1 KB = 2¹⁰ = 1,024 byte (không phải 1,000 như đơn vị SI)." },
-        { q: "Một ký tự tiếng Nhật (Kanji) cần bao nhiêu byte?", jp: "日本語の文字1文字は何byte？", opts: ["0.5 byte", "1 byte", "2 byte", "4 byte"], ans: 2, exp: "Tiếng Nhật có ~65,536 ký tự = 2¹⁶ → cần 2 byte/ký tự. Tiếng Anh chỉ cần 1 byte." },
-      ]
-    },
-    {
-      num: 14, title: "マルチメディア表現", vn: "Biểu diễn Đa phương tiện",
-      stars: 4,
-      summary: "Số hóa âm thanh (tần số lấy mẫu, lượng tử hóa), MIDI, độ phân giải hình ảnh (VGA, SXGA...), màu sắc RGB và tốc độ khung hình.",
-      concepts: [
-        { term: "音声のデジタル化", yomi: "おんせいのでじたるか", vnTerm: "Số hóa âm thanh", icon: "🔊",
-          jp: "サンプリング周波数=1秒の測定回数。CDは44.1kHz。量子化数=波の高さを整数で表す段数。",
-          vn: "Sampling rate (tần số lấy mẫu): số lần đo/giây. CD = 44,100 lần/giây (44.1 kHz). Quantization (lượng tử hóa): độ chi tiết biên độ sóng.",
-          tip: "CD stereo: 2 kênh × 44,100 × 2 byte × 60s = ~10 MB/phút → CD 640 MB ≈ 63 phút."
-        },
-        { term: "画像の解像度", yomi: "がぞうのかいぞうど", vnTerm: "Độ phân giải hình ảnh", icon: "🖼️",
-          jp: "VGA=640×480。1画素=RGB各8bit=3byte。30fps動画=640×480×3×30≒26.4MB/秒。",
-          vn: "Mỗi pixel = 3 byte (RGB, mỗi màu 8-bit = 256 mức). VGA: 640×480 pixel. Video 30fps = 640×480×3×30 ≈ 26MB/giây.",
-          tip: "Thứ tự độ phân giải: QVGA < VGA < XGA < SXGA < UXGA."
-        },
-      ],
-      vocab: [
-        ["サンプリング周波数", "さんぷりんぐしゅうはすう", "Tần số lấy mẫu", "CD = 44.1 kHz (44,100 lần/giây)"],
-        ["量子化数", "りょうしかすう", "Mức lượng tử hóa", "Số nguyên biểu diễn biên độ sóng"],
-        ["MIDI", "みでぃ", "MIDI", "Giao thức nhạc cụ điện tử, lưu lệnh không phải âm thanh"],
-        ["画素 / ピクセル", "がそ / ぴくせる", "Pixel", "Điểm ảnh nhỏ nhất"],
-        ["RGB", "あーるじーびー", "RGB", "3 màu cơ bản (Đỏ, Lục, Lam)"],
-        ["VGA", "ぶいじーえー", "VGA", "640×480 pixel"],
-        ["XGA", "えっくすじーえー", "XGA", "1024×768 pixel"],
-        ["SXGA", "えすえっくすじーえー", "SXGA", "1280×1024 pixel"],
-        ["dpi", "でぃーぴーあい", "dpi", "Dot per inch — đơn vị độ phân giải máy in"],
-        ["フレームレート", "ふれーむれーと", "Frame rate (fps)", "Số khung hình/giây. TV Nhật=30fps, phim=24fps"],
-      ],
-      quizzes: [
-        { q: "CD âm thanh dùng tần số lấy mẫu bao nhiêu?", jp: "CDの音声サンプリング周波数は？", opts: ["22 kHz", "44.1 kHz", "96 kHz", "8 kHz"], ans: 1, exp: "CD sử dụng 44,100 Hz (44.1 kHz) — 44,100 lần đo sóng âm mỗi giây, đủ để tái tạo âm thanh chất lượng cao." },
-        { q: "1 pixel màu RGB cần bao nhiêu byte lưu trữ?", jp: "RGBカラーの1画素は何byte？", opts: ["1 byte", "2 byte", "3 byte", "4 byte"], ans: 2, exp: "RGB: R=8bit, G=8bit, B=8bit → tổng 24 bit = 3 byte mỗi pixel." },
-      ]
-    },
-    {
-      num: 15, title: "データ通信・圧縮・誤り検出", vn: "Truyền dữ liệu, Nén & Phát hiện lỗi",
-      stars: 4,
-      summary: "Đơn vị tốc độ (bps), phân loại nén (có tổn thất/không), các định dạng file (JPEG, GIF, MPEG, MP3), và phương pháp phát hiện lỗi (Parity, CRC).",
-      concepts: [
-        { term: "圧縮の種類", yomi: "あっしゅくのしゅるい", vnTerm: "Phân loại nén dữ liệu", icon: "🗜️",
-          jp: "可逆=完全復元可（PNG,GIF）。不可逆=完全には戻らない（JPEG,MP3）。MPEGは差分記録も利用。",
-          vn: "Không tổn thất (可逆): khôi phục 100% — PNG, GIF, ZIP. Có tổn thất (不可逆): mất chất lượng khi nén — JPEG, MP3, MPEG.",
-          tip: "Ảnh nghệ thuật/icon dùng PNG (không tổn thất). Ảnh chụp dùng JPEG (nhỏ hơn)."
-        },
-        { term: "誤り検出方式", yomi: "あやまりけんしゅつほうしき", vnTerm: "Phát hiện lỗi truyền dữ liệu", icon: "🔍",
-          jp: "パリティチェック=1ビット検査・1箇所のみ検出可。CRC=多項式計算・複数ビット検出可。",
-          vn: "Parity Check: thêm 1 bit kiểm tra — phát hiện và sửa được 1 lỗi đơn. CRC: dùng đa thức — phát hiện nhiều lỗi → dùng trong CD, DVD, LAN.",
-          tip: "Thi hay so sánh: Parity = đơn giản/1 lỗi. CRC = phức tạp hơn/nhiều lỗi."
-        },
-      ],
-      vocab: [
-        ["bps", "びーぴーえす", "bps", "bit per second — đơn vị tốc độ truyền"],
-        ["可逆圧縮", "かぎゃくあっしゅく", "Nén không tổn thất", "Khôi phục hoàn toàn (PNG, GIF, ZIP)"],
-        ["不可逆圧縮", "ふかぎゃくあっしゅく", "Nén có tổn thất", "Mất chất lượng (JPEG, MP3, MPEG)"],
-        ["JPEG", "じぇいぺぐ", "JPEG", "Nén ảnh có tổn thất, phổ biến cho ảnh chụp"],
-        ["GIF", "じふ", "GIF", "Nén ảnh không tổn thất, hỗ trợ animation"],
-        ["PNG", "ぴんぐ", "PNG", "Nén ảnh không tổn thất, hỗ trợ transparency"],
-        ["MPEG", "えむぺぐ", "MPEG", "Nén video (dùng thêm ghi chênh lệch giữa khung)"],
-        ["MP3", "えむぴーすりー", "MP3", "Nén âm thanh có tổn thất"],
-        ["パリティチェック", "ぱりてぃ", "Parity Check", "Phát hiện 1 lỗi đơn"],
-        ["CRC", "しーあーるしー", "CRC", "Phát hiện nhiều lỗi, dùng trong CD/DVD/LAN"],
-      ],
-      quizzes: [
-        { q: "Định dạng nào là nén CÓ TỔN THẤT (không khôi phục được hoàn toàn)?", jp: "不可逆圧縮の形式はどれ？", opts: ["PNG", "GIF", "JPEG", "ZIP"], ans: 2, exp: "JPEG là nén có tổn thất (不可逆): chất lượng giảm khi nén mạnh. PNG, GIF, ZIP là không tổn thất (可逆)." },
-        { q: "Phương pháp phát hiện lỗi nào được dùng trong CD, DVD và mạng LAN?", jp: "CD・DVD・LANで使用される誤り検出方式は？", opts: ["Parity Check", "CRC", "MD5", "SHA-256"], ans: 1, exp: "CRC (Cyclic Redundancy Check) dùng đa thức, phát hiện được nhiều lỗi bit cùng lúc → dùng trong CD, DVD, Ethernet." },
-      ]
-    },
-    {
-      num: 16, title: "オペレーティングシステム（OS）", vn: "Hệ điều hành (OS)",
-      stars: 4,
-      summary: "Vai trò của OS (trung gian hardware-software), kernel, các chức năng chính (quản lý file, đa nhiệm, bộ nhớ ảo), và phân loại OS (Windows, Linux, macOS, Android).",
-      concepts: [
-        { term: "OSの役割と構造", yomi: "おーえすのやくわりとこうぞう", vnTerm: "Vai trò & Cấu trúc OS", icon: "⚙️",
-          jp: "OSはハードウェアとアプリの仲介役。カーネル=OSの核心部分。ユーティリティ=補助プログラム。",
-          vn: "OS là phần mềm nền tảng kết nối phần cứng và ứng dụng. Kernel (nhân): quản lý trực tiếp phần cứng. Utility: các công cụ hỗ trợ.",
-          tip: "Không có OS, phần mềm không thể chạy trên phần cứng."
-        },
-        { term: "OSの主要機能", yomi: "おーえすのしゅようきのう", vnTerm: "Chức năng chính của OS", icon: "🗂️",
-          jp: "ファイル管理・タスク管理(マルチタスク)・メモリ管理・デバイス管理・仮想記憶。",
-          vn: "Quản lý file (File System). Đa nhiệm (Multitasking): chạy nhiều app cùng lúc. Quản lý bộ nhớ RAM. Quản lý thiết bị ngoại vi. Bộ nhớ ảo (Virtual Memory): dùng HDD như RAM khi RAM đầy.",
-          tip: "Bộ nhớ ảo = mở rộng RAM bằng HDD, nhưng chậm hơn nhiều."
-        },
-      ],
-      vocab: [
-        ["OS", "おーえす", "Operating System", "Hệ điều hành — nền tảng phần mềm"],
-        ["カーネル", "かーねる", "Kernel", "Nhân OS, quản lý phần cứng trực tiếp"],
-        ["ユーティリティ", "ゆーてぃりてぃ", "Utility", "Công cụ hỗ trợ (antivirus, backup...)"],
-        ["マルチタスク", "まるちたすく", "Multitasking", "Chạy nhiều chương trình đồng thời"],
-        ["仮想記憶", "かそうきおく", "Virtual Memory", "Dùng HDD như RAM khi RAM đầy"],
-        ["デバイスドライバ", "でばいすどらいば", "Device Driver", "Phần mềm điều khiển thiết bị ngoại vi"],
-        ["Windows", "うぃんどうず", "Windows", "OS của Microsoft, phổ biến nhất"],
-        ["Linux", "りなっくす", "Linux", "Mã nguồn mở, miễn phí, dựa trên UNIX"],
-        ["macOS", "まっくおーえす", "macOS", "OS của Apple, dựa trên UNIX"],
-        ["Android", "あんどろいど", "Android", "OS di động, nhân Linux"],
-      ],
-      quizzes: [
-        { q: "Phần nào của OS quản lý trực tiếp phần cứng?", jp: "OSの核心部分でハードウェアを管理するのは？", opts: ["Utility (ユーティリティ)", "Kernel (カーネル)", "Application (アプリ)", "Driver"], ans: 1, exp: "Kernel (カーネル) là nhân của OS, trực tiếp quản lý CPU, bộ nhớ và thiết bị. Utility là phần mềm phụ trợ." },
-        { q: "Bộ nhớ ảo (仮想記憶) hoạt động như thế nào?", jp: "仮想記憶とは？", opts: ["Dùng CPU thay RAM", "Dùng HDD/SSD để mở rộng RAM", "Nén dữ liệu trong RAM", "Xóa bớt dữ liệu cũ"], ans: 1, exp: "仮想記憶 = Virtual Memory: khi RAM đầy, OS dùng một phần HDD/SSD làm bộ nhớ tạm. Chậm hơn RAM thật nhưng tránh crash." },
-        { q: "Linux có đặc điểm gì khác biệt so với Windows và macOS?", jp: "Linuxの特徴は？", opts: ["Tốt nhất cho gaming", "Mã nguồn đóng, trả phí", "Mã nguồn mở, miễn phí, dựa trên UNIX", "Chỉ chạy trên Apple"], ans: 2, exp: "Linux là OS mã nguồn mở (open source), miễn phí, dựa trên UNIX. Được dùng rộng rãi trên server và Android." },
-      ]
-    },
+  // ═══════════════════════════════════════
+  // PAGE SWITCHING
+  // ═══════════════════════════════════════
+  function showPage(which) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(which + '-page').classList.add('active');
+    const tabs = document.querySelectorAll('.nav-tab');
+    if (which === 'study') tabs[0].classList.add('active');
+    else if (which === 'quiz') tabs[1].classList.add('active');
+    else tabs[2].classList.add('active');
+
+    if (which === 'wrong') {
+      const qArea = document.getElementById('wrong-question-area');
+      // Chỉ làm mới màn hình giới thiệu nếu KHÔNG đang giữa lượt ôn lại
+      if (qArea.style.display === 'none' || qArea.style.display === '') {
+        renderWrongIntro();
+      }
+    }
+    window.scrollTo(0,0);
+  }
+
+  // ═══════════════════════════════════════
+  // QUIZ DATA (200 questions)
+  // ═══════════════════════════════════════
+  const Q = [
+    {q:"アナログとはどのような量を表すか？",c:["A. 離散的な量","B. 連続的な量","C. 数値化された量","D. デジタル化された量"],a:"B"},
+    {q:"アナログ信号として送信される形式はどれか？",c:["A. 0と1のデータ","B. バイナリコード","C. 電流(mA)または電圧(mV)信号","D. パケットデータ"],a:"C"},
+    {q:"デジタルとはどのような量を表すか？",c:["A. 連続的な量","B. 波形の量","C. 数値化された量","D. アナログ変換された量"],a:"C"},
+    {q:"デジタルコンピュータで使用される数字はどれか？",c:["A. 0〜9","B. 0と1","C. 0〜7","D. 0〜15"],a:"B"},
+    {q:"デジタルのメリットとして正しいのはどれか？",c:["A. 曖昧なものをそのまま表現できる","B. コピーができない","C. 正確で切れ目のある","D. 感覚的に理解できる"],a:"C"},
+    {q:"アナログの特徴として正しいのはどれか？",c:["A. コピーができる","B. 正確で切れ目のある","C. 曖昧なものをそのまま表現できる","D. 数値化された量"],a:"C"},
+    {q:"デジタルに関して正しい説明はどれか？",c:["A. 曖昧なものをそのまま残すことができる","B. 曖昧なものをそのまま残すことができない","C. コピーができない","D. 感覚的に理解できる"],a:"B"},
+    {q:"アナログのデメリットとして正しいのはどれか？",c:["A. 正確性が高い","B. データをそのまま残すことができない","C. コピーが容易である","D. 切れ目のある表現ができる"],a:"B"},
+    {q:"電子式計算機ENIACが登場した年はいつか？",c:["A. 1930年","B. 1939年","C. 1946年","D. 1949年"],a:"C"},
+    {q:"フォン・ノイマンコンピュータが登場した年はいつか？",c:["A. 1939年","B. 1946年","C. 1949年","D. 1930年"],a:"C"},
+    {q:"最も古いコンピュータの原型はどれか？",c:["A. ENIACによるABC電子式計算機","B. パスカルの計算機","C. アバカス（そろばん）","D. フォン・ノイマンコンピュータ"],a:"C"},
+    {q:"1930年代に登場したコンピュータの方式はどれか？",c:["A. 電子式","B. 電気機械式","C. プログラム内蔵式","D. 光学式"],a:"B"},
+    {q:"17世紀に登場した計算機の開発者として正しいのはどれか？",c:["A. フォン・ノイマンとエニアック","B. パスカルとライプニッツ","C. アバカスとパスカル","D. エニアックとライプニッツ"],a:"B"},
+    {q:"ABC電子式計算機はいつ登場したか？",c:["A. 1930年","B. 1939年","C. 1946年","D. 1949年"],a:"B"},
+    {q:"最も処理能力が高いコンピュータはどれか？",c:["A. デスクトップPC","B. ワークステーション","C. スーパーコンピュータ","D. ネットブック"],a:"C"},
+    {q:"コンピュータを一言で表すとどのような機械か？",c:["A. 「入力」して「出力」する機械","B. 「記憶」して「処理」する機械","C. 「演算」して「表示」する機械","D. 「通信」して「保存」する機械"],a:"B"},
+    {q:"コンピュータの基本原理として正しいのはどれか？",c:["A. 複雑な演算と表示の繰り返し","B. 入力と出力の繰り返し","C. 単純な計算と記憶の繰り返し","D. 通信と記憶の繰り返し"],a:"C"},
+    {q:"コンピュータの定義として正しい式はどれか？",c:["A. コンピュータ ＝ 入力 ＋ 出力","B. コンピュータ ＝ 演算 ＋ 通信","C. コンピュータ ＝ 記憶 ＋ 処理","D. コンピュータ ＝ 表示 ＋ 制御"],a:"C"},
+    {q:"ファイルの種類を示すためにファイル名に付けられる名前を何というか？",c:["A. ファイル名","B. アイコン","C. 拡張子","D. ディレクトリ"],a:"C"},
+    {q:"MS Wordファイルの拡張子はどれか？",c:["A. .xls","B. .htm","C. .pdf","D. .doc"],a:"D"},
+    {q:"Excelファイルの拡張子はどれか？",c:["A. .doc","B. .xls","C. .htm","D. .txt"],a:"B"},
+    {q:"ホームページファイルの拡張子はどれか？",c:["A. .doc","B. .xls","C. .htm","D. .mp3"],a:"C"},
+    {q:"フォルダの役割として正しいのはどれか？",c:["A. データを処理するための入れ物","B. ファイルを整理するための入れ物","C. ネットワークを管理するための入れ物","D. アプリケーションを実行するための入れ物"],a:"B"},
+    {q:"エクスプローラに表示される階層構造のことを何というか？",c:["A. パス構造","B. ファイル構造","C. ディレクトリ構造","D. ドライブ構造"],a:"C"},
+    {q:"ドライブ名として使用されるものはどれか？",c:["A. 数字（1, 2, 3...）","B. アルファベット（C:, D:, E:...）","C. 記号（#, @, $...）","D. 漢字"],a:"B"},
+    {q:"ホームページのアドレスのことを何というか？",c:["A. IP","B. URL","C. HTML","D. DNS"],a:"B"},
+    {q:"URLは何の略か？",c:["A. Uniform Resource Location","B. Universal Resource Link","C. Unified Resource Locator","D. Uniform Reference Library"],a:"A"},
+    {q:"Web 2.0という言葉を2004年に提唱した人物は誰か？",c:["A. エリック・シュミット","B. スティーブ・ジョブズ","C. ティム・オライリー","D. ビル・ゲイツ"],a:"C"},
+    {q:"Web 2.0の特徴はどれか？",c:["A. 一方向型のホームページ","B. 双方向型のホームページ","C. 静的なホームページ","D. テキストのみのホームページ"],a:"B"},
+    {q:"Web 1.0の説明として正しいのはどれか？",c:["A. 双方向型なホームページ","B. Web2.0登場以後の一方向型なホームページ","C. Web2.0登場以前の一方向型なホームページ","D. クラウドベースのホームページ"],a:"C"},
+    {q:"「ロングテール」の説明として正しいのはどれか？",c:["A. 購入者数が多い商品だけを提供するモデル","B. 購入者数が少なくても多品種の商品を提供することで収入増をはかるビジネスモデル","C. オンライン広告による収益モデル","D. データをクラウドに保存するモデル"],a:"B"},
+    {q:"クラウドコンピューティングの概念を提唱したのは誰か？",c:["A. ティム・オライリー（2004年）","B. エリック・シュミット（2006年）","C. スティーブ・ジョブズ（2007年）","D. ビル・ゲイツ（2000年）"],a:"B"},
+    {q:"インターネットの意味として正しいのはどれか？",c:["A. 「広い」「通信」という意味","B. 「ネット」の「間」という意味でネットワークを結んだネットワーク","C. 「高速」な「通信網」という意味","D. 「世界規模」の「電話網」という意味"],a:"B"},
+    {q:"メール利用のネチケットとして正しいのはどれか？",c:["A. 大きな添付ファイルを積極的に送る","B. 著作権のあるファイルを送ってよい","C. 急な返事を求めない","D. 自分の氏名は省略する"],a:"C"},
+    {q:"メールの添付ファイルで即座に削除すべき拡張子はどれか？",c:["A. .doc, .xls, .pdf","B. .exe, .vbs, .scr, .pif","C. .jpg, .png, .gif","D. .htm, .html, .xml"],a:"B"},
+    {q:"メール利用時の注意として正しくないのはどれか？",c:["A. メールアドレスを確認する","B. 添付ファイルのウィルスをチェックする","C. 読めない文字を使わない","D. 著作権のあるファイルを送ってよい"],a:"D"},
+    {q:"知的所有権のうち文化的生産物や表現を保護する権利はどれか？",c:["A. 工業所有権","B. 著作権","C. 特許権","D. 商標権"],a:"B"},
+    {q:"著作権に含まれるものとして正しいのはどれか？",c:["A. 特許権・実用新案権・意匠権","B. 著作者人格権・著作者財産権・著作隣接権","C. 商標権・意匠権・著作者財産権","D. 特許権・商標権・著作者人格権"],a:"B"},
+    {q:"著作者人格権の説明として正しいのはどれか？",c:["A. 著作物の複製や放送についての権利を保護するもの","B. 技術の進歩を保護する権利","C. 作品の利用に伴う著作者の人格を保護するもの","D. 編集者やレコード制作会社を保護するもの"],a:"C"},
+    {q:"著作隣接権の説明として正しいのはどれか？",c:["A. 著作者の財産的権利を保護するもの","B. 編集者やレコード制作会社など著作物の制作に携わった人を保護するもの","C. 技術の改良についての権利を保護するもの","D. 製品のデザインを保護するもの"],a:"B"},
+    {q:"工業所有権に含まれないのはどれか？",c:["A. 特許権","B. 意匠権","C. 著作権","D. 商標権"],a:"C"},
+    {q:"特許権の説明として正しいのはどれか？",c:["A. 技術の改良についての権利を保護する","B. 新規の技術についての権利を保護する","C. 製品のデザインについての権利","D. 社名やロゴなどを保護する権利"],a:"B"},
+    {q:"意匠権とは何を保護する権利か？",c:["A. 新規の技術","B. 技術の改良","C. 製品のデザイン","D. 社名やロゴ"],a:"C"},
+    {q:"商標権とは何を保護する権利か？",c:["A. 製品のデザイン","B. 新規の技術","C. 社名やロゴなどの商標","D. 技術の改良"],a:"C"},
+    {q:"実用新案権の説明として正しいのはどれか？",c:["A. 新規の技術についての権利を保護する","B. 技術の改良についての権利を保護する","C. 製品のデザインについての権利","D. 著作者の財産を保護する"],a:"B"},
+    {q:"第1世代携帯電話の通信方式はどれか？",c:["A. デジタル通信","B. アナログ通信","C. 光通信","D. パケット通信"],a:"B"},
+    {q:"第2世代携帯電話が登場した時期はいつか？",c:["A. 1980年ごろ","B. 1992年ごろ","C. 2001年ごろ","D. 2006年ごろ"],a:"B"},
+    {q:"第2世代携帯電話の特徴として正しいのはどれか？",c:["A. アナログ通信","B. データ通信が高速化","C. デジタル通信になり音質が向上した","D. ブロードバンド環境での利用"],a:"C"},
+    {q:"第3世代携帯電話が登場した時期はいつか？",c:["A. 1992年ごろ","B. 1999年ごろ","C. 2001年ごろ","D. 2006年ごろ"],a:"C"},
+    {q:"第3.5世代携帯電話が登場した時期はいつか？",c:["A. 1999年ごろ","B. 2001年ごろ","C. 2006年ごろ","D. 2010年ごろ"],a:"C"},
+    {q:"第4世代携帯電話の特徴として正しいのはどれか？",c:["A. アナログ通信を前提とする","B. ブロードバンド環境での利用を前提とする","C. 音声通話のみに対応する","D. データ通信ができない"],a:"B"},
+    {q:"携帯電話のSIMカードに記録されるものはどれか？",c:["A. アプリケーションデータ","B. 契約者番号","C. メールデータ","D. 写真データ"],a:"B"},
+    {q:"Bluetoothの通信範囲はどの程度か？",c:["A. 約1m","B. 約10m","C. 約100m","D. 約1km"],a:"B"},
+    {q:"Wi-Fiは何の略か？",c:["A. Wireless Function","B. Wide Fidelity","C. Wireless Fidelity","D. Wide Frequency"],a:"C"},
+    {q:"IrDAの説明として正しいのはどれか？",c:["A. 無線LANの規格","B. 赤外線通信の規格","C. Bluetoothの規格","D. 光ファイバの規格"],a:"B"},
+    {q:"IrDAの弱点として正しいのはどれか？",c:["A. 通信速度が非常に遅い","B. 送信機と受信機の間に遮蔽物があると通信できない","C. 電力消費が大きい","D. 接続できる機器数が限られている"],a:"B"},
+    {q:"非接触型ICカードの例として正しいのはどれか？",c:["A. クレジットカード","B. 運転免許証","C. JRのSuicaカード","D. 図書館カード"],a:"C"},
+    {q:"FTTHは何の略か？",c:["A. Fast Transfer To Home","B. Fiber To The Home","C. Free Transfer Through Hub","D. Fixed Terminal To Home"],a:"B"},
+    {q:"FTTHの特徴として正しいのはどれか？",c:["A. 電灯線を利用するため安価","B. 光ファイバを使用するためノイズの影響を受けにくい","C. 電話回線を使用するため普及している","D. ケーブルテレビの回線を利用する"],a:"B"},
+    {q:"ADSLは何の略か？",c:["A. Advanced Digital Subscriber Line","B. Asymmetric Digital Subscriber Line","C. Automatic Digital Service Link","D. Analog Digital Subscriber Line"],a:"B"},
+    {q:"PLC（Power Line Communication）の説明として正しいのはどれか？",c:["A. 光ファイバを利用してデータ通信を行う技術","B. 一般家庭の電灯線を利用してデータ通信を行う技術","C. 無線LAN規格の一種","D. ケーブルテレビの通信技術"],a:"B"},
+    {q:"液晶ディスプレイの構造として正しいのはどれか？",c:["A. 有機物の発光体を使用する","B. バックライトの光を透過・遮断することで明るさを調整する","C. プラズマを使用して発光する","D. LEDを直接点灯・消灯する"],a:"B"},
+    {q:"有機ELディスプレイの特徴はどれか？",c:["A. バックライトを使用して表示する","B. 有機物の発光体によりカラー表示を行う","C. 光ファイバを使用して表示する","D. 液晶を使用して表示する"],a:"B"},
+    {q:"携帯電話のOSとして正しくないのはどれか？",c:["A. iOS","B. Android","C. Symbian","D. MS-DOS"],a:"D"},
+    {q:"タッチパネルの「抵抗膜方式」の説明として正しいのはどれか？",c:["A. 指先とセンサの間の電荷を測定する","B. 押された部分の縦横の抵抗値を測定する","C. 赤外線を使って位置を検出する","D. 超音波を使って位置を検出する"],a:"B"},
+    {q:"タッチパネルの「静電容量方式」の説明として正しいのはどれか？",c:["A. 押された部分の縦横の抵抗値を測定する","B. 指先とセンサの間に蓄えられる電荷を測定する","C. 赤外線を使って位置を検出する","D. 光センサを使って位置を検出する"],a:"B"},
+    {q:"CMOSセンサの説明として正しいのはどれか？",c:["A. 温度を記録する素子と増幅器が並んだ形のセンサ","B. 光の強弱を記録する素子と増幅器が並んだ形のセンサ","C. 電磁波を記録する素子と変換器が並んだ形のセンサ","D. 音波を記録する素子と変換器が並んだ形のセンサ"],a:"B"},
+    {q:"ネットワークの接続形態は何種類あるか？",c:["A. 2種類","B. 3種類","C. 4種類","D. 5種類"],a:"B"},
+    {q:"「スター型」ネットワークの説明として正しいのはどれか？",c:["A. 1本のケーブルに複数のコンピュータが接続されたもの","B. 閉じたケーブルに複数のコンピュータが接続されたもの","C. ハブを中心に複数のコンピュータが接続されたもの","D. 2台のコンピュータが直接接続されたもの"],a:"C"},
+    {q:"最もよく使われるネットワーク接続形態はどれか？",c:["A. バス型","B. スター型","C. リング型","D. メッシュ型"],a:"B"},
+    {q:"「バス型」ネットワークの説明として正しいのはどれか？",c:["A. ハブを中心に複数のコンピュータが接続されたもの","B. 閉じたケーブルに複数のコンピュータが接続されたもの","C. 1本の通信ケーブルに複数のコンピュータが接続されたもの","D. 星形に配置されたコンピュータ同士が接続されたもの"],a:"C"},
+    {q:"「リング型」ネットワークの説明として正しいのはどれか？",c:["A. 1本の通信ケーブルに複数のコンピュータが接続されたもの","B. ハブを中心に複数のコンピュータが接続されたもの","C. 閉じたケーブルに複数のコンピュータが接続されたもの","D. 直線上にコンピュータが接続されたもの"],a:"C"},
+    {q:"コンピュータの処理配置方式は何種類あるか？",c:["A. 1種類","B. 2種類","C. 3種類","D. 4種類"],a:"B"},
+    {q:"P2P（ピアツーピア）の説明として正しいのはどれか？",c:["A. 中心のサーバが処理を管理する構成","B. 対等にサービスを提供しあう構成","C. 1台のコンピュータが全ての処理を行う構成","D. クラウド上で処理を行う構成"],a:"B"},
+    {q:"コンピュータのデータ転送規約のことを何というか？",c:["A. ドメイン","B. プロトコル","C. ポート","D. パケット"],a:"B"},
+    {q:"OSI参照モデルは何層構造か？",c:["A. 5層","B. 6層","C. 7層","D. 8層"],a:"C"},
+    {q:"OSI参照モデルのトランスポート層のプロトコルはどれか？",c:["A. IP","B. TCP","C. HTTP","D. FTP"],a:"B"},
+    {q:"OSI参照モデルのネットワーク層のプロトコルはどれか？",c:["A. TCP","B. HTTP","C. IP","D. SMTP"],a:"C"},
+    {q:"IPアドレスの説明として正しいのはどれか？",c:["A. ネットワーク上の住所にあたる名前（例：192.168.113.24）","B. アルファベットの組み合わせで表現された名前","C. MACアドレスとも呼ばれる","D. インターネット上の会社名"],a:"A"},
+    {q:"ドメイン名の説明として正しいのはどれか？",c:["A. 数字の組み合わせで表現される名前","B. アルファベットの組み合わせで表現された名前（例：daigaku.ac.jp）","C. 16進数で表現される名前","D. ポート番号のこと"],a:"B"},
+    {q:"SSLは何の略か？",c:["A. Secure Server Link","B. Safe Socket Layer","C. Secure Socket Layer","D. Safe Server Layers"],a:"C"},
+    {q:"SSLの説明として正しいのはどれか？",c:["A. ウィルスを検出するためのソフトウェア","B. 公開鍵方式と秘密鍵方式により暗号化した状態で情報通信を行う","C. ファイアウォールの一種","D. IPアドレスを管理するプロトコル"],a:"B"},
+    {q:"個人情報を入力する際にブラウザで確認すべきことはどれか？",c:["A. プロトコルがhttpになっていること","B. プロトコルがftpになっていること","C. 錠のアイコンが出ていてプロトコルがhttpsになっていること","D. URLが長いこと"],a:"C"},
+    {q:"シーザー暗号の説明として正しいのはどれか？",c:["A. 文字の並びを逆順にする暗号方式","B. 文字を何文字かずらすことで暗号化する換字式の暗号方式","C. 0と1で置き換える暗号方式","D. 公開鍵を使った暗号方式"],a:"B"},
+    {q:"暗号化の定義として正しいのはどれか？",c:["A. 原文を原文に戻すこと","B. 与えられた原文が推測できないように変換すること","C. データを圧縮すること","D. パスワードを設定すること"],a:"B"},
+    {q:"復号化の定義として正しいのはどれか？",c:["A. 原文を暗号に変換すること","B. データを圧縮すること","C. 原文に戻すこと","D. パスワードを削除すること"],a:"C"},
+    {q:"トロイの木馬の説明として正しいのはどれか？",c:["A. ネットワークを攻撃するウィルス","B. 通常の入力画面と同様にユーザ名とパスワードを入力させて情報を盗むプログラム","C. ファイルを暗号化して身代金を要求するプログラム","D. スパムメールを送信するプログラム"],a:"B"},
+    {q:"パスワード設定時に避けるべきものはどれか？",c:["A. 記号を含む長いパスワード","B. 大文字と小文字の組み合わせ","C. 自分の氏名や電話番号などの個人情報","D. ランダムな文字と数字の組み合わせ"],a:"C"},
+    {q:"稼働率の計算式として正しいのはどれか？",c:["A. 稼働率 ＝ MTTR / (MTBF ＋ MTTR)","B. 稼働率 ＝ MTBF / (MTBF ＋ MTTR)","C. 稼働率 ＝ MTBF × MTTR","D. 稼働率 ＝ MTTR / MTBF"],a:"B"},
+    {q:"MTBFとは何を表すか？",c:["A. 平均修理時間","B. 最大故障時間","C. 平均故障間隔","D. 最小動作時間"],a:"C"},
+    {q:"MTTRとは何を表すか？",c:["A. 平均故障間隔","B. 最大修理時間","C. 最小故障時間","D. 平均修理時間"],a:"D"},
+    {q:"並列接続した場合の稼働率の計算式はどれか？",c:["A. Aの稼働率 × Bの稼働率","B. 1－(1－Aの稼働率)×(1－Bの稼働率)","C. Aの稼働率 ＋ Bの稼働率","D. (Aの稼働率 ＋ Bの稼働率) / 2"],a:"B"},
+    {q:"直列接続した場合の稼働率の計算式はどれか？",c:["A. Aの稼働率 ＋ Bの稼働率","B. 1－(1－Aの稼働率)×(1－Bの稼働率)","C. Aの稼働率 × Bの稼働率","D. Aの稼働率 / Bの稼働率"],a:"C"},
+    {q:"信頼度成長曲線はどのような形か？",c:["A. 直線","B. S字曲線","C. バスタブ曲線","D. 波形曲線"],a:"B"},
+    {q:"一般の機械装置の故障傾向を表す曲線はどれか？",c:["A. S字曲線","B. 直線","C. バスタブ曲線","D. 正弦波曲線"],a:"C"},
+    {q:"コンピュータの5要素に含まれないのはどれか？",c:["A. 演算装置","B. 記憶装置","C. 通信装置","D. 制御装置"],a:"C"},
+    {q:"CPUは何の機能を担うか？",c:["A. 記憶装置","B. 入力装置","C. 演算装置","D. 出力装置"],a:"C"},
+    {q:"マザーボードの説明として正しいのはどれか？",c:["A. パソコンの電源を管理する基板","B. パソコンの内部において大きな面積を占めるメインの基板","C. グラフィックを処理する専用基板","D. ネットワークに接続するための基板"],a:"B"},
+    {q:"RAMは何の略か？",c:["A. Read Access Memory","B. Random Access Memory","C. Read And Modify","D. Random Allocation Memory"],a:"B"},
+    {q:"ROMは何の略か？",c:["A. Random Output Memory","B. Read Only Memory","C. Rapid Online Memory","D. Read On Module"],a:"B"},
+    {q:"RAMの特徴として正しいのはどれか？",c:["A. 読み取り専用の半導体メモリ","B. 電源を切ってもデータが保持される","C. 自由にデータの読み書きができる半導体メモリ","D. CD-ROMとも呼ばれる"],a:"C"},
+    {q:"ROMの特徴として正しいのはどれか？",c:["A. 自由にデータの読み書きができる","B. 読み取り専用の半導体メモリ","C. 電源を切るとデータが消える","D. キャッシュメモリとも呼ばれる"],a:"B"},
+    {q:"CPUをハードウェアとして見たときの名称はどれか？",c:["A. MPU（Micro Processing Unit）またはマイクロプロセッサ","B. ALU（Arithmetic Logic Unit）","C. GPU（Graphics Processing Unit）","D. FPU（Floating Point Unit）"],a:"A"},
+    {q:"ハードディスクの内部で金属の円板が回転する速度はどの程度か？",c:["A. 1分間に数十回転","B. 1分間に数百回転","C. 1分間に数千回転","D. 1分間に数万回転"],a:"C"},
+    {q:"コンピュータの第1世代（1940年代中〜）に使用された論理素子はどれか？",c:["A. トランジスタ","B. IC","C. LSI","D. 真空管"],a:"D"},
+    {q:"コンピュータの第2世代（1950年代後半〜）に使用された論理素子はどれか？",c:["A. 真空管","B. トランジスタ","C. IC","D. LSI"],a:"B"},
+    {q:"コンピュータの第3世代（1960年代中〜）に使用された論理素子はどれか？",c:["A. 真空管","B. トランジスタ","C. IC","D. LSI"],a:"C"},
+    {q:"コンピュータの第4世代（1970年代初〜）に使用された論理素子はどれか？",c:["A. IC","B. トランジスタ","C. 真空管","D. LSI"],a:"D"},
+    {q:"AND回路のモデルとして正しいのはどれか？",c:["A. スイッチが並列に並んだ回路","B. スイッチが直列に並んだ回路","C. スイッチが星形に並んだ回路","D. スイッチが円形に並んだ回路"],a:"B"},
+    {q:"OR回路のモデルとして正しいのはどれか？",c:["A. スイッチが直列に並んだ回路","B. スイッチが星形に並んだ回路","C. スイッチが並列に並んだ回路","D. スイッチが円形に並んだ回路"],a:"C"},
+    {q:"AND回路でスイッチX=ON、Y=OFFの場合、出力はどうなるか？",c:["A. ON","B. OFF","C. 不定","D. 交互にON/OFF"],a:"B"},
+    {q:"2進数「1010」を10進数に変換すると何か？",c:["A. 8","B. 9","C. 10","D. 12"],a:"C"},
+    {q:"情報量の最小単位は何か？",c:["A. byte","B. KB","C. bit","D. nibble"],a:"C"},
+    {q:"bitは何の略か？",c:["A. Basic Information Technology","B. Binary Digit","C. Byte In Total","D. Base Integer Type"],a:"B"},
+    {q:"1 byteは何 bitか？",c:["A. 4 bit","B. 8 bit","C. 16 bit","D. 32 bit"],a:"B"},
+    {q:"1 KBは何 byteか？",c:["A. 1,000 byte","B. 1,024 byte","C. 1,048 byte","D. 10,000 byte"],a:"B"},
+    {q:"1 MBは何 KBか？",c:["A. 1,000 KB","B. 1,024 KB","C. 1,100 KB","D. 2,048 KB"],a:"B"},
+    {q:"1 GBは何 MBか？",c:["A. 1,000 MB","B. 1,024 MB","C. 1,100 MB","D. 2,048 MB"],a:"B"},
+    {q:"1 TBは何 GBか？",c:["A. 1,000 GB","B. 1,024 GB","C. 1,100 GB","D. 2,048 GB"],a:"B"},
+    {q:"アルファベット1文字の情報量はどれか？",c:["A. 1 bit","B. 4 bit","C. 8 bit（1 byte）","D. 16 bit（2 byte）"],a:"C"},
+    {q:"アルファベット・数字・記号を含む文字の種類は全部でいくつか？",c:["A. 128種類","B. 256種類","C. 512種類","D. 1024種類"],a:"B"},
+    {q:"現在の日本語文字に割り当てられたコード番号の数はいくつか？",c:["A. 32,768個","B. 65,536個","C. 128,000個","D. 256,000個"],a:"B"},
+    {q:"英語の文字コード規格として正しいのはどれか？",c:["A. JISコード","B. ASCIIコード","C. EUCコード","D. シフトJISコード"],a:"B"},
+    {q:"2進数の符号ビットで「1」は何を表すか？",c:["A. 正の数","B. 負の数","C. ゼロ","D. 不定"],a:"B"},
+    {q:"2進数の加算「1＋1」の結果はどれか？",c:["A. 0","B. 1","C. 10（2進数）","D. 11（2進数）"],a:"C"},
+    {q:"サンプリング周波数の単位はどれか？",c:["A. bps","B. Hz（ヘルツ）","C. dpi","D. dB"],a:"B"},
+    {q:"サンプリング周波数が高いほどどうなるか？",c:["A. 音質が低下する","B. ファイルサイズが小さくなる","C. 音質が向上する","D. 通信速度が低下する"],a:"C"},
+    {q:"波の高さの最大値をいくつの整数として表すかのことを何というか？",c:["A. サンプリング周波数","B. ビットレート","C. 量子化数","D. 解像度"],a:"C"},
+    {q:"CDの音声のサンプリング周波数はどれか？",c:["A. 22.05 kHz","B. 44.1 kHz","C. 96 kHz","D. 192 kHz"],a:"B"},
+    {q:"CDの音声データにおける量子化数はどれか？",c:["A. 2⁸（256段階）","B. 2¹²（4,096段階）","C. 2¹⁶（65,536段階）","D. 2²⁴（16,777,216段階）"],a:"C"},
+    {q:"CD（640 MB）に記録できるステレオ音声の時間はおよそどれか？",c:["A. 約30分","B. 約63分","C. 約120分","D. 約200分"],a:"B"},
+    {q:"MIDIは何の略か？",c:["A. Musical Instrument Digital Interface","B. Multi Instrument Data Input","C. Music Interface Digital Instrument","D. Musical Integrated Digital Interface"],a:"A"},
+    {q:"MIDI命令のデータ量はいくらか？",c:["A. 4 bit ＝ 0.5 byte","B. 8 bit ＝ 1 byte","C. 16 bit ＝ 2 byte","D. 32 bit ＝ 4 byte"],a:"B"},
+    {q:"MIDI命令の種類は最大何種類か？",c:["A. 128種類","B. 256種類","C. 512種類","D. 1024種類"],a:"B"},
+    {q:"デジタル画像の構成要素として正しいのはどれか？",c:["A. 線と面の集まり","B. 縦横に並んだ点（画素・ピクセル）の集まり","C. ベクターデータの集まり","D. 音声と映像の集まり"],a:"B"},
+    {q:"「QVGA」の解像度はどれか？",c:["A. 640×480","B. 800×600","C. 320×240","D. 1024×768"],a:"C"},
+    {q:"「VGA」の解像度はどれか？",c:["A. 320×240","B. 640×480","C. 800×600","D. 1024×768"],a:"B"},
+    {q:"「XGA」の解像度はどれか？",c:["A. 640×480","B. 800×600","C. 1024×768","D. 1280×1024"],a:"C"},
+    {q:"RGB各色を256段階で表現する場合、1画素の情報量はいくらか？",c:["A. 1 byte","B. 2 byte","C. 3 byte","D. 4 byte"],a:"C"},
+    {q:"プリンタの解像度を表す単位はどれか？",c:["A. Hz","B. bps","C. dpi","D. MB"],a:"C"},
+    {q:"dpiは何の略か？",c:["A. Data Per Inch","B. Dot Per Inch","C. Display Per Interface","D. Digital Print Index"],a:"B"},
+    {q:"A4サイズに300 dpiで印刷する場合、必要な画素数はおよそどれか？",c:["A. 約2.0メガピクセル","B. 約4.5メガピクセル","C. 約8.7メガピクセル","D. 約12.0メガピクセル"],a:"C"},
+    {q:"映画における1秒あたりの画面書き換え回数はいくつか？",c:["A. 12回","B. 24回","C. 30回","D. 60回"],a:"B"},
+    {q:"日本のテレビ放送における1秒あたりの画面書き換え回数はいくつか？",c:["A. 24回","B. 25回","C. 30回","D. 60回"],a:"C"},
+    {q:"テレビ（640×480、RGB各8 bit、30回/秒）の1秒分の動画の情報量はおよそどれか？",c:["A. 約10 MB","B. 約26.4 MB","C. 約50 MB","D. 約100 MB"],a:"B"},
+    {q:"ブロードバンドとは一般にどのくらいの通信速度か？",c:["A. 10 Kbps以上","B. 100 Kbps〜1 Mbps以上","C. 10 Mbps以上","D. 100 Mbps以上"],a:"B"},
+    {q:"通信速度の単位として正しいのはどれか？",c:["A. Hz","B. dpi","C. bps（bit per second）","D. dB"],a:"C"},
+    {q:"有線通信でFTTHの最大通信速度はどれか？",c:["A. 40 Mbps","B. 50 Mbps","C. 100 Mbps","D. 1 Gbps"],a:"C"},
+    {q:"ADSLの下り最大通信速度はおよそどれか？",c:["A. 10 Mbps","B. 50 Mbps","C. 100 Mbps","D. 1 Gbps"],a:"B"},
+    {q:"無線LANの最大通信速度はどれか？",c:["A. 1 Mbps","B. 11 Mbps","C. 54 Mbps","D. 100 Mbps"],a:"C"},
+    {q:"Bluetoothの通信速度はどれか？",c:["A. 200 Kbps","B. 1 Mbps","C. 11 Mbps","D. 54 Mbps"],a:"B"},
+    {q:"CATVの通信速度はどれか？",c:["A. 10 Mbps","B. 40 Mbps","C. 100 Mbps","D. 1 Gbps"],a:"B"},
+    {q:"音声を圧縮する際に利用される変換は何か？",c:["A. ラプラス変換","B. フーリエ変換","C. Z変換","D. ウェーブレット変換"],a:"B"},
+    {q:"フーリエ変換で分解されるものはどれか？",c:["A. デジタルデータをアナログに変換する","B. 全ての波を波長の違う正弦波に分解する","C. 全ての画像をピクセルに分解する","D. 音声データをMIDI形式に変換する"],a:"B"},
+    {q:"圧縮ファイルの拡張子として正しくないのはどれか？",c:["A. .zip","B. .lzh","C. .gz","D. .mp3"],a:"D"},
+    {q:"HTMLは何の略か？",c:["A. High Text Markup Language","B. Hyper Text Markup Language","C. Hyperlink Text Management Language","D. Home Text Module Language"],a:"B"},
+    {q:"XMLは何の略か？",c:["A. Extended Markup Language","B. eXtensible Markup Language","C. Extended Module Language","D. eXternal Markup Library"],a:"B"},
+    {q:"HTMLとXMLの違いとして正しいのはどれか？",c:["A. HTMLはユーザがタグを自由に定義できる","B. XMLはユーザがタグを自由に定義して利用できる","C. XMLは定義済みのタグしか使えない","D. HTMLはXMLの上位互換"],a:"B"},
+    {q:"電子商取引（eコマース）の正式名称はどれか？",c:["A. Electronic Computer","B. Electronic Commerce","C. Electronic Communication","D. Electronic Content"],a:"B"},
+    {q:"BtoCの意味として正しいのはどれか？",c:["A. 企業間の取引","B. 企業対消費者の取引","C. 政府対消費者の取引","D. 消費者間の取引"],a:"B"},
+    {q:"BtoBの意味として正しいのはどれか？",c:["A. 企業対消費者の取引","B. 政府対政府の取引","C. 企業間の取引","D. 個人間の取引"],a:"C"},
+    {q:"EDIは何の略か？",c:["A. Electronic Data Interchange","B. Electronic Document Interface","C. Extended Data Input","D. Electronic Distribution Interface"],a:"A"},
+    {q:"EOSの説明として正しいのはどれか？",c:["A. 製造業における全製造過程の電子化","B. ネットワークを使った電子データ交換の標準化","C. オンラインの受発注システム","D. 電子マネーシステム"],a:"C"},
+    {q:"CALSは何の略か？",c:["A. Computer Aided Learning System","B. Commerce At Light Speed","C. Computer Automated Logistics System","D. Commerce And Logistics Service"],a:"B"},
+    {q:"ICカードを使った電子マネーの形態として正しいのはどれか？",c:["A. クローズドループ型とオープンループ型","B. インターネット型とオフライン型","C. 前払い型と後払い型","D. 国内型と国際型"],a:"A"},
+    {q:"クローズドループ型電子マネーの代表例はどれか？",c:["A. Mondex","B. VISA キャッシュ","C. Suica","D. PayPal"],a:"B"},
+    {q:"オープンループ型電子マネーの代表例はどれか？",c:["A. VISA キャッシュ","B. Suica","C. Master CardのMondex","D. Edy"],a:"C"},
+    {q:"ブラウザがウェブサイトのID情報を記憶する仕組みは何か？",c:["A. キャッシュ","B. Cookie（クッキー）","C. セッション変数","D. ローカルストレージ"],a:"B"},
+    {q:"日本で制定された個人情報保護の法律名はどれか？",c:["A. 情報セキュリティ法","B. 個人データ保護規則","C. 個人情報の保護に関する法律","D. サイバーセキュリティ基本法"],a:"C"},
+    {q:"OECD8原則の「目的明確化の原則」の説明として正しいのはどれか？",c:["A. データ主体の同意がなければ目的以外に利用してはならない","B. 収集目的を明確にし、データ利用は収集目的に合致するべき","C. 合理的安全保護措置により保護するべき","D. 管理者は諸原則実施の責任を有する"],a:"B"},
+    {q:"OECD8原則の「安全保護の原則」の説明として正しいのはどれか？",c:["A. 収集目的を明確にすること","B. データ主体の同意を得ること","C. 合理的安全保護措置により、紛失・破壊・使用・修正・開示等から保護するべき","D. 管理者が責任を持つこと"],a:"C"},
+    {q:"OECD8原則の「責任の原則」の説明として正しいのはどれか？",c:["A. 収集目的を明確にすること","B. データを公開すること","C. 個人が自己データを確認できること","D. 管理者は諸原則実施の責任を有する"],a:"D"},
+    {q:"OECD8原則の「個人参加の原則」の説明として正しいのはどれか？",c:["A. 管理者が責任を負うこと","B. 自己に関するデータの所在及び内容を確認させ、又は意義申立を保証するべき","C. データを安全に保護すること","D. 収集目的を明確にすること"],a:"B"},
+    {q:"OECD8原則において「収集制限の原則」の説明として正しいのはどれか？",c:["A. データは最新の状態に保つべき","B. 適法・公正な手段により、情報主体に通知又は同意を得て収集されるべき","C. 個人が自己データを確認できること","D. データを暗号化して保管すること"],a:"B"},
+    {q:"OECD8原則において「利用制限の原則」の説明として正しいのはどれか？",c:["A. データ収集の実施方針を公開すること","B. データ主体の同意がある場合、法律の規定による場合以外は目的以外に利用してはならない","C. 合理的な安全保護措置を施すこと","D. データを正確・完全・最新に保つこと"],a:"B"},
+    {q:"OECD8原則の「データ内容の原則」として正しいのはどれか？",c:["A. データを暗号化すること","B. データは公開すること","C. 利用目的に沿ったもので、かつ正確・完全・最新であるべき","D. 管理者が責任を持つこと"],a:"C"},
+    {q:"OECD8原則の「公開の原則」として正しいのはどれか？",c:["A. データを安全に保護すること","B. データ収集の実施方針等を公開し、データの存在・利用目的・管理者等を明示するべき","C. 個人が自己データを確認できること","D. 適法な手段でデータを収集すること"],a:"B"},
+    {q:"「集中処理システム」の説明として正しいのはどれか？",c:["A. 処理を複数のコンピュータで分散して管理する","B. 中心となるコンピュータが中核となる処理すべてを管理する","C. 対等にサービスを提供しあう構成","D. クラウド上で処理を分散する"],a:"B"},
+    {q:"コンピュータネットワークの定義として正しいのはどれか？",c:["A. コンピュータ同士がUSBで接続されたもの","B. 電子機器同士が電気的にデータの送受信をできるようにしたもの","C. インターネットに接続されたコンピュータの集まり","D. 同じ部屋にある複数のコンピュータ"],a:"B"},
+    {q:"ワンセグ放送の説明として正しいのはどれか？",c:["A. 衛星から送信される放送","B. 地上デジタル放送と同一内容の番組を小さい画面で表示するサイマル放送","C. インターネットを通じた放送","D. ケーブルテレビの放送"],a:"B"},
+    {q:"ウィルス対策ソフトのパターンファイルの手動更新頻度として適切なのはどれか？",c:["A. 少なくとも1日に1度","B. 少なくとも1週間に1度","C. 少なくとも1ヶ月に1度","D. 少なくとも1年に1度"],a:"B"},
+    {q:"「基数」の定義として正しいのはどれか？",c:["A. 数値の最大値","B. 数値を扱う際に「基となる数字の個数」","C. 2進数における桁数","D. 10進数との変換比率"],a:"B"},
+    {q:"16進数の基数はいくつか？",c:["A. 8","B. 10","C. 16","D. 32"],a:"C"},
+    {q:"コンピュータの記憶装置に含まれないのはどれか？",c:["A. メモリ（RAM）","B. ハードディスク","C. キャッシュ","D. CPU"],a:"D"},
+    {q:"ネットワークセキュリティでファイアウォールの目的として正しいのはどれか？",c:["A. データを圧縮すること","B. サーバに対するセキュリティを保つこと","C. ネットワーク速度を上げること","D. データを暗号化すること"],a:"B"},
+    {q:"「分散処理システム」の説明として正しいのはどれか？",c:["A. 中心となるコンピュータが全ての処理を管理する","B. 処理を複数のコンピュータで分散して管理する","C. インターネット上のサーバで処理する","D. 1台のコンピュータがネットワーク全体を管理する"],a:"B"},
+    {q:"低い周波数の波が表すものはどれか？",c:["A. 元の波の詳細","B. 元の波の大きな性質","C. 元の波の高周波成分","D. 元の波のノイズ成分"],a:"B"},
+    {q:"高い周波数の波が表すものはどれか？",c:["A. 元の波の大きな性質","B. 元の波の低周波成分","C. 元の波の詳細","D. 元の波の基本成分"],a:"C"},
+    {q:"コンピュータのウィルスの説明として正しいのはどれか？",c:["A. 自然発生するプログラム","B. 人為的に作成されたプログラム","C. ハードウェアの障害","D. ネットワーク障害の一種"],a:"B"},
+    {q:"IP電話の説明として正しいのはどれか？",c:["A. 一般の電話回線を使用した通話","B. 衛星を使用した通話","C. ADSLなどの高速通信を利用してインターネットで音声情報を送受信する","D. Bluetoothを使用した近距離通話"],a:"C"},
+    {q:"デジタル画像において「SXGA」の解像度はどれか？",c:["A. 1024×768","B. 1280×768","C. 1280×1024","D. 1600×1200"],a:"C"},
+    {q:"デジタル画像において「UXGA」の解像度はどれか？",c:["A. 1280×1024","B. 1600×1200","C. 1920×1080","D. 2560×1440"],a:"B"},
+    {q:"MIDI演習：512 MBのSDカードに約何時間記録できるか？",c:["A. 約100時間","B. 約200時間","C. 約388時間","D. 約500時間"],a:"C"},
+    {q:"OSI参照モデルで最下層（物理層）の上の層は何か？",c:["A. ネットワーク層","B. データリンク層","C. トランスポート層","D. セッション層"],a:"B"},
+    {q:"Web 2.0でGoogleが提供するサービスの例として正しいのはどれか？",c:["A. 有料の表計算ソフトをWebで提供","B. 無料で使えるワープロや表計算ソフトをWeb上で提供","C. アプリをダウンロード販売する","D. 企業向けのみの専用サービス"],a:"B"},
+    {q:"コンピュータシステムで初期にエラーが多く発生した後安定する曲線はどれか？",c:["A. S字曲線","B. バスタブ曲線（初期故障型）","C. 直線増加","D. 指数増加"],a:"B"},
+    {q:"OSI参照モデルで最上位の層はどれか？",c:["A. セッション層","B. プレゼンテーション層","C. アプリケーション層","D. トランスポート層"],a:"C"},
+    {q:"xDSLとは何を指すか？",c:["A. FTTHの一種","B. ADSLやSDSL、HDSLなど多くの種類をまとめた総称","C. 光ファイバ通信の規格","D. 電灯線通信の規格"],a:"B"},
+    {q:"コンピュータの5要素のうち「出力装置」の例として正しいのはどれか？",c:["A. キーボード","B. マウス","C. ハードディスク","D. ディスプレイ（モニタ）"],a:"D"},
+    {q:"OSI参照モデルにおいてTCPとIPはそれぞれ何層に対応するか？",c:["A. TCPはネットワーク層、IPはトランスポート層","B. TCPはデータリンク層、IPはネットワーク層","C. TCPはトランスポート層、IPはネットワーク層","D. TCPはアプリケーション層、IPはセッション層"],a:"C"}
   ];
 
-  /* ── STATE ── */
-  let currentCh = 1;
-  let currentTab = 'study';
-  let quizState = { pool: [], idx: 0, score: 0, done: false };
-  let flashState = { idx: 0 };
+  // ═══════════════════════════════════════
+  // STATE
+  // ═══════════════════════════════════════
+  let answers = {};          // qi -> chữ cái đã chọn (lần gần nhất)
+  let wrongSet = new Set();  // các câu hiện đang sai, cần ôn lại
+  let mainIndex = 0;         // câu hiện tại trong bài kiểm tra chính
+  let mainAnswered = false;  // câu hiện tại đã chọn đáp án chưa
+  let correctCount = 0;
+  let wrongCount = 0;
 
-  /* ── INIT ── */
-  function init() {
-    buildSidebar();
-    renderStudy(currentCh);
-    renderTable(currentCh);
-    renderQuizStart();
-    renderFlashStart();
+  let wrongQueue = [];       // hàng đợi các câu cần ôn lại trong lượt hiện tại
+  let wrongIndex = 0;
+  let wrongModeAnswered = false;
+  let wrongModeChoice = null;
+
+  function getLetter(c) { return c.split('.')[0].trim(); }
+
+  function updateWrongBadge() {
+    const badge = document.getElementById('wrong-badge');
+    if (wrongSet.size > 0) { badge.style.display = 'inline-block'; badge.textContent = wrongSet.size; }
+    else badge.style.display = 'none';
   }
 
-  function buildSidebar() {
-    const nav = document.getElementById('sidebar-nav');
-    DATA.forEach(ch => {
-      const el = document.createElement('div');
-      el.className = 'nav-item' + (ch.num === currentCh ? ' active' : '');
-      el.id = `nav-${ch.num}`;
-      el.onclick = () => selectChapter(ch.num);
-      const stars = ch.stars === 5 ? '⭐⭐⭐⭐⭐' : ch.stars === 4 ? '⭐⭐⭐⭐' : '⭐⭐⭐';
-      el.innerHTML = `
-        <span class="ch-num">${String(ch.num).padStart(2,'0')}</span>
-        <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${ch.title.split('（')[0].split('・')[0]}</span>
-        <span class="nav-star">${stars}</span>
-      `;
-      nav.appendChild(el);
-    });
-  }
+  // ═══════════════════════════════════════
+  // MAIN QUIZ — làm từng câu, 200 câu tổng
+  // ═══════════════════════════════════════
+  function renderMainQuestion() {
+    const qArea = document.getElementById('quiz-question-area');
+    const finishArea = document.getElementById('quiz-finish-area');
 
-  function selectChapter(num) {
-    currentCh = num;
-    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-    document.getElementById(`nav-${num}`).classList.add('active');
-    renderStudy(num);
-    renderTable(num);
-    renderQuizStart();
-    renderFlashStart();
-    if (currentTab !== 'study') switchTab('study');
-  }
-
-  function switchTab(tab) {
-    currentTab = tab;
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(`view-${tab}`).classList.add('active');
-    document.getElementById(`tab-${tab}`).classList.add('active');
-  }
-
-  /* ── STUDY VIEW ── */
-  function renderStudy(num) {
-    const ch = DATA.find(c => c.num === num);
-    const stars = '⭐'.repeat(ch.stars);
-    const cards = ch.concepts.map((con, i) => `
-      <div class="k-card" id="kc-${i}">
-        <div class="k-card-head" onclick="toggleCard(${i})">
-          <div class="k-icon">${con.icon}</div>
-          <div class="k-labels">
-            <div class="k-jp-term">${con.term} <span class="k-yomi">${con.yomi}</span></div>
-            <div class="k-vn-sub">${con.vnTerm}</div>
-          </div>
-          <div class="k-arrow">▼</div>
-        </div>
-        <div class="k-card-body">
-          <div class="info-row">
-            <div class="info-label">📖 Khái niệm Nhật - Việt</div>
-            <div class="info-box info-blue">
-              <p><strong>🇯🇵 ${con.jp}</strong></p>
-              <p style="margin-top:8px">🇻🇳 ${con.vn}</p>
-            </div>
-          </div>
-          ${con.tip ? `
-          <div class="info-row">
-            <div class="info-label">💡 Mẹo ghi nhớ</div>
-            <div class="info-box info-yellow">${con.tip}</div>
-          </div>` : ''}
-          ${con.example ? `
-          <div class="info-row">
-            <div class="info-label">📝 Ví dụ</div>
-            <div class="info-box info-gray">${con.example}</div>
-          </div>` : ''}
-        </div>
-      </div>
-    `).join('');
-
-    document.getElementById('view-study').innerHTML = `
-      <div class="ch-header">
-        <div class="ch-badges">
-          <span class="badge badge-num">Chương ${ch.num}</span>
-          <span class="badge badge-star">${stars} Độ quan trọng</span>
-          <span class="badge badge-vn">🇻🇳 Có bản dịch</span>
-        </div>
-        <h1 class="ch-jp">${ch.title}</h1>
-        <div class="ch-vn">${ch.vn}</div>
-        <div class="ch-summary">📌 ${ch.summary}</div>
-      </div>
-      <div class="section-divider">Khái niệm trọng tâm (${ch.concepts.length} mục)</div>
-      ${cards}
-      <div style="height:40px"></div>
-    `;
-  }
-
-  function toggleCard(i) {
-    document.getElementById(`kc-${i}`).classList.toggle('open');
-  }
-
-  /* ── TABLE VIEW ── */
-  function renderTable(num) {
-    const ch = DATA.find(c => c.num === num);
-    const rows = ch.vocab.map(([jp, yomi, vn, note]) => `
-      <tr>
-        <td class="jp-cell">${jp}</td>
-        <td><span class="kw-cell">${yomi}</span></td>
-        <td class="vn-cell">${vn}</td>
-        <td class="note-cell">${note}</td>
-      </tr>
-    `).join('');
-
-    document.getElementById('view-table').innerHTML = `
-      <div class="ch-header" style="margin-bottom:20px">
-        <h1 class="ch-jp" style="font-size:28px">${ch.title}</h1>
-        <div class="ch-vn" style="font-size:16px">${ch.vn} — Bảng từ vựng (${ch.vocab.length} từ)</div>
-      </div>
-      <div class="trans-table-wrap">
-        <table class="trans-table">
-          <thead>
-            <tr>
-              <th>🇯🇵 Tiếng Nhật</th>
-              <th>Phiên âm</th>
-              <th>🇻🇳 Tiếng Việt</th>
-              <th>Ghi chú</th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>
-    `;
-  }
-
-  /* ── QUIZ VIEW ── */
-  function renderQuizStart() {
-    const ch = DATA.find(c => c.num === currentCh);
-    document.getElementById('view-quiz').innerHTML = `
-      <div class="quiz-wrap">
-        <div class="quiz-card quiz-score-card">
-          <div style="font-size:48px;margin-bottom:16px">✏️</div>
-          <h2 style="font-size:22px;font-weight:800;margin-bottom:10px">Luyện tập Chương ${ch.num}</h2>
-          <p style="color:var(--text-sub);margin-bottom:28px">${ch.vn}<br><strong>${ch.quizzes.length} câu hỏi</strong> trắc nghiệm</p>
-          <button class="btn-primary" onclick="startQuiz()">Bắt đầu Quiz →</button>
-        </div>
-      </div>
-    `;
-    quizState = { pool: [...DATA.find(c => c.num === currentCh).quizzes], idx: 0, score: 0 };
-  }
-
-  function startQuiz() {
-    quizState.idx = 0;
-    quizState.score = 0;
-    renderQuestion();
-  }
-
-  function renderQuestion() {
-    const { pool, idx } = quizState;
-    if (idx >= pool.length) { renderQuizResult(); return; }
-    const q = pool[idx];
-    const labels = ['A','B','C','D'];
-    const prog = Math.round((idx / pool.length) * 100);
-    document.getElementById('view-quiz').innerHTML = `
-      <div class="quiz-wrap">
-        <div class="progress-bar-wrap"><div class="progress-bar" style="width:${prog}%"></div></div>
-        <div class="quiz-card">
-          <div class="q-meta">Câu ${idx+1} / ${pool.length}</div>
-          <div class="q-text">${q.q}</div>
-          ${q.jp ? `<div class="q-jp">🇯🇵 ${q.jp}</div>` : '<div style="height:12px"></div>'}
-          <div class="opts-list">
-            ${q.opts.map((o,i) => `
-              <button class="opt-btn" id="opt-${i}" onclick="checkAnswer(${i})">
-                <span class="opt-label">${labels[i]}</span>
-                ${o}
-              </button>
-            `).join('')}
-          </div>
-          <div class="quiz-feedback" id="quiz-fb"></div>
-          <div id="quiz-next" style="display:none">
-            <button class="btn-primary" onclick="nextQuestion()">Câu tiếp theo →</button>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  function checkAnswer(idx) {
-    const q = quizState.pool[quizState.idx];
-    const btns = document.querySelectorAll('.opt-btn');
-    if ([...btns].some(b => b.classList.contains('correct') || b.classList.contains('wrong'))) return;
-    const correct = idx === q.ans;
-    if (correct) quizState.score++;
-    btns[idx].classList.add(correct ? 'correct' : 'wrong');
-    btns[q.ans].classList.add('correct');
-    btns.forEach(b => b.classList.add('locked'));
-    const fb = document.getElementById('quiz-fb');
-    fb.innerHTML = `<strong>${correct ? '✅ Chính xác!' : '❌ Chưa đúng.'}</strong> ${q.exp}`;
-    fb.className = `quiz-feedback show ${correct ? 'correct' : 'wrong'}`;
-    document.getElementById('quiz-next').style.display = 'block';
-  }
-
-  function nextQuestion() {
-    quizState.idx++;
-    renderQuestion();
-  }
-
-  function renderQuizResult() {
-    const { pool, score } = quizState;
-    const pct = Math.round((score / pool.length) * 100);
-    const msg = pct >= 80 ? '🎉 Xuất sắc! Bạn đã nắm vững chương này!' : pct >= 60 ? '👍 Tốt! Ôn thêm một chút nữa nhé.' : '📚 Cần ôn tập thêm. Thử lại đi!';
-    document.getElementById('view-quiz').innerHTML = `
-      <div class="quiz-wrap">
-        <div class="quiz-card quiz-score-card">
-          <h2 style="font-size:22px;font-weight:800;margin-bottom:20px">Kết quả</h2>
-          <div class="score-circle">
-            <div class="score-num">${score}</div>
-            <div class="score-denom">/ ${pool.length}</div>
-          </div>
-          <p style="font-size:15px;color:var(--text-sub);margin:16px 0 8px">${pct}% chính xác</p>
-          <p style="font-size:16px;font-weight:700;color:var(--text)">${msg}</p>
-          <div>
-            <button class="btn-primary" onclick="startQuiz()">Làm lại</button>
-            <button class="btn-outline" onclick="renderQuizStart()">Về trang đầu</button>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  /* ── FLASHCARD VIEW ── */
-  function renderFlashStart() {
-    flashState.idx = 0;
-    renderFlash();
-  }
-
-  function renderFlash() {
-    const ch = DATA.find(c => c.num === currentCh);
-    if (!ch.concepts.length) {
-      document.getElementById('view-flash').innerHTML = `<div class="start-card"><div class="start-icon">🎴</div><div class="start-title">Chưa có Flashcard</div></div>`;
+    if (mainIndex >= Q.length) {
+      qArea.style.display = 'none';
+      showMainFinish();
       return;
     }
-    const idx = flashState.idx % ch.concepts.length;
-    const con = ch.concepts[idx];
-    document.getElementById('view-flash').innerHTML = `
-      <div class="flash-wrap">
-        <div class="flash-controls">
-          <span class="flash-counter">${idx+1} / ${ch.concepts.length}</span>
+
+    qArea.style.display = 'block';
+    finishArea.style.display = 'none';
+
+    const qi = mainIndex;
+    const q = Q[qi];
+    const answeredLetter = answers[qi];
+    const locked = mainAnswered;
+
+    document.getElementById('stat-current').textContent = `${qi+1} / ${Q.length}`;
+    document.getElementById('stat-correct').textContent = correctCount;
+    document.getElementById('stat-wrong').textContent = wrongCount;
+    document.getElementById('progress-fill').style.width = `${(qi/Q.length)*100}%`;
+
+    qArea.innerHTML = `
+      <div class="q-card">
+        <div class="q-num">問題 ${qi+1} / ${Q.length}</div>
+        <div class="q-text">${q.q}</div>
+        <div class="choices">
+          ${q.c.map(ch => {
+            const letter = getLetter(ch);
+            let cls = 'choice-btn';
+            if (locked) {
+              if (letter === q.a) cls += ' correct';
+              else if (letter === answeredLetter) cls += ' wrong';
+            }
+            return `<button class="${cls}" onclick="chooseMainAnswer('${letter}')" ${locked?'disabled':''}>${ch}</button>`;
+          }).join('')}
         </div>
-        <div class="flash-scene" id="flash-scene" onclick="this.classList.toggle('flipped')">
-          <div class="flash-inner">
-            <div class="flash-face">
-              <div class="flash-hint">🇯🇵 Click để xem nghĩa</div>
-              <div class="flash-jp">${con.term}</div>
-              <div style="margin-top:10px"><span class="flash-yomi">${con.yomi}</span></div>
-            </div>
-            <div class="flash-face flash-back-face">
-              <div class="flash-hint">🇻🇳 Nghĩa tiếng Việt</div>
-              <div class="flash-vn-term">${con.vnTerm}</div>
-              <div class="flash-vn-desc">${con.vn ? con.vn.split('.')[0] : ''}</div>
-            </div>
-          </div>
-        </div>
-        <div class="flash-btns">
-          <button class="flash-btn" onclick="prevFlash()">← Trước</button>
-          <button class="flash-btn next" onclick="nextFlash()">Tiếp theo →</button>
-        </div>
+        ${locked ? (
+          answeredLetter === q.a
+            ? `<div class="correct-hint">✅ Chính xác!</div>`
+            : `<div class="correct-hint" style="color:#7a0000;background:var(--red-soft)">❌ Sai rồi — đáp án đúng: ${q.a}. Câu này đã được lưu vào mục <strong>🔁 Câu sai</strong>.</div>`
+        ) : ''}
+      </div>
+      <div class="quiz-nav" style="justify-content:flex-end">
+        ${locked ? `<button class="btn btn-primary" onclick="nextMainQuestion()">${qi+1 < Q.length ? 'Câu tiếp theo →' : 'Xem kết quả →'}</button>` : ''}
       </div>
     `;
   }
 
-  function nextFlash() { flashState.idx++; renderFlash(); }
-  function prevFlash() { flashState.idx = Math.max(0, flashState.idx - 1); renderFlash(); }
+  function chooseMainAnswer(letter) {
+    if (mainAnswered) return;
+    const qi = mainIndex;
+    answers[qi] = letter;
+    mainAnswered = true;
+    if (letter === Q[qi].a) {
+      correctCount++;
+      wrongSet.delete(qi);
+    } else {
+      wrongCount++;
+      wrongSet.add(qi);
+    }
+    updateWrongBadge();
+    renderMainQuestion();
+  }
 
-  init();
+  function nextMainQuestion() {
+    mainIndex++;
+    mainAnswered = false;
+    renderMainQuestion();
+    window.scrollTo(0,0);
+  }
+
+  function showMainFinish() {
+    document.getElementById('quiz-finish-area').style.display = 'block';
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('stat-current').textContent = `${Q.length} / ${Q.length}`;
+    const pct = Math.round(correctCount / Q.length * 100);
+    const grade = pct>=90?'優秀 🏆':pct>=70?'合格 ✅':pct>=50?'もう少し 📚':'不合格 ❌';
+    document.getElementById('fa-score').textContent = correctCount;
+    document.getElementById('fa-grade').textContent = `${pct}% — ${grade}`;
+    document.getElementById('fa-wrong-count').textContent = wrongSet.size;
+    const bar = document.getElementById('fa-bar');
+    bar.style.background = pct>=70?'#34c759':pct>=50?'#ff9500':'#ff3b30';
+    bar.style.width = '0%';
+    setTimeout(()=>{ bar.style.width = pct+'%'; }, 50);
+  }
+
+  function resetMainQuiz() {
+    if (!confirm('Làm lại từ đầu sẽ xóa toàn bộ kết quả và danh sách câu sai đã lưu. Tiếp tục?')) return;
+    answers = {};
+    wrongSet.clear();
+    mainIndex = 0;
+    mainAnswered = false;
+    correctCount = 0;
+    wrongCount = 0;
+    document.getElementById('progress-fill').style.width = '0%';
+    updateWrongBadge();
+    renderMainQuestion();
+    window.scrollTo(0,0);
+  }
+
+  // ═══════════════════════════════════════
+  // WRONG-ANSWER PRACTICE — làm lại bất cứ lúc nào
+  // ═══════════════════════════════════════
+  function renderWrongIntro() {
+    const arr = Array.from(wrongSet).sort((a,b)=>a-b);
+    document.getElementById('wrong-intro').style.display = 'block';
+    document.getElementById('wrong-question-area').style.display = 'none';
+    document.getElementById('wrong-finish-area').style.display = 'none';
+    document.getElementById('wrong-count-num').textContent = arr.length;
+
+    const listEl = document.getElementById('wrong-list');
+    const btn = document.getElementById('btn-start-wrong');
+    if (arr.length === 0) {
+      listEl.innerHTML = '<p style="font-size:13px;color:var(--text-secondary);grid-column:1/-1">🎉 Tuyệt vời! Hiện không có câu sai nào.</p>';
+      btn.style.display = 'none';
+    } else {
+      btn.style.display = 'inline-block';
+      listEl.innerHTML = arr.map(i => `<span class="page-dot" style="cursor:default;background:var(--red-soft);color:#c00;border-color:rgba(200,0,0,0.2)">${i+1}</span>`).join('');
+    }
+    updateWrongBadge();
+  }
+
+  function startWrongPractice() {
+    wrongQueue = Array.from(wrongSet).sort((a,b)=>a-b);
+    if (wrongQueue.length === 0) return;
+    wrongIndex = 0;
+    wrongModeAnswered = false;
+    wrongModeChoice = null;
+    document.getElementById('wrong-intro').style.display = 'none';
+    document.getElementById('wrong-finish-area').style.display = 'none';
+    document.getElementById('wrong-question-area').style.display = 'block';
+    renderWrongQuestion();
+    window.scrollTo(0,0);
+  }
+
+  function renderWrongQuestion() {
+    const qArea = document.getElementById('wrong-question-area');
+    if (wrongIndex >= wrongQueue.length) { showWrongFinish(); return; }
+
+    const qi = wrongQueue[wrongIndex];
+    const q = Q[qi];
+    const locked = wrongModeAnswered;
+
+    qArea.innerHTML = `
+      <div class="page-info"><span>Ôn lại: câu ${wrongIndex+1} / ${wrongQueue.length}</span><span>Còn sai: ${wrongSet.size}</span></div>
+      <div class="q-card">
+        <div class="q-num">問題 ${qi+1}</div>
+        <div class="q-text">${q.q}</div>
+        <div class="choices">
+          ${q.c.map(ch => {
+            const letter = getLetter(ch);
+            let cls = 'choice-btn';
+            if (locked) {
+              if (letter === q.a) cls += ' correct';
+              else if (letter === wrongModeChoice) cls += ' wrong';
+            }
+            return `<button class="${cls}" onclick="chooseWrongAnswer('${letter}')" ${locked?'disabled':''}>${ch}</button>`;
+          }).join('')}
+        </div>
+        ${locked ? (
+          wrongModeChoice === q.a
+            ? `<div class="correct-hint">✅ Chính xác! Câu này đã được gỡ khỏi danh sách câu sai.</div>`
+            : `<div class="correct-hint" style="color:#7a0000;background:var(--red-soft)">❌ Vẫn sai — đáp án đúng: ${q.a}</div>`
+        ) : ''}
+      </div>
+      <div class="quiz-nav" style="justify-content:flex-end">
+        ${locked ? `<button class="btn btn-primary" onclick="nextWrongQuestion()">${wrongIndex+1 < wrongQueue.length ? 'Câu tiếp theo →' : 'Hoàn thành →'}</button>` : ''}
+      </div>
+    `;
+  }
+
+  function chooseWrongAnswer(letter) {
+    if (wrongModeAnswered) return;
+    wrongModeAnswered = true;
+    wrongModeChoice = letter;
+    const qi = wrongQueue[wrongIndex];
+    answers[qi] = letter;
+    if (letter === Q[qi].a) {
+      wrongSet.delete(qi);
+      correctCount++;
+    } else {
+      wrongCount++;
+    }
+    updateWrongBadge();
+    renderWrongQuestion();
+  }
+
+  function nextWrongQuestion() {
+    wrongIndex++;
+    wrongModeAnswered = false;
+    wrongModeChoice = null;
+    renderWrongQuestion();
+    window.scrollTo(0,0);
+  }
+
+  function showWrongFinish() {
+    document.getElementById('wrong-question-area').style.display = 'none';
+    document.getElementById('wrong-finish-area').style.display = 'block';
+    document.getElementById('wf-remaining').textContent = wrongSet.size;
+  }
+
+  function backToWrongIntro() {
+    renderWrongIntro();
+    window.scrollTo(0,0);
+  }
+
+  // ═══════════════════════════════════════
+  // INIT
+  // ═══════════════════════════════════════
+  renderMainQuestion();
+  updateWrongBadge();
 </script>
 </body>
 </html>
