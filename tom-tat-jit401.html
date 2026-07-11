@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>JIT401 — Bảng tóm tắt học nhanh (JP + VI)</title>
+<style>
+:root{--bg:#0b0d12;--card:#141822;--border:#2a3142;--text:#e8eaef;--muted:#9aa3b5;--jp:#7cb8ff;--vi:#7ddea2;--acc:#ffb86b;--quiz:#ff7b9c}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI","Noto Sans JP","Meiryo",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+header{padding:28px 20px 18px;background:linear-gradient(160deg,#0a0a0f,#152238 60%,#0d2137);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+header h1{margin:0 0 6px;font-size:clamp(18px,3vw,28px);letter-spacing:-.5px}
+header p{margin:0;color:var(--muted);font-size:13px;max-width:900px}
+.wrap{max-width:980px;margin:0 auto;padding:18px 16px 80px}
+.toc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:22px}
+.toc h2{margin:0 0 10px;font-size:15px;color:var(--acc)}
+.toc ol{margin:0;padding-left:20px;columns:2;gap:24px;font-size:13px}
+.toc a{color:var(--jp);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.ch{margin:28px 0;scroll-margin-top:90px}
+.ch-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #2d4a73}
+.ch-no{font-size:12px;font-weight:700;color:#0a84ff;letter-spacing:1px}
+.ch-title{font-size:20px;font-weight:700}
+.ch-sub{color:var(--muted);font-size:13px}
+.sec{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 14px 10px;margin:12px 0}
+.sec h3{margin:0 0 4px;font-size:15px}
+.sec .sec-vi{margin:0 0 10px;color:var(--vi);font-size:12px}
+.lbl{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:999px;margin:8px 0 6px}
+.lbl.jp{background:rgba(124,184,255,.15);color:var(--jp)}
+.lbl.vi{background:rgba(125,222,162,.12);color:var(--vi)}
+table.sum{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:6px}
+table.sum th,table.sum td{border:1px solid var(--border);padding:8px 10px;vertical-align:top}
+table.sum th{background:#1c2436;text-align:left;font-size:12px;color:var(--muted)}
+table.sum.vi th{background:#16261d}
+table.sum tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.quiz{background:linear-gradient(180deg,#1a1220,#141822);border:1px solid #5a2a3c;border-radius:12px;padding:16px;margin-top:36px}
+.quiz h2{margin:0 0 8px;color:var(--quiz);font-size:18px}
+.quiz p{color:var(--muted);font-size:13px;margin:0 0 12px}
+.quiz ul{margin:0;padding-left:18px;font-size:13px}
+.quiz li{margin:6px 0}
+.pass{margin-top:16px;padding:12px;border-radius:10px;background:rgba(48,209,88,.1);border:1px solid rgba(48,209,88,.35);color:#9dffb5;font-size:13px}
+footer{margin-top:40px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:700px){.toc ol{columns:1}}
+</style>
+</head>
+<body>
+<header>
+  <h1>JIT401 — Bảng tóm tắt học nhanh</h1>
+  <p>Nguồn: <strong>JIT401-Giao-trinh-IT.docx</strong> (情報技術日本語テキスト, 20 chương).
+  Mỗi mục có <strong>bảng tiếng Nhật</strong> (theo sách) và <strong>bảng dịch tiếng Việt</strong> ngay bên dưới.
+  Cuối trang: đối chiếu quiz trong <code>index.html</code>.</p>
+</header>
+<div class="wrap">
+<div class="toc">
+<h2>Mục lục / 目次</h2>
+<ol>
+<li><a href="#ch1">Ch.1 コンピュータの基礎</a> — Kiến thức cơ bản về máy tính</li><li><a href="#ch2">Ch.2 インターネット利用</a> — Sử dụng Internet</li><li><a href="#ch3">Ch.3 IT機器の現状</a> — Các thiết bị IT</li><li><a href="#ch4">Ch.4 データ通信技術</a> — Công nghệ truyền dữ liệu (kết nối)</li><li><a href="#ch5">Ch.5 ネットワーク</a> — Mạng máy tính</li><li><a href="#ch6">Ch.6 インターネット技術</a> — Công nghệ Internet (OSI/HTML)</li><li><a href="#ch7">Ch.7 ビジネスにおけるインターネット利用</a> — TMĐT &amp; bảo vệ thông tin</li><li><a href="#ch8">Ch.8 暗号化</a> — Mã hóa</li><li><a href="#ch9">Ch.9 セキュリティ</a> — An toàn &amp; bảo mật</li><li><a href="#ch10">Ch.10 コンピュータの構造</a> — Cấu trúc máy tính</li><li><a href="#ch11">Ch.11 CPUの動作原理</a> — Nguyên lý CPU &amp; mạch logic</li><li><a href="#ch12">Ch.12 演算処理</a> — Xử lý tính toán (số nhị phân)</li><li><a href="#ch13">Ch.13 情報量</a> — Lượng thông tin</li><li><a href="#ch14">Ch.14 マルチメディア表現</a> — Đa phương tiện</li><li><a href="#ch15">Ch.15 データ通信（圧縮）</a> — Truyền dữ liệu &amp; nén</li><li><a href="#ch16">Ch.16 オペレーティングシステム</a> — Hệ điều hành</li><li><a href="#ch17">Ch.17 データベース理論</a> — Cơ sở dữ liệu</li><li><a href="#ch18">Ch.18 データベース記述</a> — SQL / mô tả dữ liệu</li><li><a href="#ch19">Ch.19 プログラミングの基礎</a> — Cơ sở lập trình</li><li><a href="#ch20">Ch.20 アルゴリズム</a> — Giải thuật</li></ol></div>
+<section class="ch" id="ch1"><div class="ch-head"><span class="ch-no">CHAPTER 1</span><span class="ch-title">コンピュータの基礎</span><span class="ch-sub">Kiến thức cơ bản về máy tính</span></div><div class="sec"><h3>デジタルとアナログ</h3><p class="sec-vi">Digital và Analog</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>デジタル</strong></td><td>数値化された（離散的な）量。コンピュータは 0 と 1 のみ使用</td></tr>
+<tr><td><strong>アナログ</strong></td><td>連続的な量。長さ・重さ・時間など身の回りの物理量</td></tr>
+<tr><td><strong>アナログ信号</strong></td><td>電流(mA)・電圧(mV)などの連続信号で送受信</td></tr>
+<tr><td><strong>特徴比較</strong></td><td>アナログ＝曖昧なものをそのまま表現可／コピー劣化。デジタル＝正確・切れ目あり・コピー可だが曖昧さは残せない</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Digital</strong></td><td>Đại lượng đã được số hóa (rời rạc). Máy tính chỉ dùng 0 và 1</td></tr>
+<tr><td><strong>Analog</strong></td><td>Đại lượng liên tục. Độ dài, trọng lượng, thời gian…</td></tr>
+<tr><td><strong>Tín hiệu analog</strong></td><td>Truyền bằng dòng điện (mA) hoặc điện áp (mV)</td></tr>
+<tr><td><strong>So sánh</strong></td><td>Analog biểu diễn mơ hồ được / copy dễ méo. Digital chính xác, có thể copy, không giữ nguyên tính mơ hồ</td></tr>
+</tbody></table></div><div class="sec"><h3>コンピュータの歴史</h3><p class="sec-vi">Lịch sử máy tính</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>紀元前</strong></td><td>アバカス（そろばんの起源）</td></tr>
+<tr><td><strong>17世紀</strong></td><td>パスカルの計算機・ライプニッツの乗算機など機械式</td></tr>
+<tr><td><strong>1930年代</strong></td><td>電気機械式計算機（リレー）</td></tr>
+<tr><td><strong>1939年</strong></td><td>ABC試作器（アイオワ大学）</td></tr>
+<tr><td><strong>1946年</strong></td><td>ENIAC：電子式計算機（エッカート・モークリー／ペンシルバニア大）。真空管約2万本</td></tr>
+<tr><td><strong>1949年</strong></td><td>EDSAC：プログラム内蔵方式 → フォン・ノイマン型（現在の基礎）</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Cổ đại</strong></td><td>Abacus (nguồn gốc bàn tính)</td></tr>
+<tr><td><strong>Thế kỷ 17</strong></td><td>Máy cơ học: Pascal, Leibniz…</td></tr>
+<tr><td><strong>Thập niên 1930</strong></td><td>Máy điện-cơ (relay)</td></tr>
+<tr><td><strong>1939</strong></td><td>Máy thử ABC (ĐH Iowa)</td></tr>
+<tr><td><strong>1946</strong></td><td>ENIAC: máy tính điện tử (Eckert &amp; Mauchly). ~20.000 đèn điện tử</td></tr>
+<tr><td><strong>1949</strong></td><td>EDSAC: stored-program → kiến trúc von Neumann</td></tr>
+</tbody></table></div><div class="sec"><h3>コンピュータの機能・種類</h3><p class="sec-vi">Chức năng &amp; loại máy tính</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>一言で</strong></td><td>コンピュータ＝記憶＋処理（どちらかだけでは不可）</td></tr>
+<tr><td><strong>5要素</strong></td><td>演算・記憶・制御・入力・出力装置</td></tr>
+<tr><td><strong>汎用計算機</strong></td><td>PC・スマホ・スパコン等（プログラム変更で多用途）</td></tr>
+<tr><td><strong>専用計算機</strong></td><td>ゲーム機・カーナビ・電卓など</td></tr>
+<tr><td><strong>ワークステーション</strong></td><td>形・性能はPCと近いが常時稼働で故障しにくい</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Định nghĩa</strong></td><td>Máy tính = ghi nhớ + xử lý (thiếu một thì không gọi là máy tính)</td></tr>
+<tr><td><strong>5 thành phần</strong></td><td>Tính toán, nhớ, điều khiển, vào, ra</td></tr>
+<tr><td><strong>Máy đa dụng</strong></td><td>PC, smartphone, supercomputer…</td></tr>
+<tr><td><strong>Máy chuyên dụng</strong></td><td>Máy game, GPS xe, máy tính cầm tay…</td></tr>
+<tr><td><strong>Workstation</strong></td><td>Gần PC nhưng ổn định khi chạy liên tục</td></tr>
+</tbody></table></div><div class="sec"><h3>ファイル・フォルダ・ドライブ</h3><p class="sec-vi">File, folder, drive</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>ファイル</strong></td><td>アプリで作ったデータを記録媒体に保存した単位。アイコンで種類表示</td></tr>
+<tr><td><strong>拡張子</strong></td><td>ファイル名末尾の文字列（.doc/.xls/.htm など）で種類識別</td></tr>
+<tr><td><strong>フォルダ</strong></td><td>ファイルを整理する入れ物。階層＝ディレクトリ構造</td></tr>
+<tr><td><strong>パス</strong></td><td>C:\ユーザー\… のように位置を表す表記。カレントパス＝今見ている場所</td></tr>
+<tr><td><strong>ドライブ</strong></td><td>(C:)(E:) などの名前。通常システムHDDはC</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>File</strong></td><td>Đơn vị lưu dữ liệu do ứng dụng tạo ra</td></tr>
+<tr><td><strong>Phần mở rộng</strong></td><td>Chuỗi sau tên file: .doc, .xls, .htm… để nhận loại file</td></tr>
+<tr><td><strong>Folder</strong></td><td>Hộp chứa file. Cấu trúc cây = directory</td></tr>
+<tr><td><strong>Path</strong></td><td>Đường dẫn vị trí. Current path = thư mục đang xem</td></tr>
+<tr><td><strong>Drive</strong></td><td>Tên như (C:)(E:). Ổ hệ thống thường là C</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch2"><div class="ch-head"><span class="ch-no">CHAPTER 2</span><span class="ch-title">インターネット利用</span><span class="ch-sub">Sử dụng Internet</span></div><div class="sec"><h3>ホームページ検索</h3><p class="sec-vi">Tìm kiếm trang web</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>URL</strong></td><td>Uniform Resource Location：ホームページのアドレス／資源の場所指定</td></tr>
+<tr><td><strong>ブラウザ</strong></td><td>Internet Explorer など閲覧ソフト</td></tr>
+<tr><td><strong>ポータル</strong></td><td>Google・Yahoo など検索の入り口サイト</td></tr>
+<tr><td><strong>フリーウェア</strong></td><td>利用無料でも配布・改変条件あり（何でも自由ではない）</td></tr>
+<tr><td><strong>シェアウェア</strong></td><td>試用制限あり。フリーソフトではない</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>URL</strong></td><td>Địa chỉ trang / cách chỉ định vị trí tài nguyên trên Internet</td></tr>
+<tr><td><strong>Trình duyệt</strong></td><td>Phần mềm xem web</td></tr>
+<tr><td><strong>Portal</strong></td><td>Cổng tìm kiếm (Google, Yahoo…)</td></tr>
+<tr><td><strong>Freeware</strong></td><td>Miễn phí dùng nhưng vẫn có điều kiện phân phối/sửa</td></tr>
+<tr><td><strong>Shareware</strong></td><td>Dùng thử có hạn; không phải freeware</td></tr>
+</tbody></table></div><div class="sec"><h3>Web2.0</h3><p class="sec-vi">Web 2.0</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>提唱</strong></td><td>2004年 ティム・オライリー</td></tr>
+<tr><td><strong>本質</strong></td><td>双方向型HP。誰もが発信（Blog・SNS・Wiki・YouTube）</td></tr>
+<tr><td><strong>Web1.0</strong></td><td>専門家が一方向に発信するメディア</td></tr>
+<tr><td><strong>技術</strong></td><td>RSS／Ajax／トラックバック</td></tr>
+<tr><td><strong>ロングテール</strong></td><td>購入者少なくても多品種で収入増。パレート(8:2)に対抗</td></tr>
+<tr><td><strong>誤りやすい点</strong></td><td>送り手と受け手が固定されている → Web2.0では誤り</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Đề xuất</strong></td><td>2004, Tim O'Reilly</td></tr>
+<tr><td><strong>Bản chất</strong></td><td>Web hai chiều: ai cũng phát tán nội dung</td></tr>
+<tr><td><strong>Web 1.0</strong></td><td>Một chiều, chuyên gia phát tin</td></tr>
+<tr><td><strong>Công nghệ</strong></td><td>RSS, Ajax, trackback</td></tr>
+<tr><td><strong>Long tail</strong></td><td>Bán nhiều loại dù ít người mua mỗi loại</td></tr>
+<tr><td><strong>Hay sai</strong></td><td>Người gửi/nhận cố định → SAI với Web 2.0</td></tr>
+</tbody></table></div><div class="sec"><h3>クラウドコンピューティング</h3><p class="sec-vi">Cloud computing</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>定義</strong></td><td>インターネット経由でコンピュータ資源・サービスを提供。接続先を意識しない（雲の上）</td></tr>
+<tr><td><strong>提唱</strong></td><td>2006年 エリック・シュミット（Google）</td></tr>
+<tr><td><strong>関連</strong></td><td>ASP・SaaS・グリッドも広い意味でクラウドの一種</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Định nghĩa</strong></td><td>Cung cấp tài nguyên/dịch vụ qua Internet; user không cần biết máy ở đâu</td></tr>
+<tr><td><strong>Đề xuất</strong></td><td>2006, Eric Schmidt (Google)</td></tr>
+<tr><td><strong>Liên quan</strong></td><td>ASP, SaaS, grid computing cũng thuộc họ cloud theo nghĩa rộng</td></tr>
+</tbody></table></div><div class="sec"><h3>メールのネチケット</h3><p class="sec-vi">Netiquette email</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>必須</strong></td><td>自分の氏名・連絡先明記／相手氏名・所属明記</td></tr>
+<tr><td><strong>禁止</strong></td><td>著作権あるファイル送信／大きな添付（目安1MB超は確認）</td></tr>
+<tr><td><strong>安全</strong></td><td>添付のウィルスチェック必須</td></tr>
+<tr><td><strong>礼儀</strong></td><td>急な返事を求めない（期限は1週間程度余裕）</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Bắt buộc</strong></td><td>Ghi rõ tên/liên hệ mình; ghi tên/chức danh người nhận</td></tr>
+<tr><td><strong>Cấm</strong></td><td>Gửi file có bản quyền; đính kèm quá lớn</td></tr>
+<tr><td><strong>An toàn</strong></td><td>Luôn quét virus file đính kèm</td></tr>
+<tr><td><strong>Lịch sự</strong></td><td>Không đòi trả lời gấp (nên chừa ~1 tuần)</td></tr>
+</tbody></table></div><div class="sec"><h3>知的所有権・法律</h3><p class="sec-vi">Sở hữu trí tuệ</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>著作権</strong></td><td>思想・感情の創作的表現を保護。創作時点で自動発生（登録不要）</td></tr>
+<tr><td><strong>著作権の3種</strong></td><td>著作者人格権・著作者財産権・著作隣接権</td></tr>
+<tr><td><strong>工業所有権</strong></td><td>技術の進歩を保護：特許・実用新案・意匠・商標</td></tr>
+<tr><td><strong>特許権</strong></td><td>新規技術を保護（VN: Quyền sáng chế）</td></tr>
+<tr><td><strong>実用新案</strong></td><td>技術の改良・考案を保護</td></tr>
+<tr><td><strong>意匠権</strong></td><td>製品デザイン（形状・模様・色彩）</td></tr>
+<tr><td><strong>商標権</strong></td><td>社名・ロゴなど商標</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Bản quyền</strong></td><td>Bảo hộ biểu đạt sáng tạo; phát sinh ngay khi sáng tạo</td></tr>
+<tr><td><strong>3 loại bản quyền</strong></td><td>Quyền nhân cách / tài sản / liền kề tác giả</td></tr>
+<tr><td><strong>Sở hữu công nghiệp</strong></td><td>Bảo hộ tiến bộ kỹ thuật: patent, utility, design, trademark</td></tr>
+<tr><td><strong>Patent</strong></td><td>Bảo hộ kỹ thuật mới (特許権)</td></tr>
+<tr><td><strong>Utility model</strong></td><td>Bảo hộ cải tiến/cấu trúc</td></tr>
+<tr><td><strong>Design right</strong></td><td>Thiết kế sản phẩm</td></tr>
+<tr><td><strong>Trademark</strong></td><td>Tên công ty, logo…</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch3"><div class="ch-head"><span class="ch-no">CHAPTER 3</span><span class="ch-title">IT機器の現状</span><span class="ch-sub">Các thiết bị IT</span></div><div class="sec"><h3>携帯電話の世代</h3><p class="sec-vi">Thế hệ điện thoại di động</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>第1世代</strong></td><td>アナログ通信。音声波をそのまま電波に置き換え。音質悪・盗聴リスク</td></tr>
+<tr><td><strong>第2世代(~1992)</strong></td><td>デジタル通信。音質・セキュリティ向上（mova等）</td></tr>
+<tr><td><strong>第3世代(~2001)</strong></td><td>高速データ通信。動画等送受信可（FOMA等）</td></tr>
+<tr><td><strong>第3.5世代(~2006)</strong></td><td>さらに高速。アプリ快適利用</td></tr>
+<tr><td><strong>第3.9世代</strong></td><td>WiMAX・LTE等。主にPC向け高速データ</td></tr>
+<tr><td><strong>第4世代</strong></td><td>ブロードバンド前提の情報端末（教科書時点で未商品化）</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>1G</strong></td><td>Analog: sóng thoại → sóng radio trực tiếp</td></tr>
+<tr><td><strong>2G</strong></td><td>Digital: chất lượng thoại &amp; bảo mật tốt hơn</td></tr>
+<tr><td><strong>3G</strong></td><td>Truyền dữ liệu tốc độ cao, video…</td></tr>
+<tr><td><strong>3.5G</strong></td><td>Nhanh hơn 3G, app mượt hơn</td></tr>
+<tr><td><strong>3.9G</strong></td><td>WiMAX/LTE… chủ yếu data cho PC</td></tr>
+<tr><td><strong>4G</strong></td><td>Terminal băng rộng (theo sách năm 2013)</td></tr>
+</tbody></table></div><div class="sec"><h3>通信・ハードウェア</h3><p class="sec-vi">Truyền tin &amp; phần cứng</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>SIMカード</strong></td><td>契約者番号を記録するICカード（Thẻ SIM）</td></tr>
+<tr><td><strong>抵抗膜方式</strong></td><td>押した位置の縦横抵抗値を測定（圧力）</td></tr>
+<tr><td><strong>静電容量方式</strong></td><td>指先とセンサ間の電荷を測定。マルチタッチ向き</td></tr>
+<tr><td><strong>CMOSセンサ</strong></td><td>光の強弱を記録する素子＋増幅器。省電力</td></tr>
+<tr><td><strong>液晶</strong></td><td>偏光板＋液晶分子で透過/遮断。低消費電力</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>SIM</strong></td><td>IC card ghi số thuê bao</td></tr>
+<tr><td><strong>Điện trở (resistive)</strong></td><td>Đo điện trở dọc/ngang khi nhấn</td></tr>
+<tr><td><strong>Điện dung (capacitive)</strong></td><td>Đo điện tích giữa ngón tay và cảm biến</td></tr>
+<tr><td><strong>CMOS</strong></td><td>Cảm biến ánh sáng + khuếch đại, ít tốn điện</td></tr>
+<tr><td><strong>LCD</strong></td><td>Điều khiển sáng qua phân cực; tiết kiệm điện</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch4"><div class="ch-head"><span class="ch-no">CHAPTER 4</span><span class="ch-title">データ通信技術</span><span class="ch-sub">Công nghệ truyền dữ liệu (kết nối)</span></div><div class="sec"><h3>有線接続</h3><p class="sec-vi">Kết nối có dây</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>CATV</strong></td><td>ケーブルテレビ余帯域を通信に利用。高速</td></tr>
+<tr><td><strong>ADSL</strong></td><td>Asymmetric Digital Subscriber Line。下り＞上り。電話線利用。距離で速度低下</td></tr>
+<tr><td><strong>FTTH</strong></td><td>Fiber To The Home。光ファイバ。安定高速。最大約100Mbps（教科書）。ラストワンマイル解決</td></tr>
+<tr><td><strong>PLC</strong></td><td>電灯線(100V)でデータ通信。アダプタ必要</td></tr>
+<tr><td><strong>IP電話</strong></td><td>ADSL/FTTH等で音声をIPパケット送信（Skypeは無償自己責任型と区別）</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>CATV</strong></td><td>Dùng băng thông dư của truyền hình cáp</td></tr>
+<tr><td><strong>ADSL</strong></td><td>Đường thuê bao số bất đối xứng; download nhanh hơn upload</td></tr>
+<tr><td><strong>FTTH</strong></td><td>Cáp quang về nhà; ổn định, ~100 Mbps (theo giáo trình)</td></tr>
+<tr><td><strong>PLC</strong></td><td>Truyền data qua dây điện 100V</td></tr>
+<tr><td><strong>IP phone</strong></td><td>Thoại qua Internet dạng gói IP</td></tr>
+</tbody></table></div><div class="sec"><h3>無線通信手段</h3><p class="sec-vi">Kết nối không dây</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>IrDA</strong></td><td>赤外線。遮蔽物があると不可。近距離</td></tr>
+<tr><td><strong>非接触IC</strong></td><td>Suica等。IC＋アンテナ。RFID関連</td></tr>
+<tr><td><strong>Bluetooth</strong></td><td>電波(~2.4GHz)。約10m・約1Mbps。携帯/PC/マウス等</td></tr>
+<tr><td><strong>Wi-Fi</strong></td><td>Wireless Fidelity。無線LANの愛称。IEEE802.11a/b/g/n</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>IrDA</strong></td><td>Hồng ngoại; bị che là mất sóng</td></tr>
+<tr><td><strong>IC không tiếp xúc</strong></td><td>Suica…; RFID</td></tr>
+<tr><td><strong>Bluetooth</strong></td><td>Sóng radio ~10m, ~1Mbps (không phải hồng ngoại)</td></tr>
+<tr><td><strong>Wi-Fi</strong></td><td>Tên gọi thân thiện của WLAN</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch5"><div class="ch-head"><span class="ch-no">CHAPTER 5</span><span class="ch-title">ネットワーク</span><span class="ch-sub">Mạng máy tính</span></div><div class="sec"><h3>LAN/WAN・インターネット</h3><p class="sec-vi">LAN/WAN &amp; Internet</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>LAN</strong></td><td>局所ネットワーク（会社・学校内）</td></tr>
+<tr><td><strong>WAN</strong></td><td>広域ネットワーク</td></tr>
+<tr><td><strong>インターネット</strong></td><td>ネットワークの間＝網の網。WWW＝World Wide Web</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>LAN</strong></td><td>Mạng cục bộ</td></tr>
+<tr><td><strong>WAN</strong></td><td>Mạng diện rộng</td></tr>
+<tr><td><strong>Internet</strong></td><td>Mạng của các mạng; WWW = mạng nhện toàn cầu</td></tr>
+</tbody></table></div><div class="sec"><h3>ネットワーク形態</h3><p class="sec-vi">Hình thái mạng</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>バス型</strong></td><td>1本ケーブル共有。衝突しやすく現在少ない</td></tr>
+<tr><td><strong>スター型</strong></td><td>ハブ中心。増設容易で最もよく使われる（Hình thái mạng sao）</td></tr>
+<tr><td><strong>リング型</strong></td><td>環状。1台故障で影響大</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Bus</strong></td><td>Dùng chung 1 đường; dễ va chạm</td></tr>
+<tr><td><strong>Star</strong></td><td>Qua hub/switch; phổ biến nhất</td></tr>
+<tr><td><strong>Ring</strong></td><td>Vòng tròn; 1 máy hỏng ảnh hưởng lớn</td></tr>
+</tbody></table></div><div class="sec"><h3>処理構成</h3><p class="sec-vi">Cấu hình xử lý</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>集中処理</strong></td><td>ホストが全処理。端末は入出力のみ</td></tr>
+<tr><td><strong>分散処理</strong></td><td>複数PCで処理分担（Hệ thống xử lý phân tán）</td></tr>
+<tr><td><strong>P2P</strong></td><td>対等にサービス提供しあう分散形態</td></tr>
+<tr><td><strong>クライアント/サーバ</strong></td><td>提供側＝サーバ、利用側＝クライアント</td></tr>
+<tr><td><strong>密結合MP</strong></td><td>複数処理装置がメモリ共有で並列</td></tr>
+<tr><td><strong>疎結合MP</strong></td><td>各処理装置が独立メモリで並列</td></tr>
+<tr><td><strong>ファイアウォール</strong></td><td>内部網とInternetの間で不正アクセス防止</td></tr>
+<tr><td><strong>DMZ</strong></td><td>公開サーバ用の緩衝地帯</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Tập trung</strong></td><td>Host xử lý hết; terminal chỉ I/O</td></tr>
+<tr><td><strong>Phân tán</strong></td><td>Nhiều máy chia sẻ xử lý</td></tr>
+<tr><td><strong>P2P</strong></td><td>Các máy ngang hàng cung cấp dịch vụ cho nhau</td></tr>
+<tr><td><strong>Client/Server</strong></td><td>Server cung cấp, client nhận</td></tr>
+<tr><td><strong>Tightly coupled</strong></td><td>Nhiều CPU/ALU chia sẻ bộ nhớ</td></tr>
+<tr><td><strong>Loosely coupled</strong></td><td>Mỗi bộ xử lý có bộ nhớ riêng</td></tr>
+<tr><td><strong>Firewall</strong></td><td>Chặn truy cập bất hợp pháp giữa trong/ngoài</td></tr>
+<tr><td><strong>DMZ</strong></td><td>Vùng đệm cho server công khai</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch6"><div class="ch-head"><span class="ch-no">CHAPTER 6</span><span class="ch-title">インターネット技術</span><span class="ch-sub">Công nghệ Internet (OSI/HTML)</span></div><div class="sec"><h3>プロトコル・OSI</h3><p class="sec-vi">Giao thức &amp; OSI</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>プロトコル</strong></td><td>データ転送の規約</td></tr>
+<tr><td><strong>OSI</strong></td><td>Open System Interconnection。7層モデル</td></tr>
+<tr><td><strong>例</strong></td><td>物理層：電圧・コネクタ／アプリ層HTTP／トランスポートTCP／ネットワークIP</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Protocol</strong></td><td>Quy ước truyền dữ liệu</td></tr>
+<tr><td><strong>OSI</strong></td><td>Mô hình 7 tầng chuẩn hóa</td></tr>
+<tr><td><strong>Ví dụ</strong></td><td>HTTP (app), TCP (transport), IP (network)</td></tr>
+</tbody></table></div><div class="sec"><h3>IPアドレスとドメイン名</h3><p class="sec-vi">IP &amp; tên miền</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>IPアドレス</strong></td><td>コンピュータの住所番号。覚えにくい数字列</td></tr>
+<tr><td><strong>ドメイン名</strong></td><td>分かりやすい名前（Tên miền）。DNSが変換</td></tr>
+<tr><td><strong>.com のみ</strong></td><td>国名なし＝アメリカのドメイン</td></tr>
+<tr><td><strong>URL</strong></td><td>Internet上のサービス・ファイルの場所を特定する記述方式</td></tr>
+<tr><td><strong>誤り</strong></td><td>IPは覚えやすい → 誤り（覚えにくい）</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>IP</strong></td><td>Số địa chỉ máy; khó nhớ</td></tr>
+<tr><td><strong>Domain</strong></td><td>Tên dễ nhớ; DNS chuyển sang IP</td></tr>
+<tr><td><strong>.com</strong></td><td>Không có mã quốc gia → Mỹ</td></tr>
+<tr><td><strong>URL</strong></td><td>Cách mô tả vị trí tài nguyên trên Internet</td></tr>
+<tr><td><strong>Sai hay gặp</strong></td><td>IP dễ nhớ → SAI</td></tr>
+</tbody></table></div><div class="sec"><h3>HTML・XML</h3><p class="sec-vi">HTML &amp; XML</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>HTML</strong></td><td>Hyper Text Markup Language。文字種類・配置・画像・動画・音・リンクを記述</td></tr>
+<tr><td><strong>XML</strong></td><td>eXtensible Markup Language。ユーザが独自タグ定義可</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>HTML</strong></td><td>Ngôn ngữ đánh dấu siêu văn bản: chữ, layout, ảnh, video, âm thanh, link</td></tr>
+<tr><td><strong>XML</strong></td><td>Cho phép user tự định nghĩa thẻ</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch7"><div class="ch-head"><span class="ch-no">CHAPTER 7</span><span class="ch-title">ビジネスにおけるインターネット利用</span><span class="ch-sub">TMĐT &amp; bảo vệ thông tin</span></div><div class="sec"><h3>電子商取引</h3><p class="sec-vi">Thương mại điện tử</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>電子商取引</strong></td><td>eコマース。取引プロセスの電子化（Thương mại điện tử）</td></tr>
+<tr><td><strong>EDI</strong></td><td>電子データ交換の標準化。受発注・決済・配送</td></tr>
+<tr><td><strong>EOS</strong></td><td>オンライン受発注システム（Hệ thống đặt hàng trực tuyến）</td></tr>
+<tr><td><strong>CALS</strong></td><td>製造業の全過程電子化標準</td></tr>
+<tr><td><strong>Cookie</strong></td><td>ブラウザがサイトのID情報を記憶</td></tr>
+<tr><td><strong>CRM</strong></td><td>顧客関係管理。データマイニングで予測</td></tr>
+<tr><td><strong>スカベンジング</strong></td><td>残された個人情報を収集する犯罪</td></tr>
+<tr><td><strong>OECD8原則</strong></td><td>利用制限の原則あり。「利用無制限」は誤り</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>E-commerce</strong></td><td>Số hóa quy trình giao dịch</td></tr>
+<tr><td><strong>EDI</strong></td><td>Chuẩn trao đổi dữ liệu điện tử</td></tr>
+<tr><td><strong>EOS</strong></td><td>Hệ thống đặt hàng trực tuyến</td></tr>
+<tr><td><strong>CALS</strong></td><td>Chuẩn hóa điện tử hóa toàn bộ sản xuất</td></tr>
+<tr><td><strong>Cookie</strong></td><td>Trình duyệt nhớ ID website</td></tr>
+<tr><td><strong>CRM</strong></td><td>Quản trị quan hệ khách hàng</td></tr>
+<tr><td><strong>Scavenging</strong></td><td>Thu thập thông tin cá nhân còn sót</td></tr>
+<tr><td><strong>OECD 8</strong></td><td>Có nguyên tắc hạn chế sử dụng; không phải vô hạn</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch8"><div class="ch-head"><span class="ch-no">CHAPTER 8</span><span class="ch-title">暗号化</span><span class="ch-sub">Mã hóa</span></div><div class="sec"><h3>暗号の基礎</h3><p class="sec-vi">Cơ bản mã hóa</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>暗号化</strong></td><td>原文が推測できないように変換（Giải mã＝復号化）</td></tr>
+<tr><td><strong>シーザー暗号</strong></td><td>文字をN文字ずらす換字式古典暗号</td></tr>
+<tr><td><strong>転置式</strong></td><td>文字の並び順・位置を入れ替えて暗号化</td></tr>
+<tr><td><strong>共通鍵</strong></td><td>送受信で同じ鍵を共有（秘密鍵方式）</td></tr>
+<tr><td><strong>公開鍵</strong></td><td>暗号化鍵を公開、復号鍵は秘密。現在主流</td></tr>
+<tr><td><strong>SSL</strong></td><td>Secure Socket Layer。公開鍵＋秘密鍵で暗号化通信。https・錠アイコン</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Mã hóa</strong></td><td>Biến đổi để không đoán được bản gốc</td></tr>
+<tr><td><strong>Caesar</strong></td><td>Dịch ký tự N vị trí</td></tr>
+<tr><td><strong>Hoán vị</strong></td><td>Đổi thứ tự ký tự</td></tr>
+<tr><td><strong>Khóa chung</strong></td><td>Hai bên dùng chung 1 khóa</td></tr>
+<tr><td><strong>Khóa công khai</strong></td><td>Khóa mã hóa công khai; khóa giải mật</td></tr>
+<tr><td><strong>SSL</strong></td><td>Truyền tin mã hóa; https + biểu tượng ổ khóa</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch9"><div class="ch-head"><span class="ch-no">CHAPTER 9</span><span class="ch-title">セキュリティ</span><span class="ch-sub">An toàn &amp; bảo mật</span></div><div class="sec"><h3>事故・ウィルス・攻撃</h3><p class="sec-vi">Sự cố, virus, tấn công</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>故障以外</strong></td><td>プログラムミス（バグ）による不具合が問題</td></tr>
+<tr><td><strong>ウィルス</strong></td><td>人為プログラム。感染→潜伏→発病</td></tr>
+<tr><td><strong>ワーム</strong></td><td>独立増殖するタイプ（広義でウィルスに含むことも）</td></tr>
+<tr><td><strong>トロイの木馬</strong></td><td>本物画面に見せかけパスワード窃盗（Ngựa thành Troy）</td></tr>
+<tr><td><strong>フィッシング</strong></td><td>偽サイトで番号詐取</td></tr>
+<tr><td><strong>DoS</strong></td><td>大量アクセスで使用不能にする攻撃</td></tr>
+<tr><td><strong>削除すべき拡張子</strong></td><td>.exe / .vbs / .scr / .pif は即座に削除</td></tr>
+<tr><td><strong>パスワードNG</strong></td><td>氏名・生年月日・電話番号など推測容易なもの</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Ngoài hỏng hóc</strong></td><td>Lỗi chương trình (bug) cũng nguy hiểm</td></tr>
+<tr><td><strong>Virus</strong></td><td>Chương trình nhân tạo: lây → ủ → phát</td></tr>
+<tr><td><strong>Worm</strong></td><td>Tự nhân bản độc lập</td></tr>
+<tr><td><strong>Trojan</strong></td><td>Giả màn hình nhập để đánh cắp mật khẩu</td></tr>
+<tr><td><strong>Phishing</strong></td><td>Giả trang web ngân hàng…</td></tr>
+<tr><td><strong>DoS</strong></td><td>Tấn công từ chối dịch vụ</td></tr>
+<tr><td><strong>File nguy hiểm</strong></td><td>Xóa ngay .exe/.vbs/.scr/.pif</td></tr>
+<tr><td><strong>Password xấu</strong></td><td>Tên, ngày sinh, SĐT…</td></tr>
+</tbody></table></div><div class="sec"><h3>稼働率</h3><p class="sec-vi">Tỷ lệ sẵn sàng</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>稼働率</strong></td><td>MTBF / (MTBF + MTTR)</td></tr>
+<tr><td><strong>MTBF</strong></td><td>平均故障間隔（品質）</td></tr>
+<tr><td><strong>MTTR</strong></td><td>平均修理時間（保守性）</td></tr>
+<tr><td><strong>直列</strong></td><td>A × B</td></tr>
+<tr><td><strong>並列</strong></td><td>1 − (1−A)(1−B)</td></tr>
+<tr><td><strong>信頼度成長曲線</strong></td><td>累積エラーはS字曲線</td></tr>
+<tr><td><strong>バスタブ曲線</strong></td><td>一般機械の故障率曲線（初期・安定期・摩耗）</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Availability</strong></td><td>MTBF/(MTBF+MTTR)</td></tr>
+<tr><td><strong>MTBF</strong></td><td>Thời gian trung bình giữa 2 lần hỏng</td></tr>
+<tr><td><strong>MTTR</strong></td><td>Thời gian sửa trung bình</td></tr>
+<tr><td><strong>Nối tiếp</strong></td><td>A × B</td></tr>
+<tr><td><strong>Song song</strong></td><td>1 − (1−A)(1−B)</td></tr>
+<tr><td><strong>Đường tăng độ tin cậy</strong></td><td>Dạng chữ S</td></tr>
+<tr><td><strong>Bathtub</strong></td><td>Đường cong hỏng hóc thiết bị cơ</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch10"><div class="ch-head"><span class="ch-no">CHAPTER 10</span><span class="ch-title">コンピュータの構造</span><span class="ch-sub">Cấu trúc máy tính</span></div><div class="sec"><h3>5要素と内部</h3><p class="sec-vi">5 thành phần &amp; bên trong</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>5要素</strong></td><td>演算・記憶・制御・入力・出力</td></tr>
+<tr><td><strong>演算装置</strong></td><td>Thiết bị tính toán số học。CPUが担う</td></tr>
+<tr><td><strong>マザーボード</strong></td><td>PC内で最大面積のメイン基板</td></tr>
+<tr><td><strong>CPU</strong></td><td>Central Processing Unit。処理の中心。MPUとも。演算＋制御</td></tr>
+<tr><td><strong>バス/チップセット</strong></td><td>電気の通り道／データ制御IC群</td></tr>
+<tr><td><strong>RAM</strong></td><td>Random Access Memory。読み書き自由。電源切で消える</td></tr>
+<tr><td><strong>ROM</strong></td><td>Read Only Memory。読み取り専用（Bộ nhớ chỉ đọc）</td></tr>
+<tr><td><strong>キャッシュ</strong></td><td>アクセス速度が最も高速（容量小）</td></tr>
+<tr><td><strong>OSの役割</strong></td><td>CPU・メモリ等の資源をアプリに割り当て</td></tr>
+<tr><td><strong>UI機能</strong></td><td>マウス/KB操作、ウィンドウ見え方、ファイル扱いを決定</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>5 phần</strong></td><td>Tính toán, nhớ, điều khiển, vào, ra</td></tr>
+<tr><td><strong>ALU</strong></td><td>Bộ tính toán số học (trong CPU)</td></tr>
+<tr><td><strong>Motherboard</strong></td><td>Bo mạch chính lớn nhất</td></tr>
+<tr><td><strong>CPU</strong></td><td>Trung tâm xử lý; còn gọi MPU</td></tr>
+<tr><td><strong>Bus/Chipset</strong></td><td>Đường truyền điện / nhóm IC điều khiển</td></tr>
+<tr><td><strong>RAM</strong></td><td>Nhớ truy cập ngẫu nhiên; mất khi tắt nguồn</td></tr>
+<tr><td><strong>ROM</strong></td><td>Chỉ đọc</td></tr>
+<tr><td><strong>Cache</strong></td><td>Truy cập nhanh nhất</td></tr>
+<tr><td><strong>Vai trò OS</strong></td><td>Cấp phát CPU, RAM… cho ứng dụng</td></tr>
+<tr><td><strong>Giao diện người dùng</strong></td><td>Quyết định cách dùng chuột/bàn phím/cửa sổ/file</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch11"><div class="ch-head"><span class="ch-no">CHAPTER 11</span><span class="ch-title">CPUの動作原理</span><span class="ch-sub">Nguyên lý CPU &amp; mạch logic</span></div><div class="sec"><h3>論理素子・回路</h3><p class="sec-vi">Phần tử logic &amp; mạch</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>チューリングマシン</strong></td><td>CPU動作原理の基礎モデル</td></tr>
+<tr><td><strong>4世代</strong></td><td>真空管→トランジスタ→IC→LSI</td></tr>
+<tr><td><strong>第1世代</strong></td><td>真空管</td></tr>
+<tr><td><strong>IC</strong></td><td>集積回路（Mạch tích hợp）</td></tr>
+<tr><td><strong>AND</strong></td><td>スイッチ直列。両方ONで出力ON</td></tr>
+<tr><td><strong>OR</strong></td><td>スイッチ並列。1つでもONで出力ON</td></tr>
+<tr><td><strong>NOT</strong></td><td>入力反転</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Turing machine</strong></td><td>Mô hình nền tảng cho CPU</td></tr>
+<tr><td><strong>4 thế hệ</strong></td><td>Đèn điện tử → transistor → IC → LSI</td></tr>
+<tr><td><strong>Thế hệ 1</strong></td><td>Vacuum tube</td></tr>
+<tr><td><strong>IC</strong></td><td>Mạch tích hợp</td></tr>
+<tr><td><strong>AND</strong></td><td>Nối tiếp; cả hai ON mới ra ON</td></tr>
+<tr><td><strong>OR</strong></td><td>Song song; một ON là ra ON</td></tr>
+<tr><td><strong>NOT</strong></td><td>Đảo bit</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch12"><div class="ch-head"><span class="ch-no">CHAPTER 12</span><span class="ch-title">演算処理</span><span class="ch-sub">Xử lý tính toán (số nhị phân)</span></div><div class="sec"><h3>2進数</h3><p class="sec-vi">Hệ nhị phân</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>データ表現</strong></td><td>すべて0と1の並び</td></tr>
+<tr><td><strong>10進/2進/16進</strong></td><td>Hệ thập phân / nhị phân / thập lục phân</td></tr>
+<tr><td><strong>例</strong></td><td>1100₂ = 12₁₀；1+1=10₂（繰り上がり）</td></tr>
+<tr><td><strong>2の補数</strong></td><td>負数表現の標準。引き算を足し算に</td></tr>
+<tr><td><strong>丸め誤差</strong></td><td>0.1₁₀は2進で無限循環 → 小数は完全表現できない</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Biểu diễn</strong></td><td>Mọi dữ liệu là dãy 0 và 1</td></tr>
+<tr><td><strong>Cơ số</strong></td><td>Thập phân / nhị phân / hex</td></tr>
+<tr><td><strong>Ví dụ</strong></td><td>1100₂=12; 1+1=10₂</td></tr>
+<tr><td><strong>Bù 2</strong></td><td>Biểu diễn số âm chuẩn</td></tr>
+<tr><td><strong>Sai số</strong></td><td>Số thực thập phân không luôn biểu diễn chính xác</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch13"><div class="ch-head"><span class="ch-no">CHAPTER 13</span><span class="ch-title">情報量</span><span class="ch-sub">Lượng thông tin</span></div><div class="sec"><h3>単位と文字</h3><p class="sec-vi">Đơn vị &amp; ký tự</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>最小単位</strong></td><td>bit（binary digit）</td></tr>
+<tr><td><strong>1 byte</strong></td><td>8 bit</td></tr>
+<tr><td><strong>1 GB</strong></td><td>1,024 MB（2¹⁰倍系）</td></tr>
+<tr><td><strong>英字1文字</strong></td><td>256種 → 8 bit = 1 byte（ASCII）</td></tr>
+<tr><td><strong>日本語1文字</strong></td><td>65,536種 → 16 bit = 2 byte（Unicode等）</td></tr>
+<tr><td><strong>情報量</strong></td><td>Lượng thông tin</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Đơn vị nhỏ nhất</strong></td><td>bit</td></tr>
+<tr><td><strong>1 byte</strong></td><td>8 bit</td></tr>
+<tr><td><strong>1 GB</strong></td><td>1.024 MB</td></tr>
+<tr><td><strong>1 chữ cái Latin</strong></td><td>8 bit = 1 byte</td></tr>
+<tr><td><strong>1 chữ Nhật</strong></td><td>16 bit = 2 byte (Unicode)</td></tr>
+<tr><td><strong>Thuật ngữ</strong></td><td>情報量 = Lượng thông tin</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch14"><div class="ch-head"><span class="ch-no">CHAPTER 14</span><span class="ch-title">マルチメディア表現</span><span class="ch-sub">Đa phương tiện</span></div><div class="sec"><h3>MIDI・音声・画像・動画</h3><p class="sec-vi">MIDI, âm thanh, ảnh, video</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>MIDI</strong></td><td>楽器演奏命令をデジタル伝達。命令≤256種 → 8 bit=1 byte</td></tr>
+<tr><td><strong>着信メロディ(quiz)</strong></td><td>MIDIコード解釈。高音質な実楽曲再生は不可とされる（問題の答え）</td></tr>
+<tr><td><strong>サンプリング周波数</strong></td><td>1秒あたりの測定回数(Hz)。CD=44.1kHz（Tần số lấy mẫu）</td></tr>
+<tr><td><strong>量子化数</strong></td><td>波の高さを何段階で表すか（Số lượng tử hóa）</td></tr>
+<tr><td><strong>VGA</strong></td><td>640×480（Độ phân giải）</td></tr>
+<tr><td><strong>RGB各8bit</strong></td><td>1画素=24bit=3 byte</td></tr>
+<tr><td><strong>dpi</strong></td><td>スキャナ/プリンタ解像度</td></tr>
+<tr><td><strong>動画</strong></td><td>静止画×フレームレート×秒。映画24、日本TV30回/秒</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>MIDI</strong></td><td>Lệnh nhạc cụ số; 1 lệnh 8 bit</td></tr>
+<tr><td><strong>Nhạc chuông</strong></td><td>Theo quiz: không phải phát nhạc chất lượng cao như audio</td></tr>
+<tr><td><strong>Tần số lấy mẫu</strong></td><td>Lần đo/giây; CD 44,1 kHz</td></tr>
+<tr><td><strong>Lượng tử hóa</strong></td><td>Số mức biểu diễn biên độ</td></tr>
+<tr><td><strong>VGA</strong></td><td>640×480</td></tr>
+<tr><td><strong>RGB 8 bit</strong></td><td>1 pixel = 3 byte</td></tr>
+<tr><td><strong>dpi</strong></td><td>Độ phân giải máy quét/in</td></tr>
+<tr><td><strong>Video</strong></td><td>Khung hình × fps × giây; TV Nhật 30 fps</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch15"><div class="ch-head"><span class="ch-no">CHAPTER 15</span><span class="ch-title">データ通信（圧縮）</span><span class="ch-sub">Truyền dữ liệu &amp; nén</span></div><div class="sec"><h3>通信速度・圧縮</h3><p class="sec-vi">Tốc độ &amp; nén</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>単位</strong></td><td>bps = bit per second</td></tr>
+<tr><td><strong>ブロードバンド</strong></td><td>概ね100Kbps〜1Mbps以上</td></tr>
+<tr><td><strong>データ圧縮</strong></td><td>Nén dữ liệu</td></tr>
+<tr><td><strong>音声圧縮</strong></td><td>フーリエ変換＝波を正弦波に分解。音の波の性質を利用</td></tr>
+<tr><td><strong>ランレングス</strong></td><td>同じ色がいくつ並ぶかを記述。単純。色変化多いと増えることも</td></tr>
+<tr><td><strong>JPEG/GIF/MPEG</strong></td><td>画像JPEG・GIF／動画MPEG（差分記録）。MP3=MPEG1 Layer3</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Đơn vị</strong></td><td>bps</td></tr>
+<tr><td><strong>Băng rộng</strong></td><td>Khoảng ≥100 Kbps–1 Mbps</td></tr>
+<tr><td><strong>Nén dữ liệu</strong></td><td>Data compression</td></tr>
+<tr><td><strong>Nén âm</strong></td><td>Biến đổi Fourier; dùng tính chất sóng</td></tr>
+<tr><td><strong>Run-length</strong></td><td>Ghi số pixel cùng màu liên tiếp; không luôn nhỏ hơn</td></tr>
+<tr><td><strong>Định dạng</strong></td><td>JPEG/GIF/MPEG; MP3 thuộc MPEG1 L3</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch16"><div class="ch-head"><span class="ch-no">CHAPTER 16</span><span class="ch-title">オペレーティングシステム</span><span class="ch-sub">Hệ điều hành</span></div><div class="sec"><h3>OSの機能</h3><p class="sec-vi">Chức năng OS</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>位置づけ</strong></td><td>アプリとハードの仲介（基本ソフト）</td></tr>
+<tr><td><strong>①UI</strong></td><td>操作・ウィンドウ・ファイル扱いを決定</td></tr>
+<tr><td><strong>②ハード吸収</strong></td><td>機種差を隠す</td></tr>
+<tr><td><strong>③記憶管理</strong></td><td>キャッシュ↔メモリ↔HDD。仮想記憶・スワッピング</td></tr>
+<tr><td><strong>④プロセス管理</strong></td><td>マルチタスクスケジューリング</td></tr>
+<tr><td><strong>⑤ユーザ管理</strong></td><td>マルチユーザ・権限</td></tr>
+<tr><td><strong>資源割当</strong></td><td>CPUやメモリをアプリに割り当てる</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Vị trí</strong></td><td>Trung gian app ↔ hardware</td></tr>
+<tr><td><strong>UI</strong></td><td>Quyết định cách thao tác</td></tr>
+<tr><td><strong>Che khác biệt HW</strong></td><td>Chuẩn hóa phần cứng</td></tr>
+<tr><td><strong>Quản lý nhớ</strong></td><td>Cache–RAM–HDD; virtual memory</td></tr>
+<tr><td><strong>Process</strong></td><td>Đa nhiệm</td></tr>
+<tr><td><strong>User</strong></td><td>Đa người dùng</td></tr>
+<tr><td><strong>Cấp phát tài nguyên</strong></td><td>Gán CPU/RAM cho ứng dụng</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch17"><div class="ch-head"><span class="ch-no">CHAPTER 17</span><span class="ch-title">データベース理論</span><span class="ch-sub">Cơ sở dữ liệu</span></div><div class="sec"><h3>DBの要点</h3><p class="sec-vi">Điểm chính CSDL</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>3要素</strong></td><td>検索速度・データ量・完備性。大量データでは検索速度が最重要</td></tr>
+<tr><td><strong>階層的表現</strong></td><td>親・子・孫の木構造。最上位からたどる（Cấu trúc hình cây）</td></tr>
+<tr><td><strong>網的表現</strong></td><td>親子を網状につなぐ</td></tr>
+<tr><td><strong>関係的表現</strong></td><td>表（リレーショナル）。現在主流（Cơ sở dữ liệu quan hệ）</td></tr>
+<tr><td><strong>キーワード</strong></td><td>Từ khóa</td></tr>
+<tr><td><strong>昇順/降順</strong></td><td>Thứ tự tăng dần / giảm dần</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>3 yếu tố</strong></td><td>Tốc độ tìm, khối lượng, tính toàn vẹn — tốc độ tìm quan trọng nhất</td></tr>
+<tr><td><strong>Phân cấp</strong></td><td>Cây parent–child–grandchild</td></tr>
+<tr><td><strong>Lưới</strong></td><td>Mạng quan hệ cha–con</td></tr>
+<tr><td><strong>Quan hệ</strong></td><td>Bảng quan hệ (RDBMS)</td></tr>
+<tr><td><strong>Keyword</strong></td><td>Từ khóa</td></tr>
+<tr><td><strong>ASC/DESC</strong></td><td>Tăng dần / giảm dần</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch18"><div class="ch-head"><span class="ch-no">CHAPTER 18</span><span class="ch-title">データベース記述</span><span class="ch-sub">SQL / mô tả dữ liệu</span></div><div class="sec"><h3>SQL基礎</h3><p class="sec-vi">Cơ bản SQL</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>SQL</strong></td><td>関係DB操作用言語。検索・並べ替え・結合など</td></tr>
+<tr><td><strong>SELECT</strong></td><td>条件検索の基本</td></tr>
+<tr><td><strong>ORDER BY</strong></td><td>並べ替え（昇順・降順）</td></tr>
+<tr><td><strong>JOIN</strong></td><td>表の結合</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>SQL</strong></td><td>Ngôn ngữ thao tác CSDL quan hệ</td></tr>
+<tr><td><strong>SELECT</strong></td><td>Truy vấn theo điều kiện</td></tr>
+<tr><td><strong>ORDER BY</strong></td><td>Sắp xếp</td></tr>
+<tr><td><strong>JOIN</strong></td><td>Kết nối bảng</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch19"><div class="ch-head"><span class="ch-no">CHAPTER 19</span><span class="ch-title">プログラミングの基礎</span><span class="ch-sub">Cơ sở lập trình</span></div><div class="sec"><h3>言語とオブジェクト</h3><p class="sec-vi">Ngôn ngữ &amp; OOP</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>低級言語</strong></td><td>機械語。CPU依存。汎用性・読みやすさに問題（Java/C++は低級ではない）</td></tr>
+<tr><td><strong>高級言語</strong></td><td>Java・C++など。コンパイラで機械語へ（Ngôn ngữ bậc cao）</td></tr>
+<tr><td><strong>手続型</strong></td><td>Howを詳細記述（Java, C++）</td></tr>
+<tr><td><strong>非手続型</strong></td><td>Whatを記述（SQL等）</td></tr>
+<tr><td><strong>オブジェクト指向</strong></td><td>「もの」を中心。再利用しやすい</td></tr>
+<tr><td><strong>UI設計</strong></td><td>アルゴリズム検討時だけでは不十分。試作して修正</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Ngôn ngữ cấp thấp</strong></td><td>Máy / assembly; phụ thuộc CPU</td></tr>
+<tr><td><strong>Ngôn ngữ bậc cao</strong></td><td>Java, C++…</td></tr>
+<tr><td><strong>Thủ tục</strong></td><td>Mô tả How</td></tr>
+<tr><td><strong>Phi thủ tục</strong></td><td>Mô tả What</td></tr>
+<tr><td><strong>Hướng đối tượng</strong></td><td>Lấy 'vật' (object) làm trung tâm</td></tr>
+<tr><td><strong>Thiết kế UI</strong></td><td>Không đủ chỉ lúc nghĩ thuật toán; cần prototype</td></tr>
+</tbody></table></div></section>
+<section class="ch" id="ch20"><div class="ch-head"><span class="ch-no">CHAPTER 20</span><span class="ch-title">アルゴリズム</span><span class="ch-sub">Giải thuật</span></div><div class="sec"><h3>アルゴリズム・ソート</h3><p class="sec-vi">Thuật toán &amp; sắp xếp</p><span class="lbl jp">表1 · 日本語（教科書）</span><table class="sum"><thead><tr><th style="width:22%">項目</th><th>要点（教科書）</th></tr></thead><tbody>
+<tr><td><strong>アルゴリズム</strong></td><td>入力・出力・処理手順を明確にした基本手順</td></tr>
+<tr><td><strong>フローチャート</strong></td><td>図形と矢印で表現した流れ図</td></tr>
+<tr><td><strong>ソーティング</strong></td><td>昇順・降順に並べ替え。単純比較はO(n²)で非実用</td></tr>
+<tr><td><strong>例</strong></td><td>バブルソート・クイックソート・マージソート等</td></tr>
+</tbody></table><span class="lbl vi">表2 · Bản dịch tiếng Việt</span><table class="sum vi"><thead><tr><th style="width:22%">Mục</th><th>Nội dung tóm tắt</th></tr></thead><tbody>
+<tr><td><strong>Algorithm</strong></td><td>Quy trình xử lý rõ input/output/steps</td></tr>
+<tr><td><strong>Flowchart</strong></td><td>Sơ đồ khối</td></tr>
+<tr><td><strong>Sorting</strong></td><td>Sắp xếp; so sánh thô quá chậm với n lớn</td></tr>
+<tr><td><strong>Ví dụ</strong></td><td>Bubble, quick, merge…</td></tr>
+</tbody></table></div></section>
+
+<section class="quiz" id="quiz-check">
+<h2>Đối chiếu quiz (index.html) — phải trả lời được toàn bộ</h2>
+<p>Sau khi học các bảng trên, kiểm tra các mốc sau (rút từ QUIZ + SAMPLE). Nếu còn mục nào không trả lời được → ôn lại đúng chương.</p>
+<ul>
+<li><strong>ENIAC年:</strong> 1946 / EDSAC・ノイマン型 1949 / 電気機械式 1930年代</li><li><strong>コンピュータ式:</strong> 記憶＋処理</li><li><strong>5要素:</strong> 演算・記憶・制御・入力・出力</li><li><strong>ROM/RAM:</strong> ROM=読み取り専用=Bộ nhớ chỉ đọc / RAM=Random Access Memory</li><li><strong>拡張子:</strong> .xls Excel / .htm HTML / 末尾文字列</li><li><strong>URL:</strong> ホームページアドレス／資源場所</li><li><strong>Web2.0:</strong> 2004 O'Reilly・双方向・ロングテール。送り手受け手固定は誤り</li><li><strong>クラウド:</strong> 2006 Schmidt・Internet経由で資源提供</li><li><strong>ネチケット:</strong> 著作権ファイル送らない。.exe/.vbs/.scr/.pif即削除</li><li><strong>知財:</strong> 著作権3種／特許=新規技術／意匠=デザイン／商標=ロゴ／工業所有権=技術の進歩保護／創作で自動発生</li><li><strong>携帯世代:</strong> 1Gアナログ波そのまま／2Gデジタル／3G高速データ</li><li><strong>タッチ:</strong> 抵抗膜=抵抗値／静電容量=電荷／CMOS=光＋増幅</li><li><strong>接続:</strong> FTTH~100Mbps／ADSL=Asymmetric…／PLC=電灯線／Wi-Fi=Wireless Fidelity／BT≠赤外線／Suica=非接触IC</li><li><strong>ネット:</strong> スター型最多／分散処理／P2P対等／密結合=メモリ共有／疎結合=独立メモリ</li><li><strong>OSI:</strong> 7層／TCP=トランスポート／.com=米／HTML≠独自タグ／XML=独自タグ可／IPでコンピュータ特定</li><li><strong>商取引:</strong> EOS=オンライン受発注／EDI=データ交換標準／Cookie／OECDに利用無制限なし／スカベンジング=収集</li><li><strong>暗号:</strong> 暗号化=推測不可変換／シーザー=ずらす／転置=順序入替／SSL=公開+秘密鍵</li><li><strong>セキュ:</strong> ウィルス人為／トロイの木馬／稼働率=MTBF/(MTBF+MTTR)／並列=1-(1-A)(1-B)／成長曲線=S字</li><li><strong>構造:</strong> MB=最大基板／CPU≠最大基板／キャッシュ最速／OS資源割当／UI=操作決定</li><li><strong>論理:</strong> 4世代真空管…／AND直列／OR並列／チューリング</li><li><strong>2進:</strong> 1100=12／1+1=10₂／0と1の並び</li><li><strong>情報量:</strong> bit最小／英1B／日2B／Unicode65536／1GB=1024MB</li><li><strong>MM:</strong> MIDI=8bit／CD44.1kHz／VGA640×480／RGB3B／TV30fps／dpi=スキャナプリンタ</li><li><strong>圧縮:</strong> bps／フーリエ＝正弦波分解／音声は波の性質／ランレングス≠常に縮小</li><li><strong>DB/Prog:</strong> 検索速度最重要／階層=親子孫／関係DB／OOP=もの中心／高級=JavaC++／低級≠Java</li><li><strong>専門用語JP↔VN:</strong> 電流=Điện lưu/Dòng điện／分散=Hệ thống xử lý phân tán／データ圧縮=Nén dữ liệu／高水準=Ngôn ngữ bậc cao／昇順=Thứ tự tăng dần／キーワード=Từ khóa</li>
+</ul>
+<div class="pass">
+<strong>Kết luận đối chiếu:</strong> Nội dung tóm tắt đã bổ sung đủ các điểm hay ra trong quiz
+(lịch sử ENIAC/EDSAC, Web2.0/cloud, thế hệ di động, FTTH/PLC/Bluetooth/IrDA, OSI 7 lớp, EDI/EOS,
+mã hóa/SSL, MTBF-MTTR, 5 thành phần/MB/CPU/cache, 4 thế hệ logic, bit/byte/Unicode,
+MIDI/CD 44.1kHz/VGA/30fps, Fourier/run-length, DB phân cấp–quan hệ, OOP, thuật ngữ JP↔VN…).
+Học theo bảng JP → đọc bảng dịch → làm lại quiz trong index.html để “pass”.
+</div>
+</section>
+<footer>JIT401 study sheet · auto-generated from textbook + quiz cross-check · 2026</footer>
+</div>
+</body>
+</html>
