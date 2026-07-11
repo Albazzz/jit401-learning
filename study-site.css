@@ -194,6 +194,44 @@
   color: var(--text-secondary);
 }
 
+/* Detailed body blocks */
+.detail-block {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  margin: 10px 0 14px;
+  background: var(--surface-2);
+}
+.detail-block.jp-block {
+  background: linear-gradient(180deg, #f7faff 0%, var(--surface-2) 100%);
+  border-color: rgba(47, 124, 246, 0.2);
+}
+.detail-block.vi-block {
+  background: linear-gradient(180deg, #f3fbf6 0%, var(--surface-2) 100%);
+  border-color: rgba(31, 157, 99, 0.22);
+}
+.detail-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+.detail-block.vi-block .detail-label { color: var(--correct); }
+.detail-p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin: 0 0 10px;
+}
+.detail-p:last-child { margin-bottom: 0; }
+.detail-p.jp {
+  font-family: var(--font-jp);
+  font-size: 0.98rem;
+  line-height: 1.85;
+}
+
 /* Dual summary tables */
 .tbl-label {
   display: inline-flex;
@@ -753,6 +791,94 @@ table.sum tr:nth-child(even) td:first-child { background: rgba(47, 124, 246, 0.0
   color: var(--text-secondary);
   line-height: 1.5;
   font-family: var(--font-jp);
+}
+
+/* Quiz bilingual explain panel */
+.explain-panel {
+  margin-top: 14px;
+  padding: 14px 14px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(47, 124, 246, 0.22);
+  background: linear-gradient(180deg, #f7faff 0%, #fff 40%);
+  box-shadow: var(--shadow-sm);
+}
+.explain-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.explain-sub {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--text);
+  margin: 12px 0 6px;
+}
+.explain-q,
+.explain-choices {
+  font-size: 0.86rem;
+  margin-bottom: 4px;
+}
+.explain-choices td:first-child {
+  width: 40px;
+  text-align: center;
+}
+.explain-choices th:last-child,
+.explain-choices td:last-child {
+  width: 110px;
+}
+.explain-choices tr.row-ok td {
+  background: rgba(31, 157, 99, 0.1) !important;
+}
+.explain-choices tr.row-bad td {
+  background: rgba(229, 72, 77, 0.08) !important;
+}
+.tag-ok,
+.tag-bad {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.tag-ok {
+  background: var(--correct-bg);
+  color: var(--correct);
+}
+.tag-bad {
+  background: var(--wrong-bg);
+  color: var(--wrong);
+}
+.explain-why {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(31, 157, 99, 0.08);
+  border: 1px solid rgba(31, 157, 99, 0.2);
+}
+.explain-why .why-line {
+  margin: 0 0 8px;
+}
+.explain-why .why-line:last-child { margin-bottom: 0; }
+.explain-why .why-ans {
+  font-weight: 800;
+  color: var(--correct);
+  font-size: 0.98rem;
+}
+.explain-src {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.explain-src .jp-cell {
+  font-family: var(--font-jp);
+  color: var(--text-secondary);
 }
 .page-info {
   display: flex;
