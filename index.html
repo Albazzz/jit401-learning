@@ -3794,10 +3794,34 @@ const SAMPLE_TR = [
     return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
   function letterOf(c){ return String(c).split('.')[0].trim(); }
+  function getExplainOn(){
+    try { return localStorage.getItem('jit401_explain_on') !== '0'; } catch(e){ return true; }
+  }
+  function setExplainOn(on){
+    try { localStorage.setItem('jit401_explain_on', on ? '1' : '0'); } catch(e){}
+  }
+  function toggleExplain(){
+    const next = !getExplainOn();
+    setExplainOn(next);
+    document.querySelectorAll('.explain-panel').forEach(el=>{
+      el.classList.toggle('is-hidden', !next);
+    });
+    document.querySelectorAll('.btn-explain-toggle').forEach(btn=>{
+      btn.textContent = next ? 'Ẩn giải thích' : 'Hiện giải thích';
+      btn.setAttribute('aria-pressed', next ? 'true' : 'false');
+      btn.classList.toggle('is-off', !next);
+    });
+    document.querySelectorAll('.explain-toolbar-hint').forEach(el=>{
+      el.innerHTML = next
+        ? 'Đang hiện bảng dịch &amp; lý do chọn đáp án'
+        : 'Đã ẩn phần giải thích — bấm để xem lại';
+    });
+  }
   function buildExplainPanel(q, tr, chosen){
     const qv = (tr && tr.qv) || '';
     const cv = (tr && tr.cv) || [];
     const why = (tr && tr.why) || q.ex || '';
+    const on = getExplainOn();
     const rows = q.c.map((c,i)=>{
       const L = letterOf(c);
       const vi = cv[i] || '';
@@ -3813,7 +3837,14 @@ const SAMPLE_TR = [
         <td>${mark}</td>
       </tr>`;
     }).join('');
-    return `<div class="explain-panel">
+    return `<div class="explain-toolbar">
+      <button type="button" class="btn btn-secondary btn-explain-toggle${on?'':' is-off'}"
+        onclick="toggleExplain()" aria-pressed="${on?'true':'false'}">
+        ${on?'Ẩn giải thích':'Hiện giải thích'}
+      </button>
+      <span class="explain-toolbar-hint">${on?'Đang hiện bảng dịch &amp; lý do chọn đáp án':'Đã ẩn phần giải thích — bấm để xem lại'}</span>
+    </div>
+    <div class="explain-panel${on?'':' is-hidden'}">
       <div class="explain-title">Bảng dịch &amp; giải thích</div>
       <table class="sum explain-q">
         <thead><tr><th style="width:18%">Loại</th><th>Nội dung</th></tr></thead>

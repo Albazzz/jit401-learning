@@ -794,13 +794,37 @@ table.sum tr:nth-child(even) td:first-child { background: rgba(47, 124, 246, 0.0
 }
 
 /* Quiz bilingual explain panel */
-.explain-panel {
+.explain-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
   margin-top: 14px;
+}
+.btn-explain-toggle {
+  font-size: 0.85rem !important;
+  padding: 8px 14px !important;
+  min-width: 140px;
+}
+.btn-explain-toggle.is-off {
+  background: var(--accent-soft) !important;
+  color: var(--accent) !important;
+  border-color: rgba(47, 124, 246, 0.35) !important;
+}
+.explain-toolbar-hint {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.explain-panel {
+  margin-top: 10px;
   padding: 14px 14px 12px;
   border-radius: 14px;
   border: 1px solid rgba(47, 124, 246, 0.22);
   background: linear-gradient(180deg, #f7faff 0%, #fff 40%);
   box-shadow: var(--shadow-sm);
+}
+.explain-panel.is-hidden {
+  display: none;
 }
 .explain-title {
   font-size: 0.8rem;
