@@ -1,0 +1,82 @@
+TÓM TẮT CÁC YÊU CẦU (PROMPTS) TRONG PHIÊN LÀM VIỆC JIT401
+============================================================
+Nguồn: lịch sử hội thoại với Grok trong workspace d:\Study\1_JIT401\jl
+Ngày tham chiếu: 2026-07-11 (theo ngữ cảnh phiên)
+
+
+1) Tóm tắt giáo trình + đối chiếu quiz
+--------------------------------------
+- Dựa vào file JIT401-Giao-trinh-IT.docx, viết bảng tóm tắt nội dung.
+- Mỗi chương / mỗi bài / mỗi mục phải có chi tiết nội dung.
+- Mục tiêu: học nhanh toàn bộ nội dung.
+- Ghi 2 bảng tiếng Nhật (lấy từ sách) và kèm bảng dịch ở dưới.
+- Sau khi tóm tắt xong: đối chiếu với quiz trong index.html.
+  + Nếu trả lời được toàn bộ quiz → pass.
+  + Nếu không → bổ sung thêm nội dung.
+
+
+2) Viết lại phần Study + sửa CSS theo file CSS sẵn có
+----------------------------------------------------
+- Dựa vào tóm tắt / tài liệu đã có, viết lại phần study.
+- Sửa CSS theo các file CSS đã có trong thư mục dự án
+  (app.css, study-site.css, tokens, layout, base…).
+- Không chỉ dùng style inline dài như bản cũ; dùng CSS ngoài.
+
+
+3) Study còn thiếu chi tiết — phải chi tiết hơn
+-----------------------------------------------
+- Phản hồi: study hiện chỉ có tiêu đề và các mục, chưa đủ detail.
+- Yêu cầu bổ sung chi tiết hơn cho từng mục (nội dung đầy đủ để học).
+
+
+4) Bổ sung phần quiz: dịch + giải thích đáp án
+----------------------------------------------
+- Khi làm quiz, phần giải thích cần kèm:
+  + Bảng dịch câu hỏi.
+  + Bảng dịch các lựa chọn.
+  + Giải thích rõ vì sao chọn lựa chọn đó (đáp án đúng).
+
+
+5) Push lên GitHub để xem
+-------------------------
+- Yêu cầu push code lên remote (nhiều lần trong phiên).
+- Repo: https://github.com/Albazzz/jit401-learning
+
+
+6) Thêm nút bật/tắt phần giải thích
+-----------------------------------
+- Thêm một nút cho phép bật/tắt phần giải thích quiz
+  (ẩn/hiện bảng dịch & lý do chọn đáp án).
+
+
+7) Push lần sau khi có nút bật/tắt
+----------------------------------
+- Push tiếp bản có nút toggle giải thích.
+
+
+8) Tóm tắt lại các prompt vào file txt (yêu cầu hiện tại)
+---------------------------------------------------------
+- Tóm tắt lại những prompt nãy giờ đã yêu cầu vào một file .txt.
+- (Chính là file này: tom-tat-yeu-cau.txt)
+
+
+----------------------------------------------------------
+KẾT QUẢ CHÍNH ĐÃ LÀM THEO CÁC YÊU CẦU TRÊN
+----------------------------------------------------------
+- index.html:
+  + Study chi tiết song ngữ JP–VI theo giáo trình (nhiều chương/mục).
+  + Quiz ôn luyện + quiz mẫu + câu sai.
+  + Panel giải thích: dịch câu hỏi, dịch lựa chọn, vì sao đúng.
+  + Nút Ẩn/Hiện giải thích (lưu trạng thái localStorage).
+- app.css, study-site.css: giao diện theo token/CSS dự án.
+- tom-tat-jit401.html: bản tóm tắt riêng (nếu còn).
+- Đã push các bản chính lên GitHub (jit401-learning).
+
+
+----------------------------------------------------------
+GHI CHÚ
+----------------------------------------------------------
+- Các file trích xuất tạm (ch_snip_*.txt, textbook_extract.txt,
+  script build_*.py, v.v.) chủ yếu phục vụ xử lý nội bộ, không
+  nhất thiết đều được push lên repo.
+- File này chỉ tóm tắt YÊU CẦU của bạn, không phải toàn bộ log kỹ thuật.

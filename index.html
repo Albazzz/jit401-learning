@@ -22,8 +22,10 @@
       <button class="nav-tab active" onclick="showPage('study')">Tài liệu</button>
       <button class="nav-tab" onclick="showPage('quiz')">Ôn luyện<span class="nav-badge" id="wrong-badge" style="display:none">0</span></button>
       <button class="nav-tab" onclick="showPage('sample')">Quiz mẫu<span class="nav-badge orange" id="swrong-badge" style="display:none">0</span></button>
+      <button class="nav-tab" onclick="showPage('pt')">Quiz PT<span class="nav-badge" id="ptwrong-badge" style="display:none;background:#7c3aed">0</span></button>
       <button class="nav-tab" onclick="showPage('wrong')">Câu sai</button>
       <button class="nav-tab" onclick="showPage('swrong')">Sai mẫu</button>
+      <button class="nav-tab" onclick="showPage('ptwrong')">Sai PT</button>
     </div>
   </div>
 </nav>
@@ -178,7 +180,7 @@
 <li><a class="lvl-2" href="#ch20-s3">Sơ đồ khối</a></li>
 <li><a class="lvl-2" href="#ch20-s4">Sắp xếp</a></li>
 <li><a class="lvl-2" href="#ch20-s5">Thiết kế giao diện người–máy</a></li>
-<li><a class="lvl-0" href="#quiz-check">Đối chiếu quiz</a></li>
+<li><a class="lvl-0" href="#ch-pt-extra">Quiz PT — Bổ sung</a></li><li><a class="lvl-2" href="#ch-pt-extra-s1">Thuật ngữ PT</a></li><li><a class="lvl-2" href="#ch-pt-extra-s2">OSI / mã hóa / availability / clock</a></li><li><a class="lvl-2" href="#ch-pt-extra-s3">HW / logic / security / EC</a></li><li><a class="lvl-0" href="#quiz-check">Đối chiếu quiz</a></li>
         </ul>
       </aside>
 
@@ -3217,9 +3219,112 @@
       </tbody></table>
     </article>
 
-        <section class="quiz-check-box<section class="quiz-check-box<section class="quiz-check-box<section class="quiz-check-box section-block" id="quiz-check">
+        
+    <article class="section-block lvl-0" id="ch-pt-extra">
+      <h2><span class="jp">Quiz PT 追加ポイント</span></h2>
+      <p class="sec-meta">Bổ sung kiến thức để pass Quiz PT (theo quiz.txt mới)</p>
+    </article>
+
+    <article class="section-block" id="ch-pt-extra-s1">
+      <h2 class="jp">用語・読み・ベトナム語（PT）</h2>
+      <p class="sec-meta">Thuật ngữ hay ra trong Quiz PT</p>
+      <div class="detail-block jp-block">
+        <div class="detail-label">① 日本語・要点</div>
+        <p class="jp detail-p">素因数（そいんすう）／素数（そすう）。サイマル放送＝同一内容を同時に複数方式で放送。マス目＝チューリングマシンのテープ上のマス。マイクロプロセッサ＝MPU＝CPUのハードウェア呼称。踏み台（ふみだい）＝他システム攻撃の足場。通信制御（つうしんせいぎょ）。周波数帯（しゅうはすうたい）。帯域幅（たいいきはば）。単結晶（たんけっしょう）。正弦波（せいげんは）。小文字（こもじ）。変調＝modulation。CRC＝Cyclic Redundancy Check。LSI＝大規模集積回路。PLC＝電灯線通信。EDI＝Electronic Data Interchange。DoS＝サービス拒否攻撃。</p>
+      </div>
+      <div class="detail-block vi-block">
+        <div class="detail-label">② Tiếng Việt</div>
+        <p class="detail-p">素因数 (soinsuu) / 素数 (sosuu). サイマル放送 = phát sóng cùng lúc cùng nội dung (one-seg). マス目 = ô trên băng Turing. Microprocessor = MPU. 踏み台 = bàn đạp tấn công. 通信制御 = điều khiển thông tin. 周波数帯 = dải tần. 帯域幅 = băng thông. 単結晶 = đơn kết tinh. 正弦波 = sóng sin. 小文字 = chữ thường. Modulation, CRC, LSI, PLC, EDI, DoS như bảng dưới.</p>
+      </div>
+      <span class="tbl-label jp">③ 要点（日本語）</span>
+      <table class="sum"><thead><tr><th>用語</th><th>読み / 意味</th></tr></thead><tbody>
+        <tr><td>サイマル放送</td><td class="jp-cell">同一番組を同時放送（ワンセグの基本）</td></tr>
+        <tr><td>踏み台</td><td class="jp-cell">ふみだい。侵入後に他組織攻撃の足場</td></tr>
+        <tr><td>単結晶</td><td class="jp-cell">たんけっしょう。LSI基板のシリコンなど</td></tr>
+        <tr><td>流通過程</td><td class="jp-cell">quá trình lưu thông（商品・バリューの流れ）</td></tr>
+        <tr><td>周波数帯 / 帯域幅</td><td class="jp-cell">しゅうはすうたい / たいいきはば（bandwidth）</td></tr>
+        <tr><td>LSI</td><td class="jp-cell">大規模集積回路</td></tr>
+        <tr><td>PLC</td><td class="jp-cell">電灯線でデータ通信</td></tr>
+        <tr><td>DoS</td><td class="jp-cell">大量アクセスで使用不能にする攻撃</td></tr>
+      </tbody></table>
+      <span class="tbl-label vi">④ Ý chính (VI)</span>
+      <table class="sum vi"><thead><tr><th>Mục</th><th>Chi tiết</th></tr></thead><tbody>
+        <tr><td>Simulcast</td><td>Phát sóng cùng lúc (one-seg)</td></tr>
+        <tr><td>Stepping stone</td><td>Máy bị chiếm làm bàn đạp</td></tr>
+        <tr><td>Đơn kết tinh</td><td>Silicon wafer LSI</td></tr>
+        <tr><td>Lưu thông</td><td>Luồng hàng/value (EC)</td></tr>
+        <tr><td>Băng tần</td><td>Dải tần / bandwidth</td></tr>
+        <tr><td>LSI/PLC/DoS</td><td>Mạch lớn / điện nhà / từ chối dịch vụ</td></tr>
+      </tbody></table>
+    </article>
+
+    <article class="section-block" id="ch-pt-extra-s2">
+      <h2 class="jp">OSI・暗号・稼働率・クロック（計算）</h2>
+      <p class="sec-meta">Các điểm tính toán / định nghĩa hay ra PT</p>
+      <div class="detail-block jp-block">
+        <div class="detail-label">① 日本語・詳細</div>
+        <p class="jp detail-p">OSI 7層: 物理・データリンク（隣接機器間）・ネットワーク・トランスポート・セッション（開始〜終了の手順管理）・プレゼンテーション・アプリケーション。秘密文書: 受信者の公開鍵で暗号化。認証: 送信者の秘密鍵で暗号化し、公開鍵で検証。SSL≠認証の定義そのもの（SSLは暗号通信プロトコル）。稼働率=MTBF/(MTBF+MTTR)。例: 500/(500+10)=0.98=98%。並列A,Bの後にC直列: [1-(1-A)(1-B)]×C。例 A=B=0.9,C=0.95 → [1-0.01]×0.95=0.99×0.95=0.9405≈94.0%。クロック: 1命令時間(秒)=クロック数/周波数。3GHzで6クロック → 6/(3×10⁹)=2×10⁻⁹秒=2.0 ns。</p>
+      </div>
+      <div class="detail-block vi-block">
+        <div class="detail-label">② Tiếng Việt</div>
+        <p class="detail-p">OSI 7 tầng: physical, data link (máy kề), network, transport, session (quản lý phiên từ đầu đến cuối), presentation, application. Gửi mật: mã bằng public key người nhận. Xác thực: ký bằng private key người gửi. SSL là giao thức mã hóa, không đồng nghĩa định nghĩa “認証” thuần. Availability = MTBF/(MTBF+MTTR). Song song rồi nối tiếp: [1-(1-A)(1-B)]×C. Thời gian 1 lệnh = số clock / f. 3GHz × 6 clock = 2 ns.</p>
+      </div>
+      <span class="tbl-label jp">③ 要点</span>
+      <table class="sum"><thead><tr><th>項目</th><th>詳細</th></tr></thead><tbody>
+        <tr><td>セッション層</td><td class="jp-cell">通信の開始〜終了の手順管理（第5層）</td></tr>
+        <tr><td>データリンク層</td><td class="jp-cell">隣接機器間の転送</td></tr>
+        <tr><td>秘密通信</td><td class="jp-cell">相手の公開鍵で暗号化</td></tr>
+        <tr><td>認証</td><td class="jp-cell">自分の秘密鍵で暗号化→相手は公開鍵で検証</td></tr>
+        <tr><td>稼働率</td><td class="jp-cell">MTBF/(MTBF+MTTR)；並列後直列の合成に注意</td></tr>
+        <tr><td>命令時間</td><td class="jp-cell">クロック数 ÷ 周波数（GHz→×10⁹）</td></tr>
+      </tbody></table>
+      <span class="tbl-label vi">④ Ý chính</span>
+      <table class="sum vi"><thead><tr><th>Mục</th><th>Chi tiết</th></tr></thead><tbody>
+        <tr><td>Session</td><td>Quản lý phiên (tầng 5)</td></tr>
+        <tr><td>Data link</td><td>Chuyển giữa máy kề</td></tr>
+        <tr><td>Gửi mật / Xác thực</td><td>Public người nhận / Private người gửi</td></tr>
+        <tr><td>Availability</td><td>MTBF/(MTBF+MTTR); công thức ghép</td></tr>
+        <tr><td>Clock</td><td>t = N_clock / f</td></tr>
+      </tbody></table>
+    </article>
+
+    <article class="section-block" id="ch-pt-extra-s3">
+      <h2 class="jp">ハード・論理・セキュリティ・EC（PT）</h2>
+      <p class="sec-meta">Phần cứng, logic, bảo mật, TMĐT</p>
+      <div class="detail-block jp-block">
+        <div class="detail-label">① 日本語</div>
+        <p class="jp detail-p">5要素: 演算・記憶・制御・入力・出力。出力=ディスプレイ・プリンタ。入力=KB・マウス。記憶=メモリ・HDD。キャッシュが最速。RAMは電源OFFで消える。ROMは読み取り専用。CPUに入出力機能は含まれない（誤り選択肢）。AND=直列、OR=並列、NOT=反転。ダイオードは一方向電流。電子の移動方向と電流方向は逆。プログラムミス（バグ）は故障以外の問題。ウイルス対策はパターン更新。危険添付を開かない。最新ブラウザ。工業所有権=特許・実用新案・意匠・商標（著作隣接権は著作権側）。CALS=企業間同一データ取引の標準。クローズドループ電子マネー=店舗のバリューは発行元経由で口座振込。FOMA=第3世代。静電容量方式=指とセンサの電荷。直列/並列システム。バスはデータやりとりの通路。</p>
+      </div>
+      <div class="detail-block vi-block">
+        <div class="detail-label">② Tiếng Việt</div>
+        <p class="detail-p">5 thành phần; ra = màn/in; vào = KB/chuột; nhớ = RAM/HDD; cache nhanh nhất; RAM mất khi tắt; ROM chỉ đọc; CPU không gồm I/O. AND nối tiếp, OR song song, NOT đảo. Diode một chiều; chiều electron ngược chiều dòng. Bug ngoài hỏng hóc. AV + cập nhật pattern; không mở .exe…; browser mới. Sở hữu công nghiệp: patent, utility, design, trademark. CALS chuẩn data liên doanh. e-money closed-loop: value về issuer/bank. FOMA = 3G. Capacitive = đo điện tích. Series/parallel system. Bus = đường trao data trong CPU.</p>
+      </div>
+      <span class="tbl-label jp">③ 要点</span>
+      <table class="sum"><thead><tr><th>項目</th><th>詳細</th></tr></thead><tbody>
+        <tr><td>キャッシュ</td><td class="jp-cell">アクセス最速</td></tr>
+        <tr><td>AND / OR</td><td class="jp-cell">直列 / 並列</td></tr>
+        <tr><td>ウイルス対策</td><td class="jp-cell">ソフト＋パターン日常更新</td></tr>
+        <tr><td>工業所有権</td><td class="jp-cell">特許・実用新案・意匠・商標</td></tr>
+        <tr><td>FOMA</td><td class="jp-cell">第3世代携帯電話</td></tr>
+        <tr><td>静電容量方式</td><td class="jp-cell">指先とセンサ間の電荷を測定</td></tr>
+        <tr><td>バス</td><td class="jp-cell">CPU内部などのデータ通路</td></tr>
+      </tbody></table>
+      <span class="tbl-label vi">④ Ý chính</span>
+      <table class="sum vi"><thead><tr><th>Mục</th><th>Chi tiết</th></tr></thead><tbody>
+        <tr><td>Cache</td><td>Nhanh nhất</td></tr>
+        <tr><td>AND/OR</td><td>Nối tiếp / song song</td></tr>
+        <tr><td>Antivirus</td><td>Cập nhật mẫu nhận diện</td></tr>
+        <tr><td>SHCN</td><td>Patent, utility, design, trademark</td></tr>
+        <tr><td>FOMA</td><td>3G</td></tr>
+        <tr><td>Capacitive</td><td>Đo điện tích ngón tay</td></tr>
+        <tr><td>Bus</td><td>Đường data</td></tr>
+      </tbody></table>
+    </article>
+
+
+        <section class="quiz-check-box section-block" id="quiz-check">
           <h2>Đối chiếu quiz — phải trả lời được toàn bộ</h2>
-          <p>Các mốc hay ra trong Ôn luyện + Quiz mẫu. Ôn bảng trên rồi làm lại quiz để pass.</p>
+          <p>Các mốc hay ra trong Ôn luyện + Quiz mẫu + <strong>Quiz PT</strong>. Ôn bảng study (kể cả mục «Quiz PT 追加ポイント») rồi làm lại quiz để pass.</p>
           <ul>
             <li><strong>ENIAC年:</strong> 1946 / EDSAC・ノイマン型 1949 / 電気機械式 1930年代</li>
 <li><strong>コンピュータ式:</strong> 記憶＋処理</li>
@@ -3246,10 +3351,23 @@
 <li><strong>MM:</strong> MIDI=8bit／CD44.1kHz／VGA640×480／RGB3B／TV30fps／dpi=スキャナプリンタ</li>
 <li><strong>圧縮:</strong> bps／フーリエ＝正弦波分解／音声は波の性質／ランレングス≠常に縮小</li>
 <li><strong>DB/Prog:</strong> 検索速度最重要／階層=親子孫／関係DB／OOP=もの中心／高級=JavaC++／低級≠Java</li>
+
+<li><strong>Quiz PT:</strong> 109 câu (cũ + quiz.txt, lọc trùng)</li>
+<li><strong>差分記録:</strong> 前フレームとの差分だけ記録（MPEG）</li>
+<li><strong>サイマル放送:</strong> phát sóng cùng lúc</li>
+<li><strong>OSI:</strong> セッション=開始〜終了管理／データリンク=隣接転送</li>
+<li><strong>鍵:</strong> 秘密文書=相手の公開鍵／認証=自分の秘密鍵</li>
+<li><strong>稼働率:</strong> MTBF/(MTBF+MTTR)；並列+直列合成例 94%</li>
+<li><strong>クロック:</strong> 命令時間=クロック数÷周波数（3GHz×6clk=2ns）</li>
+<li><strong>論理:</strong> AND直列／OR並列／NOT反転</li>
+<li><strong>RAM/ROM/Cache:</strong> 揮発／読専／最速</li>
+<li><strong>FOMA=3G／PLC=電灯線／LSI=大規模集積／DoS=サービス拒否</strong></li>
+<li><strong>工業所有権:</strong> 特許・実用新案・意匠・商標</li>
+<li><strong>電子マネー:</strong> クローズドは発行元経由口座振込</li>
 <li><strong>専門用語JP↔VN:</strong> 電流=Điện lưu/Dòng điện／分散=Hệ thống xử lý phân tán／データ圧縮=Nén dữ liệu／高水準=Ngôn ngữ bậc cao／昇順=Thứ tự tăng dần／キーワード=Từ khóa</li>
           </ul>
           <div class="pass-note">
-            Nội dung study đã cover các điểm quiz chính. Học bảng JP → đọc bảng VI → làm Ôn luyện &amp; Quiz mẫu.
+            Nội dung study đã cover các điểm quiz chính. Học bảng JP → đọc bảng VI → làm Ôn luyện, Quiz mẫu &amp; <strong>Quiz PT</strong>.
           </div>
         </section>
 
@@ -3365,6 +3483,61 @@
       <p style="font-size:16px;font-weight:600">Đã ôn xong!</p>
       <p style="margin-top:8px;font-size:13px;color:var(--muted)">Còn lại: <strong id="sw-rem" style="color:var(--wrong)">0</strong> câu sai</p>
       <div style="margin-top:16px"><button class="btn btn-orange" onclick="backSWrongIntro()">Danh sách câu sai</button></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ QUIZ PT (từ quiz.txt) ═══ -->
+<div id="pt-page" class="page">
+  <div class="quiz-hero" style="background:linear-gradient(160deg,#1e1b4b 0%,#312e81 55%,#5b21b6 100%)">
+    <p class="quiz-hero-eyebrow" style="color:#c4b5fd">JIT401 — Quiz PT</p>
+    <h2>109 câu <span style="color:#c4b5fd">Quiz PT</span></h2>
+    <p class="quiz-hero-sub">Câu hỏi từ quiz.txt · cùng tính năng ôn luyện / giải thích</p>
+  </div>
+  <div class="progress-strip"><div class="progress-fill" id="pt-progress" style="width:0%;background:#8b5cf6"></div></div>
+  <div class="quiz-stats-bar">
+    <div class="quiz-stats-inner">
+      <span class="quiz-stat-item">Câu: <strong id="pt-stat-cur">1 / 109</strong></span>
+      <span class="quiz-stat-item" style="color:var(--correct)">Đúng: <strong id="pt-stat-ok">0</strong></span>
+      <span class="quiz-stat-item" style="color:var(--wrong)">Sai: <strong id="pt-stat-ng">0</strong></span>
+    </div>
+  </div>
+  <div class="quiz-container">
+    <div id="pt-area"></div>
+    <div class="score-card" id="pt-finish" style="display:none">
+      <div><span class="score-big" id="pt-fscore" style="color:#8b5cf6">0</span><span class="score-of"> / 109</span></div>
+      <div class="score-grade" id="pt-fgrade"></div>
+      <div class="score-bar-wrap"><div class="score-bar-fill" id="pt-fbar" style="width:0%;background:#8b5cf6"></div></div>
+      <p style="margin-top:12px;font-size:13px;color:var(--muted)">Câu sai: <strong id="pt-fwrong" style="color:var(--wrong)">0</strong></p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap">
+        <button class="btn btn-secondary" onclick="showPage('ptwrong')">Làm lại câu sai</button>
+        <button class="btn btn-danger" onclick="resetPT()">Làm lại từ đầu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="ptwrong-page" class="page">
+  <div class="quiz-hero" style="background:linear-gradient(160deg,#1e1b4b 0%,#312e81 55%,#5b21b6 100%)">
+    <p class="quiz-hero-eyebrow" style="color:#c4b5fd">JIT401 — Quiz PT</p>
+    <h2>Làm lại <span style="color:#c4b5fd">câu sai PT</span></h2>
+    <p class="quiz-hero-sub">Ôn lại câu sai trong Quiz PT</p>
+  </div>
+  <div class="quiz-container wrong-intro">
+    <div id="ptw-intro">
+      <div class="score-card">
+        <p>Số câu sai cần ôn lại (Quiz PT)</p>
+        <div class="score-big" id="ptw-cnt" style="font-size:44px;color:#8b5cf6">0</div>
+        <div class="page-dots" id="ptw-list"></div>
+        <div style="margin-top:20px"><button class="btn btn-secondary" id="ptw-start-btn" onclick="startPTWrong()">Bắt đầu</button></div>
+      </div>
+    </div>
+    <div id="ptw-area" style="display:none"></div>
+    <div class="score-card" id="ptw-finish" style="display:none">
+      <p style="font-size:16px;font-weight:600">Đã ôn xong!</p>
+      <p style="margin-top:8px;font-size:13px;color:var(--muted)">Còn lại: <strong id="ptw-rem" style="color:var(--wrong)">0</strong> câu sai</p>
+      <div style="margin-top:16px"><button class="btn btn-secondary" onclick="backPTWrongIntro()">Danh sách câu sai</button></div>
     </div>
   </div>
 </div>
@@ -3599,6 +3772,119 @@ const QUIZ = [
   {m:2,q:"【専門知識】1文字を表現するために、16ビット（2バイト）のデータ量を使用する文字コードは何ですか。",c:["A. ASCIIコード","B. Unicode","C. シフトJISコード","D. EUC"],a:"B",ex:"Unicode（ユニコード）は1文字を16ビット（2バイト）で表現する文字コードです（§13.5）。"},
   ];
 
+
+const PT = [
+  {m:2,q:"動画像では、1つ前の画像との違っている部分だけを記録して圧縮率を高める方法を何と言いますか。",c:["A. ランレングス圧縮","B. 差分記録","C. フーリエ変換","D. 量子化"],a:"B",ex:"動画像では前後フレームでほとんど差がないため、違っている部分だけを記録する差分記録で圧縮率を高める（MPEGで利用）。"},
+  {m:2,q:"「#」の記号はどのように読みますか。",c:["A. シャープ","B. ハッシュ","C. ポンド","D. ナンバー"],a:"A",ex:"記号「#」は日本語でシャープと読むのが一般的。"},
+  {m:2,q:"JISコードは、日本工業規格 JIS が定めたもので、（  ）bitの数字を（  ）桁ずつ区切って表します。",c:["A. 8 - 4","B. 16 - 8","C. 32 - 16","D. 16 - 4"],a:"B",ex:"JISコードは16ビットを8ビットずつに分けて扱う。"},
+  {m:2,q:"パリティビットには、どのような種類がありますか。",c:["A. 奇数パリティと偶数パリティ","B. 縦パリティだけ","C. 横パリティだけ","D. パリティは1種類だけ"],a:"A",ex:"パリティビットの基本分類は奇数パリティと偶数パリティ。"},
+  {m:5,q:"「OSI」について、正しいものはどれですか。",c:["A. 通信速度を測る単位である","B. コンピュータの5要素の1つである","C. 通信の手順であるプロトコルを機能ごとに7つの階層に分けて定義したモデルである","D. 暗号化の方式の1つである"],a:"C",ex:"OSI参照モデルはプロトコルを7階層に分けて定義する。"},
+  {m:2,q:"2進数10011と2進数101を乗算した結果の2進数はどれか。",c:["A. 1011111","B. 110011","C. 10011","D. 10101"],a:"A",ex:"10011₂=19、101₂=5、19×5=95、95₁₀=1011111₂。"},
+  {m:2,q:"CDでは、傷や手の脂、埃などによってデータが正しく読み取れない場合があります。このような誤りを検出・訂正するための仕組みを何と言いますか。",c:["A. パリティチェック","B. 誤り検出・訂正機構","C. ファイアウォール","D. ランレングス圧縮"],a:"B",ex:"CD等では誤り検出・訂正機構（例: CIRC）が使われる。"},
+  {m:2,q:"通信回線の伝送誤りに対処するパリティチェック方式（垂直パリティ）の記述として、適切なものはどれか。",c:["A. すべてのビット誤りを訂正できる","B. 1ビットの誤りを検出できる","C. 2ビットの誤りを必ず検出できる","D. 誤りを検出も訂正もできない"],a:"B",ex:"単純なパリティでは主に奇数個（代表的に1ビット）の誤りを検出できる。"},
+  {m:4,q:"「giai thừa」は日本語の漢字でどのように読みますか。",c:["A. 階乗（かいじょう）","B. 乗算（じょうざん）","C. 因数（いんすう）","D. 累乗（るいじょう）"],a:"A",ex:"giai thừa = 階乗（かいじょう）。"},
+  {m:2,q:"「論理和」は何ですか。",c:["A. AND回路の演算","B. NOT回路の演算","C. XOR回路の演算","D. OR回路の演算"],a:"D",ex:"論理和＝OR、論理積＝AND、論理否定＝NOT。"},
+  {m:2,q:"音声情報の高さがデジタル化するとき、（ ① ）が大きいほど、（ ② ）が向上します。",c:["A. ①サンプリング周波数 ②ファイルサイズのみ","B. ①圧縮率 ②雑音","C. ①量子化数 ②音質","D. ①ビットレート ②解像度"],a:"C",ex:"量子化数が大きいほど音の振幅を細かく表せ、音質が向上する。"},
+  {m:5,q:"ネットワークの形態について、正しいものはどれか。",c:["A. リング型は、データが隣接するノードを順次伝送され、一部のコンピュータが故障すると通信に支障が出る可能性がある","B. スター型は1本のケーブルに全端末がぶら下がる","C. バス型はハブを中心に接続する","D. リング型は最も故障の影響が小さい"],a:"A",ex:"リング型は隣接へ順次転送するため、故障の影響が出やすい。"},
+  {m:2,q:"改行が何番のコードにあたるかなど、画面に直接表示できない記号は何と呼ばれますか。",c:["A. 制御コード","B. 文字コード","C. 圧縮コード","D. パリティコード"],a:"A",ex:"改行など表示されない記号は制御コード。"},
+  {m:2,q:"世界の主要な言語で使われている文字を統一的に表す文字コードはどれか。",c:["A. ASCII","B. JIS","C. EUC","D. Unicode"],a:"D",ex:"Unicodeは世界の主要言語の文字を統一的に扱う。"},
+  {m:2,q:"マウスやキーボードの操作方法、ウィンドウの見え方などを決めるものを何と言いますか。",c:["A. デバイスドライバ","B. ミドルウェア","C. ユーザインタフェース","D. ファイアウォール"],a:"C",ex:"操作・表示の仕方を決めるのはユーザインタフェース。"},
+  {m:5,q:"ハードディスクの仕組みと管理について正しいものをえらびなさい。",c:["A. ヘッドは常にディスク面に接触している","B. 同一トラック上にデータがあるとアームを動かす必要がなく高速に読み書きできる","C. セクタは使わない","D. デフラグは不要な操作である"],a:"B",ex:"同一トラックならアーム移動が不要で高速。ヘッドは接触しない。"},
+  {m:5,q:"データ量の大小関係のうち正しいものはどれか。",c:["A. 1Gバイト < 1Mバイト < 1kバイト","B. 1kバイト < 1Mバイト < 1Gバイト < 1Tバイト","C. 1Tバイト < 1Gバイト < 1Mバイト","D. 1Mバイト < 1kバイト < 1Gバイト"],a:"B",ex:"k < M < G < T の順。"},
+  {m:4,q:"「変調」は英語で何ですか。",c:["A. modulation","B. modemlation","C. moduration","D. medulation"],a:"A",ex:"変調 = modulation（変調・復調で modem）。"},
+  {m:2,q:"映像データや音声データの圧縮方式として代表的なものはどれか。",c:["A. JPEG","B. GIF","C. MPEG","D. BMP"],a:"C",ex:"動画像・音声にはMPEGが代表的。JPEG/GIFは主に静止画。"},
+  {m:2,q:"ネットワークの形態について、中心に集線装置を置き複数のコンピュータを接続する形態はどれか。",c:["A. バス型","B. スター型","C. リング型","D. メッシュ型"],a:"B",ex:"ハブ等を中心にするのはスター型。"},
+  {m:5,q:"上り（アップロード）について正しいものはどれか。",c:["A. 上流から下流の方向","B. 下流から上流の方向","C. 必ず無線だけ","D. ダウンロードと同じ意味"],a:"B",ex:"上りは下流（利用者）から上流（網・サーバ）へ。"},
+  {m:2,q:"一般に100 Kbps〜1 Mbps以上の通信速度を何と言いますか。",c:["A. ナローバンド","B. ダイアルアップ","C. ブロードバンド","D. シリアル"],a:"C",ex:"100Kbps〜1Mbps以上はブロードバンドと呼ばれる。"},
+  {m:2,q:"プリンタの解像度をドット数で表す単位は何といいますか。",c:["A. bps","B. dpi","C. Hz","D. fps"],a:"B",ex:"プリンタ解像度の単位は dpi（dot per inch）。"},
+  {m:1,q:"情報量の（  ）単位のことをビット(bit)といいます。",c:["A. 最大","B. 平均","C. 最小","D. 可変"],a:"C",ex:"ビットは情報量の最小単位（基本単位でもある）。"},
+  {m:2,q:"A〜Zの26種類の文字を表現するには最低何ビット必要か。",c:["A. 3","B. 4","C. 5","D. 8"],a:"C",ex:"2⁴=16不足、2⁵=32で26以上を表現できる。"},
+  {m:5,q:"ある音をコンピュータのファイルに記録するとき、符号化ビット数（量子化ビット数）を大きくするとどうなるか。",c:["A. サンプリング周波数だけが上がる","B. 音の振幅をより細かく記録できる","C. 必ずファイルが小さくなる","D. 音程だけが変わる"],a:"B",ex:"量子化ビット数が大きいほど振幅を細かく記録できる。"},
+  {m:1,q:"（  ）とは、数値を扱う際に「基となる数」のことである。",c:["A. 基数","B. 対数","C. 素数","D. 倍数"],a:"A",ex:"基となる数＝基数（2進・10進など）。"},
+  {m:4,q:"「プロキシサーバ」はベトナム語で何と言いますか。",c:["A. máy chủ web","B. máy chủ thư","C. máy chủ tên miền","D. máy chủ trung gian"],a:"D",ex:"プロキシ＝中継・代理 → máy chủ trung gian。"},
+  {m:4,q:"「CRC」は英語でなんですか。",c:["A. Cyclic Redundance Check","B. Cyclic Redundancy Check","C. Circle Redundancy Check","D. Code Redundancy Control"],a:"B",ex:"CRC = Cyclic Redundancy Check。"},
+  {m:2,q:"電源が切れたとき、データが消えてしまうものは何ですか。",c:["A. GPU","B. IC","C. ROM","D. RAM"],a:"D",ex:"RAMは揮発性で電源OFFでデータが消える。"},
+  {m:2,q:"デジタル画像は縦横に並んだ点の集まりである。この点を画素、もしくはなんと言いますか。",c:["A. ピクセル","B. ビット","C. フレーム","D. セクタ"],a:"A",ex:"画素＝ピクセル。"},
+  {m:2,q:"見かけ上の記憶容量を実際のメモリ容量より大きくし、大きなメモリ空間を確保することを何と言いますか。",c:["A. キャッシュ","B. スワッピングのみ","C. 仮想記憶","D. デフラグ"],a:"C",ex:"仮想記憶はHDD等を使い見かけのメモリを拡大する。"},
+  {m:2,q:"ぎざぎざの少ないきれいな画像を得るには何を増やすとよいか。",c:["A. 画素数","B. パリティビット","C. プロトコル数","D. ドメイン名"],a:"A",ex:"画素数が多いほどぎざぎざが減りきれいに見える。"},
+  {m:2,q:"10進数のマイナス5を、2の補数表現で8ビットの2進数で表すとどうなるか。",c:["A. 11111011","B. 11111010","C. 10000101","D. 00000101"],a:"A",ex:"+5=00000101 → 反転11111010 → +1で11111011。"},
+  {m:2,q:"音声を圧縮する際によく使われる、波を正弦波に分解する変換は何ですか。",c:["A. ランレングス","B. ハフマン符号","C. フーリエ変換","D. パリティ"],a:"C",ex:"音声圧縮ではフーリエ変換で波を周波数成分に分解する。"},
+  {m:2,q:"2進数100001を3倍したものはどれか。",c:["A. 1000010","B. 1100011","C. 111111","D. 1000011"],a:"B",ex:"100001₂=33、33×3=99、99=1100011₂。"},
+  {m:2,q:"装置Aと装置Bが直列につながっているシステムを何と言いますか。",c:["A. 並列システム","B. 直列システム","C. 集中システム","D. 分散システム"],a:"B",ex:"直列＝直列システム。"},
+  {m:2,q:"装置Aと装置Bが並列につながっているシステムを何と言いますか。",c:["A. 直列システム","B. 並列システム","C. 集中システム","D. 分散システム"],a:"B",ex:"並列接続＝並列システム。"},
+  {m:2,q:"イラストなどに使われる、最大表示色が256色の静止画圧縮形式はどれか。",c:["A. JPEG","B. BMP","C. MPEG","D. GIF"],a:"D",ex:"GIFは最大256色の静止画（簡易アニメも可）。"},
+  {m:2,q:"波の高さの最大値をいくつの段階で表すかを何と言いますか。",c:["A. サンプリング周波数","B. 量子化数","C. フレームレート","D. ビットレート"],a:"B",ex:"振幅の段階数＝量子化数。"},
+  {m:2,q:"2バイトで1文字を表すとき、何種類の文字まで表せるか。",c:["A. 256","B. 1,024","C. 65,536","D. 16,777,216"],a:"C",ex:"2バイト=16ビット、2¹⁶=65,536。"},
+  {m:2,q:"10進数155を2進数で表したものはどれか。",c:["A. 10011011","B. 10011100","C. 10101011","D. 11001011"],a:"A",ex:"155=128+16+8+2+1 → 10011011₂。"},
+  {m:2,q:"2進数1.111を10進数で表現したものはどれか。",c:["A. 1.875","B. 1.75","C. 1.5","D. 2.0"],a:"A",ex:"1 + 0.5 + 0.25 + 0.125 = 1.875。"},
+  {m:2,q:"MIDI命令のデータ段階（取りうる値の数）として適切なものはどれか。",c:["A. 64","B. 100","C. 128","D. 256"],a:"C",ex:"MIDIデータバイトは7ビット相当で0〜127の128段階。"},
+  {m:4,q:"「小文字」はどのように読みますか。ベトナム語で何ですか。",c:["A. おおもじ - chữ in hoa","B. こもじ - chữ số","C. こもじ - chữ in thường","D. だいもじ - chữ thường"],a:"C",ex:"小文字＝こもじ＝chữ in thường。"},
+  {m:5,q:"フリーウェアとシェアウェアの違いについて、正しい説明はどれですか。",c:["A. どちらも必ず有料である","B. シェアウェアは無料で入手できるが、継続使用に登録と料金が必要な場合がある","C. フリーウェアは必ずソース公開である","D. シェアウェアは商用利用禁止が定義である"],a:"B",ex:"シェアウェアは試用後に登録・料金が必要なことがある。"},
+  {m:2,q:"データの（  ）と（  ）の対応を決めているのが文字コードです。",c:["A. 音 - 画像","B. ファイル - フォルダ","C. 圧縮 - 解凍","D. 数字 - 文字"],a:"D",ex:"文字コードは数字と文字の対応を決める。"},
+  {m:5,q:"AND回路について正しいものをえらんでください。",c:["A. スイッチが並列のモデル","B. スイッチが直列に並んだ回路としてモデル化される","C. どちらか1つONで出力ON","D. 入力を反転する"],a:"B",ex:"ANDは直列スイッチ。両方ONで出力ON。"},
+  {m:5,q:"圧縮・解凍ソフトでファイルを圧縮したとき、圧縮方式によって付けられる拡張子として正しいものはどれですか。",c:["A. doc、xls、ppt","B. jpg、png、gif","C. zip、lzh、gz","D. exe、dll、sys"],a:"C",ex:"圧縮拡張子の例: zip / lzh / gz。"},
+  {m:2,q:"動画像では、静止画圧縮と差分記録を組み合わせて圧縮率を高めた形式としてよく用いられるものは何ですか。",c:["A. JPEG","B. GIF","C. MPEG","D. PNG"],a:"C",ex:"静止画圧縮＋差分記録＝MPEG。"},
+  {m:4,q:"「sóng hình sin」は日本語の漢字でどのように書きますか。どのように読みますか。",c:["A. 余弦波 - よげんは","B. 正弦波 - せいげんは","C. 正弦波 - しょうげんは","D. 正玄波 - せいげんは"],a:"B",ex:"正弦波（せいげんは）＝sin波。"},
+  {m:2,q:"ネットワークのデータ伝送速度を表す単位はどれか。",c:["A. bps","B. dpi","C. Hz","D. lux"],a:"A",ex:"伝送速度の単位は bps（bit per second）。"},
+  {m:4,q:"「帯域幅」はどのように読みますか。ベトナム語で何ですか。",c:["A. たいいきはば - chiều rộng dải tần","B. たいいきふく - băng thông hẹp","C. たいきはば - tần số","D. はばたいいき - độ trễ"],a:"A",ex:"帯域幅＝たいいきはば＝bandwidth / chiều rộng dải tần。"},
+  {m:4,q:"「マス目」はベトナム語で何ですか。",c:["A. cần","B. đĩa","C. sợi đốt","D. nấc"],a:"D",ex:"マス目＝ô/nấc trên băng Turing など。"},
+  {m:4,q:"「PLC」はベトナム語で何ですか。",c:["A. nối mạng qua hệ thống điện nhà","B. truyền hình cáp dây dẫn","C. cáp quang đến tận nhà","D. truyền dữ liệu bằng tia hồng ngoại"],a:"A",ex:"PLC = Power Line Communication＝電灯線通信。"},
+  {m:1,q:"個人のパソコンをねらった（  ）としてウイルスが代表的です。",c:["A. 犯罪","B. 行為","C. もの","D. 病気"],a:"A",ex:"コンピュータ犯罪の例としてウイルス。"},
+  {m:5,q:"ウィルスに感染するのを避けるために、何をしますか。",c:["A. パスワードに氏名や数字だけを使う","B. 常に最新版に更新されるブラウザを使う","C. 古いブラウザを使い続ける","D. exe,vbs,scr,pif の添付をすぐに開く"],a:"B",ex:"ブラウザを最新に保つなど安全対策が重要。危険拡張子は開かない。"},
+  {m:2,q:"国際標準の携帯電話で利用できるアプリケーションを決定するのが何と呼ぶソフトウェアですか。",c:["A. アプリケーション","B. オペレーティングシステム","C. 電子マネー","D. ガラパゴス携帯"],a:"B",ex:"使えるアプリを決めるのはOS。"},
+  {m:4,q:"「周波数帯」はどのように読みますか。ベトナム語で何ですか。",c:["A. しゅうはすうたい - băng tần","B. しゅばすうだい - dải tần số","C. しゅうはすうたい - dải tần số","D. しゅうぱすうだい - băng tần"],a:"C",ex:"周波数帯＝しゅうはすうたい＝dải tần số / băng tần。"},
+  {m:4,q:"LSIは日本語で何ですか。",c:["A. 大規模集積回路","B. 集積線路","C. 集積回路","D. 大規模集積線路"],a:"A",ex:"LSI = Large Scale Integration＝大規模集積回路。"},
+  {m:2,q:"A3サイズ（29.7cm×42.0cm）を350 dpiで印刷する場合の画素数の計算で使う関係はどれか。",c:["A. 画素数 ≒ (cm/2.54×dpi) の縦×横","B. 画素数 = cm×dpi のみ","C. 画素数 = bps×Hz","D. 画素数 = ビット数÷8"],a:"A",ex:"dpiは1インチあたりの点。cmをインチ(÷2.54)に直して×dpiし、縦×横で総画素。"},
+  {m:4,q:"「số nguyên tố」は日本語で何ですか。",c:["A. かんすう","B. そいんすう","C. にんすう","D. らんすう"],a:"B",ex:"正解はB。そいんすう"},
+  {m:4,q:"「サイマル放送」はベトナム語で何ですか。",c:["A. phát sóng qua vệ tinh","B. phát sóng tạm thời","C. phát sóng từng đoạn","D. phát sóng cùng một lúc"],a:"D",ex:"正解はD。phát sóng cùng một lúc"},
+  {m:5,q:"LAN (Local Area Network) について、正しいものはどれですか。",c:["A. LANは、広域な地域を結ぶ大規模なネットワークであり、インターネットはWANの一種である。","B. LANとWANの区別は明確で、一つの企業内のネットワークは、支店が複数あっても常にLANとして分類される。","C. LANにはコンピュータやプリンタのみが接続され、家電製品が接続されることはない。","D. LANは、ネットワーク管理者が歩いて機器の状態をチェックできる程度の局所的な範囲を指すことが多い。"],a:"D",ex:"正解はD。LANは、ネットワーク管理者が歩いて機器の状態をチェックできる程度の局所的な範囲を指すことが多い。"},
+  {m:2,q:"次の説明する文書は ただしですか。（Phần thuyết minh về từ vựng được cho là đúng hay sai?） 認証とは公開鍵方式と秘密鍵方式により暗号化した状態で情報通信を行うこと。",c:["A. False","B. True","C. （候補なし）","D. （候補なし）"],a:"A",ex:"正解はA。False"},
+  {m:2,q:"OSIのセッション層（第5層）の主な役割として、最も適切なものはどれですか。",c:["A. 通信の開始から終了までの手順を管理する。","B. 通信相手までのデータの轉送経路を決定し、論理アドレスを管理する。","C. 通信媒体を通じてビット信号を伝送するための電気的・機械的規格を定める。","D. データの形式（文字コードや暗号化など）を変換し、アプリケーション層が扱える形式に変換する。"],a:"A",ex:"正解はA。通信の開始から終了までの手順を管理する。"},
+  {m:5,q:"OR回路について正しいものをえらんでください。",c:["A. スイッチが直列に並んだ回路としてモデル化されます","B. OR回路の演算のことを論理積と言います","C. スイッチが並列に並んだ回路としてモデル化されます","D. OR回路は1つのダイオードを使って実現できます"],a:"C",ex:"正解はC。スイッチが並列に並んだ回路としてモデル化されます"},
+  {m:2,q:"マザーボードとケーブルで接続された箱は何ですか。",c:["A. ハードディスク","B. マザーボード","C. CPU","D. メリ"],a:"A",ex:"正解はA。ハードディスク"},
+  {m:2,q:"クロック周波数 3 GHz のプロセッサにおいて、1つの命令が6クロックで実行できるとき、1命令の実行に必要な時間は何ナノ秒か。",c:["A. 2.0","B. 3.0","C. 0.5","D. 18.0"],a:"A",ex:"正解はA。2.0"},
+  {m:2,q:"出力装置は何がありますか。",c:["A. キーボードやマウス","B. メモリやハードディスク","C. ディスプレイやプリンタ","D. CPU"],a:"C",ex:"正解はC。ディスプレイやプリンタ"},
+  {m:2,q:"「ROM」とは何ですか。",c:["A. 画面イメージ全体を記憶するメモリである","B. 読み取り専用の半導体メモリである","C. 読み書き専用の半導体メモリである","D. 静電気をを記録するメモリである"],a:"B",ex:"正解はB。読み取り専用の半導体メモリである"},
+  {m:2,q:"チューリングマシンは何から構造されますか。",c:["A. ヘッド、テープ、メモリ","B. ヘッド、テープ","C. テープ、メモリ","D. ヘッド、メモリ"],a:"B",ex:"正解はB。ヘッド、テープ"},
+  {m:2,q:"故障以外で問題なのは、( ) による不具合です。",c:["A. プログラム","B. ウイルス","C. OS","D. プログラムミス"],a:"D",ex:"正解はD。プログラムミス"},
+  {m:4,q:"「bộ vi xử lý」は日本語でなんですか。",c:["A. マイクロプロセッサー","B. デバイスドライバ","C. マイクロプロセッサ","D. マザーボード"],a:"C",ex:"正解はC。マイクロプロセッサ"},
+  {m:2,q:"AさんがBさんに電子文書を送信し、Bさんがその文書の送信者を確認する方法について、本文の内容に基づき、正しく説明しているものはどれか。",c:["A. Aさんは自身の秘密鍵で文書を暗号化して送信する。BさんはAさんの公開鍵で復号できれば、Aさんからの送信と確認できる。","B. Aさんは自身の公開鍵で文書を暗号化して送信する。BさんはAさんの秘密鍵で復号できれば、Aさんからの送信と確認できる。","C. AさんはBさんの公開鍵で文書を暗号化して送信する。Bさんは自身の秘密鍵で復号できれば、Aさんからの送信と確認できる。","D. AさんはBさんの秘密鍵で文書を暗号化して送信する。Bさんは自身の公開鍵で復号できれば、Aさんからの送信と確認できる。"],a:"A",ex:"正解はA。Aさんは自身の秘密鍵で文書を暗号化して送信する。BさんはAさんの公開鍵で復号できれば、Aさんからの送信と確認できる。"},
+  {m:2,q:"Aさんは、Bさんに機密文書を電子メールで送信するため、公開鍵暗号方式を用いて文書を暗号化することにした。このとき、Aさんが文書を暗号化するために使用するべき鍵はどれか。",c:["A. Bさんの公開鍵","B. Aさんの秘密鍵","C. Bさんの秘密鍵","D. Aさんの公開鍵"],a:"A",ex:"正解はA。Bさんの公開鍵"},
+  {m:2,q:"コンピュータウイルスの予防策として、最も適切なものはどれですか。",c:["A. 既知のウイルスのみを検出するよう、ウイルス対策ソフトのパターンファイルは更新しない。","B. ウイルスに感染した場合は、すぐに全てのファイルを消去しパソコンを初期化する。","C. ウイルス感染を防ぐには、メールの利用を完全に停止することが最も効果的である。","D. ウイルス対策ソフトを購入し、パターンファイルを日常的に更新する。"],a:"D",ex:"正解はD。ウイルス対策ソフトを購入し、パターンファイルを日常的に更新する。"},
+  {m:6,q:"CPUについて正しくないものをえらんでください。",c:["A. 処理の中心となる部品","B. 演算装置と制御装置の機能が組み込まれている","C. コンピュータの頭脳","D. 入力装置と出力装置の機能が組み込まれている"],a:"D",ex:"正解はD。入力装置と出力装置の機能が組み込まれている"},
+  {m:5,q:"ダイオードに関する次の記述のうち、正しいものはどれですか。",c:["A. ダイオードは、p型とn型という2つの同じ性質の物質を貼り合わせて作られる。","B. すべてのダイオードは電流が流れると発光するため、電源ランプなどに広く用いられている。","C. ダイオードは、電流を一方向にしか流さないという点で、真空管と異なる機能を持つ。","D. ダイオードでは、電子がp型からn型に移動しやすく、その逆方向に電流が流れる。"],a:"C",ex:"正解はC。ダイオードは、電流を一方向にしか流さないという点で、真空管と異なる機能を持つ。"},
+  {m:2,q:"以下のメモリ部品の中で、アクセス速度が一番速いのはどちらですか。",c:["A. ハードディスク","B. USB","C. メモリ","D. キャッシュ"],a:"D",ex:"正解はD。キャッシュ"},
+  {m:2,q:"記憶装置は何が該当しますか。",c:["A. CPU","B. メモリやハードディスク","C. ディスプレイやプリンタ","D. キーボードやマウス"],a:"B",ex:"正解はB。メモリやハードディスク"},
+  {m:4,q:"「DoS」はベトナム語で何ですか。",c:["A. tấn công từ chối dịch vụ","B. tiêu chuẩn mã hóa dữ liệu","C. hệ thống vạn năng","D. hệ thống Ram động"],a:"A",ex:"正解はA。tấn công từ chối dịch vụ"},
+  {m:2,q:"ある企業のデータセンターには、重要な役割を果たすサーバーがあります。このサーバーの稼働データを分析したところ、平均故障間隔が500時間、平均修復時間が10時間であることがわかりました。このサーバーの稼働率はいくつか。",c:["A. 98.0%","B. 97.0%","C. 99.0%","D. 99.5%"],a:"A",ex:"正解はA。98.0%"},
+  {m:5,q:"CALS(Commerce At Light Speed)について、正しいものはどれですか。",c:["A. CALSのもともとの目的は、自動車業界のサプライチェーン効率化を図ることだった。","B. CALSを導入した結果、軍事産業を除く多くの業界で納期の長期化が報告されている。","C. CALSは、企業間で同じデータを用いて取引できるようにするための標準規格である。","D. CALS(Commerce At Light Speed)に関する次の記述のうち、本文の内容と一致するものはどれか。"],a:"C",ex:"正解はC。CALSは、企業間で同じデータを用いて取引できるようにするための標準規格である。"},
+  {m:2,q:"「工業所有権」に属しているものはどの有権ですか。",c:["A. 著作隣接権、商標権、実用新案権","B. 意匠権、特許権、実用新案権","C. 著作隣接権、意匠権、商標権","D. 意匠権、著作権財産権、特許権"],a:"B",ex:"正解はB。意匠権、特許権、実用新案権"},
+  {m:4,q:"「bước đệm」は日本語で何ですか。",c:["A. ぞうしょく","B. ふっかつ","C. ふみだい","D. かんすう"],a:"C",ex:"正解はC。ふみだい"},
+  {m:4,q:"「RAM」は英語で何ですか。",c:["A. Random Array Memory","B. Read Array Memory","C. Read Access Memory","D. Random Access Memory"],a:"D",ex:"正解はD。Random Access Memory"},
+  {m:2,q:"OSIにおいて、「隣接機器間転送」の機能は主にどの階層が担当しますか。",c:["A. ネットワーク層","B. 物理層","C. データリンク層","D. 通トランスポート層"],a:"C",ex:"正解はC。データリンク層"},
+  {m:4,q:"「通信制御」はどのように読みますか。ベトナム語で何ですか。",c:["A. つうしんせいきょ - điều khiển từ xa","B. つうしんせいぎょ - điều khiển thông tin","C. つうしんせいぎょう - hạn chế thông tin","D. つうしんせいきょ - hạn chế thông tin từ xa"],a:"B",ex:"正解はB。つうしんせいぎょ - điều khiển thông tin"},
+  {m:5,q:"フォルダの管理とパスに関する説明として、正しいものはどれですか。",c:["A. エクスプローラで表示される階層構造のことをディレクトリ構造と呼び、フォルダは親子関係で構成されている。","B. 通常、新しく作成するファイルは「C:\Windows」フォルダに自動的に保存される。","C. フォルダはファイルのサブファイルである。","D. ファイルを探しやすくするためには、1つのフォルダに数百個以上のファイルをまとめて保存するのが効率的である。"],a:"A",ex:"正解はA。エクスプローラで表示される階層構造のことをディレクトリ構造と呼び、フォルダは親子関係で構成されている。"},
+  {m:2,q:"メモリ空間には、番地が割り当てられるところは何と呼ばれましたか。",c:["A. Cookie","B. ハードディスク","C. Cache","D. 記憶アドレス"],a:"D",ex:"正解はD。記憶アドレス"},
+  {m:6,q:"コンピュータウィルスについて正しくないものをえらんでください。",c:["A. 伝染し、潜伏期間をおいて発病する過程が生物のウィルス","B. 個人のパソコンをねらった犯罪","C. 人為的に作成されたプログラム","D. 感染経路 là、USBメモリやインターネットを利用したメール、ホームページを経由する"],a:"B",ex:"正解はB。個人のパソコンをねらった犯罪"},
+  {m:5,q:"公開鍵方式による秘密文書通信について、正しいものはどれか。",c:["A. 通信途中で暗号文が盗まれても、第三者はBの公開鍵を入手すれば文書を復号化できる。","B. 送信者Aは、受信者Bの秘密鍵を使って文書を暗号化し、Bに送付する。","C. 一度暗号化された文書は、送信者Aも受信者Bの公開鍵を使えば復号化できる。","D. 受信者Bは、暗号化用の公開鍵と復号化用の秘密鍵の両方を所持しており、Aから送られてきた文書を秘密鍵で復号する。"],a:"D",ex:"正解はD。受信者Bは、暗号化用の公開鍵と復号化用の秘密鍵の両方を所持しており、Aから送られてきた文書を秘密鍵で復号する。"},
+  {m:4,q:"「_」のキーボードの記号はどのように読みますか。",c:["A. アスタリスク","B. ハット","C. アンダーバー","D. チルダ"],a:"C",ex:"正解はC。アンダーバー"},
+  {m:5,q:"ハードディスクの仕組みと管理に関する次の記述の中で、本文の内容に基づいて正しいものを一つ選びなさい。",c:["A. ヘッドとディスク面は常に接触しており、これによってデータの読み書きの信頼性を高めている。","B. ハードディスクへの物理的な衝撃は、ヘッドとディスクの間に隙間ができるため、読み書き速度の向上に役立つ。","C. 同一トラック上にデータが配置されている場合、アームを動かす必要がないため、高速に読み書きを行うことができる。","D. （候補なし）"],a:"C",ex:"正解はC。同一トラック上にデータが配置されている場合、アームを動かす必要がないため、高速に読み書きを行うことができる。"},
+  {m:4,q:"「バス」はベトナム語で何ですか。",c:["A. đường dẫn","B. mạng máy tính dạng kênh","C. sao lưu","D. bàn tính"],a:"B",ex:"正解はB。mạng máy tính dạng kênh"},
+  {m:4,q:"「転置式」はどのように読みますか。ベトナム語で何ですか。",c:["A. てんほうしき - mã hóa hoán vị","B. うんちしき - mã hóa hoán vị","C. てんちしき - kiểu hoán vị","D. うんほうしき - kiểu hoán vị"],a:"C",ex:"正解はC。てんちしき - kiểu hoán vị"},
+  {m:2,q:"ある回路の入力Xと出力Yの関係が、Y = NOT X で表されるとき、この回路は何回路と呼ばれますか。",c:["A. OR回路","B. AND回路","C. NOT回路","D. XOR回路"],a:"C",ex:"正解はC。NOT回路"},
+  {m:5,q:"ダイオードと半導体について、正しいものはどれですか。",c:["A. LEDは一般のダイオードとは構造が異なり、光を発しないという点で区別される。","B. ダイオードは、p型からn型に電子が移動するため、p型からn型の方向に電流が流れる。","C. n型半導体は電子が不足しており、p型半導体は電子が過剰であるため安定している。","D. 電流が流れる方向と電子の移動する方向は逆である。"],a:"D",ex:"正解はD。電流が流れる方向と電子の移動する方向は逆である。"},
+  {m:4,q:"「流通過程」はベトナム語で何ですか。",c:["A. quá trình di chuyển","B. quá trình lưu thông","C. quá trình vận hành","D. quá trình vận hành"],a:"B",ex:"正解はB。quá trình lưu thông"},
+  {m:4,q:"「ブロードバンド」は英語で何ですか。ベトナム語で何ですか。",c:["A. broadband - băng rộng","B. brodband - băng tần","C. buroadband - băng rộng","D. burodband - băng tần"],a:"A",ex:"正解はA。broadband - băng rộng"},
+  {m:5,q:"電子マネーの形態について、正しいものはどれですか。",c:["A. オープンループ型の電子マネーは、設備投資が少なく、銀行の負担が軽いため、早期に普及した。","B. クローズドループ型の電子マネーは、現金のような匿名性が高く、小口の利用に適している。","C. クローズドループ型の電子マネーは、現金のような匿名性が高く、小口の利用に適している。","D. クローズドループ型の電子マネーでは、店舗が受け取ったバリューは発行元を通じて銀行口座に振り込まれる。"],a:"D",ex:"正解はD。クローズドループ型の電子マネーでは、店舗が受け取ったバリューは発行元を通じて銀行口座に振り込まれる。"},
+  {m:2,q:"NTTドコモのFOMAの商品は何世代携帯電話のものですか。",c:["A. 4G","B. 2G","C. 3G","D. 3.5G"],a:"C",ex:"正解はC。3G"},
+  {m:4,q:"「EDI」は英語でどの言葉に略されましたか。",c:["A. Electronic Data International","B. Electronical Data International","C. Electronic Data Interchange","D. Electronical Data Interchange"],a:"C",ex:"正解はC。Electronic Data Interchange"},
+  {m:2,q:"ある会社のシステムは、3つの装置A、B、Cで構成されています。AとBは並列接続され、それらがCと直列接続されています。各装置の稼働率はそれぞれ0.9、0.9、0.95であるとき、システム全体の稼働率はいくつか。",c:["A. 89.5%","B. 92.5%","C. 94.0%","D. 91.0%"],a:"C",ex:"正解はC。94.0%"},
+  {m:2,q:"指先とのセンサの間に蓄えられる電荷を測定する方式は何の方式ですか。",c:["A. CMOSのセンサの方式","B. セグメントの方式","C. 静電容量方式","D. 抵抗膜方式"],a:"C",ex:"正解はC。静電容量方式"},
+  {m:4,q:"「単結晶」はどのように読みますか。また、ベトナム語で何ですか。",c:["A. たんけつしょう - đơn giản","B. たんけつしょ - đơn kết tinh","C. たんけっしょ - đa kết tinh","D. たんけっしょう - đơn kết tinh"],a:"D",ex:"正解はD。たんけっしょう - đơn kết tinh"},
+  {m:2,q:"コンピュータのCPUにおいて、バスの主な役割として最も適切なものはどれか。",c:["A. 演算装置と制御装置の処理速度を向上させること","B. 電源をコンピュータの各部位に供給すること","C. CPU内部でデータのやりとりをすること","D. 命令を解釈し、他の装置に制御信号を送ること"],a:"C",ex:"正解はC。CPU内部でデータのやりとりをすること"},
+  {m:2,q:"Chọn cách gọi tên đúng của hệ thống trong hình",c:["A. 直列システム","B. 並列システム","C. 集中システム","D. 分散システム"],a:"B",ex:"正解はB。並列システム"},
+];
+
   // =====================================================
   // TRANSLATIONS + EXPLAIN (auto)
   // =====================================================
@@ -3790,6 +4076,119 @@ const SAMPLE_TR = [
   {qv:"[Chuyên môn] 1文字を表現するために、16ビット（2バイト）のデータ量を使用する文字コードは何ですか。",cv:["A. ASCIIコード","B. Unicode","C. シフトJISコード","D. EUC"],why:"✓ Chọn B — Unicode Lý do: Unicode（ユニコード）は1文字を16ビット（2バイト）で表現する文字コードです（§13.5）。 Khớp kiến thức giáo trình (định nghĩa, số liệu, hoặc thuật ngữ chuẩn). So với lựa chọn khác: A sai/không khớp: ASCIIコード | C sai/không khớp: シフトJISコード | D sai/không khớp: EUC"},
 ];
 
+
+const PT_TR = [
+  {qv:"Trong video, phương pháp chỉ ghi phần khác biệt so với khung hình trước để tăng tỷ lệ nén gọi là gì?",cv:["A. Nén run-length","B. Ghi chênh lệch (差分記録)","C. Biến đổi Fourier","D. Lượng tử hóa"],why:"✓ Chọn B — 差分記録. Chỉ lưu phần khác frame trước; dùng trong MPEG."},
+  {qv:"Ký hiệu 「#」 đọc như thế nào?",cv:["A. Sharp (シャープ)","B. Hash","C. Pound","D. Number"],why:"✓ Chọn A — シャープ (Sharp)."},
+  {qv:"Mã JIS biểu diễn số ( ) bit, chia từng cụm ( ) bit.",cv:["A. 8 - 4","B. 16 - 8","C. 32 - 16","D. 16 - 4"],why:"✓ Chọn B — 16 bit chia 8+8."},
+  {qv:"Parity bit có những loại nào?",cv:["A. Parity lẻ và parity chẵn","B. Chỉ dọc","C. Chỉ ngang","D. Chỉ 1 loại"],why:"✓ Chọn A — 奇数/偶数パリティ."},
+  {qv:"Phát biểu nào ĐÚNG về OSI?",cv:["A. Đơn vị đo tốc độ","B. Một trong 5 thành phần máy tính","C. Mô hình chia protocol thành 7 tầng","D. Một kiểu mã hóa"],why:"✓ Chọn C — OSI = 7 tầng protocol."},
+  {qv:"10011₂ × 101₂ bằng bao nhiêu (nhị phân)?",cv:["A. 1011111","B. 110011","C. 10011","D. 10101"],why:"✓ Chọn A — 19×5=95 → 1011111₂."},
+  {qv:"Cơ chế phát hiện/sửa lỗi khi CD bị xước, bụi… gọi là gì?",cv:["A. Parity check","B. Cơ chế phát hiện·sửa lỗi","C. Firewall","D. Run-length"],why:"✓ Chọn B — 誤り検出・訂正機構."},
+  {qv:"Mô tả đúng về parity check dọc?",cv:["A. Sửa được mọi bit lỗi","B. Phát hiện được lỗi 1 bit","C. Luôn phát hiện lỗi 2 bit","D. Không phát hiện/sửa được"],why:"✓ Chọn B — phát hiện lỗi 1 bit (số bit 1 lẻ)."},
+  {qv:"「Giai thừa」 viết/đọc kanji tiếng Nhật thế nào?",cv:["A. 階乗 (kaijou)","B. 乗算","C. 因数","D. 累乗"],why:"✓ Chọn A — 階乗 / kaijou."},
+  {qv:"「論理和」 là gì?",cv:["A. Phép AND","B. Phép NOT","C. Phép XOR","D. Phép OR"],why:"✓ Chọn D — 論理和 = OR."},
+  {qv:"Khi số hóa âm thanh, (①) càng lớn thì (②) càng tốt?",cv:["A. ① tần số lấy mẫu ② chỉ dung lượng file","B. ① tỷ lệ nén ② nhiễu","C. ① số lượng tử hóa ② chất lượng âm","D. ① bitrate ② độ phân giải"],why:"✓ Chọn C — 量子化数 ↑ → 音質 ↑."},
+  {qv:"Phát biểu nào ĐÚNG về hình thái mạng?",cv:["A. Ring: truyền tuần tự; 1 máy hỏng có thể ảnh hưởng","B. Star = 1 cáp chung","C. Bus = hub trung tâm","D. Ring ít bị ảnh hưởng hỏng hóc nhất"],why:"✓ Chọn A — đặc trưng ring topology."},
+  {qv:"Mã xuống dòng / ký hiệu không hiển thị gọi là gì?",cv:["A. Mã điều khiển","B. Mã ký tự","C. Mã nén","D. Mã parity"],why:"✓ Chọn A — 制御コード."},
+  {qv:"Bảng mã thống nhất chữ các ngôn ngữ chính trên thế giới?",cv:["A. ASCII","B. JIS","C. EUC","D. Unicode"],why:"✓ Chọn D — Unicode."},
+  {qv:"Cách thao tác chuột/bàn phím, cách hiện cửa sổ… gọi là gì?",cv:["A. Device driver","B. Middleware","C. User interface","D. Firewall"],why:"✓ Chọn C — UI."},
+  {qv:"Phát biểu đúng về HDD?",cv:["A. Head luôn chạm mặt đĩa","B. Cùng track → không cần di chuyển arm, đọc/ghi nhanh","C. Không dùng sector","D. Defrag không cần"],why:"✓ Chọn B — cùng track = seek time ≈ 0."},
+  {qv:"Quan hệ dung lượng đúng là?",cv:["A. G < M < k","B. k < M < G < T","C. T < G < M","D. M < k < G"],why:"✓ Chọn B — KB < MB < GB < TB."},
+  {qv:"「変調」 tiếng Anh là gì?",cv:["A. modulation","B. modemlation","C. moduration","D. medulation"],why:"✓ Chọn A — modulation."},
+  {qv:"Nén video/âm thanh tiêu biểu là?",cv:["A. JPEG","B. GIF","C. MPEG","D. BMP"],why:"✓ Chọn C — MPEG."},
+  {qv:"Đặt hub/switch trung tâm, máy nối ra xung quanh là hình thái nào?",cv:["A. Bus","B. Star","C. Ring","D. Mesh"],why:"✓ Chọn B — スター型."},
+  {qv:"Phát biểu đúng về upload (上り)?",cv:["A. Từ thượng lưu xuống hạ lưu","B. Từ hạ lưu lên thượng lưu","C. Chỉ wireless","D. = download"],why:"✓ Chọn B — client → server."},
+  {qv:"Tốc độ khoảng ≥100 Kbps–1 Mbps gọi là gì?",cv:["A. Narrowband","B. Dial-up","C. Broadband","D. Serial"],why:"✓ Chọn C — ブロードバンド."},
+  {qv:"Đơn vị độ phân giải máy in (số chấm) là gì?",cv:["A. bps","B. dpi","C. Hz","D. fps"],why:"✓ Chọn B — dpi."},
+  {qv:"Đơn vị ( ) của lượng tin gọi là bit?",cv:["A. lớn nhất","B. trung bình","C. nhỏ nhất","D. thay đổi"],why:"✓ Chọn C — 最小単位."},
+  {qv:"Biểu diễn 26 chữ A–Z cần tối thiểu mấy bit?",cv:["A. 3","B. 4","C. 5","D. 8"],why:"✓ Chọn C — 2⁵=32 ≥ 26."},
+  {qv:"Tăng số bit lượng tử hóa khi ghi âm thì?",cv:["A. Chỉ tăng tần số lấy mẫu","B. Ghi biên độ chi tiết hơn","C. File luôn nhỏ hơn","D. Chỉ đổi cao độ"],why:"✓ Chọn B — biên độ chi tiết hơn."},
+  {qv:"( ) là “số làm cơ sở” khi xử lý số?",cv:["A. Cơ số (基数)","B. Logarit","C. Số nguyên tố","D. Bội số"],why:"✓ Chọn A — 基数."},
+  {qv:"Proxy server tiếng Việt là gì?",cv:["A. Web server","B. Mail server","C. DNS server","D. Máy chủ trung gian"],why:"✓ Chọn D — máy chủ trung gian."},
+  {qv:"CRC viết tắt tiếng Anh là gì?",cv:["A. Cyclic Redundance Check","B. Cyclic Redundancy Check","C. Circle…","D. Code…"],why:"✓ Chọn B — Cyclic Redundancy Check."},
+  {qv:"Tắt nguồn thì dữ liệu mất là loại nào?",cv:["A. GPU","B. IC","C. ROM","D. RAM"],why:"✓ Chọn D — RAM (volatile)."},
+  {qv:"Điểm ảnh (画素) còn gọi là gì?",cv:["A. Pixel","B. Bit","C. Frame","D. Sector"],why:"✓ Chọn A — ピクセル."},
+  {qv:"Làm dung lượng nhớ “ảo” lớn hơn RAM thật gọi là gì?",cv:["A. Cache","B. Chỉ swapping","C. Bộ nhớ ảo (仮想記憶)","D. Defrag"],why:"✓ Chọn C — 仮想記憶."},
+  {qv:"Để ảnh mịn, ít răng cưa cần tăng gì?",cv:["A. Số pixel","B. Parity bit","C. Số protocol","D. Domain"],why:"✓ Chọn A — 画素数."},
+  {qv:"−5 ở hệ 10, bù 2 8-bit là?",cv:["A. 11111011","B. 11111010","C. 10000101","D. 00000101"],why:"✓ Chọn A — 2's complement of 5."},
+  {qv:"Khi nén âm, phép biến đổi phân tích sóng thành sin là?",cv:["A. Run-length","B. Huffman","C. Fourier","D. Parity"],why:"✓ Chọn C — フーリエ変換."},
+  {qv:"100001₂ × 3 = ?",cv:["A. 1000010","B. 1100011","C. 111111","D. 1000011"],why:"✓ Chọn B — 33×3=99 → 1100011."},
+  {qv:"Hai thiết bị mắc nối tiếp gọi là?",cv:["A. Song song","B. Nối tiếp (直列)","C. Tập trung","D. Phân tán"],why:"✓ Chọn B — 直列システム."},
+  {qv:"Hai thiết bị mắc song song gọi là?",cv:["A. Nối tiếp","B. Song song (並列)","C. Tập trung","D. Phân tán"],why:"✓ Chọn B — 並列システム."},
+  {qv:"Ảnh tĩnh ≤256 màu, minh họa… định dạng nào?",cv:["A. JPEG","B. BMP","C. MPEG","D. GIF"],why:"✓ Chọn D — GIF."},
+  {qv:"Chia biên độ sóng thành bao nhiêu mức gọi là?",cv:["A. Tần số lấy mẫu","B. Số lượng tử hóa","C. Frame rate","D. Bitrate"],why:"✓ Chọn B — 量子化数."},
+  {qv:"1 chữ = 2 byte → tối đa bao nhiêu loại?",cv:["A. 256","B. 1024","C. 65,536","D. 16,777,216"],why:"✓ Chọn C — 2¹⁶."},
+  {qv:"155₁₀ = ?₂",cv:["A. 10011011","B. 10011100","C. 10101011","D. 11001011"],why:"✓ Chọn A — 10011011."},
+  {qv:"1.111₂ = ?₁₀",cv:["A. 1.875","B. 1.75","C. 1.5","D. 2.0"],why:"✓ Chọn A — 1.875."},
+  {qv:"Lệnh MIDI thể hiện khoảng bao nhiêu mức?",cv:["A. 64","B. 100","C. 128","D. 256"],why:"✓ Chọn C — 128 (0–127)."},
+  {qv:"「小文字」 đọc và nghĩa VI?",cv:["A. oomojii - chữ hoa","B. komoji - chữ số","C. komoji - chữ thường","D. daimoji…"],why:"✓ Chọn C — こもじ / chữ in thường."},
+  {qv:"Khác biệt Freeware / Shareware — chọn đúng?",cv:["A. Cả hai luôn trả phí","B. Shareware tải miễn phí nhưng dùng lâu có thể cần đăng ký/trả phí","C. Freeware luôn open source","D. Shareware cấm thương mại theo định nghĩa"],why:"✓ Chọn B — shareware dùng thử."},
+  {qv:"Mã ký tự quyết định tương ứng giữa ( ) và ( )?",cv:["A. âm - ảnh","B. file - folder","C. nén - giải nén","D. số - chữ"],why:"✓ Chọn D — 数字と文字."},
+  {qv:"Phát biểu đúng về mạch AND?",cv:["A. Công tắc song song","B. Mô hình công tắc nối tiếp","C. Một ON là ra ON","D. Đảo input"],why:"✓ Chọn B — AND = nối tiếp."},
+  {qv:"Extension nén file đúng là?",cv:["A. doc/xls/ppt","B. jpg/png/gif","C. zip/lzh/gz","D. exe/dll/sys"],why:"✓ Chọn C — zip, lzh, gz."},
+  {qv:"Video dùng nén ảnh tĩnh + ghi chênh lệch → định dạng?",cv:["A. JPEG","B. GIF","C. MPEG","D. PNG"],why:"✓ Chọn C — MPEG."},
+  {qv:"Sóng sin viết/đọc kanji?",cv:["A. 余弦波","B. 正弦波 - seigenha","C. 正弦波 - shougenha","D. 正玄波"],why:"✓ Chọn B — 正弦波 / せいげんは."},
+  {qv:"Đơn vị tốc độ truyền mạng?",cv:["A. bps","B. dpi","C. Hz","D. lux"],why:"✓ Chọn A — bps."},
+  {qv:"「帯域幅」 đọc và nghĩa VI?",cv:["A. taiikihaba - chiều rộng dải tần","B. … băng hẹp","C. … tần số","D. … độ trễ"],why:"✓ Chọn A — たいいきはば."},
+  {qv:"「マス目」 tiếng Việt?",cv:["A. cần","B. đĩa","C. sợi đốt","D. nấc"],why:"✓ Chọn D — nấc (ô chia)."},
+  {qv:"PLC tiếng Việt?",cv:["A. Nối mạng qua điện nhà","B. Truyền hình cáp","C. FTTH","D. Hồng ngoại"],why:"✓ Chọn A — PLC / điện nhà."},
+  {qv:"Virus là ví dụ điển hình của ( ) nhắm PC cá nhân?",cv:["A. tội phạm / 犯罪","B. hành vi","C. đồ vật","D. bệnh"],why:"✓ Chọn A — 犯罪."},
+  {qv:"Để tránh nhiễm virus nên làm gì?",cv:["A. Password chỉ tên/số","B. Dùng browser luôn cập nhật","C. Giữ browser cũ","D. Mở ngay file .exe/.vbs…"],why:"✓ Chọn B — cập nhật browser / phần mềm."},
+  {qv:"Phần mềm quyết định app chạy được trên ĐTDĐ chuẩn quốc tế?",cv:["A. Ứng dụng","B. Hệ điều hành (OS)","C. Tiền điện tử","D. Galapagos phone"],why:"✓ Chọn B — OS."},
+  {qv:"「周波数帯」 đọc + nghĩa?",cv:["A. shuuhasuutai - băng tần (nghĩa hẹp)","B. đọc sai","C. shuuhasuutai - dải tần số","D. đọc sai"],why:"✓ Chọn C — しゅうはすうたい / dải tần số."},
+  {qv:"LSI tiếng Nhật là gì?",cv:["A. Mạch tích hợp quy mô lớn","B. Đường tích hợp","C. IC (thường)","D. Đường tích hợp lớn"],why:"✓ Chọn A — 大規模集積回路."},
+  {qv:"Tính pixel khi in A3 @350dpi dùng quan hệ nào?",cv:["A. (cm/2.54×dpi) rộng × dài","B. chỉ cm×dpi","C. bps×Hz","D. bit÷8"],why:"✓ Chọn A — đổi inch rồi × dpi, nhân 2 chiều."},
+  {qv:"「số nguyên tố」は日本語で何ですか。",cv:["A. かんすう","B. そいんすう","C. にんすう","D. らんすう"],why:"✓ Chọn B — そいんすう. (quiz.txt)"},
+  {qv:"(JP) 「サイマル放送」はベトナム語で何ですか。",cv:["A. phát sóng qua vệ tinh","B. phát sóng tạm thời","C. phát sóng từng đoạn","D. phát sóng cùng một lúc"],why:"✓ Chọn D — phát sóng cùng một lúc. (quiz.txt)"},
+  {qv:"(JP) LAN (Local Area Network) について、正しいものはどれですか。",cv:["A. LANは、広域な地域を結ぶ大規模なネットワークであり、インターネットはWANの一種である。","B. LANとWANの区別は明確で、一つの企業内のネットワークは、支店が複数あっても常にLANとして分類される。","C. LANにはコンピュータやプリンタのみが接続され、家電製品が接続されることはない。","D. LANは、ネットワーク管理者が歩いて機器の状態をチェックできる程度の局所的な範囲を指すことが多い。"],why:"✓ Chọn D — LANは、ネットワーク管理者が歩いて機器の状態をチェックできる程度の局所的な範囲を指すことが多い。. (quiz.txt)"},
+  {qv:"次の説明する文書は ただしですか。（Phần thuyết minh về từ vựng được cho là đúng hay sai?） 認証とは公開鍵方式と秘密鍵方式により暗号化した状態で情報通信を行うこと。",cv:["A. False","B. True","C. （候補なし）","D. （候補なし）"],why:"✓ Chọn A — False. (quiz.txt)"},
+  {qv:"(JP) OSIのセッション層（第5層）の主な役割として、最も適切なものはどれですか。",cv:["A. 通信の開始から終了までの手順を管理する。","B. 通信相手までのデータの轉送経路を決定し、論理アドレスを管理する。","C. 通信媒体を通じてビット信号を伝送するための電気的・機械的規格を定める。","D. データの形式（文字コードや暗号化など）を変換し、アプリケーション層が扱える形式に変換する。"],why:"✓ Chọn A — 通信の開始から終了までの手順を管理する。. (quiz.txt)"},
+  {qv:"(JP) OR回路について正しいものをえらんでください。",cv:["A. スイッチが直列に並んだ回路としてモデル化されます","B. OR回路の演算のことを論理積と言います","C. スイッチが並列に並んだ回路としてモデル化されます","D. OR回路は1つのダイオードを使って実現できます"],why:"✓ Chọn C — スイッチが並列に並んだ回路としてモデル化されます. (quiz.txt)"},
+  {qv:"(JP) マザーボードとケーブルで接続された箱は何ですか。",cv:["A. ハードディスク","B. マザーボード","C. CPU","D. メリ"],why:"✓ Chọn A — ハードディスク. (quiz.txt)"},
+  {qv:"(JP) クロック周波数 3 GHz のプロセッサにおいて、1つの命令が6クロックで実行できるとき、1命令の実行に必要な時間は何ナノ秒か。",cv:["A. 2.0","B. 3.0","C. 0.5","D. 18.0"],why:"✓ Chọn A — 2.0. (quiz.txt)"},
+  {qv:"(JP) 出力装置は何がありますか。",cv:["A. キーボードやマウス","B. メモリやハードディスク","C. ディスプレイやプリンタ","D. CPU"],why:"✓ Chọn C — ディスプレイやプリンタ. (quiz.txt)"},
+  {qv:"(JP) 「ROM」とは何ですか。",cv:["A. 画面イメージ全体を記憶するメモリである","B. 読み取り専用の半導体メモリである","C. 読み書き専用の半導体メモリである","D. 静電気をを記録するメモリである"],why:"✓ Chọn B — 読み取り専用の半導体メモリである. (quiz.txt)"},
+  {qv:"(JP) チューリングマシンは何から構造されますか。",cv:["A. ヘッド、テープ、メモリ","B. ヘッド、テープ","C. テープ、メモリ","D. ヘッド、メモリ"],why:"✓ Chọn B — ヘッド、テープ. (quiz.txt)"},
+  {qv:"(JP) 故障以外で問題なのは、( ) による不具合です。",cv:["A. プログラム","B. ウイルス","C. OS","D. プログラムミス"],why:"✓ Chọn D — プログラムミス. (quiz.txt)"},
+  {qv:"「bộ vi xử lý」は日本語でなんですか。",cv:["A. マイクロプロセッサー","B. デバイスドライバ","C. マイクロプロセッサ","D. マザーボード"],why:"✓ Chọn C — マイクロプロセッサ. (quiz.txt)"},
+  {qv:"(JP) AさんがBさんに電子文書を送信し、Bさんがその文書の送信者を確認する方法について、本文の内容に基づき、正しく説明しているものはどれか。",cv:["A. Aさんは自身の秘密鍵で文書を暗号化して送信する。BさんはAさんの公開鍵で復号できれば、Aさんからの送信と確認できる。","B. Aさんは自身の公開鍵で文書を暗号化して送信する。BさんはAさんの秘密鍵で復号できれば、Aさんからの送信と確認できる。","C. AさんはBさんの公開鍵で文書を暗号化して送信する。Bさんは自身の秘密鍵で復号できれば、Aさんからの送信と確認できる。","D. AさんはBさんの秘密鍵で文書を暗号化して送信する。Bさんは自身の公開鍵で復号できれば、Aさんからの送信と確認できる。"],why:"✓ Chọn A — Aさんは自身の秘密鍵で文書を暗号化して送信する。BさんはAさんの公開鍵で復号できれば、Aさんからの送信と確認できる。. (quiz.txt)"},
+  {qv:"(JP) Aさんは、Bさんに機密文書を電子メールで送信するため、公開鍵暗号方式を用いて文書を暗号化することにした。このとき、Aさんが文書を暗号化するために使用するべき鍵はどれか。",cv:["A. Bさんの公開鍵","B. Aさんの秘密鍵","C. Bさんの秘密鍵","D. Aさんの公開鍵"],why:"✓ Chọn A — Bさんの公開鍵. (quiz.txt)"},
+  {qv:"(JP) コンピュータウイルスの予防策として、最も適切なものはどれですか。",cv:["A. 既知のウイルスのみを検出するよう、ウイルス対策ソフトのパターンファイルは更新しない。","B. ウイルスに感染した場合は、すぐに全てのファイルを消去しパソコンを初期化する。","C. ウイルス感染を防ぐには、メールの利用を完全に停止することが最も効果的である。","D. ウイルス対策ソフトを購入し、パターンファイルを日常的に更新する。"],why:"✓ Chọn D — ウイルス対策ソフトを購入し、パターンファイルを日常的に更新する。. (quiz.txt)"},
+  {qv:"(JP) CPUについて正しくないものをえらんでください。",cv:["A. 処理の中心となる部品","B. 演算装置と制御装置の機能が組み込まれている","C. コンピュータの頭脳","D. 入力装置と出力装置の機能が組み込まれている"],why:"✓ Chọn D — 入力装置と出力装置の機能が組み込まれている. (quiz.txt)"},
+  {qv:"(JP) ダイオードに関する次の記述のうち、正しいものはどれですか。",cv:["A. ダイオードは、p型とn型という2つの同じ性質の物質を貼り合わせて作られる。","B. すべてのダイオードは電流が流れると発光するため、電源ランプなどに広く用いられている。","C. ダイオードは、電流を一方向にしか流さないという点で、真空管と異なる機能を持つ。","D. ダイオードでは、電子がp型からn型に移動しやすく、その逆方向に電流が流れる。"],why:"✓ Chọn C — ダイオードは、電流を一方向にしか流さないという点で、真空管と異なる機能を持つ。. (quiz.txt)"},
+  {qv:"(JP) 以下のメモリ部品の中で、アクセス速度が一番速いのはどちらですか。",cv:["A. ハードディスク","B. USB","C. メモリ","D. キャッシュ"],why:"✓ Chọn D — キャッシュ. (quiz.txt)"},
+  {qv:"(JP) 記憶装置は何が該当しますか。",cv:["A. CPU","B. メモリやハードディスク","C. ディスプレイやプリンタ","D. キーボードやマウス"],why:"✓ Chọn B — メモリやハードディスク. (quiz.txt)"},
+  {qv:"(JP) 「DoS」はベトナム語で何ですか。",cv:["A. tấn công từ chối dịch vụ","B. tiêu chuẩn mã hóa dữ liệu","C. hệ thống vạn năng","D. hệ thống Ram động"],why:"✓ Chọn A — tấn công từ chối dịch vụ. (quiz.txt)"},
+  {qv:"(JP) ある企業のデータセンターには、重要な役割を果たすサーバーがあります。このサーバーの稼働データを分析したところ、平均故障間隔が500時間、平均修復時間が10時間であることがわかりました。このサーバーの稼働率はいくつか。",cv:["A. 98.0%","B. 97.0%","C. 99.0%","D. 99.5%"],why:"✓ Chọn A — 98.0%. (quiz.txt)"},
+  {qv:"(JP) CALS(Commerce At Light Speed)について、正しいものはどれですか。",cv:["A. CALSのもともとの目的は、自動車業界のサプライチェーン効率化を図ることだった。","B. CALSを導入した結果、軍事産業を除く多くの業界で納期の長期化が報告されている。","C. CALSは、企業間で同じデータを用いて取引できるようにするための標準規格である。","D. CALS(Commerce At Light Speed)に関する次の記述のうち、本文の内容と一致するものはどれか。"],why:"✓ Chọn C — CALSは、企業間で同じデータを用いて取引できるようにするための標準規格である。. (quiz.txt)"},
+  {qv:"(JP) 「工業所有権」に属しているものはどの有権ですか。",cv:["A. 著作隣接権、商標権、実用新案権","B. 意匠権、特許権、実用新案権","C. 著作隣接権、意匠権、商標権","D. 意匠権、著作権財産権、特許権"],why:"✓ Chọn B — 意匠権、特許権、実用新案権. (quiz.txt)"},
+  {qv:"「bước đệm」は日本語で何ですか。",cv:["A. ぞうしょく","B. ふっかつ","C. ふみだい","D. かんすう"],why:"✓ Chọn C — ふみだい. (quiz.txt)"},
+  {qv:"(JP) 「RAM」は英語で何ですか。",cv:["A. Random Array Memory","B. Read Array Memory","C. Read Access Memory","D. Random Access Memory"],why:"✓ Chọn D — Random Access Memory. (quiz.txt)"},
+  {qv:"(JP) OSIにおいて、「隣接機器間転送」の機能は主にどの階層が担当しますか。",cv:["A. ネットワーク層","B. 物理層","C. データリンク層","D. 通トランスポート層"],why:"✓ Chọn C — データリンク層. (quiz.txt)"},
+  {qv:"(JP) 「通信制御」はどのように読みますか。ベトナム語で何ですか。",cv:["A. つうしんせいきょ - điều khiển từ xa","B. つうしんせいぎょ - điều khiển thông tin","C. つうしんせいぎょう - hạn chế thông tin","D. つうしんせいきょ - hạn chế thông tin từ xa"],why:"✓ Chọn B — つうしんせいぎょ - điều khiển thông tin. (quiz.txt)"},
+  {qv:"(JP) フォルダの管理とパスに関する説明として、正しいものはどれですか。",cv:["A. エクスプローラで表示される階層構造のことをディレクトリ構造と呼び、フォルダは親子関係で構成されている。","B. 通常、新しく作成するファイルは「C:\Windows」フォルダに自動的に保存される。","C. フォルダはファイルのサブファイルである。","D. ファイルを探しやすくするためには、1つのフォルダに数百個以上のファイルをまとめて保存するのが効率的である。"],why:"✓ Chọn A — エクスプローラで表示される階層構造のことをディレクトリ構造と呼び、フォルダは親子関係で構成されている。. (quiz.txt)"},
+  {qv:"(JP) メモリ空間には、番地が割り当てられるところは何と呼ばれましたか。",cv:["A. Cookie","B. ハードディスク","C. Cache","D. 記憶アドレス"],why:"✓ Chọn D — 記憶アドレス. (quiz.txt)"},
+  {qv:"(JP) コンピュータウィルスについて正しくないものをえらんでください。",cv:["A. 伝染し、潜伏期間をおいて発病する過程が生物のウィルス","B. 個人のパソコンをねらった犯罪","C. 人為的に作成されたプログラム","D. 感染経路 là、USBメモリやインターネットを利用したメール、ホームページを経由する"],why:"✓ Chọn B — 個人のパソコンをねらった犯罪. (quiz.txt)"},
+  {qv:"(JP) 公開鍵方式による秘密文書通信について、正しいものはどれか。",cv:["A. 通信途中で暗号文が盗まれても、第三者はBの公開鍵を入手すれば文書を復号化できる。","B. 送信者Aは、受信者Bの秘密鍵を使って文書を暗号化し、Bに送付する。","C. 一度暗号化された文書は、送信者Aも受信者Bの公開鍵を使えば復号化できる。","D. 受信者Bは、暗号化用の公開鍵と復号化用の秘密鍵の両方を所持しており、Aから送られてきた文書を秘密鍵で復号する。"],why:"✓ Chọn D — 受信者Bは、暗号化用の公開鍵と復号化用の秘密鍵の両方を所持しており、Aから送られてきた文書を秘密鍵で復号する。. (quiz.txt)"},
+  {qv:"(JP) 「_」のキーボードの記号はどのように読みますか。",cv:["A. アスタリスク","B. ハット","C. アンダーバー","D. チルダ"],why:"✓ Chọn C — アンダーバー. (quiz.txt)"},
+  {qv:"(JP) ハードディスクの仕組みと管理に関する次の記述の中で、本文の内容に基づいて正しいものを一つ選びなさい。",cv:["A. ヘッドとディスク面は常に接触しており、これによってデータの読み書きの信頼性を高めている。","B. ハードディスクへの物理的な衝撃は、ヘッドとディスクの間に隙間ができるため、読み書き速度の向上に役立つ。","C. 同一トラック上にデータが配置されている場合、アームを動かす必要がないため、高速に読み書きを行うことができる。","D. （候補なし）"],why:"✓ Chọn C — 同一トラック上にデータが配置されている場合、アームを動かす必要がないため、高速に読み書きを行うことができる。. (quiz.txt)"},
+  {qv:"(JP) 「バス」はベトナム語で何ですか。",cv:["A. đường dẫn","B. mạng máy tính dạng kênh","C. sao lưu","D. bàn tính"],why:"✓ Chọn B — mạng máy tính dạng kênh. (quiz.txt)"},
+  {qv:"(JP) 「転置式」はどのように読みますか。ベトナム語で何ですか。",cv:["A. てんほうしき - mã hóa hoán vị","B. うんちしき - mã hóa hoán vị","C. てんちしき - kiểu hoán vị","D. うんほうしき - kiểu hoán vị"],why:"✓ Chọn C — てんちしき - kiểu hoán vị. (quiz.txt)"},
+  {qv:"(JP) ある回路の入力Xと出力Yの関係が、Y = NOT X で表されるとき、この回路は何回路と呼ばれますか。",cv:["A. OR回路","B. AND回路","C. NOT回路","D. XOR回路"],why:"✓ Chọn C — NOT回路. (quiz.txt)"},
+  {qv:"(JP) ダイオードと半導体について、正しいものはどれですか。",cv:["A. LEDは一般のダイオードとは構造が異なり、光を発しないという点で区別される。","B. ダイオードは、p型からn型に電子が移動するため、p型からn型の方向に電流が流れる。","C. n型半導体は電子が不足しており、p型半導体は電子が過剰であるため安定している。","D. 電流が流れる方向と電子の移動する方向は逆である。"],why:"✓ Chọn D — 電流が流れる方向と電子の移動する方向は逆である。. (quiz.txt)"},
+  {qv:"(JP) 「流通過程」はベトナム語で何ですか。",cv:["A. quá trình di chuyển","B. quá trình lưu thông","C. quá trình vận hành","D. quá trình vận hành"],why:"✓ Chọn B — quá trình lưu thông. (quiz.txt)"},
+  {qv:"(JP) 「ブロードバンド」は英語で何ですか。ベトナム語で何ですか。",cv:["A. broadband - băng rộng","B. brodband - băng tần","C. buroadband - băng rộng","D. burodband - băng tần"],why:"✓ Chọn A — broadband - băng rộng. (quiz.txt)"},
+  {qv:"(JP) 電子マネーの形態について、正しいものはどれですか。",cv:["A. オープンループ型の電子マネーは、設備投資が少なく、銀行の負担が軽いため、早期に普及した。","B. クローズドループ型の電子マネーは、現金のような匿名性が高く、小口の利用に適している。","C. クローズドループ型の電子マネーは、現金のような匿名性が高く、小口の利用に適している。","D. クローズドループ型の電子マネーでは、店舗が受け取ったバリューは発行元を通じて銀行口座に振り込まれる。"],why:"✓ Chọn D — クローズドループ型の電子マネーでは、店舗が受け取ったバリューは発行元を通じて銀行口座に振り込まれる。. (quiz.txt)"},
+  {qv:"(JP) NTTドコモのFOMAの商品は何世代携帯電話のものですか。",cv:["A. 4G","B. 2G","C. 3G","D. 3.5G"],why:"✓ Chọn C — 3G. (quiz.txt)"},
+  {qv:"(JP) 「EDI」は英語でどの言葉に略されましたか。",cv:["A. Electronic Data International","B. Electronical Data International","C. Electronic Data Interchange","D. Electronical Data Interchange"],why:"✓ Chọn C — Electronic Data Interchange. (quiz.txt)"},
+  {qv:"(JP) ある会社のシステムは、3つの装置A、B、Cで構成されています。AとBは並列接続され、それらがCと直列接続されています。各装置の稼働率はそれぞれ0.9、0.9、0.95であるとき、システム全体の稼働率はいくつか。",cv:["A. 89.5%","B. 92.5%","C. 94.0%","D. 91.0%"],why:"✓ Chọn C — 94.0%. (quiz.txt)"},
+  {qv:"(JP) 指先とのセンサの間に蓄えられる電荷を測定する方式は何の方式ですか。",cv:["A. CMOSのセンサの方式","B. セグメントの方式","C. 静電容量方式","D. 抵抗膜方式"],why:"✓ Chọn C — 静電容量方式. (quiz.txt)"},
+  {qv:"(JP) 「単結晶」はどのように読みますか。また、ベトナム語で何ですか。",cv:["A. たんけつしょう - đơn giản","B. たんけつしょ - đơn kết tinh","C. たんけっしょ - đa kết tinh","D. たんけっしょう - đơn kết tinh"],why:"✓ Chọn D — たんけっしょう - đơn kết tinh. (quiz.txt)"},
+  {qv:"(JP) コンピュータのCPUにおいて、バスの主な役割として最も適切なものはどれか。",cv:["A. 演算装置と制御装置の処理速度を向上させること","B. 電源をコンピュータの各部位に供給すること","C. CPU内部でデータのやりとりをすること","D. 命令を解釈し、他の装置に制御信号を送ること"],why:"✓ Chọn C — CPU内部でデータのやりとりをすること. (quiz.txt)"},
+  {qv:"Chọn cách gọi tên đúng của hệ thống trong hình",cv:["A. 直列システム","B. 並列システム","C. 集中システム","D. 分散システム"],why:"✓ Chọn B — 並列システム. (quiz.txt)"},
+];
+
   function escHtml(s){
     return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
@@ -3916,7 +4315,7 @@ const SAMPLE_TR = [
           if(locked){if(l===q.a)cls+=' correct';else if(l===ch)cls+=' wrong';}
           return`<button class="${cls}" onclick="engines['${prefix}'].choose('${l}')" ${locked?'disabled':''}>${c}</button>`;
         }).join('')}</div>
-        ${locked?`<div class="${ch===q.a?'correct-hint':'wrong-hint'}">${ch===q.a?'✅ Chính xác!':'❌ Sai — đáp án đúng: '+q.a+(wrongSet?` · Đã lưu vào câu sai`:'')}</div>${buildExplainPanel(q, (prefix==='s'?SAMPLE_TR:QUIZ_TR)[idx], ch)}`:''}
+        ${locked?`<div class="${ch===q.a?'correct-hint':'wrong-hint'}">${ch===q.a?'✅ Chính xác!':'❌ Sai — đáp án đúng: '+q.a+(wrongSet?` · Đã lưu vào câu sai`:'')}</div>${buildExplainPanel(q, (prefix==='s'?SAMPLE_TR:prefix==='pt'?PT_TR:QUIZ_TR)[idx], ch)}`:''}
       </div>
       <div class="quiz-nav">
         ${locked?`<button class="btn ${isOrange?'btn-orange':'btn-primary'}" onclick="engines['${prefix}'].next()">${idx+1<data.length?'Câu tiếp theo →':'Xem kết quả →'}</button>`:''}
@@ -3998,7 +4397,7 @@ const SAMPLE_TR = [
           if(locked){if(l===q.a)cls+=' correct';else if(l===choice)cls+=' wrong';}
           return`<button class="${cls}" onclick="wrongEngines['${prefix}'].choose('${l}')" ${locked?'disabled':''}>${c}</button>`;
         }).join('')}</div>
-        ${locked?`<div class="${choice===q.a?'correct-hint':'wrong-hint'}">${choice===q.a?'✅ Chính xác! Đã gỡ khỏi danh sách.':'❌ Vẫn sai — đáp án đúng: '+q.a}</div>${buildExplainPanel(q, (prefix==='sw'?SAMPLE_TR:QUIZ_TR)[qi], choice)}`:''}
+        ${locked?`<div class="${choice===q.a?'correct-hint':'wrong-hint'}">${choice===q.a?'✅ Chính xác! Đã gỡ khỏi danh sách.':'❌ Vẫn sai — đáp án đúng: '+q.a}</div>${buildExplainPanel(q, (prefix==='sw'?SAMPLE_TR:prefix==='ptw'?PT_TR:QUIZ_TR)[qi], choice)}`:''}
       </div>
       <div class="quiz-nav">
         ${locked?`<button class="btn ${isOrange?'btn-orange':'btn-primary'}" onclick="wrongEngines['${prefix}'].next()">${idx+1<queue.length?'Câu tiếp →':'Hoàn thành →'}</button>`:''}
@@ -4055,8 +4454,23 @@ const SAMPLE_TR = [
     wrongEngines['w'] = makeWrongEngine(engines['q'],'w','w-cnt','w-list','w-area','w-finish','w-rem','w-start-btn');
     wrongEngines['sw'] = makeWrongEngine(engines['s'],'sw','sw-cnt','sw-list','sw-area','sw-finish','sw-rem','sw-start-btn');
 
+
+    // PT quiz engine (quiz.txt)
+    engines['pt'] = makeEngine(
+      PT, 'pt',
+      document.getElementById('pt-stat-cur'),
+      document.getElementById('pt-stat-ok'),
+      document.getElementById('pt-stat-ng'),
+      document.getElementById('pt-progress'),
+      'pt-area','pt-finish','pt-fscore','pt-fgrade','pt-fbar','pt-fwrong',
+      new Set(),
+      document.getElementById('ptwrong-badge')
+    );
+    wrongEngines['ptw'] = makeWrongEngine(engines['pt'],'ptw','ptw-cnt','ptw-list','ptw-area','ptw-finish','ptw-rem','ptw-start-btn');
+
     engines['q'].render();
     engines['s'].render();
+    engines['pt'].render();
   });
 
   // =====================================================
@@ -4067,10 +4481,11 @@ const SAMPLE_TR = [
     document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
     document.getElementById(which+'-page').classList.add('active');
     const tabs=document.querySelectorAll('.nav-tab');
-    const map={'study':0,'quiz':1,'sample':2,'wrong':3,'swrong':4};
+    const map={'study':0,'quiz':1,'sample':2,'pt':3,'wrong':4,'swrong':5,'ptwrong':6};
     if(map[which]!==undefined) tabs[map[which]].classList.add('active');
     if(which==='wrong') wrongEngines['w'].intro();
     if(which==='swrong') wrongEngines['sw'].intro();
+    if(which==='ptwrong') wrongEngines['ptw'].intro();
     window.scrollTo(0,0);
   }
 
@@ -4083,6 +4498,14 @@ const SAMPLE_TR = [
     document.getElementById('q-finish').style.display='none';
     document.getElementById('q-area').style.display='block';
   }
+  function resetPT(){
+    if(!confirm('Làm lại từ đầu sẽ xóa toàn bộ kết quả Quiz PT. Tiếp tục?'))return;
+    engines['pt'].reset();
+    document.getElementById('pt-finish').style.display='none';
+    document.getElementById('pt-area').style.display='block';
+  }
+  function startPTWrong(){wrongEngines['ptw'].start();}
+  function backPTWrongIntro(){wrongEngines['ptw'].back();}
   function resetSample(){
     if(!confirm('Làm lại từ đầu sẽ xóa toàn bộ kết quả. Tiếp tục?'))return;
     engines['s'].reset();
